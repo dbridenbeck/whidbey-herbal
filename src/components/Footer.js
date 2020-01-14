@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import instagram from '../images/instagram.png';
 import facebook from '../images/facebook.png';
 
-const Footer = () => {
-
   const FooterContainer = styled.div`
     width: 80%;
     border-top: 1px solid #787878;
@@ -12,7 +10,7 @@ const Footer = () => {
     display: block;
   `;
 
-const SocialIconWrapper = styled.div`
+  const SocialIconWrapper = styled.div`
     margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -22,6 +20,7 @@ const SocialIconWrapper = styled.div`
 
   const SocialIcon = styled.img`
     display: inline-block;
+    height: 25px;
     width: 25px;
     margin: 25px 5px 0px 5px;
   `;
@@ -35,11 +34,23 @@ const SocialIconWrapper = styled.div`
     font-weight: normal;
   `;
 
+const Footer = () => {
+
   return (
     <FooterContainer>
       <SocialIconWrapper>
-        <SocialIcon src={`${instagram}`} />
-        <SocialIcon src={`${facebook}`} />
+        <SocialIcon
+          src={`${instagram}`}
+          height="512"
+          width="512"
+          alt="Instagram logo"
+        />
+        <SocialIcon
+          src={`${facebook}`}
+          height="512"
+          width="512"
+          alt="Facebook logo"
+        />
       </SocialIconWrapper>
       <CopyrightText>© 2019, Whidbey Herbal</CopyrightText>
     </FooterContainer>

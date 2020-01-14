@@ -1,10 +1,11 @@
 import React from "react";
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import NavLinks from "./NavLinks";
 import { device } from "../utils/devices";
 
 const PanelWrapper = styled.div`
-  /* make navpanel display as hamburger slider when mobile */
+  /* make navpanel display as hamburger controled slider when mobile */
   display: block;
   position: absolute;
   top: 0;
@@ -23,7 +24,6 @@ const PanelWrapper = styled.div`
 `;
 
 const Panel = styled.div`
-  /* display ternary ensures panel links don't show when hidden */
   position: absolute;
   height: 100vh;
   background: rgba(255, 255, 255, 0.8);
@@ -31,29 +31,29 @@ const Panel = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  transition: all .75s ease-in-out;
-  &.openPanel{
+  transition: all 0.75s ease-in-out;
+  &.openPanel {
     opacity: 1;
     width: 100vw;
     left: 0;
-    transition: all .75s ease-in-out;
-    /* ignore class toggle transition and always make visible on laptop */
+    transition: all 0.75s ease-in-out;
+    /* ignore .openPanel transition and always make visible on laptop */
     @media ${device.laptop} {
       background: none;
       width: 100%;
       height: 100%;
       display: flex;
-      left: 0;  
+      left: 0;
       opacity: 1;
       transition: none;
     }
   }
-  &.closePanel{
+  &.closePanel {
     opacity: 0;
     left: -100px;
     width: 0vw;
-    transition: all .75s ease-in-out;
-    /* ignore class toggle transition and always make visible on laptop */
+    transition: all 0.75s ease-in-out;
+    /* ignore .closePanel transition and always make visible on laptop */
     @media ${device.laptop} {
       background: none;
       width: 100%;
@@ -66,17 +66,21 @@ const Panel = styled.div`
   }
 `;
 
-const NavPanel = (props) => {
+const NavPanel = ({burgerToggled}) => {
 
   return (
     <PanelWrapper className="PanelWrapper">
       <Panel
-        className={props.burgerToggled ? "openPanel" : "closePanel"}
+        className={burgerToggled ? "openPanel" : "closePanel"}
       >
         <NavLinks />
       </Panel>
     </PanelWrapper>
   );
+}
+
+NavPanel.propTypes = {
+  burgerToggled: PropTypes.bool,
 }
 
 export default NavPanel;

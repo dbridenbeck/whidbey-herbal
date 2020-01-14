@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
+import PropTypes from "prop-types";
+
 import { device } from "../utils/devices";
 import { fluidH2 } from "../utils/responsiveSCSS";
-
-const StoreBlock = ({store}) => {
 
   const StoreName = styled.h2`
     margin-bottom: 5px;
@@ -19,9 +19,9 @@ const StoreBlock = ({store}) => {
 
   const StoreContainer = styled.div`
       position: relative;
+      flex-grow: 1;
       width: 40%;
       height: 75px;
-      flex-grow: 1;
       margin: 0 20px 20px 0;
       &:hover ${StoreName} {
         color: #e3be42;
@@ -45,12 +45,18 @@ const StoreBlock = ({store}) => {
     color: #787878;
   `;
 
+const StoreBlock = ({store}) => {
+
   return (
     <StoreContainer>
       <StoreName>{store.storeName}</StoreName>
       <StoreAddress>{store.address}</StoreAddress>
     </StoreContainer>
   );
+}
+
+StoreBlock.propTypes = {
+  store: PropTypes.object
 }
 
 export default StoreBlock;

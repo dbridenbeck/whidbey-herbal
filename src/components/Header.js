@@ -1,61 +1,16 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavHashLink as NavLink } from "react-router-hash-link";
 import { connect } from "react-redux";
 import styled from 'styled-components';
+import PropTypes from "prop-types";
+
 import NavPanel from './NavPanel';
 import Hamburger from './Hamburger';
 import { device } from "../utils/devices";
+
 import cart from "../images/cart.png";
 import cartYellow from "../images/cart-yellow.png";
 import horizLogo from "../images/horiz-logo.png";
-
-export class Header extends Component {
-         constructor(props) {
-           super(props);
-           this.state = {
-             show: false,
-             scrollPos: 50
-           };
-           this.handleScroll = this.handleScroll.bind(this);
-         }
-
-         componentDidMount() {
-           window.addEventListener("scroll", this.handleScroll);
-         }
-
-         componentWillUnmount() {
-           window.removeEventListener("scroll", this.handleScroll);
-         }
-
-         handleScroll() {
-           this.setState({
-             scrollPos: document.body.getBoundingClientRect().top,
-             show: document.body.getBoundingClientRect().top < 0
-           });
-         }
-
-         
-         render() {
-          const { Reducer1 } = this.props
-           return (
-            <Navbar 
-            className={this.state.show ? "active" : "hidden"}
-            scrollPos={this.state.scrollPos}
-            >
-              <Hamburger>
-                <div />
-              </Hamburger>
-              <HomeLink to={`/`}></HomeLink>
-              <NavPanel
-                burgerToggled={Reducer1.burgerToggled}
-                burgerClickedOnce={Reducer1.burgerClickedOnce}
-              />
-              <CheckoutLink to={`/checkout`}></CheckoutLink>
-            </Navbar>
-           );
-         }
-
-       }
 
 const Navbar = styled.div`
   z-index: 1000;
@@ -72,19 +27,20 @@ const Navbar = styled.div`
   :hover {
     opacity: 1;
   }
-  /* control Navbar show/hide when on laptop */
+  /* control Navbar show/hide for scroll & hover when on laptop */
   @media ${device.laptop} {
     opacity: 0;
     &.active {
-    opacity: 1;
-    transition: opacity 200ms ease-in;
+      opacity: 1;
+      transition: opacity 200ms ease-in;
     }
     &.hidden {
       opacity: 0;
-      :hover {
-        opacity: ${props => props.scrollPos > 0 && props.scrollPos <= 50 ? '1' : '0'};
-      }
       transition: opacity 200ms ease-out;
+      :hover {
+        opacity: ${props =>
+          props.scrollPos >= 0 && props.scrollPos <= 50 ? "1" : "0"};
+      }
     }
   }
 `;
@@ -101,20 +57,74 @@ const CheckoutLink = styled(NavLink)`
   }
 `;
 
-const HomeLink = styled(NavLink)`
-  width: 250px;
-  height: 100%;
-  background-image: url(${horizLogo});
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  &:hover {
-    color: tomato;
-  }
-`;  
+const HomeLink = styled.img`
+  height: 50px;
+  width: auto;
+`;
 
-const mapStateToProps = Reducer1 => ({
-  Reducer1
+export class Header extends Component {
+// Using component state to control show/hide behavior for header
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false,
+      scrollPos: 50
+    };
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  handleScroll() {
+    this.setState({
+      scrollPos: document.body.getBoundingClientRect().top,
+      show: document.body.getBoundingClientRect().top < 0
+    });
+  }
+  
+  render() {
+  const { burgerToggled } = this.props
+    return (
+    <Navbar 
+    className={this.state.show ? "active" : "hidden"}
+    scrollPos={this.state.scrollPos}
+    >
+      <Hamburger>
+        {/* This div creates the hamburger using before & after css pseudoclasses */}
+        <div />
+      </Hamburger>
+      
+      <NavLink to={`/#home`}>
+        <HomeLink 
+          src={`${horizLogo}`} 
+          width="1200"
+          height="263"
+          alt="Whidbey Herbal Logo"
+        />
+      </NavLink>
+
+      <NavPanel
+        burgerToggled={burgerToggled}
+      />
+      <CheckoutLink to={`/checkout`}></CheckoutLink>
+    </Navbar>
+    );
+  }
+}
+
+Header.propTypes = {
+  burgerToggled: PropTypes.bool
+};
+
+
+const mapStateToProps = ({burgerToggled}) => ({
+  burgerToggled
 });
 
 export default connect(mapStateToProps, null)(Header);

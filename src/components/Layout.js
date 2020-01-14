@@ -6,61 +6,61 @@ import * as CartActionCreators from "../state/actions/cart";
 import fetchProductsAction from '../state/fetchProducts';
 import styled from "styled-components";
 import Header from "./Header"
-import Spinner from "./Spinner"
 import Footer from "./Footer"
 
 const MainWrapper = styled.div`
-  margin: 0 20px;
-  padding: 0;
-  border: 0;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: block;
+  width: 100%;
+  max-width: 1000px;
 `;
 
 const Layout = ({
   children,
   clearCheckoutInState,
-  clearBurger,
   fetchProducts,
-  Reducer1
+  checkout
 }) => {
+  // if shopify saiys the checkout happened successfully, clear checkout in state
   const clearCheckoutIfCompleted = () => {
-    Reducer1.checkout.checkoutId
-      ? client.checkout.fetch(Reducer1.checkout.checkoutId).then(checkout => {
-          if (checkout.completedAt) {
-            clearCheckoutInState();
-          }
-        })
-      : console.log("checkout doesn't exist");
+    checkout.checkoutId
+    ? client.checkout.fetch(checkout.checkoutId).then(checkout => {
+        if (checkout.completedAt) {
+          clearCheckoutInState();
+        }
+      })
+    : console.log("checkout doesn't exist");
   };
 
   useEffect(() => {
-    // if checkoutId has been completed, clear localStorage
+    // if checkout has been completed, clear checkout in state
     clearCheckoutIfCompleted();
-    // fetch products from shopify into
+    // populate state with products from shopify
     fetchProducts();
-    // clear burgerClickedOnce from redux, to avoid MobileNavPanel from animating on load
-    clearBurger();
   }, []);
 
-  if (Reducer1.pending) {
-    return <Spinner />;
-  } else {
     return (
       <div>
-        {Reducer1.pending ? <Spinner /> : null}
           <Header />
           <MainWrapper>{children}</MainWrapper>
           <Footer />
       </div>
     );
-  }
-};
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-}
+  checkout: PropTypes.shape({
+    lineItems: PropTypes.array,
+    checkoutId: PropTypes.string
+  }),
+  clearCheckoutInState: PropTypes.func,
+  fetchProducts: PropTypes.func,
+};
 
-const mapStateToProps = ( Reducer1 ) => ({
-  Reducer1
+const mapStateToProps = ( {checkout} ) => ({
+  checkout
 });
 
 const mapDispatchToProps = dispatch => ({

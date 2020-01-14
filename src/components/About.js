@@ -25,6 +25,7 @@ const Title = styled.h1`
 
 const FarmerIllustration = styled.img`
   display: block;
+  height: auto;
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
@@ -41,7 +42,12 @@ const About = () => {
   return (
     <AboutContainer id="about">
       <Title>About the Farmers</Title>
-      <FarmerIllustration src={`${farmers}`}></FarmerIllustration>
+      <FarmerIllustration 
+        src={`${farmers}`} 
+        width="1200" 
+        height="1121" 
+        alt="Watercolor image of Sam and Caitlin, the farmers of Whidbey Herbal"
+      />
       <AboutText>
         Caitlin and Sam Stanton are fifth and third generation Northwesterners,
         respectively. We love our community for its independence, and support of

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const LineItem = ({
   lineItem,
@@ -25,5 +26,13 @@ const LineItem = ({
     </div>
   );
 };
+
+LineItem.propTypes = {
+  lineItem: PropTypes.object,
+  index: PropTypes.number,
+  createRemoveButton: PropTypes.func,
+  createUpdateItemButton: PropTypes.func,
+  removeLineItem: PropTypes.func,
+}
 
 export default LineItem;

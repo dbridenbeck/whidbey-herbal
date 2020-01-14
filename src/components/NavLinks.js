@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import * as CartActionCreators from '../state/actions/cart';
 import { NavHashLink as NavLink } from "react-router-hash-link";
 import styled from 'styled-components';
@@ -75,10 +76,7 @@ const links = [
   },
 ]
 
-
-
 const NavLinks = ({clearBurger}) => {
-  console.log("clearBurger from NavLinks is: ", clearBurger)
 
   // Add in functionality to close navpanel by turning burgerToggled to false on click!
   return (
@@ -96,6 +94,10 @@ const NavLinks = ({clearBurger}) => {
       )}
     </NavLinksWrapper>
   );
+}
+
+NavLinks.propTypes = {
+  clearBurger: PropTypes.func,
 }
 
 const mapDispatchtoProps = (dispatch) => ({

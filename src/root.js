@@ -37,8 +37,8 @@ const Root = () => {
   <Provider store={store}>
     <Router>
       <Layout>
-        <Route exact path="/"  component={Home} />
-        <Route path="/checkout"  component={Checkout} />
+        <Route exact path="/" component={Home} />
+        <Route path="/checkout" component={Checkout} />
         <Route path="/product/:handle" component={Product}/>
       </Layout>
     </Router>

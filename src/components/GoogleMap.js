@@ -26,15 +26,23 @@ const MapFrame = styled.img`
   top: 10.5%;
   left: 15.5%;
   width: 60%;
+  height: auto;
   border-radius: 5%;
 `;
 
 const GoogleMap = () => {
-
+  
   return (
     <MapWrapper>
-      <MapImg src={`${mapFrame}`} />
-        <MapFrame src={`${googlemapsImg}`} />
+      <MapImg 
+        src={`${mapFrame}`} 
+      />
+        <MapFrame 
+          src={`${googlemapsImg}`} 
+          width="375"
+          height="338"
+          alt="Blue watercolored lines bordering a Google Map window."        
+        />
     </MapWrapper>
   );
 }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from "prop-types";
+
 import { client } from "../plugins/shopify.js";
 import * as CartActionCreators from '../state/actions/cart';
 import LineItems from '../components/LineItems';
@@ -99,8 +101,15 @@ export class Checkout extends Component {
   }
 };
 
-const mapStateToProps = ( Reducer1 ) => ({
-  checkout: Reducer1.checkout
+Checkout.propTypes = {
+  checkout: PropTypes.object,
+  removeLineItem: PropTypes.func,
+  updateCheckoutId: PropTypes.func,
+  updateItemQuantity: PropTypes.func,
+}
+
+const mapStateToProps = ( {checkout} ) => ({
+  checkout
 });
 
 const mapDispatchToProps = dispatch => ({

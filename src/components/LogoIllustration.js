@@ -6,9 +6,9 @@ import circleLogo from "../images/circle-logo.png";
 import { device } from "../utils/devices";
 
 const WelcomeContainer = styled.div`
-  margin: 50px auto 0px auto;
   width: 100%;
   max-width: 650px;
+  margin: 50px auto 0px auto;
   @media ${device.largeScreen} {
     max-width: 1000px;
   }
@@ -16,20 +16,17 @@ const WelcomeContainer = styled.div`
 
 const FarmWithLogo = styled.div`
   position: relative;
-  margin: 0 auto;
   width: 100%;
   max-height: 900px;
+  margin: 0 auto;
 `;
 
 const Logo = styled.img`
-  position: absolute;
   display: block;
-  top: 0;
-  left: 0;
+  position: absolute;
+  width: 20%;
   max-width: 400px;
-  height: 20%;
-  background-size: contain;
-  background-repeat: no-repeat;
+  height: auto;
 `;
 
 const FarmIllustration = styled.img`
@@ -39,9 +36,9 @@ const FarmIllustration = styled.img`
 `;
 
 const TextBlock = styled.div`
+  display: block;
   position: relative;
   margin-top: -5%;
-  display: block;
 `;
 
 const WhidbeyHeader = styled.h1`
@@ -53,6 +50,7 @@ const WhidbeyHeader = styled.h1`
 `;
 
 const IllustrationText = styled.p`
+  /* fluid typography to control line height and text size see utils/responsiveSCSS.js for details */
   ${fluidText}
   margin-top: -5px;
   font-style: normal;
@@ -60,13 +58,16 @@ const IllustrationText = styled.p`
   color: #787878;
 `;
 
-
-
 const LogoIllustration = () => {
+
   return (
-    <WelcomeContainer>
+    <WelcomeContainer id="home">
       <FarmWithLogo>
-        <Logo src={`${circleLogo}`} />
+        <Logo 
+          src={`${circleLogo}`} 
+          width="800" 
+          height="800" 
+          alt="Whidbey Island Logo" />
         <FarmIllustration src={`${farm}`} />
       </FarmWithLogo>
       <TextBlock>

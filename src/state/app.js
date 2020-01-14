@@ -6,6 +6,7 @@ export const initialState = {
     checkoutId: '',
   },
   products: [],
+  articles: [],
   pending: true,
   error: null,
   burgerToggled: false,
@@ -69,24 +70,24 @@ export const Reducer1 = (state = initialState, action) => {
         }
       };
 
-    case CartActionTypes.FETCH_PRODUCTS_PENDING:
-      return {
-        ...state,
-        pending: true
-      }
-    case CartActionTypes.FETCH_PRODUCTS_SUCCESS:
-      return {
-        ...state,
-        pending: false,
-        products: action.products
-      }
-    case CartActionTypes.FETCH_PRODUCTS_ERROR:
-      return {
-        ...state,
-        pending: false,
-        error: action.error
-      }
-    case CartActionTypes.TOGGLE_BURGER:
+      case CartActionTypes.FETCH_PENDING:
+        return {
+          ...state,
+          pending: true
+        }
+      case CartActionTypes.FETCH_SUCCESS:
+        return {
+          ...state,
+          pending: false,
+          [action.dataType]: action.data
+        }
+      case CartActionTypes.FETCH_ERROR:
+        return {
+          ...state,
+          pending: false,
+          error: action.error
+        }
+      case CartActionTypes.TOGGLE_BURGER:
       return {
         ...state,
         burgerToggled: !state.burgerToggled,

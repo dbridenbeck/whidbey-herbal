@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { client } from "../plugins/shopify.js";
 import * as CartActionCreators from "../state/actions/cart";
-import fetchProductsAction from '../state/fetchProducts';
+import { fetchShopifyProductsAction, fetchShopifyArticlesAction } from '../state/fetchShopifyData';
 import styled from "styled-components";
 import Header from "./Header"
 import Footer from "./Footer"
@@ -19,35 +19,38 @@ const MainWrapper = styled.div`
 const Layout = ({
   children,
   clearCheckoutInState,
-  fetchProducts,
+  fetchShopifyProducts,
+  fetchShopifyArticles,
   checkout
 }) => {
   // if shopify saiys the checkout happened successfully, clear checkout in state
   const clearCheckoutIfCompleted = () => {
     checkout.checkoutId
-    ? client.checkout.fetch(checkout.checkoutId).then(checkout => {
-        if (checkout.completedAt) {
-          clearCheckoutInState();
-        }
-      })
-    : console.log("checkout doesn't exist");
+      ? client.checkout.fetch(checkout.checkoutId).then(checkout => {
+          if (checkout.completedAt) {
+            clearCheckoutInState();
+          }
+        })
+      : console.log("checkout doesn't exist");
   };
 
   useEffect(() => {
     // if checkout has been completed, clear checkout in state
     clearCheckoutIfCompleted();
     // populate state with products from shopify
-    fetchProducts();
+    fetchShopifyProducts();
+    // populate state with articles from shopify
+    fetchShopifyArticles();
   }, []);
 
-    return (
-      <div>
-          <Header />
-          <MainWrapper>{children}</MainWrapper>
-          <Footer />
-      </div>
-    );
-}
+  return (
+    <div>
+      <Header />
+      <MainWrapper>{children}</MainWrapper>
+      <Footer />
+    </div>
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
@@ -66,7 +69,8 @@ const mapStateToProps = ( {checkout} ) => ({
 const mapDispatchToProps = dispatch => ({
   clearCheckoutInState: () =>
     dispatch(CartActionCreators.clearCheckoutInState()),
-  fetchProducts: () => dispatch(fetchProductsAction()),
+  fetchShopifyProducts: () => dispatch(fetchShopifyProductsAction()),
+  fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
   clearBurger: () => dispatch(CartActionCreators.clearBurger()),
 });
 

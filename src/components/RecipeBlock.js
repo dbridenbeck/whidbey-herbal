@@ -28,6 +28,7 @@ import { fluidText, fluidH2 } from "../utils/responsiveSCSS";
     width: 75%;
     height: auto;
     margin: 0 auto 20px auto;
+    border-radius: 10px;
   `;
   
   const RecipeText = styled.p`
@@ -43,15 +44,12 @@ import { fluidText, fluidH2 } from "../utils/responsiveSCSS";
 const RecipeBlock = ({recipe}) => {
 
   return (
-    <RecipeContainer recipeName={recipe.recipeName}>
+    <RecipeContainer recipeName={recipe.node.title}>
       <RecipeImage
-        src={`${recipe.img}`}
-        width={`${recipe.width}`}
-        height={`${recipe.height}`}
-        alt={`${recipe.alt}`}
+        src={`${recipe.node.image.originalSrc}`}
       />
-      <RecipeTitle>{recipe.recipeName}</RecipeTitle>
-      <RecipeText>{recipe.description}</RecipeText>
+      <RecipeTitle>{recipe.node.title}</RecipeTitle>
+      <RecipeText>{recipe.node.excerpt}</RecipeText>
     </RecipeContainer>
   );
 }

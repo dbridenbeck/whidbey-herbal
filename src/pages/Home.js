@@ -14,7 +14,7 @@ class Home extends Component {
   return (
     <div>
       <LogoIllustration />
-      <Products />
+      <Products title={""}/>
       <About />
       <Process />
       <StoreLocator />

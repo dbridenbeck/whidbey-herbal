@@ -1,4 +1,5 @@
-import Client from "shopify-buy";
+import Client from 'shopify-buy/index.unoptimized.umd';
+
 
 export const client = Client.buildClient({
   domain: "whomstdadisthatdad.myshopify.com",

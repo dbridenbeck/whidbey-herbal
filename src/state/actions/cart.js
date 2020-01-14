@@ -27,17 +27,18 @@ export const clearCheckoutInState = () => ({
   type: CartActionTypes.CLEAR_CHECKOUT_IN_STATE
 });
 
-export const fetchProductsPending = () => ({
-  type: CartActionTypes.FETCH_PRODUCTS_PENDING
+export const fetchPending = () => ({
+  type: CartActionTypes.FETCH_PENDING
 });
 
-export const fetchProductsSuccess = products => ({
-  type: CartActionTypes.FETCH_PRODUCTS_SUCCESS,
-  products: products
+export const fetchSuccess = (dataType, data) => ({
+  type: CartActionTypes.FETCH_SUCCESS,
+  data,
+  dataType,
 });
 
-export const fetchProductsError = error => ({
-  type: CartActionTypes.FETCH_PRODUCTS_ERROR,
+export const fetchError = error => ({
+  type: CartActionTypes.FETCH_ERROR,
   error: error
 });
 

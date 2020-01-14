@@ -9,11 +9,6 @@ import { device } from "../utils/devices";
 import { laptopMargins, tabletMargins } from "../utils/responsiveSCSS";
 
 const ProductsWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-evenly;
-  position: relative;
   width: 100%;
   max-width: 1000px;
   margin: 20px auto 0 auto;
@@ -23,6 +18,14 @@ const ProductsWrapper = styled.div`
   @media ${device.laptop} {
     ${laptopMargins};
   }
+`;
+
+const ProductsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  position: relative;
 `;
 
 const ExploreShopLink = styled(Link)`
@@ -44,20 +47,29 @@ const ExploreShopLink = styled(Link)`
   }
 `;
 
-const Products = ({products}) => {
+const ProductsTitle = styled.h1`
+  margin: 5% 0 5px 50px;
+  font-weight: normal;
+  font-size: min(max(16px, 4vw), 40px);
+  text-align: left;
+  color: #787878;
+`;
+
+const Products = ({products, title}) => {
 
   return (
-    <div>
-      <ProductsWrapper>
+    <ProductsWrapper>
+      <ProductsTitle> {title} </ProductsTitle>
+      <ProductsContainer>
         {/* only display products that are availble for sale */}
         {products
           .filter(product => product.availableForSale)
           .map(product => (
             <Product key={product.id} product={product} />
           ))}
-      </ProductsWrapper>
+      </ProductsContainer>
       <ExploreShopLink to="/">Explore the Shop</ExploreShopLink>
-    </div>
+    </ProductsWrapper>
   );
 };
 

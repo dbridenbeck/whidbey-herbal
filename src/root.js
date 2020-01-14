@@ -7,7 +7,7 @@ import Product from '../src/pages/Product';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { Reducer1 } from '../src/state/app';
+import { Reducer1 } from './state/App';
 import { saveToLocalStorage, getFromLocalStorage } from "../src/state/localStorage";
 import thunk from "redux-thunk";
 import "./index.css";

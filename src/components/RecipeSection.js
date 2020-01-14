@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from "styled-components";
+import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-
 
 import RecipeBlock from './RecipeBlock';
 
 import { device } from "../utils/devices";
 import { laptopMargins, tabletMargins, mobileMargins, fluidH1 } from "../utils/responsiveSCSS";
-
-import lilacHoney from '../images/lilacHoney.jpg';
-import calendulaOil from '../images/calendulaOil.jpg';
 
 const RecipesWrapper = styled.div`
   position: relative;
@@ -41,37 +38,15 @@ const RecipeWrapper = styled.div`
   margin: 0 auto;
 `;
 
-const recipes = [
-  {
-    recipeName: "LILAC INFUSED HONEY",
-    description: "Treat yourself to one of life’s great flavors!",
-    img: `${lilacHoney}`,
-    width: "600",
-    height: "600",
-    alt:
-      "A photo of lilac flowers in a canning jar in front of a backdrop trees, the farm and a tractor."
-  },
-  {
-    recipeName: "CALENDULA ROSE OIL",
-    description: "A fantastic addition to your medicine cabinet",
-    img: `${calendulaOil}`,
-    width: "600",
-    height: "600",
-    alt:
-      "Overhead photo of a bowl of flowers, a pair of scissors and two zucchinis"
-  }
-];
-
-const RecipeSection = () => {
-
+const RecipeSection = ({articles}) => {
   return (
     <RecipesWrapper id="recipes">
       <ContainerTitle>Recipes</ContainerTitle>
       <RecipeWrapper>
-        {recipes.map(recipe => (
+        {articles.map(article => (
           <RecipeBlock 
-            recipe={recipe} 
-            key={recipe.recipeName} 
+            recipe={article} 
+            key={article.node.id} 
           />
         ))}
       </RecipeWrapper>
@@ -79,4 +54,12 @@ const RecipeSection = () => {
   );
 }
 
-export default RecipeSection;
+RecipeSection.propTypes = {
+  articles: PropTypes.array
+};
+
+const mapStatetoProps = ({articles}) => ({
+  articles
+})
+
+export default connect(mapStatetoProps, null)(RecipeSection);

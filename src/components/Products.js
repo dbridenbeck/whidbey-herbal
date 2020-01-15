@@ -47,12 +47,15 @@ const ExploreShopLink = styled(Link)`
   }
 `;
 
-const ProductsTitle = styled.h1`
-  margin: 5% 0 5px 50px;
+const ProductsTitle = styled.h2`
+  margin: 5% 0 5px 0px;
   font-weight: normal;
-  font-size: min(max(16px, 4vw), 40px);
+  font-size: 32px;
   text-align: left;
   color: #787878;
+  @media ${device.tablet} {
+    margin: 5% 0 5px 50px;
+  }
 `;
 
 const Products = ({products, title}) => {

@@ -11,13 +11,19 @@ import * as CartActionCreators from "../state/actions/cart";
 import styled from "styled-components";
 
 
-// Start Styled Components
+// Begin Styled Components
+const ProductWrapper = styled.div`
+  display: block;
+  height: auto;
+  width: 100%;
+  margin: 90px auto 0 auto;
+`;
 
 const ProductInfo = styled.div`
   width: 100%;
-  margin: 50px auto 0 auto;
+  margin: 0 auto;
   height: auto;
-  @media ${device.laptop} {
+  @media ${device.tablet} {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -25,11 +31,14 @@ const ProductInfo = styled.div`
 `;
 
 const Images = styled.div`
-  width: 80%;
-  height: auto;
+  width: 60%;
   margin: 0 auto;
   @media ${device.tablet} {
     width: 45%;
+  }
+  @media ${device.laptop} {
+    width: 35%;
+    margin: 0 7.5%;
   }
 `;
 
@@ -46,15 +55,17 @@ const AltImages = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 50%;
+  align-content: center;
   height: auto;
+  width: 100%;
   margin: 0 auto;
 `;
 
 const AltImage = styled.img`
   display: block;
-  width: 46%;
-  height: auto;
+  width: 120px;
+  height: 120px;
+  align-self: center;
   margin: 0 10px;
   border: 1px solid #e3be42;
   border-radius: 10px;
@@ -82,7 +93,7 @@ const ProductDetails = styled.div`
     color: #787878;
   }
   @media ${device.tablet} {
-    width: 45%;
+    width: 50%;
     margin: 0 auto;
   }
 `;
@@ -94,19 +105,12 @@ const Title = styled.h1`
   font-size: min(max(26px, 5vw), 54px);
   font-weight: bold;
   @media ${device.tablet} {
-    margin-top: -20px;
+    margin-top: -4%;
   }
 `;
 
 const AboutText = styled.p`
-    margin: 0 auto;
-    padding: 0;
-    font-size: min(max(15px, 3vw), 18px);
-    line-height: min(max(18px, 3vw), 32px);
-    text-align: left;
-    font-style: normal;
-    letter-spacing: 0.01em;
-    color: #787878;
+
 `;
 
 const CTABlock = styled.div`
@@ -151,6 +155,7 @@ const ShopifyHTML = styled.div`
   margin-top: 30px;
 `;
 
+// begin component
 const Product = ( { checkout, products, updateItemQuantity, addLineItem, match } ) => {
   const { handle } = match.params;
 
@@ -176,7 +181,7 @@ const createBuyButton = (product, quantity, buttonText) => {
 }
 
   return (
-    <div>
+    <ProductWrapper>
       <ProductInfo>
         <Images>
           <HeroImage
@@ -185,7 +190,7 @@ const createBuyButton = (product, quantity, buttonText) => {
           />
           <AltImages>
             {selectedProduct.images.edges.map(image => (
-              <AltImage src={image.node.src} alt={image.node.altText} />
+              <AltImage className="altImage" src={image.node.src} alt={image.node.altText} />
             ))}
           </AltImages>
         </Images>
@@ -213,8 +218,8 @@ const createBuyButton = (product, quantity, buttonText) => {
 
       <Reviews />
 
-      <Products title={"View More Products"} />
-    </div>
+      <Products title={"More Products"} />
+    </ProductWrapper>
   );
 };
 

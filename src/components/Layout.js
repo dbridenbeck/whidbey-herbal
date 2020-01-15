@@ -13,7 +13,7 @@ const MainWrapper = styled.div`
   padding: 0 20px;
   display: block;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
 `;
 
 const Layout = ({

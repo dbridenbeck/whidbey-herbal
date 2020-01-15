@@ -21,7 +21,7 @@ export const fetchShopifyArticlesAction = () => {
            dispatch(fetchPending());
            client.graphQLClient
              .send(articlesQuery)
-             .then(({ data }) => {
+             .then(({ model, data }) => {
                const articles = data.articles.edges;
                // add articles from shopify to redux
                dispatch(fetchSuccess("articles", articles));
@@ -33,17 +33,56 @@ export const fetchShopifyArticlesAction = () => {
          };
        };
 
+// Build a custom products query using the unoptimized version of the SDK
+const productsQuery = client.graphQLClient.query((root) => {
+  root.addConnection('products', {args: {first: 4}}, (product) => {
+    product.add('title');
+    product.add('descriptionHtml');
+    product.add('handle');
+    product.add('availableForSale');
+    product.addConnection("images", {args: {first: 2}}, image => {
+      image.add("id");
+      image.add("src");
+      image.add("altText");
+    });
+    product.addConnection('variants', {args: {first: 1}}, variant => {
+      variant.add('id');
+      variant.add('price');
+    });
+  });
+});
+
 export const fetchShopifyProductsAction = () => {
   return dispatch => {
     dispatch(fetchPending());
-    client.product.fetchAll()
-    .then(products => {
-      // add products from shopify to redux
-      dispatch(fetchSuccess("products", products));
-      return products;
-    })
-    .catch(error => {
-      dispatch(fetchError(error));
-    });
-  }
-}
+    // Call the send method with the custom products query
+    client.graphQLClient
+      .send(productsQuery)
+      .then(({ model, data }) => {
+        const products = data.products.edges.map(
+          product => product.node
+        );
+        // add products from shopify to redux
+          dispatch(fetchSuccess("products", products));
+        return products;
+      })
+      .catch(error => {
+        dispatch(fetchError(error));
+      });
+  };
+};
+
+// export const fetchShopifyProductsAction = () => {
+//   return dispatch => {
+//     dispatch(fetchPending());
+//     client.product.fetchAll()
+//     .then(products => {
+//       // add products from shopify to redux
+//       dispatch(fetchSuccess("products", products));
+//       return products;
+//     })
+//     .catch(error => {
+//       dispatch(fetchError(error));
+//     });
+//   }
+// }

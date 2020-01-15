@@ -54,19 +54,18 @@ const Product = ({product}) => {
 
   return (
     <ProductContainer>
-      <ProductLink to={`/product/${product.handle}`} >
+      <ProductLink to={`/product/${product.handle}`}>
         <ImageContainer>
-          <Image src={`${product.images[0].src}`}
+          <Image
+            src={`${product.images.edges[0].node.src}`}
             alt={`${product.description}`}
           />
         </ImageContainer>
-          <Title> {product.title.toUpperCase()} </Title>
+        <Title> {product.title.toUpperCase()} </Title>
       </ProductLink>
       <Info>
-        5ml bottle <br /> 
-        <strong> 
-          ${product.variants[0].price}
-        </strong>
+        5ml bottle <br />
+        <strong>${product.variants.edges[0].node.price}</strong>
       </Info>
     </ProductContainer>
   );

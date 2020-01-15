@@ -190,7 +190,7 @@ const createBuyButton = (product, quantity, buttonText) => {
           />
           <AltImages>
             {selectedProduct.images.edges.map(image => (
-              <AltImage className="altImage" src={image.node.src} alt={image.node.altText} />
+              <AltImage key={image.node.id} className="altImage" src={image.node.src} alt={image.node.altText} />
             ))}
           </AltImages>
         </Images>

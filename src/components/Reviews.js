@@ -67,7 +67,7 @@ const Reviews = () => {
     <ReviewsWrapper>
       <Title>Reviews</Title>
       {reviewsList.map(review => (
-        <ReviewContainer>
+        <ReviewContainer key={review.name}>
           <ReviewText>
             {review.text}
           </ReviewText>

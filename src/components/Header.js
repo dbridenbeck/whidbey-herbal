@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { NavHashLink as NavLink } from "react-router-hash-link";
 import { connect } from "react-redux";
 import styled from 'styled-components';
@@ -30,17 +31,26 @@ const Navbar = styled.div`
   }
   /* control Navbar show/hide for scroll & hover when on laptop */
   @media ${device.laptop} {
-    opacity: 0;
+    opacity: ${props =>
+      props.currentRoute !== "/"
+        ? "0"
+        : "1"};
     &.active {
       opacity: 1;
       transition: opacity 200ms ease-in;
     }
     &.hidden {
-      opacity: 0;
+      opacity: ${props =>
+        props.currentRoute !== "/"
+          ? "1"
+          : "0"};
       transition: opacity 200ms ease-out;
       :hover {
         opacity: ${props =>
-          props.scrollPos >= 0 && props.scrollPos <= 50 ? "1" : "0"};
+          (props.scrollPos >= 0 && props.scrollPos <= 50) || 
+          (props.currentRoute !== "/") 
+          ? "1" 
+          : "0"};
       }
     }
   }
@@ -90,11 +100,13 @@ export class Header extends Component {
   }
   
   render() {
+  console.log("props!: ", this.props);
   const { burgerToggled } = this.props
     return (
     <Navbar 
     className={this.state.show ? "active" : "hidden"}
     scrollPos={this.state.scrollPos}
+    currentRoute={this.props.location.pathname}
     >
       <Hamburger>
         {/* This div creates the hamburger using before & after css pseudoclasses */}
@@ -128,4 +140,4 @@ const mapStateToProps = ({burgerToggled}) => ({
   burgerToggled
 });
 
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps, null)(withRouter(Header));

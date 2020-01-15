@@ -32,7 +32,6 @@ const Root = () => {
     const state = store.getState();
     saveToLocalStorage(state);
   });
-
   return (
   <Provider store={store}>
     <Router>

@@ -52,7 +52,7 @@ export const Reducer1 = (state = initialState, action) => {
             if (lineItem.id === action.product.id) {
               return {
                 ...action.product,
-                quantity: lineItem.quantity + state.quantityButtonAmount
+                quantity: lineItem.quantity + parseFloat(state.quantityButtonAmount, 2)
               };
             } else {
               return lineItem;

@@ -16,14 +16,17 @@ const StyledInput = styled.input`
   border-radius: 10px;
   text-align: center;
   font-size: 18px;
-  color: #787878;
+  color: rgba(120, 120, 120, .8);
+  :focus {
+    outline-width: 0;
+  }
 `;
 
 const QuantityButton = ({updateQuantityButton, quantityButtonAmount}) => {
 console.log("quantityButtonAmount is: ", quantityButtonAmount );
   return (
     <div>
-      <Quantity onChange="">
+      <Quantity>
         <label>
           Quantity:
           {/* ugh - gotta come back to this. need to get value to be the quantity that goes to updateQuantityButton! */}

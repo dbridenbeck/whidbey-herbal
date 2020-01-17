@@ -57,14 +57,32 @@ const Navbar = styled.div`
 `;
 
 const CheckoutLink = styled(NavLink)`
-  width: 10%;
+  position: relative;
+  width: 48px;
   height: 100%;
+  margin: 0 3%;
   background-image: url(${cart});
   background-position: center;
   background-size: auto 60%;
   background-repeat: no-repeat;
   &:hover {
     background-image: url(${cartYellow});
+  }
+  .item-counter {
+    width: 25px;
+    height: 25px;
+    opacity: ${props => (props.itemsincart ? "1" : "0")};
+    position: absolute;
+    right: -10px;
+    top: 2px;
+    padding-top: 2px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #787878;
+    background-color: rgba(227, 190, 66, 0.6);
+    border-radius: 50%;
+    transition: all 0.5s ease-in-out;
   }
 `;
 
@@ -100,8 +118,11 @@ export class Header extends Component {
   }
   
   render() {
-  const { burgerToggled } = this.props
-    return (
+  const { burgerToggled, lineItems } = this.props
+  const itemsInCart = lineItems.reduce((itemTotal, item) => (parseFloat(item.quantity, 2) + itemTotal), 0);
+  console.log(itemsInCart)
+
+  return (
     <Navbar 
     className={this.state.show ? "active" : "hidden"}
     scrollPos={this.state.scrollPos}
@@ -124,19 +145,23 @@ export class Header extends Component {
       <NavPanel
         burgerToggled={burgerToggled}
       />
-      <CheckoutLink to={`/checkout`}></CheckoutLink>
+      <CheckoutLink to={`/checkout`} itemsincart={itemsInCart}>
+        <div className="item-counter">{itemsInCart}</div>
+      </CheckoutLink>
     </Navbar>
     );
   }
 }
 
 Header.propTypes = {
-  burgerToggled: PropTypes.bool
+  burgerToggled: PropTypes.bool,
+  lineItems: PropTypes.array
 };
 
 
-const mapStateToProps = ({burgerToggled}) => ({
-  burgerToggled
+const mapStateToProps = ({burgerToggled, checkout: {lineItems}}) => ({
+  burgerToggled,
+  lineItems
 });
 
 export default connect(mapStateToProps, null)(withRouter(Header));

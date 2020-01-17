@@ -154,6 +154,9 @@ const BuyButton = styled.button`
     background-color: #e3be42;
     color: white;
   }
+  :focus {
+    outline-width: 0;
+  }
 `;
 
 const ShopifyHTML = styled.div`

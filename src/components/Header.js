@@ -100,7 +100,6 @@ export class Header extends Component {
   }
   
   render() {
-  console.log("props!: ", this.props);
   const { burgerToggled } = this.props
     return (
     <Navbar 

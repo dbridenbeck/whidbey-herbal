@@ -11,6 +11,8 @@ export const initialState = {
   error: null,
   burgerToggled: false,
   burgerClickedOnce: false,
+  heroImgSrc: "",
+  heroImgId: "",
 };
 
 export const Reducer1 = (state = initialState, action) => {
@@ -98,6 +100,18 @@ export const Reducer1 = (state = initialState, action) => {
         ...state,
         burgerClickedOnce: false,
         burgerToggled: false
+      }
+    case CartActionTypes.HANDLE_HERO_IMG:
+      return {
+        ...state,
+        heroImgSrc: action.imageSrc,
+        heroImgId: action.imageId
+      }
+    case CartActionTypes.CLEAR_HERO_IMG:
+      return {
+        ...state,
+        heroImgSrc: "",
+        heroImgId: ""
       }
     default:
       return state;

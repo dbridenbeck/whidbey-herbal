@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { device } from "../utils/devices";
+import * as CartActionCreators from "../state/actions/cart";
 
 const Title = styled.h2`
   margin: 0;
@@ -50,19 +52,26 @@ const Info = styled.p`
   color: #666666;
 `;
 
-const Product = ({product}) => {
+const createProductLink = (product, clearHeroImg) => {
+  const setHeroImg = () => clearHeroImg();
+  return (
+  <ProductLink to={`/product/${product.handle}`} onClick={setHeroImg}>
+    <ImageContainer>
+      <Image
+        src={`${product.images.edges[0].node.src}`}
+        alt={`${product.description}`}
+      />
+    </ImageContainer>
+    <Title> {product.title.toUpperCase()} </Title>
+  </ProductLink>
+  )
+}
+
+const Product = ({product, clearHeroImg}) => {
 
   return (
     <ProductContainer>
-      <ProductLink to={`/product/${product.handle}`}>
-        <ImageContainer>
-          <Image
-            src={`${product.images.edges[0].node.src}`}
-            alt={`${product.description}`}
-          />
-        </ImageContainer>
-        <Title> {product.title.toUpperCase()} </Title>
-      </ProductLink>
+      {createProductLink(product, clearHeroImg)}
       <Info>
         5ml bottle <br />
         <strong>${product.variants.edges[0].node.price}</strong>
@@ -75,4 +84,8 @@ Product.propTypes = {
   product: PropTypes.object
 }
 
-export default Product;
+const mapDispatchToProps = (dispatch) => ({
+  clearHeroImg: () => dispatch(CartActionCreators.clearHeroImg())
+})
+
+export default connect(null, mapDispatchToProps)(Product);

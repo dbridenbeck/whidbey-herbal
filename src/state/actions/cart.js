@@ -49,3 +49,13 @@ export const toggleBurger = () => ({
 export const clearBurger = () => ({
   type: CartActionTypes.CLEAR_BURGER
 });
+
+export const handleHeroImg = (imageSrc, imageId) => ({
+  type: CartActionTypes.HANDLE_HERO_IMG,
+  imageSrc,
+  imageId
+});
+
+export const clearHeroImg = () => ({
+  type: CartActionTypes.CLEAR_HERO_IMG,
+});

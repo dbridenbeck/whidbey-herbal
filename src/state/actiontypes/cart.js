@@ -8,3 +8,5 @@ export const FETCH_SUCCESS = 'cart/FETCH_SUCCESS';
 export const FETCH_ERROR = 'cart/FETCH_ERROR';
 export const TOGGLE_BURGER = 'cart/TOGGLE_BURGER';
 export const CLEAR_BURGER = 'cart/CLEAR_BURGER';
+export const HANDLE_HERO_IMG = 'cart/HANDLE_HERO_IMG';
+export const CLEAR_HERO_IMG = 'cart/CLEAR_HERO_IMG';

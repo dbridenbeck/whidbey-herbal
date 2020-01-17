@@ -18,7 +18,7 @@ const LineItem = ({
     <div key={lineItem.id}>
       <h3>{lineItem.title}</h3>
       <p>{lineItem.description}</p>
-      <p>{lineItem.variants[0].price}</p>
+      <p>{lineItem.variants.edges[0].node.price}</p>
       <p>Quantity: {lineItem.quantity}</p>
       {createRemoveButton(lineItem.id, index)}
       {createUpdateItemButton(lineItem, 1, "+")}

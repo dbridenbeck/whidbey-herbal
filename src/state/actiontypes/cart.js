@@ -10,3 +10,4 @@ export const TOGGLE_BURGER = 'cart/TOGGLE_BURGER';
 export const CLEAR_BURGER = 'cart/CLEAR_BURGER';
 export const HANDLE_HERO_IMG = 'cart/HANDLE_HERO_IMG';
 export const CLEAR_HERO_IMG = 'cart/CLEAR_HERO_IMG';
+export const UPDATE_QUANTITY_BUTTON = 'cart/UPDATE_QUANTITY_BUTTON';

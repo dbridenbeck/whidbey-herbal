@@ -59,3 +59,8 @@ export const handleHeroImg = (imageSrc, imageId) => ({
 export const clearHeroImg = () => ({
   type: CartActionTypes.CLEAR_HERO_IMG,
 });
+
+export const updateQuantityButton = (quantity) => ({
+  type: CartActionTypes.UPDATE_QUANTITY_BUTTON,
+  quantity
+});

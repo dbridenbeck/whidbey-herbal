@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
+import { connect } from "react-redux";
+import * as CartActionCreators from "../state/actions/cart";
 
 const Quantity = styled.form`
   font-size: 18px;
@@ -17,18 +19,27 @@ const StyledInput = styled.input`
   color: #787878;
 `;
 
-const QuantityButton = () => {
-
+const QuantityButton = ({updateQuantityButton, quantityButtonAmount}) => {
+console.log("quantityButtonAmount is: ", quantityButtonAmount );
   return (
     <div>
       <Quantity onChange="">
         <label>
           Quantity:
-          <StyledInput type="text" value="1" onChange="" />
+          {/* ugh - gotta come back to this. need to get value to be the quantity that goes to updateQuantityButton! */}
+          <StyledInput type="text" value={quantityButtonAmount} onChange={(event) => updateQuantityButton(event.target.value)} />
         </label>
       </Quantity>
     </div>
   );
 };
 
-export default QuantityButton;
+const mapStatetoProps = ({quantityButtonAmount}) => ({
+  quantityButtonAmount
+})
+
+const mapDispatchtoProps = (dispatch) => ({
+  updateQuantityButton: (quantity) => dispatch(CartActionCreators.updateQuantityButton(quantity)),
+})
+
+export default connect(mapStatetoProps, mapDispatchtoProps)(QuantityButton);

@@ -161,130 +161,110 @@ const ShopifyHTML = styled.div`
 `;
 
 // begin component
-export class Product extends Component {
-         // using component state to track which image should show in the heroImg component
-         // TODO: refactor this to use redux - products.js and the product.js page need to share state on heroImg
-         constructor(props) {
-           super(props);
-           this.state = {
-             heroImg: this.props.products
-               .filter(
-                 product => this.props.match.params.handle === product.handle
-               )
-               .map(product => product.images.edges[0].node.src),
-             selectedImg: this.props.products
-               .filter(
-                 product => this.props.match.params.handle === product.handle
-               )
-               .map(product => product.images.edges[0].node.id)
-           };
-         }
+const Product = ({
+    checkout,
+    products,
+    updateItemQuantity,
+    addLineItem,
+    match,
+    heroImgSrc,
+    heroImgId,
+    handleHeroImg
+  }) => {
 
-         render() {
-           console.log("is the products page re-rendering?")
-           const {
-             checkout,
-             products,
-             updateItemQuantity,
-             addLineItem,
-             match,
-             heroImgSrc,
-             heroImgId,
-             handleHeroImg
-           } = this.props;
-           const { handle } = match.params;
+  console.log("is the products page re-rendering?")
+  const { handle } = match.params;
 
-           // select the current product
-           const selectProduct = products.filter(
-             product => handle === product.handle
-           );
-           const selectedProduct = selectProduct[0];
+  // select the current product
+  const selectProduct = products.filter(
+    product => handle === product.handle
+  );
+  const selectedProduct = selectProduct[0];
 
-           // check if item exists in checkout already
-           const doesItemExist = checkout.lineItems.filter(
-             lineItem => lineItem.id === selectedProduct.id
-           );
+  // check if item exists in checkout already
+  const doesItemExist = checkout.lineItems.filter(
+    lineItem => lineItem.id === selectedProduct.id
+  );
 
-           // create buy button
-           const createBuyButton = (product, quantity, buttonText) => {
-             const addItem = () => addLineItem(product, quantity);
-             const updateQuantity = () => updateItemQuantity(product, quantity);
-             return (
-               <BuyButton
-                 className="buyButton"
-                 onClick={doesItemExist.length ? updateQuantity : addItem}
-               >
-                 {buttonText}
-               </BuyButton>
-             );
-           };
+  // create buy button
+  const createBuyButton = (product, quantity, buttonText) => {
+    const addItem = () => addLineItem(product, quantity);
+    const updateQuantity = () => updateItemQuantity(product, quantity);
+    return (
+      <BuyButton
+        className="buyButton"
+        onClick={doesItemExist.length ? updateQuantity : addItem}
+      >
+        {buttonText}
+      </BuyButton>
+    );
+  };
 
-           // when clicked, AltImage updates state and sets heroImg's src to AltImage
-           const createAltImage = image => {
-            const setHeroImg = () =>
-              handleHeroImg(image.node.src, image.node.id);
-            return (
-              <AltImage
-                key={image.node.id}
-                src={image.node.src}
-                alt={image.node.altText}
-                isSelected={image.node.id === this.state.selectedImg}
-                onClick={setHeroImg}
-              />
-            );
-          };
+  // when clicked, AltImage updates state and sets heroImg's src to AltImage
+  const createAltImage = image => {
+   const setHeroImg = () =>
+     handleHeroImg(image.node.src, image.node.id);
+   return (
+     <AltImage
+       key={image.node.id}
+       src={image.node.src}
+       alt={image.node.altText}
+       isSelected={image.node.id === heroImgId}
+       onClick={setHeroImg}
+     />
+   );
+ };
 
-           // begin component's return
-           return (
-             <ProductWrapper>
-               <ProductInfo>
-                 <Images>
-                   <HeroImage
-                     src={
-                       heroImgSrc
-                         ? heroImgSrc
-                         : selectedProduct.images.edges[0].node.src
-                     }
-                     alt="Product Photo"
-                   />
-                   <AltImages>
-                     {selectedProduct.images.edges.map(image =>
-                       createAltImage(image)
-                     )}
-                   </AltImages>
-                 </Images>
-                 <ProductDetails>
-                   <Title>{selectedProduct.title}</Title>
-                   {/* TODO replace AboutText's content with metafield via shopify once I have it whitelisted via graphql admin api */}
-                   <AboutText>
-                     {" "}
-                     We are one of few distilleries creating Western Hemlock
-                     essential oil. When you smell it, you will understand why
-                     we had to have it in our collection, and why it’s the
-                     Washington state tree!{" "}
-                   </AboutText>
-                   <CTABlock>
-                     <Price>
-                       ${selectedProduct.variants.edges[0].node.price}
-                     </Price>
-                     <QuantityButton />
-                     {createBuyButton(selectedProduct, 1, `Add to Cart`)}
-                   </CTABlock>
-                   <ShopifyHTML
-                     dangerouslySetInnerHTML={{
-                       __html: selectedProduct.descriptionHtml
-                     }}
-                   />
-                 </ProductDetails>
-               </ProductInfo>
+  // begin component's return
+  return (
+    <ProductWrapper>
+      <ProductInfo>
+        <Images>
+          <HeroImage
+            src={
+              heroImgSrc
+                ? heroImgSrc
+                : selectedProduct.images.edges[0].node.src
+            }
+            alt="Product Photo"
+          />
+          <AltImages>
+            {selectedProduct.images.edges.map(image =>
+              createAltImage(image)
+            )}
+          </AltImages>
+        </Images>
+        <ProductDetails>
+          <Title>{selectedProduct.title}</Title>
+          {/* TODO replace AboutText's content with metafield via shopify once I have it whitelisted via graphql admin api */}
+          <AboutText>
+            {" "}
+            We are one of few distilleries creating Western Hemlock
+            essential oil. When you smell it, you will understand why
+            we had to have it in our collection, and why it’s the
+            Washington state tree!{" "}
+          </AboutText>
+          <CTABlock>
+            <Price>
+              ${selectedProduct.variants.edges[0].node.price}
+            </Price>
+            <QuantityButton />
+            {createBuyButton(selectedProduct, 1, `Add to Cart`)}
+          </CTABlock>
+          <ShopifyHTML
+            dangerouslySetInnerHTML={{
+              __html: selectedProduct.descriptionHtml
+            }}
+          />
+        </ProductDetails>
+      </ProductInfo>
 
-               <Reviews />
+      <Reviews />
 
-               <Products title={"More Products"} />
-             </ProductWrapper>
-           );
-         }
-       }
+      <Products title={"More Products"} />
+    </ProductWrapper>
+  );
+}
 
 Product.propTypes = {
   checkout: PropTypes.object,

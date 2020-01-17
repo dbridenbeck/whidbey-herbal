@@ -54,7 +54,7 @@ export class Checkout extends Component {
     const lineItemsToAdd = checkout.lineItems.map(
       item => (
         {
-          variantId: item.variants[0].id,
+          variantId: item.variants.edges[0].node.id,
           quantity: item.quantity
         }
       )

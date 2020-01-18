@@ -46,10 +46,6 @@ const LineItem = ({
   removeLineItem,
   updateItemQuantity
 }) => {
-  // if line item's quantity drops to zero, remove it from redux
-  if (lineItem.quantity === 0) {
-    removeLineItem(lineItem.id, index);
-  }
 
   return (
     <LineItemWrapper key={lineItem.id}>

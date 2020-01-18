@@ -121,7 +121,7 @@ export class Header extends Component {
   const { burgerToggled, lineItems } = this.props
   const itemsInCart = () => {
     if (lineItems.length) {
-      return lineItems.reduce((itemTotal, item) => (parseFloat(item.quantity, 2) + itemTotal), 0)
+      return lineItems.reduce((itemTotal, item) => ( item.quantity == '' ? itemTotal : parseFloat(item.quantity, 2) + itemTotal ), 0)
     } else {
       return false
     }

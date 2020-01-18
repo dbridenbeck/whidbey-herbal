@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from "styled-components";
-import { connect } from "react-redux";
-import * as CartActionCreators from "../state/actions/cart";
 
 const Quantity = styled.form`
   font-size: 18px;
@@ -30,11 +28,11 @@ console.log("quantityButtonAmount is: ", quantity );
         <label>
           {labelTitle}
           <StyledInput
-            type="text"
+            type="number"
             value={quantity}
-            onChange={event =>
-              onChangeFunction(event.target.value, updateType, selectedProduct)
-            }
+            onChange={event => {
+              onChangeFunction(event.target.value, updateType, selectedProduct);
+            }}
           />
         </label>
       </Quantity>

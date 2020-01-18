@@ -12,11 +12,12 @@ export const removeLineItem = (productId, index) => ({
   index,
 });
 
-export const updateItemQuantity = (product, quantityToUpdate) => ({
-  type: CartActionTypes.UPDATE_ITEM_QUANTITY,
-  product,
-  quantityToUpdate,
-});
+export const updateItemQuantity = (quantityToUpdate, updateType, product) => ({
+         type: CartActionTypes.UPDATE_ITEM_QUANTITY,
+         quantityToUpdate,
+         updateType,
+         product
+       });
 
 export const updateCheckoutId = (id) => ({
   type: CartActionTypes.UPDATE_CHECKOUT_ID,

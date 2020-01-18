@@ -119,8 +119,15 @@ export class Header extends Component {
   
   render() {
   const { burgerToggled, lineItems } = this.props
-  const itemsInCart = lineItems.reduce((itemTotal, item) => (parseFloat(item.quantity, 2) + itemTotal), 0);
-  console.log(itemsInCart)
+  const itemsInCart = () => {
+    if (lineItems.length) {
+      return lineItems.reduce((itemTotal, item) => (parseFloat(item.quantity, 2) + itemTotal), 0)
+    } else {
+      return false
+    }
+  };
+
+  console.log("what is itemsInCart?: ", itemsInCart())
 
   return (
     <Navbar 
@@ -145,8 +152,8 @@ export class Header extends Component {
       <NavPanel
         burgerToggled={burgerToggled}
       />
-      <CheckoutLink to={`/checkout`} itemsincart={itemsInCart}>
-        <div className="item-counter">{itemsInCart}</div>
+      <CheckoutLink to={`/checkout`} itemsincart={itemsInCart()}>
+        <div className="item-counter">{itemsInCart()}</div>
       </CheckoutLink>
     </Navbar>
     );

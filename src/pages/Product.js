@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Products from '../components/Products';
 import Reviews from '../components/Reviews';
 import QuantityButton from '../components/QuantityButton';
+import BuyButton from '../components/BuyButton';
 
 import { device } from "../utils/devices";
 
@@ -137,51 +138,26 @@ const Price = styled.p`
   font-weight: normal;
 `;
 
-const BuyButton = styled.button`
-  display: block;
-  width: 25%;
-  max-width: 300px;
-  height: 40%;
-  padding: 5px;
-  color: #e3be42;
-  text-align: center;
-  font-size: min(max(16px, 2vw), 18px);
-  font-weight: normal;
-  border: 1px solid #e3be42;
-  border-radius: 10px;
-  text-decoration: none;
-  &:hover {
-    background-color: #e3be42;
-    color: white;
-  }
-  :focus {
-    outline-width: 0;
-  }
-`;
-
 const ShopifyHTML = styled.div`
   margin-top: 30px;
 `;
 
 // begin component
 const Product = ({
-    checkout,
-    products,
-    updateItemQuantity,
-    addLineItem,
-    match,
-    heroImgSrc,
-    heroImgId,
-    handleHeroImg
-  }) => {
-
-  console.log("is the products page re-rendering?")
+  products,
+  match,
+  heroImgSrc,
+  heroImgId,
+  checkout,
+  handleHeroImg,
+  quantityButtonAmount,
+  updateQuantityButton
+}) => {
+  console.log("is the products page re-rendering?");
   const { handle } = match.params;
 
   // select the current product
-  const selectProduct = products.filter(
-    product => handle === product.handle
-  );
+  const selectProduct = products.filter(product => handle === product.handle);
   const selectedProduct = selectProduct[0];
 
   // check if item exists in checkout already
@@ -189,34 +165,21 @@ const Product = ({
     lineItem => lineItem.id === selectedProduct.id
   );
 
-  // create buy button
-  const createBuyButton = (product, quantity, buttonText) => {
-    const addItem = () => addLineItem(product, quantity);
-    const updateQuantity = () => updateItemQuantity(product, quantity);
-    return (
-      <BuyButton
-        className="buyButton"
-        onClick={doesItemExist.length ? updateQuantity : addItem}
-      >
-        {buttonText}
-      </BuyButton>
-    );
-  };
+  console.log("doesItemExist is: ", doesItemExist);
 
   // when clicked, AltImage updates state and sets heroImg's src to AltImage
   const createAltImage = image => {
-   const setHeroImg = () =>
-     handleHeroImg(image.node.src, image.node.id);
-   return (
-     <AltImage
-       key={image.node.id}
-       src={image.node.src}
-       alt={image.node.altText}
-       isSelected={image.node.id === heroImgId}
-       onClick={setHeroImg}
-     />
-   );
- };
+    const setHeroImg = () => handleHeroImg(image.node.src, image.node.id);
+    return (
+      <AltImage
+        key={image.node.id}
+        src={image.node.src}
+        alt={image.node.altText}
+        isSelected={image.node.id === heroImgId}
+        onClick={setHeroImg}
+      />
+    );
+  };
 
   // begin component's return
   return (
@@ -225,16 +188,12 @@ const Product = ({
         <Images>
           <HeroImage
             src={
-              heroImgSrc
-                ? heroImgSrc
-                : selectedProduct.images.edges[0].node.src
+              heroImgSrc ? heroImgSrc : selectedProduct.images.edges[0].node.src
             }
             alt="Product Photo"
           />
           <AltImages>
-            {selectedProduct.images.edges.map(image =>
-              createAltImage(image)
-            )}
+            {selectedProduct.images.edges.map(image => createAltImage(image))}
           </AltImages>
         </Images>
         <ProductDetails>
@@ -242,17 +201,24 @@ const Product = ({
           {/* TODO replace AboutText's content with metafield via shopify once I have it whitelisted via graphql admin api */}
           <AboutText>
             {" "}
-            We are one of few distilleries creating Western Hemlock
-            essential oil. When you smell it, you will understand why
-            we had to have it in our collection, and why it’s the
-            Washington state tree!{" "}
+            We are one of few distilleries creating Western Hemlock essential
+            oil. When you smell it, you will understand why we had to have it in
+            our collection, and why it’s the Washington state tree!{" "}
           </AboutText>
           <CTABlock>
-            <Price>
-              ${selectedProduct.variants.edges[0].node.price}
-            </Price>
-            <QuantityButton />
-            {createBuyButton(selectedProduct, 1, `Add to Cart`)}
+            <Price>${selectedProduct.variants.edges[0].node.price}</Price>
+            <QuantityButton
+              selectedProduct={selectedProduct}
+              labelTitle={"Quantity: "}
+              quantity={quantityButtonAmount}
+              updateType={"add"}
+              onChangeFunction={updateQuantityButton}
+            />
+            <BuyButton
+              selectedProduct={selectedProduct}
+              quantity={quantityButtonAmount}
+              doesItemExist={doesItemExist}
+            />
           </CTABlock>
           <ShopifyHTML
             dangerouslySetInnerHTML={{
@@ -267,32 +233,29 @@ const Product = ({
       <Products title={"More Products"} />
     </ProductWrapper>
   );
-}
+};
 
 Product.propTypes = {
-  checkout: PropTypes.object,
   products: PropTypes.array,
-  updateItemQuantity: PropTypes.func,
-  addLineItem: PropTypes.func,
+  checkout: PropTypes.object,
   heroImg: PropTypes.string,
   heroImgHandle: PropTypes.string,
   handleHeroImg: PropTypes.func
 };
 
-const mapStateToProps = ({checkout, products, heroImgSrc, heroImgId}) => ({
-  checkout,
+const mapStateToProps = ({products, checkout, heroImgSrc, heroImgId, quantityButtonAmount}) => ({
   products,
+  checkout,
   heroImgSrc,
-  heroImgId
+  heroImgId,
+  quantityButtonAmount
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateItemQuantity: (product, quantityToUpdate) =>
-    dispatch(CartActionCreators.updateItemQuantity(product, quantityToUpdate)),
-  addLineItem: (product, quantity) =>
-    dispatch(CartActionCreators.addLineItem(product, quantity)),
   handleHeroImg: (imageSrc, imageId) =>
-    dispatch(CartActionCreators.handleHeroImg(imageSrc, imageId))
+    dispatch(CartActionCreators.handleHeroImg(imageSrc, imageId)),
+  updateQuantityButton: (quantity) =>
+    dispatch(CartActionCreators.updateQuantityButton(quantity))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

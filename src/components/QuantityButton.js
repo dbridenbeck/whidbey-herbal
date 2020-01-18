@@ -11,7 +11,7 @@ const Quantity = styled.form`
 const StyledInput = styled.input`
   width:  50px;
   height: 30px;
-  margin-left: 10px;
+  margin: 0 auto;
   border: 1px solid #787878;
   border-radius: 10px;
   text-align: center;
@@ -22,27 +22,24 @@ const StyledInput = styled.input`
   }
 `;
 
-const QuantityButton = ({updateQuantityButton, quantityButtonAmount}) => {
-console.log("quantityButtonAmount is: ", quantityButtonAmount );
+const QuantityButton = ({quantity, selectedProduct, updateType, labelTitle, onChangeFunction}) => {
+console.log("quantityButtonAmount is: ", quantity );
   return (
     <div>
       <Quantity>
         <label>
-          Quantity:
-          {/* ugh - gotta come back to this. need to get value to be the quantity that goes to updateQuantityButton! */}
-          <StyledInput type="text" value={quantityButtonAmount} onChange={(event) => updateQuantityButton(event.target.value)} />
+          {labelTitle}
+          <StyledInput
+            type="text"
+            value={quantity}
+            onChange={event =>
+              onChangeFunction(event.target.value, updateType, selectedProduct)
+            }
+          />
         </label>
       </Quantity>
     </div>
   );
 };
 
-const mapStatetoProps = ({quantityButtonAmount}) => ({
-  quantityButtonAmount
-})
-
-const mapDispatchtoProps = (dispatch) => ({
-  updateQuantityButton: (quantity) => dispatch(CartActionCreators.updateQuantityButton(quantity)),
-})
-
-export default connect(mapStatetoProps, mapDispatchtoProps)(QuantityButton);
+export default QuantityButton;

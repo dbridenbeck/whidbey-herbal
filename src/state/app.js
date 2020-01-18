@@ -24,14 +24,16 @@ export const Reducer1 = (state = initialState, action) => {
         quantityButtonAmount: 1,
         checkout: {
           ...state.checkout,
+          // need to put an ternary in here to either add new line item or update existing line item's quantity
           lineItems: [
             ...state.checkout.lineItems,
             { 
               ...action.product, 
-              quantity: state.quantityButtonAmount }
+              quantity: state.quantityButtonAmount 
+            }
           ]
         }
-      };
+      }
     case CartActionTypes.REMOVE_LINE_ITEM:
       return {
         ...state,
@@ -39,9 +41,9 @@ export const Reducer1 = (state = initialState, action) => {
           ...state.checkout,
           lineItems: state.checkout.lineItems.filter(
             (lineItem, index) => index !== action.index
-            )
-          }
-        };
+          )
+        }
+      };
     case CartActionTypes.UPDATE_ITEM_QUANTITY:
       return {
         ...state,
@@ -52,7 +54,7 @@ export const Reducer1 = (state = initialState, action) => {
             if (lineItem.id === action.product.id) {
               return {
                 ...action.product,
-                quantity: lineItem.quantity + parseFloat(state.quantityButtonAmount, 2)
+                quantity: action.updateType === "change" ? (action.quantityToUpdate) : (parseFloat(action.quantityToUpdate, 2) + lineItem.quantity)
               };
             } else {
               return lineItem;
@@ -121,7 +123,7 @@ export const Reducer1 = (state = initialState, action) => {
     case CartActionTypes.UPDATE_QUANTITY_BUTTON:
       return {
         ...state,
-        quantityButtonAmount: action.quantity,
+        quantityButtonAmount: action.quantity
       };
     default:
       return state;

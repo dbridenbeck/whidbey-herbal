@@ -1,10 +1,77 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
+import styled from "styled-components";
+import { device } from "../utils/devices";
 
 import { client } from "../plugins/shopify.js";
 import * as CartActionCreators from '../state/actions/cart';
 import LineItems from '../components/LineItems';
+import Products from '../components/Products';
+import Footer from '../components/Footer';
+
+const Title = styled.h1`
+  display: inline-block;
+  margin: 0;
+  color: #e3be42;
+  font-size: min(max(26px, 5vw), 54px);
+  font-weight: normal;
+  @media ${device.tablet} {
+    margin-top: -4%;
+  }
+`;
+
+const CheckoutWrapper = styled.div`
+  width: 100%;
+  margin-top: 75px;
+`;
+
+const LineItemHeaders = styled.div`
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #787878;
+`;
+
+const ProductHeader = styled.span`
+  width: 33%;
+  margin-left: 16.7%;
+`;
+
+const PriceHeader = styled.span`
+  width: 16.7%;   
+`;
+
+const QuantityHeader = styled.span`
+  width: 16.7%;
+`;
+
+const TotalHeader = styled.span`
+  width: 16.7%;
+`;
+
+const SubtotalSection = styled.div`
+  flex: 1;
+`;
+
+const Subtotal = styled.p`
+  flex: 1;
+`;
+
+const RemoveButton = styled.button`
+  width: 8.37%;
+  font-size: 36px;
+  background: none;
+  border: none;
+  color: firebrick;
+  :focus {
+    outline-width: 0;
+  }
+`;
 
 export class Checkout extends Component {
   componentDidMount() {
@@ -26,18 +93,18 @@ export class Checkout extends Component {
     const { removeLineItem } = this.props;
     const remove = () => removeLineItem(id, index);
     return (  
-      <button
+      <RemoveButton
         className="remove"
         onClick={remove}
       >
-        Remove
-      </button>
+        x
+      </RemoveButton>
     );
   }
 
   createUpdateItemButton = (product, quantityToUpdate, buttonText) => {
     const { updateItemQuantity } = this.props;
-    const updateItem = () => updateItemQuantity(product, quantityToUpdate);
+    const updateItem = () => updateItemQuantity(quantityToUpdate, "change", product);
     return (  
       <button
         className="update"
@@ -61,18 +128,16 @@ export class Checkout extends Component {
     );
 
     const goToShopifyCheckout = () => {
-      console.log("checkout.lineItems is: ", checkout.lineItems);
       client.checkout
         .addLineItems(checkoutId, lineItemsToAdd)
         .then(checkout => {
-          console.log("checkout is: ", checkout)
           window.location.href = checkout.webUrl
-        })
+      })
     }
     
     return (
       <button className="checkout" onClick={(goToShopifyCheckout)}>
-        Checkout!
+        Proceed to Checkout
       </button>
     );
   }
@@ -82,21 +147,34 @@ export class Checkout extends Component {
     const hasItems = (checkout.lineItems.length && checkout.lineItems.length > 0);
 
     return (
-      <div>
+      <CheckoutWrapper>
+        <Title>Checkout</Title>
         {hasItems ? (
           <div>
+            <LineItemHeaders>
+              <ProductHeader>Product</ProductHeader>
+              <PriceHeader>Price</PriceHeader>
+              <QuantityHeader>Quantity</QuantityHeader>
+              <TotalHeader>Total</TotalHeader>
+            </LineItemHeaders>
             <LineItems
               checkout={checkout}
               createRemoveButton={this.createRemoveButton}
               createUpdateItemButton={this.createUpdateItemButton}
               removeLineItem={removeLineItem}
             />
-            {this.createCheckoutButton()}
+            <SubtotalSection>
+              <Subtotal></Subtotal>
+              <p>Shipping & taxes calculated at checkout</p>
+              {this.createCheckoutButton()}
+            </SubtotalSection>
           </div>
         ) : (
           <p>No Items Homes </p>
         )}
-      </div>
+        <Products title="Continue Shopping" />
+        <Footer />
+      </CheckoutWrapper>
     );
   }
 };
@@ -116,8 +194,8 @@ const mapDispatchToProps = dispatch => ({
   removeLineItem: (id, index) =>
     dispatch(CartActionCreators.removeLineItem(id, index)),
   updateCheckoutId: id => dispatch(CartActionCreators.updateCheckoutId(id)),
-  updateItemQuantity: (product, quantityToUpdate) =>
-    dispatch(CartActionCreators.updateItemQuantity(product, quantityToUpdate)),
+  updateItemQuantity: (quantityToUpdate, updateType, product) =>
+    dispatch(CartActionCreators.updateItemQuantity(quantityToUpdate, updateType, product))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

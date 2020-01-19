@@ -82,6 +82,8 @@ const ProductDetails = ({
   quantityButtonAmount,
   updateQuantityButton
 }) => {
+  const quantity = quantityButtonAmount === '' ? 0 : quantityButtonAmount;
+  console.log("quantity is: ", quantity);
 
   // begin component's return
   return (
@@ -105,7 +107,7 @@ const ProductDetails = ({
           />
           <BuyButton
             selectedProduct={selectedProduct}
-            quantity={quantityButtonAmount}
+            quantity={quantity}
             doesItemExist={doesItemExist}
           />
         </CTABlock>

@@ -38,7 +38,7 @@ export class BuyButton extends Component {
 
 // create buy button
   createBuyButton = (product, quantity, props ) => {
-    const { addLineItem, updateItemQuantity, doesItemExist, checkout, selectedProduct } = props
+    const { addLineItem, updateItemQuantity, doesItemExist } = props
 
     console.log("props is: ", props);
 

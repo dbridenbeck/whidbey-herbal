@@ -15,6 +15,9 @@ const LineItemWrapper = styled.div`
   color: #787878;
   font-size: 16px;
   border-top: 1px solid #787878;
+  :last-child {
+    border-bottom: 2px solid #e3be42;
+  }
 `;
 
 const ProductImg = styled.img`

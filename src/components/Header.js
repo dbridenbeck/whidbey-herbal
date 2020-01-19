@@ -126,9 +126,6 @@ export class Header extends Component {
       return false
     }
   };
-
-  console.log("what is itemsInCart?: ", itemsInCart())
-
   return (
     <Navbar 
     className={this.state.show ? "active" : "hidden"}

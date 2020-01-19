@@ -9,6 +9,7 @@ import { device } from "../utils/devices";
 import { laptopMargins, tabletMargins } from "../utils/responsiveSCSS";
 
 const ProductsWrapper = styled.div`
+  display: block;
   width: 100%;
   max-width: 1000px;
   margin: 20px auto 0 auto;

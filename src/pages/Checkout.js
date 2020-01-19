@@ -22,8 +22,16 @@ const Title = styled.h1`
 `;
 
 const CheckoutWrapper = styled.div`
+  display: block;
   width: 100%;
+  height: 100%;
   margin-top: 75px;
+`;
+
+const CheckoutContainer = styled.div`
+  display: block;
+  position: relative;
+  margin-bottom: 200px;
 `;
 
 const LineItemHeaders = styled.div`
@@ -55,11 +63,24 @@ const TotalHeader = styled.span`
 `;
 
 const SubtotalSection = styled.div`
-  flex: 1;
+  display: block;
+  position: absolute;
+  right: 0;
+  width: 50%;
+  margin: 40px 0;
+  .shippingInfo {
+    font-size: 12px;
+    color: #787878;
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 const Subtotal = styled.p`
-  flex: 1;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  color: #787878;
 `;
 
 const RemoveButton = styled.button`
@@ -68,6 +89,19 @@ const RemoveButton = styled.button`
   background: none;
   border: none;
   color: firebrick;
+  :focus {
+    outline-width: 0;
+  }
+`;
+
+const CheckoutButton = styled.button`
+  display: block;
+  margin: 20px 0;
+  font-size: 18px;
+  background: none;
+  color: #e3be42;
+  border: 1px solid #E3BE42;
+  border-radius: 10px;
   :focus {
     outline-width: 0;
   }
@@ -136,21 +170,23 @@ export class Checkout extends Component {
     }
     
     return (
-      <button className="checkout" onClick={(goToShopifyCheckout)}>
+      <CheckoutButton className="checkout" onClick={(goToShopifyCheckout)}>
         Proceed to Checkout
-      </button>
+      </CheckoutButton>
     );
   }
 
   render() {
     const { checkout, removeLineItem } = this.props;
     const hasItems = (checkout.lineItems.length && checkout.lineItems.length > 0);
-
+    const cartSubtotalAmount = checkout.lineItems.map(lineItem => lineItem.quantity * lineItem.variants.edges[0].node.price)
+                          .reduce((cartSubtotal, currentItemSubtotal) => (currentItemSubtotal + cartSubtotal) ,0)
+                          .toFixed(2);
     return (
       <CheckoutWrapper>
         <Title>Checkout</Title>
         {hasItems ? (
-          <div>
+          <CheckoutContainer>
             <LineItemHeaders>
               <ProductHeader>Product</ProductHeader>
               <PriceHeader>Price</PriceHeader>
@@ -160,20 +196,20 @@ export class Checkout extends Component {
             <LineItems
               checkout={checkout}
               createRemoveButton={this.createRemoveButton}
-              createUpdateItemButton={this.createUpdateItemButton}
               removeLineItem={removeLineItem}
             />
             <SubtotalSection>
-              <Subtotal></Subtotal>
-              <p>Shipping & taxes calculated at checkout</p>
+              <Subtotal>
+                <strong>Subtotal:</strong> ${cartSubtotalAmount}
+              </Subtotal>
+              <p className="shippingInfo">Shipping & taxes calculated at checkout</p>
               {this.createCheckoutButton()}
             </SubtotalSection>
-          </div>
+          </CheckoutContainer>
         ) : (
           <p>No Items Homes </p>
         )}
         <Products title="Continue Shopping" />
-        <Footer />
       </CheckoutWrapper>
     );
   }

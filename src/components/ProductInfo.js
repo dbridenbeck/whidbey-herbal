@@ -38,7 +38,7 @@ const ProductInfo = ({
 
 ProductInfo.propTypes = {
   selectedProduct: PropTypes.object,
-  doesItemExist: PropTypes.bool
+  doesItemExist: PropTypes.array
 };
 
 export default ProductInfo;

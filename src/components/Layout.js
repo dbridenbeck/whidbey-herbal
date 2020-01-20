@@ -23,7 +23,6 @@ const Layout = ({
   fetchShopifyArticles,
   checkout
 }) => {
-  // if shopify saiys the checkout happened successfully, clear checkout in state
   const clearCheckoutIfCompleted = () => {
     checkout.checkoutId
       ? client.checkout.fetch(checkout.checkoutId).then(checkout => {

@@ -18,7 +18,7 @@ const PanelWrapper = styled.div`
     height: 100%;
     width: 100%;
     flex: 2;
-    margin: 0px;
+    margin: 0 0 0 5%;
     z-index: 6;
   }
 `;

@@ -21,7 +21,6 @@ const StyledInput = styled.input`
 `;
 
 const QuantityButton = ({quantity, selectedProduct, updateType, labelTitle, onChangeFunction}) => {
-console.log("quantityButtonAmount is: ", quantity );
   return (
     <div>
       <Quantity>
@@ -31,7 +30,7 @@ console.log("quantityButtonAmount is: ", quantity );
             type="number"
             value={quantity}
             onChange={event => {
-              onChangeFunction(event.target.value, updateType, selectedProduct);
+              onChangeFunction(parseFloat(event.target.value, 1), updateType, selectedProduct);
             }}
           />
         </label>

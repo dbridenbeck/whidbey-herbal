@@ -21,14 +21,15 @@ const reviewsList = [
 ];
 
 const ReviewsWrapper = styled.div`
+  display: block;
   width: 100%;
   margin: 25px auto 70px auto;
   @media ${device.tablet} {
-  margin: 25px auto -70px auto;
+  margin: 25px auto;
   width: 66%;
   }
   @media ${device.laptop} {
-  margin: 90px auto -120px auto;
+  margin: 90px auto;
   }
 `;
 

@@ -40,10 +40,8 @@ export class BuyButton extends Component {
   createBuyButton = (product, quantity, props ) => {
     const { addLineItem, updateItemQuantity, doesItemExist } = props
 
-    console.log("props is: ", props);
 
     const createAddtoCartTransition = () => {
-      console.log("setTimeout is firing!")
       this.setState({
         buyButtonClicked: true
       })

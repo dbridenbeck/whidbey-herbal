@@ -31,26 +31,21 @@ const Navbar = styled.div`
   }
   /* control Navbar show/hide for scroll & hover when on laptop */
   @media ${device.laptop} {
-    opacity: ${props =>
-      props.currentRoute !== "/"
-        ? "0"
-        : "1"};
+    opacity: ${props => (props.currentRoute !== "/" ? "0" : "1")};
     &.active {
       opacity: 1;
       transition: opacity 200ms ease-in;
     }
     &.hidden {
       opacity: ${props =>
-        props.currentRoute !== "/"
-          ? "1"
-          : "0"};
+        props.currentRoute !== "/" || props.lineItems.length ? "1" : "0"};
       transition: opacity 200ms ease-out;
       :hover {
         opacity: ${props =>
-          (props.scrollPos >= 0 && props.scrollPos <= 50) || 
-          (props.currentRoute !== "/") 
-          ? "1" 
-          : "0"};
+          (props.scrollPos >= 0 && props.scrollPos <= 50) ||
+          props.currentRoute !== "/"
+            ? "1"
+            : "0"};
       }
     }
   }
@@ -89,6 +84,7 @@ const CheckoutLink = styled(NavLink)`
 const HomeLink = styled.img`
   height: 50px;
   width: auto;
+  margin: 5px 10% 0 10%;
 `;
 
 export class Header extends Component {
@@ -121,9 +117,7 @@ export class Header extends Component {
   const { burgerToggled, lineItems } = this.props
   const itemsInCart = () => {
     if (lineItems.length) {
-      return lineItems.reduce((itemTotal, item) => ( item.quantity == '' ? itemTotal : parseFloat(item.quantity, 2) + itemTotal ), 0)
-    } else {
-      return false
+      return lineItems.reduce((itemTotal, item) => ( item.quantity === '' ? itemTotal : parseFloat(item.quantity, 2) + itemTotal ), 0)
     }
   };
   return (
@@ -131,6 +125,7 @@ export class Header extends Component {
     className={this.state.show ? "active" : "hidden"}
     scrollPos={this.state.scrollPos}
     currentRoute={this.props.location.pathname}
+    lineItems={lineItems}
     >
       <Hamburger>
         {/* This div creates the hamburger using before & after css pseudoclasses */}

@@ -1,8 +1,15 @@
 import React from 'react';
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 import { fluidText, fluidH2 } from "../utils/responsiveSCSS";
+
+  const RecipeLink = styled(Link)`
+    display: block;
+    width: 33.33%;
+    text-decoration: none;
+  `;
 
   const RecipeTitle = styled.h2`
     margin-bottom: 5px;
@@ -16,8 +23,7 @@ import { fluidText, fluidH2 } from "../utils/responsiveSCSS";
 
   const RecipeContainer = styled.div`
       position: relative;
-      width: 45%;
-      margin: 0 20px 20px 0;
+      margin: 0 0px 20px 0;
       &:hover ${RecipeTitle} {
         color: #e3be42;
       }
@@ -25,7 +31,7 @@ import { fluidText, fluidH2 } from "../utils/responsiveSCSS";
 
   const RecipeImage = styled.img`
     display: block;
-    width: 75%;
+    width: 100%;
     height: auto;
     margin: 0 auto 20px auto;
     border-radius: 10px;
@@ -44,13 +50,13 @@ import { fluidText, fluidH2 } from "../utils/responsiveSCSS";
 const RecipeBlock = ({recipe}) => {
 
   return (
-    <RecipeContainer recipeName={recipe.node.title}>
-      <RecipeImage
-        src={`${recipe.node.image.originalSrc}`}
-      />
-      <RecipeTitle>{recipe.node.title}</RecipeTitle>
-      <RecipeText>{recipe.node.excerpt}</RecipeText>
-    </RecipeContainer>
+    <RecipeLink to={`/recipe/${recipe.node.handle}`}>
+      <RecipeContainer recipeName={recipe.node.title}>
+        <RecipeImage src={`${recipe.node.image.originalSrc}`} />
+        <RecipeTitle>{recipe.node.title}</RecipeTitle>
+        <RecipeText>{recipe.node.excerpt}</RecipeText>
+      </RecipeContainer>
+    </RecipeLink>
   );
 }
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import LineItem from './LineItem';
-import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const LineItems = ({checkout, createRemoveButton, createUpdateItemButton, removeLineItem}) => {

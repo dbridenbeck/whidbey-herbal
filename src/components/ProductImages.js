@@ -68,7 +68,7 @@ const ProductImages = ({
   // when clicked, AltImage updates state and sets heroImg's src to AltImage
   const createAltImage = image => {
     const setHeroImg = () => handleHeroImg(image.node.src, image.node.id);
-    const isSelected = image.node.id == heroImgId;
+    const isSelected = image.node.id === heroImgId;
     return (
       <AltImage
         key={image.node.id}

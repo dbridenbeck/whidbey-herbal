@@ -1,15 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import Products from '../components/Products';
-import Reviews from '../components/Reviews';
-import QuantityButton from '../components/QuantityButton';
-import BuyButton from '../components/BuyButton';
-import ProductInfo from '../components/ProductInfo';
-
 import { device } from "../utils/devices";
-
-import * as CartActionCreators from "../state/actions/cart";
 import styled from "styled-components";
 
 
@@ -33,8 +24,7 @@ const Title = styled.h1`
 `;
 
 // begin component
-const Shop = ({
-}) => {
+const Shop = () => {
 
   // begin component's return
   return (

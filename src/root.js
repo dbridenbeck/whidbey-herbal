@@ -1,15 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import * as serviceWorker from './serviceWorker';
+import { Reducer1 } from './state/App';
+import { saveToLocalStorage, getFromLocalStorage } from "../src/state/localStorage";
+import thunk from "redux-thunk";
 import Home from '../src/pages/Home';
 import Checkout from '../src/pages/Checkout';
 import Layout from '../src/components/Layout';
 import Product from '../src/pages/Product';
-import * as serviceWorker from './serviceWorker';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import { Reducer1 } from './state/App';
-import { saveToLocalStorage, getFromLocalStorage } from "../src/state/localStorage";
-import thunk from "redux-thunk";
+import Shop from '../src/pages/Shop';
+import Recipe from '../src/pages/Recipe';
 import "./index.css";
 
 const Root = () => {
@@ -38,7 +40,9 @@ const Root = () => {
       <Layout>
         <Route exact path="/" component={Home} />
         <Route path="/checkout" component={Checkout} />
+        <Route path="/shop" component={Shop} />
         <Route path="/product/:handle" component={Product}/>
+        <Route path="/recipe/:handle" component={Recipe}/>
       </Layout>
     </Router>
   </Provider>

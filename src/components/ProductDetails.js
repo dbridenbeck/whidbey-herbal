@@ -1,8 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Products from "./Products";
-import Reviews from "./Reviews";
 import QuantityButton from "./QuantityButton";
 import BuyButton from "./BuyButton";
 
@@ -83,7 +81,6 @@ const ProductDetails = ({
   updateQuantityButton
 }) => {
   const quantity = quantityButtonAmount === '' ? 0 : quantityButtonAmount;
-  console.log("quantity is: ", quantity);
 
   // begin component's return
   return (
@@ -122,7 +119,7 @@ const ProductDetails = ({
 
 ProductDetails.propTypes = {
   selectedProduct: PropTypes.object,
-  doesItemExist: PropTypes.bool,
+  doesItemExist: PropTypes.array,
   quantityButtonAmount: PropTypes.number,
   updateQuantityButton: PropTypes.func
 };

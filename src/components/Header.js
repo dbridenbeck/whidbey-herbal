@@ -117,11 +117,13 @@ export class Header extends Component {
   const { burgerToggled, lineItems } = this.props
   const itemsInCart = () => {
     if (lineItems.length) {
-      return lineItems.map(lineItem => lineItem.quantity).filter(Boolean).reduce((itemTotal, quantity) => (parseFloat(quantity, 2) + itemTotal ), 0)
+      return lineItems
+              .map(lineItem => lineItem.quantity)
+              .filter(Boolean)
+              .reduce((itemTotal, quantity) => (parseFloat(quantity, 2) + itemTotal ), 0)
     }
   };
 
-  console.log("itemsInCart is: ", itemsInCart());
   return (
     <Navbar 
     className={this.state.show ? "active" : "hidden"}

@@ -205,9 +205,17 @@ export class Checkout extends Component {
   render() {
     const { checkout, removeLineItem } = this.props;
     const hasItems = (checkout.lineItems.length && checkout.lineItems.length > 0);
-    const cartSubtotalAmount = checkout.lineItems.map(lineItem => lineItem.quantity * lineItem.variants.edges[0].node.price)
-                          .reduce((cartSubtotal, currentItemSubtotal) => (currentItemSubtotal + cartSubtotal) ,0)
+    const calculateCartSubtotal = checkout.lineItems.map(lineItem => lineItem.quantity * lineItem.variants.edges[0].node.price)
+                          .reduce((cartSubtotal, currentItemSubtotal) => (currentItemSubtotal + cartSubtotal), 0)
                           .toFixed(2);
+
+    console.log("calculateCartSubtotal is: ", calculateCartSubtotal);
+
+    const visibleCartSubtotal =
+      isNaN(calculateCartSubtotal) ? "0.00" : calculateCartSubtotal;
+
+    console.log("visibleCartSubtotal is: ", visibleCartSubtotal);
+
     return (
       <CheckoutWrapper>
         <Title>Checkout</Title>
@@ -227,7 +235,7 @@ export class Checkout extends Component {
             <SubtotalContainer>
               <SubtotalSection>
                 <Subtotal>
-                  <strong>Subtotal:</strong> ${cartSubtotalAmount}
+                  <strong>Subtotal:</strong> ${visibleCartSubtotal}
                 </Subtotal>
                 <p className="shippingInfo">
                   Shipping & taxes calculated at checkout

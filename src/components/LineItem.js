@@ -60,6 +60,10 @@ const LineItem = ({
   updateItemQuantity
 }) => {
 
+  const total = lineItem.quantity 
+                ? (lineItem.quantity * lineItem.variants.edges[0].node.price).toFixed(2) 
+                : "0.00";
+
   return (
     <LineItemWrapper key={lineItem.id}>
       {createRemoveButton(lineItem.id, index)}
@@ -74,7 +78,7 @@ const LineItem = ({
         updateType={"change"} 
         onChangeFunction={updateItemQuantity}
       />
-      <ProductTotal>${(lineItem.quantity * lineItem.variants.edges[0].node.price).toFixed(2)}</ProductTotal>
+      <ProductTotal>${total}</ProductTotal>
     </LineItemWrapper>
   );
 };

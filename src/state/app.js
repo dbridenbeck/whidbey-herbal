@@ -54,7 +54,9 @@ export const Reducer1 = (state = initialState, action) => {
             if (lineItem.id === action.product.id) {
               return {
                 ...action.product,
-                quantity: action.updateType === "change" ? (parseFloat(action.quantityToUpdate, 2)) : (parseFloat(action.quantityToUpdate, 2) + parseFloat(lineItem.quantity, 2))
+                quantity: action.shouldAddQuantities
+                  ? parseFloat(action.quantityToUpdate, 2) + parseFloat(lineItem.quantity, 2)
+                  : parseFloat(action.quantityToUpdate, 2)
               };
             } else {
               return lineItem;

@@ -99,7 +99,7 @@ const ProductDetails = ({
             selectedProduct={selectedProduct}
             labelTitle={"Quantity: "}
             quantity={quantityButtonAmount}
-            updateType={"add"}
+            shouldAddQuantities={true}
             onChangeFunction={updateQuantityButton}
           />
           <BuyButton

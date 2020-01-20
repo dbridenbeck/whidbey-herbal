@@ -93,8 +93,8 @@ const mapStateToProps = ({ checkout, products }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateItemQuantity: (quantityToUpdate, updateType, product) =>
-    dispatch(CartActionCreators.updateItemQuantity(quantityToUpdate, updateType, product)),
+  updateItemQuantity: (quantityToUpdate, shouldAddQuantities, product) =>
+    dispatch(CartActionCreators.updateItemQuantity(quantityToUpdate, shouldAddQuantities, product)),
   addLineItem: (product, quantity) =>
     dispatch(CartActionCreators.addLineItem(product, quantity))
 });

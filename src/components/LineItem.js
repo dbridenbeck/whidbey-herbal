@@ -75,7 +75,7 @@ const LineItem = ({
       <QuantityButton 
         selectedProduct={lineItem} 
         quantity={lineItem.quantity} 
-        updateType={"change"} 
+        shouldAddQuantities={false} 
         onChangeFunction={updateItemQuantity}
       />
       <ProductTotal>${total}</ProductTotal>
@@ -91,7 +91,7 @@ LineItem.propTypes = {
 }
 
 const mapDispatchtoProps = (dispatch) => ({
-  updateItemQuantity: (quantityToUpdate, updateType, product) => dispatch(CartActionCreators.updateItemQuantity(quantityToUpdate, updateType, product))
+  updateItemQuantity: (quantityToUpdate, shouldAddQuantities, product) => dispatch(CartActionCreators.updateItemQuantity(quantityToUpdate, shouldAddQuantities, product))
 })
 
 export default connect(null, mapDispatchtoProps)(LineItem);

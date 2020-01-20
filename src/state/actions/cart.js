@@ -12,10 +12,10 @@ export const removeLineItem = (productId, index) => ({
   index,
 });
 
-export const updateItemQuantity = (quantityToUpdate, updateType, product) => ({
+export const updateItemQuantity = (quantityToUpdate, shouldAddQuantities, product) => ({
          type: CartActionTypes.UPDATE_ITEM_QUANTITY,
          quantityToUpdate,
-         updateType,
+         shouldAddQuantities,
          product
        });
 

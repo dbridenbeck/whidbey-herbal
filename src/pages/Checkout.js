@@ -271,8 +271,8 @@ const mapDispatchToProps = dispatch => ({
   removeLineItem: (id, index) =>
     dispatch(CartActionCreators.removeLineItem(id, index)),
   updateCheckoutId: id => dispatch(CartActionCreators.updateCheckoutId(id)),
-  updateItemQuantity: (quantityToUpdate, updateType, product) =>
-    dispatch(CartActionCreators.updateItemQuantity(quantityToUpdate, updateType, product))
+  updateItemQuantity: (quantityToUpdate, shouldAddQuantities, product) =>
+    dispatch(CartActionCreators.updateItemQuantity(quantityToUpdate, shouldAddQuantities, product))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

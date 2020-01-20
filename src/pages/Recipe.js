@@ -14,10 +14,8 @@ import { device } from "../utils/devices";
 
 // Begin Styled Components
 const RecipeWrapper = styled.div`
-  display: block;
-  height: auto;
   width: 100%;
-  margin: 90px auto 0 auto;
+  margin: 120px auto 0 auto;
 `;
 
 const Title = styled.h1`
@@ -31,14 +29,35 @@ const Title = styled.h1`
   }
 `;
 
-const RecipeImage = styled.img`
+const RecipeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  border-top: 2px solid #e3be42;
+  padding: 20px;
+  @media ${device.tablet} {
+    display: block;
+    flex-direction: none;
+    flex-wrap: none;
+  }
+`;
 
+const RecipeImage = styled.img`
+  width: 100%;
+  border-radius: 10px;
+  @media ${device.tablet} {
+    width: 40%;
+    margin: 10px 10px 10px 50px;
+    float: right;
+  }
 `;
 
 const ShopifyHTML = styled.div`
-
+  color: #787878;
+  @media ${device.tablet} {
+  }
 `;
-
 
 // begin component
 const Recipe = ({
@@ -82,13 +101,17 @@ const Recipe = ({
   // begin component's return
   return (
     <RecipeWrapper>
-      <RecipeImage src={selectedRecipe.node.image.originalSrc} />
       <Title>{selectedRecipe.node.title}</Title>
-      <ShopifyHTML dangerouslySetInnerHTML=
-      {{
-        __html: selectedRecipe.node.contentHtml
-      }}
-      />
+      <RecipeContainer>
+        <RecipeImage src={selectedRecipe.node.image.originalSrc} />
+        <ShopifyHTML dangerouslySetInnerHTML=
+        {{
+          __html: selectedRecipe.node.contentHtml
+        }}
+        />
+        
+        
+      </RecipeContainer>
       <Products title={"Explore the Shop"} />
     </RecipeWrapper>
   );

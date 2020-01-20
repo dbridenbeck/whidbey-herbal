@@ -29,6 +29,8 @@ const QuantityButton = ({quantity, selectedProduct, updateType, labelTitle, onCh
           <StyledInput
             type="number"
             value={quantity}
+            min="1"
+            max="20"
             onChange={event => {
               onChangeFunction(parseFloat(event.target.value, 1), updateType, selectedProduct);
             }}

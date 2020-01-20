@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { device } from "../utils/devices";
 import * as CartActionCreators from "../state/actions/cart";
 
 import QuantityButton from './QuantityButton';
@@ -14,22 +15,32 @@ const LineItemWrapper = styled.div`
   width: 100%;
   color: #787878;
   font-size: 16px;
-  border-top: 1px solid #787878;
+  border-top: 1px solid #C0C0C0;
   :last-child {
     border-bottom: 2px solid #e3be42;
   }
+  @media ${device.tablet} {
+    height: 70px;
+  }
+`;
+
+const ProductImgContainer = styled.div`
+  width: 8.37%;
 `;
 
 const ProductImg = styled.img`
-  width: 8.37%;
-  max-width: 50px;
-  max-height: 50px;
+  display: block;
+  width: 100%;
+  max-width: 47px;
+  max-height: 47px;
+  margin: 0 auto;
 `;
 
 const ProductTitle = styled.h3`
   width: 33%;
   font-size: 18px;
   font-weight: normal;
+  line-height: 22px;
   color: #e3be42;
 `;
 
@@ -46,14 +57,15 @@ const LineItem = ({
   lineItem,
   index,
   createRemoveButton,
-  removeLineItem,
   updateItemQuantity
 }) => {
 
   return (
     <LineItemWrapper key={lineItem.id}>
       {createRemoveButton(lineItem.id, index)}
-      <ProductImg src={lineItem.images.edges[0].node.src}/>
+      <ProductImgContainer>
+        <ProductImg src={lineItem.images.edges[0].node.src}/>
+      </ProductImgContainer>
       <ProductTitle>{lineItem.title}</ProductTitle>
       <ProductPrice>${lineItem.variants.edges[0].node.price}</ProductPrice>
       <QuantityButton 

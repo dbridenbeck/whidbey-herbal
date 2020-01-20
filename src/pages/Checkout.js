@@ -3,12 +3,22 @@ import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { device } from "../utils/devices";
+import { tabletMargins } from "../utils/responsiveSCSS";
 
 import { client } from "../plugins/shopify.js";
 import * as CartActionCreators from '../state/actions/cart';
 import LineItems from '../components/LineItems';
 import Products from '../components/Products';
-import Footer from '../components/Footer';
+
+
+const CheckoutWrapper = styled.div`
+  display: block;
+  width: 100%;
+  margin-top: 75px;
+  @media ${device.tablet} {
+    ${tabletMargins};
+  }
+`;
 
 const Title = styled.h1`
   display: inline-block;
@@ -21,17 +31,9 @@ const Title = styled.h1`
   }
 `;
 
-const CheckoutWrapper = styled.div`
-  display: block;
-  width: 100%;
-  height: 100%;
-  margin-top: 75px;
-`;
-
 const CheckoutContainer = styled.div`
   display: block;
   position: relative;
-  margin-bottom: 200px;
 `;
 
 const LineItemHeaders = styled.div`
@@ -43,15 +45,16 @@ const LineItemHeaders = styled.div`
   font-size: 16px;
   font-weight: bold;
   color: #787878;
+  border-bottom: 1px solid #c0c0c0;
 `;
 
 const ProductHeader = styled.span`
-  width: 33%;
+  width: 33.33%;
   margin-left: 16.7%;
 `;
 
 const PriceHeader = styled.span`
-  width: 16.7%;   
+  width: 16.7%;
 `;
 
 const QuantityHeader = styled.span`
@@ -62,12 +65,16 @@ const TotalHeader = styled.span`
   width: 16.7%;
 `;
 
+const SubtotalContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+`;
+
 const SubtotalSection = styled.div`
   display: block;
-  position: absolute;
-  right: 0;
-  width: 50%;
-  margin: 40px 0;
+  margin: 40px 20px 0 0;
   .shippingInfo {
     font-size: 12px;
     color: #787878;
@@ -84,27 +91,46 @@ const Subtotal = styled.p`
 `;
 
 const RemoveButton = styled.button`
-  width: 8.37%;
-  font-size: 36px;
+  width: 40px;
+  height: 40px;
+  margin: 0 3.5%;
+  font-size: 24px;
+  text-align: center;
   background: none;
-  border: none;
-  color: firebrick;
+  border: 1px solid #c0c0c0;
+  border-radius: 20px;
+  color: #787878;
   :focus {
     outline-width: 0;
+  }
+  :hover {
+    background: #c0c0c0;
+    color: white;
   }
 `;
 
 const CheckoutButton = styled.button`
   display: block;
+  height: 40px;
+  width: 222px;
   margin: 20px 0;
   font-size: 18px;
   background: none;
   color: #e3be42;
-  border: 1px solid #E3BE42;
+  border: 1px solid #e3be42;
   border-radius: 10px;
   :focus {
     outline-width: 0;
   }
+  :hover {
+    color: white;
+    background-color: #E3BE42;
+  }
+`;
+
+const StyledH2 = styled.h2`
+  color: #787878;
+  font-weight: normal;
 `;
 
 export class Checkout extends Component {
@@ -198,18 +224,25 @@ export class Checkout extends Component {
               createRemoveButton={this.createRemoveButton}
               removeLineItem={removeLineItem}
             />
-            <SubtotalSection>
-              <Subtotal>
-                <strong>Subtotal:</strong> ${cartSubtotalAmount}
-              </Subtotal>
-              <p className="shippingInfo">Shipping & taxes calculated at checkout</p>
-              {this.createCheckoutButton()}
-            </SubtotalSection>
+            <SubtotalContainer>
+              <SubtotalSection>
+                <Subtotal>
+                  <strong>Subtotal:</strong> ${cartSubtotalAmount}
+                </Subtotal>
+                <p className="shippingInfo">
+                  Shipping & taxes calculated at checkout
+                </p>
+                {this.createCheckoutButton()}
+              </SubtotalSection>
+            </SubtotalContainer>
+            <Products title="Continue Shopping" />
           </CheckoutContainer>
         ) : (
-          <p>No Items Homes </p>
+          <CheckoutContainer>
+            <StyledH2>Your Shopping Cart is empty.</StyledH2>
+            <Products title="Explore the Shop" />
+          </CheckoutContainer>
         )}
-        <Products title="Continue Shopping" />
       </CheckoutWrapper>
     );
   }

@@ -71,7 +71,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(CartActionCreators.clearCheckoutInState()),
   fetchShopifyProducts: () => dispatch(fetchShopifyProductsAction()),
   fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
-  clearBurger: () => dispatch(CartActionCreators.clearBurger()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);

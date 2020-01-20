@@ -6,19 +6,12 @@ import PropTypes from "prop-types";
 import Product from './Product';
 import { connect } from "react-redux";
 import { device } from "../utils/devices";
-import { laptopMargins, tabletMargins } from "../utils/responsiveSCSS";
 
 const ProductsWrapper = styled.div`
   display: block;
   width: 100%;
   max-width: 1000px;
-  margin: 20px auto 0 auto;
-  @media ${device.tablet} {
-    ${tabletMargins};
-  }
-  @media ${device.laptop} {
-    ${laptopMargins};
-  }
+  margin: 70px auto 0 auto;
 `;
 
 const ProductsContainer = styled.div`
@@ -49,13 +42,13 @@ const ExploreShopLink = styled(Link)`
 `;
 
 const ProductsTitle = styled.h2`
-  margin: 5% 0 5px 0px;
+  margin: 0 0 5px 0px;
   font-weight: normal;
   font-size: 32px;
   text-align: left;
   color: #787878;
   @media ${device.tablet} {
-    margin: 5% 0 5px 50px;
+    margin: 0 0 5px 50px;
   }
 `;
 

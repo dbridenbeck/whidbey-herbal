@@ -56,7 +56,7 @@ const StyledNavLink = styled(NavLink)`
 const links = [
   {
     name: "Shop",
-    destination: "/",
+    destination: "/shop",
   },
   {
     name: "About",

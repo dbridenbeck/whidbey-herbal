@@ -1,15 +1,13 @@
 import React from 'react';
 import styled from "styled-components";
 import PropTypes from "prop-types";
-
 import { device } from "../../utils/devices";
-import { fluidH2 } from "../../utils/responsiveSCSS";
 
   const StoreName = styled.h2`
     margin-bottom: 5px;
     padding: 0;
-    font-weight: normal;
-    ${fluidH2}
+    font-weight: bold;
+    font-size: 1.125em;
     letter-spacing: 0.01em;
     color: #787878;
     @media ${device.tablet} {
@@ -29,9 +27,6 @@ import { fluidH2 } from "../../utils/responsiveSCSS";
       @media ${device.tablet} {
         width: 100%;
       }
-      @media ${device.laptop} {
-        width: 100%;
-      }
     `;
   
   const StoreAddress = styled.p`
@@ -39,8 +34,8 @@ import { fluidH2 } from "../../utils/responsiveSCSS";
     margin: 0;
     padding: 0;
     font-weight: normal;
-    font-size: min(max(12px, 2vw), 18px);
-    line-height: min(max(16px, 2vw), 24px);
+    font-size: 0.875em;
+    line-height: 1.5em;
     letter-spacing: 0.01em;
     color: #787878;
   `;

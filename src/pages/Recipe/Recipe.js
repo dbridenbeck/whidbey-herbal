@@ -1,27 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Products from '../../SharedComponents/Products';
 import styled from "styled-components";
+
 import { device } from "../../utils/devices";
 
+import Products from '../../SharedComponents/Products';
+import Wrapper from '../../SharedComponents/Wrapper';
+import StyledH1 from '../../SharedComponents/StyledH1';
+
 // Begin Styled Components
-const RecipeWrapper = styled.div`
-  width: 100%;
-  margin: 120px auto 0 auto;
-`;
-
-const Title = styled.h1`
-  display: inline-block;
-  margin: 0;
-  color: #e3be42;
-  font-size: min(max(26px, 5vw), 54px);
-  font-weight: bold;
-  @media ${device.tablet} {
-    margin-top: -4%;
-  }
-`;
-
 const RecipeContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -67,8 +55,8 @@ const Recipe = ({
 
   // begin component's return
   return (
-    <RecipeWrapper>
-      <Title>{selectedRecipe.node.title}</Title>
+    <Wrapper>
+      <StyledH1 centered={false} colorIsGrey={false}>{selectedRecipe.node.title}</StyledH1>
       <RecipeContainer>
         <RecipeImage src={selectedRecipe.node.image.originalSrc} />
         <ShopifyHTML dangerouslySetInnerHTML=
@@ -80,7 +68,7 @@ const Recipe = ({
         
       </RecipeContainer>
       <Products title={"Explore the Shop"} />
-    </RecipeWrapper>
+    </Wrapper>
   );
 };
 

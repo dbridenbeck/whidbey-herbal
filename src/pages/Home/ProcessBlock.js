@@ -24,10 +24,10 @@ import PropTypes from 'prop-types';
     z-index: 2;
   `;
   
-  const ProcessTitle = styled.h1`
+  const ProcessTitle = styled.h2`
     margin: 5% 0 5px 0;
     font-weight: normal;
-    font-size: min(max(16px, 4vw), 40px);
+    font-size: 1.5em;
     text-align: center;
     color: #787878;
   `;
@@ -35,8 +35,8 @@ import PropTypes from 'prop-types';
   const Description = styled.p`
     margin: 0 auto;
     padding: 0;
-    font-size: min(max(15px, 3vw), 18px);
-    line-height: min(max(18px, 3vw), 32px);
+    font-size: 0.875em;
+    line-height: 1.5em;
     text-align: center;
     font-style: normal;
     letter-spacing: 0.01em;

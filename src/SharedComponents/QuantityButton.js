@@ -2,18 +2,17 @@ import React from 'react';
 import styled from "styled-components";
 
 const Quantity = styled.form`
-  font-size: 18px;
+  font-size: 1.125em;
+  flex: 1;
   color: #787878;
 `;
 
 const StyledInput = styled.input`
-  width:  50px;
-  height: 30px;
   margin: 0 auto;
   border: 1px solid #787878;
   border-radius: 10px;
   text-align: center;
-  font-size: 18px;
+  font-size: 1.125em;
   color: rgba(120, 120, 120, .8);
   :focus {
     outline-width: 0;

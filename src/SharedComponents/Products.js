@@ -30,7 +30,7 @@ const ExploreShopLink = styled(Link)`
   padding: 5px;
   color: #e3be42;
   text-align: center;
-  font-size: min(max(16px, 2vw), 18px);
+  font-size: 1em;
   font-weight: normal;
   border: 1px solid #e3be42;
   border-radius: 10px;
@@ -44,7 +44,7 @@ const ExploreShopLink = styled(Link)`
 const ProductsTitle = styled.h2`
   margin: 0 0 5px 0px;
   font-weight: normal;
-  font-size: 32px;
+  font-size: 1.75em;
   text-align: left;
   color: #787878;
   @media ${device.tablet} {

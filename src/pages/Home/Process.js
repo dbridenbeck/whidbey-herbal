@@ -76,9 +76,7 @@ const Process = () => {
 
   return (
     <Wrapper id="process" maxWidth={"800px"}>
-      <StyledH1 colorIsGrey={true} centered={true}>
-        Our Process
-      </StyledH1>
+      <StyledH1 colorIsGrey={true} centered={true}> Our Process </StyledH1>
       {processes.map(process => (
         <ProcessBlock process={process} key={process.processTitle} />
       ))}

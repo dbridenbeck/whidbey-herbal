@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -14,7 +15,7 @@ const LineItemWrapper = styled.div`
   height: 50px;
   width: 100%;
   color: #787878;
-  font-size: 16px;
+  font-size: 1em;
   border-top: 1px solid #C0C0C0;
   :last-child {
     border-bottom: 2px solid #e3be42;
@@ -36,12 +37,15 @@ const ProductImg = styled.img`
   margin: 0 auto;
 `;
 
-const ProductTitle = styled.h3`
+const ProductTitleLink = styled(Link)`
   width: 33%;
-  font-size: 18px;
+  font-size: 1.125;
   font-weight: normal;
-  line-height: 22px;
   color: #e3be42;
+  text-decoration: none;
+  :hover {
+    color: #787878;
+  }
 `;
 
 const ProductPrice = styled.span`
@@ -57,25 +61,27 @@ const LineItem = ({
   lineItem,
   index,
   createRemoveButton,
-  updateItemQuantity
+  updateItemQuantity,
+  clearHeroImg
 }) => {
-
-  const total = lineItem.quantity 
-                ? (lineItem.quantity * lineItem.variants.edges[0].node.price).toFixed(2) 
-                : "0.00";
+  const total = lineItem.quantity
+    ? (lineItem.quantity * lineItem.variants.edges[0].node.price).toFixed(2)
+    : "0.00";
 
   return (
     <LineItemWrapper key={lineItem.id}>
       {createRemoveButton(lineItem.id, index)}
       <ProductImgContainer>
-        <ProductImg src={lineItem.images.edges[0].node.src}/>
+        <ProductImg src={lineItem.images.edges[0].node.src} />
       </ProductImgContainer>
-      <ProductTitle>{lineItem.title}</ProductTitle>
+      <ProductTitleLink to={`/product/${lineItem.handle}`} onClick={clearHeroImg}>
+        {lineItem.title}
+      </ProductTitleLink>
       <ProductPrice>${lineItem.variants.edges[0].node.price}</ProductPrice>
-      <QuantityButton 
-        selectedProduct={lineItem} 
-        quantity={lineItem.quantity} 
-        shouldAddQuantities={false} 
+      <QuantityButton
+        selectedProduct={lineItem}
+        quantity={lineItem.quantity}
+        shouldAddQuantities={false}
         onChangeFunction={updateItemQuantity}
       />
       <ProductTotal>${total}</ProductTotal>
@@ -90,8 +96,16 @@ LineItem.propTypes = {
   removeLineItem: PropTypes.func,
 }
 
-const mapDispatchtoProps = (dispatch) => ({
-  updateItemQuantity: (quantityToUpdate, shouldAddQuantities, product) => dispatch(CartActionCreators.updateItemQuantity(quantityToUpdate, shouldAddQuantities, product))
-})
+const mapDispatchtoProps = dispatch => ({
+  updateItemQuantity: (quantityToUpdate, shouldAddQuantities, product) =>
+    dispatch(
+      CartActionCreators.updateItemQuantity(
+        quantityToUpdate,
+        shouldAddQuantities,
+        product
+      )
+    ),
+  clearHeroImg: () => dispatch(CartActionCreators.clearHeroImg())
+});
 
 export default connect(null, mapDispatchtoProps)(LineItem);

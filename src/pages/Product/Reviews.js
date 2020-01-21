@@ -37,7 +37,7 @@ const Title = styled.h2`
   margin: 0;
   padding: 0;
   color: #787878;
-  font-size: 32px;
+  font-size: 1.5em;
   font-weight: normal;
 `;
 
@@ -49,7 +49,7 @@ const ReviewContainer = styled.div`
 const ReviewText = styled.p`
   display: inline;
   font-style: italic;
-  font-size: 12px;
+  font-size: 0.75em;
   color: #787878;
   @media ${device.laptop} {
     font-size: 14px;
@@ -58,7 +58,7 @@ const ReviewText = styled.p`
 
 const ReviewName = styled.p`
   display: inline;
-  font-size: 12px;
+  font-size: 0.75em;
   color: #787878;
 `;
 

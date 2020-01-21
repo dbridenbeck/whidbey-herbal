@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { device } from "../../utils/devices";
 import farm from "./images/farm-no-lines.jpg";
 import circleLogo from "./images/circle-logo.png";
-import { fluidText } from "../../utils/responsiveSCSS";
 
 const WelcomeWrapper = styled.div`
   width: 100%;
@@ -45,13 +44,14 @@ const WhidbeyHeader = styled.h1`
   display: inline-block;
   margin: 0;
   color: #e3be42;
-  font-size: min(max(26px, 5vw), 54px);
+  font-size: 1.625em;
   font-weight: normal;
 `;
 
 const IllustrationText = styled.p`
   /* fluid typography to control line height and text size see utils/responsiveSCSS.js for details */
-  ${fluidText}
+  font-size: 0.875em;
+  line-height: 1.5em;
   margin-top: -5px;
   font-style: normal;
   font-weight: normal;
@@ -61,7 +61,7 @@ const IllustrationText = styled.p`
 const LogoIllustration = () => {
 
   return (
-    <WelcomeWrapper>
+    <WelcomeWrapper id="home">
       <FarmWithLogo>
         <Logo
           src={`${circleLogo}`}

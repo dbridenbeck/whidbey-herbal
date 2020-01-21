@@ -40,6 +40,7 @@ const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   display: inline-block;
   text-align: center;
+  font-size: 1rem;
   color: black;
   :visited {
     color: black;

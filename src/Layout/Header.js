@@ -84,7 +84,7 @@ const CheckoutLink = styled(NavLink)`
 const HomeLink = styled.img`
   height: 50px;
   width: auto;
-  margin: 5px 10% 0 10%;
+  margin: 13px 10% 0 10%;
 `;
 
 export class Header extends Component {

@@ -18,7 +18,7 @@ const ProductDetailsWrapper = styled.div`
   color: #787878;
   h2 {
     margin: 25px 0 0 0;
-    font-size: 32px;
+    font-size: 1.5em;
     font-weight: normal;
   }
   h4 {
@@ -29,7 +29,7 @@ const ProductDetailsWrapper = styled.div`
     margin: 0;
   }
   p.caution {
-    font-size: 12px;
+    font-size: 0.75em;
     color: #787878;
   }
   @media ${device.tablet} {
@@ -48,9 +48,10 @@ const CTABlock = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   width: 100%;
-  height: 100px;
+  padding: 20px 0;
   border-bottom: 4px solid #e3be42;
 `;
 
@@ -58,7 +59,7 @@ const Price = styled.p`
   display: block;
   width: 30%;
   text-align: center;
-  font-size: 28px;
+  font-size: 1.75em;
   color: #787878;
   font-weight: normal;
 `;

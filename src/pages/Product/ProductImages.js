@@ -21,7 +21,7 @@ const ProductImagesWrapper = styled.div`
 
 const HeroImage = styled.img`
   display: block;
-  margin: 4% auto 30px auto;
+  margin: 2.5% auto 30px auto;
   width: 100%;
   height: auto;
   border: 4px solid #e3be42;

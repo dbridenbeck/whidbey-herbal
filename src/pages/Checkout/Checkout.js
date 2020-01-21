@@ -22,14 +22,14 @@ const LineItemHeaders = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 20px;
-  font-size: 16px;
+  font-size: 1em;
   font-weight: bold;
   color: #787878;
   border-bottom: 1px solid #c0c0c0;
 `;
 
 const ProductHeader = styled.span`
-  width: 33.33%;
+  width: 33.33%;  
   margin-left: 16.7%;
 `;
 
@@ -56,7 +56,7 @@ const SubtotalSection = styled.div`
   display: block;
   margin: 40px 20px 0 0;
   .shippingInfo {
-    font-size: 12px;
+    font-size: 0.75em;
     color: #787878;
     margin: 0;
     padding: 0;
@@ -70,31 +70,24 @@ const Subtotal = styled.p`
   color: #787878;
 `;
 
-const RemoveButton = styled.button`
-  width: 6%;
-  height: 70%;
-  margin: 1.19%;
-  font-size: 24px;
-  text-align: center;
-  background: none;
-  border: 1px solid #c0c0c0;
-  border-radius: 50%;
-  color: #787878;
-  :focus {
-    outline-width: 0;
-  }
-  :hover {
-    background: #c0c0c0;
-    color: white;
-  }
-  @media ${device.tablet} {
-    height: 60%;
-    width: 5%;
-    margin: 1.69%;
-  }
-  @media ${device.laptop} {
-    width: 4%;
-    margin: 2.19%;
+const RemoveWrapper = styled.div`
+  width: 8.37%;
+  button {
+    display: block;
+    margin: 0 auto;
+    height: 35px;
+    width: 35px;
+    font-size: 1rem;
+    color: #e34267;
+    border-radius: 50%;
+    :focus {
+      outline-width: 0;
+    }
+    :hover {
+      background: #e34267;
+      color: white;
+      border: 1px solid #e34267;
+    }
   }
 `;
 
@@ -103,7 +96,7 @@ const CheckoutButton = styled.button`
   height: 40px;
   width: 222px;
   margin: 20px 0;
-  font-size: 18px;
+  font-size: 1.125em;
   background: none;
   color: #e3be42;
   border: 1px solid #e3be42;
@@ -142,12 +135,14 @@ export class Checkout extends Component {
     const { removeLineItem } = this.props;
     const remove = () => removeLineItem(id, index);
     return (  
-      <RemoveButton
-        className="remove"
-        onClick={remove}
-      >
+      <RemoveWrapper>
+        <button
+          className="remove"
+          onClick={remove}
+        >
         x
-      </RemoveButton>
+        </button>
+      </RemoveWrapper>
     );
   }
   

@@ -14,7 +14,8 @@ const FarmerIllustration = styled.img`
 `;
 
 const AboutText = styled.p`
-  ${fluidText}
+  font-size: 0.875em;
+  line-height: 1.5em;
   font-style: normal;
   letter-spacing: 0.01em;
   color: #787878;

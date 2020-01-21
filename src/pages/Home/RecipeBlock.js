@@ -3,8 +3,6 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import { fluidText, fluidH2 } from "../../utils/responsiveSCSS";
-
   const RecipeLink = styled(Link)`
     display: block;
     width: 33.33%;
@@ -15,7 +13,7 @@ import { fluidText, fluidH2 } from "../../utils/responsiveSCSS";
     margin-bottom: 5px;
     padding: 0;
     font-weight: bold;
-    ${fluidH2}
+    font-size: 1em;
     text-align: center;
     letter-spacing: 0.01em;
     color: #787878;
@@ -41,7 +39,7 @@ import { fluidText, fluidH2 } from "../../utils/responsiveSCSS";
     margin: 0;
     padding: 0;
     font-weight: normal;
-    ${fluidText}
+    font-size: 0.875em;
     text-align: center;
     letter-spacing: 0.01em;
     color: #787878;

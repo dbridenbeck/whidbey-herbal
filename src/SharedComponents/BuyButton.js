@@ -12,7 +12,7 @@ const BuyButtonContainer = styled.button`
   padding: 5px;
   color: #e3be42;
   text-align: center;
-  font-size: min(max(16px, 2vw), 18px);
+  font-size: 1em;
   font-weight: normal;
   border: 3px solid #e3be42;
   transition: opacity 1s ease-in-out;

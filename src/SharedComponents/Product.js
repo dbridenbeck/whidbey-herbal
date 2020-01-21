@@ -8,9 +8,9 @@ import * as CartActionCreators from "../state/actions/cart";
 
 const Title = styled.h2`
   margin: 0;
-  font-size: min(max(16px, 2vw), 24px);
+  font-size: 1em;
   font-weight: normal;
-  color: black;
+  color: #787878;
   text-decoration: none;
   text-align: center;
 `;
@@ -45,8 +45,8 @@ const Image = styled.img`
 
 const Info = styled.p`
   margin: 0;
-  font-size: min(max(12px, 2vw), 16px);
-  line-height: min(max(13px, 2vw), 18px);
+  font-size: 0.75em;
+  line-height: 1.167em;
   font-weight: normal;
   text-align: center;
   color: #666666;

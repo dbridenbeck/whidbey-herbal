@@ -4,7 +4,7 @@ import styled from "styled-components";
 const H1Component = styled.h1`
   margin: 0;
   font-weight: bold;
-  font-size: min(max(24px, 5vw), 48px);
+  font-size: 1.625em;
   text-align: ${props => props.centered ? "center" : "left"};
   letter-spacing: 0.01em;
   color: ${props => (props.colorIsGrey ? "#787878" : "#e3be42")};

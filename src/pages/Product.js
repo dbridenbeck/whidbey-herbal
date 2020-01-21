@@ -1,16 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Products from '../components/Products';
 import Reviews from '../components/Reviews';
-import { client } from "../plugins/shopify.js";
 import ProductInfo from '../components/ProductInfo';
-import { initialState } from '../state/App';
-import {
-  fetchShopifyProductsAction,
-  fetchShopifyArticlesAction
-} from "../state/fetchShopifyData";
-import * as CartActionCreators from "../state/actions/cart";
 import styled from "styled-components";
 
 // Begin Styled Components
@@ -26,31 +19,7 @@ const Product = ({
   products,
   match,
   checkout,
-  clearCheckoutInState,
-  fetchShopifyProducts,
-  fetchShopifyArticles
 }) => {
-  // if shopify says the checkout happened successfully, clear checkout in state
-  const clearCheckoutIfCompleted = () => {
-    checkout.checkoutId
-      ? client.checkout.fetch(checkout.checkoutId).then(checkout => {
-          if (checkout.completedAt) {
-            clearCheckoutInState();
-          }
-        })
-      : console.log("checkout doesn't exist");
-  };
-
-  useEffect(() => {
-    if (checkout === initialState) {
-      // if checkout has been completed, clear checkout in state
-      clearCheckoutIfCompleted();
-      // populate state with products from shopify
-      fetchShopifyProducts();
-      // populate state with articles from shopify
-      fetchShopifyArticles();
-    }
-  }, []);
 
   const { handle } = match.params;
 
@@ -81,9 +50,6 @@ const Product = ({
 Product.propTypes = {
   products: PropTypes.array,
   checkout: PropTypes.object,
-  clearCheckoutInState: PropTypes.func,
-  fetchShopifyProducts: PropTypes.func,
-  fetchShopifyArticles: PropTypes.func
 };
 
 const mapStateToProps = ({products, checkout}) => ({
@@ -91,11 +57,4 @@ const mapStateToProps = ({products, checkout}) => ({
   checkout,
 });
 
-const mapDispatchToProps = dispatch => ({
-  clearCheckoutInState: () =>
-    dispatch(CartActionCreators.clearCheckoutInState()),
-  fetchShopifyProducts: () => dispatch(fetchShopifyProductsAction()),
-  fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+export default connect(mapStateToProps, null)(Product);

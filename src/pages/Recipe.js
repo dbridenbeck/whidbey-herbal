@@ -64,31 +64,7 @@ const Recipe = ({
   articles,
   match,
   checkout,
-  clearCheckoutInState,
-  fetchShopifyProducts,
-  fetchShopifyArticles
 }) => {
-  // if shopify says the checkout happened successfully, clear checkout in state
-  const clearCheckoutIfCompleted = () => {
-    checkout.checkoutId
-      ? client.checkout.fetch(checkout.checkoutId).then(checkout => {
-          if (checkout.completedAt) {
-            clearCheckoutInState();
-          }
-        })
-      : console.log("checkout doesn't exist");
-  };
-
-  useEffect(() => {
-    if (checkout === initialState) {
-      // if checkout has been completed, clear checkout in state
-      clearCheckoutIfCompleted();
-      // populate state with products from shopify
-      fetchShopifyProducts();
-      // populate state with articles from shopify
-      fetchShopifyArticles();
-    }
-  }, []);
 
   const { handle } = match.params;
 
@@ -120,9 +96,6 @@ const Recipe = ({
 Recipe.propTypes = {
   articles: PropTypes.array,
   checkout: PropTypes.object,
-  clearCheckoutInState: PropTypes.func,
-  fetchShopifyProducts: PropTypes.func,
-  fetchShopifyArticles: PropTypes.func
 };
 
 const mapStateToProps = ({articles, checkout}) => ({
@@ -130,11 +103,4 @@ const mapStateToProps = ({articles, checkout}) => ({
   checkout
 });
 
-const mapDispatchToProps = dispatch => ({
-  clearCheckoutInState: () =>
-    dispatch(CartActionCreators.clearCheckoutInState()),
-  fetchShopifyProducts: () => dispatch(fetchShopifyProductsAction()),
-  fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Recipe);
+export default connect(mapStateToProps, null)(Recipe);

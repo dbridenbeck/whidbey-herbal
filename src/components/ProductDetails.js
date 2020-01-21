@@ -80,7 +80,8 @@ const ProductDetails = ({
   quantityButtonAmount,
   updateQuantityButton
 }) => {
-  const quantity = quantityButtonAmount === '' ? 0 : quantityButtonAmount;
+  const quantity = quantityButtonAmount === "" ? 0 : quantityButtonAmount;
+  console.log("what is quantity?: ", quantity);
 
   // begin component's return
   return (

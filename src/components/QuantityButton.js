@@ -20,14 +20,7 @@ const StyledInput = styled.input`
   }
 `;
 
-const convertNaNtoZero = event =>
-  isNaN(parseFloat(event.target.value, 1))
-    ? 0
-    : parseFloat(event.target.value, 1);
-
 const QuantityButton = ({quantity, selectedProduct, shouldAddQuantities, labelTitle, onChangeFunction}) => {
-
-
   return (
     <div>
       <Quantity>
@@ -39,7 +32,7 @@ const QuantityButton = ({quantity, selectedProduct, shouldAddQuantities, labelTi
             min="1"
             max="20"
             onChange={event => {
-              onChangeFunction(convertNaNtoZero(event), shouldAddQuantities, selectedProduct);
+              onChangeFunction(event.target.value, shouldAddQuantities, selectedProduct);
             }}
           />
         </label>

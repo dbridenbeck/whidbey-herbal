@@ -29,7 +29,7 @@ export const Reducer1 = (state = initialState, action) => {
             ...state.checkout.lineItems,
             { 
               ...action.product, 
-              quantity: state.quantityButtonAmount 
+              quantity: action.quantity 
             }
           ]
         }

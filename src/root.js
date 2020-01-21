@@ -29,11 +29,13 @@ const Root = () => {
     )
   );
 
+  
   // update localStorage with subscribe to save to localStorage on state change
   store.subscribe(() => {
     const state = store.getState();
     saveToLocalStorage(state);
   });
+    
   return (
   <Provider store={store}>
     <Router>

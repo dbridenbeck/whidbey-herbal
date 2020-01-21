@@ -64,8 +64,6 @@ const Recipe = ({
           __html: selectedRecipe.node.contentHtml
         }}
         />
-        
-        
       </RecipeContainer>
       <Products title={"Explore the Shop"} />
     </Wrapper>
@@ -74,12 +72,10 @@ const Recipe = ({
 
 Recipe.propTypes = {
   articles: PropTypes.array,
-  checkout: PropTypes.object,
 };
 
-const mapStateToProps = ({articles, checkout}) => ({
+const mapStateToProps = ({articles}) => ({
   articles,
-  checkout
 });
 
 export default connect(mapStateToProps, null)(Recipe);

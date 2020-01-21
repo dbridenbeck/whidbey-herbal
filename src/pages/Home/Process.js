@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from "styled-components";
+import Wrapper from "../../SharedComponents/Wrapper";
+import StyledH1 from "../../SharedComponents/StyledH1";
 
 import ProcessBlock from './ProcessBlock';
 
 import { device } from "../../utils/devices";
-import { laptopMargins, tabletMargins, mobileMargins, fluidH1 } from "../../utils/responsiveSCSS";
+import { fluidH1 } from "../../utils/responsiveSCSS";
 
 import harvestLeft from './images/harvestLeft.jpg';
 import harvestRight from "./images/harvestRight.jpg";
@@ -14,33 +16,6 @@ import distill from "./images/distill.jpg";
 import aging from "./images/aging.jpg";
 import bottleLeft from "./images/bottleLeft.jpg";
 import bottleRight from "./images/bottleRight.jpg";
-
-const ProcessesWrapper = styled.div`
-  position: relative;
-  height: auto;
-  width: 100%;
-  max-width: 800px;
-  ${mobileMargins};
-  @media ${device.tablet} {
-    ${tabletMargins};
-  }
-  @media ${device.laptop} {
-    ${laptopMargins};
-  }
-`;
-
-const ContainerTitle = styled.h1`
-  height: 50px;
-  margin: 20px auto;
-  font-weight: bold;
-  ${fluidH1}
-  text-align: center;
-  letter-spacing: 0.01em;
-  color: #787878;
-  @media ${device.laptop} {
-    margin-bottom: 80px;
-  }
-`;
 
 const processes = [
   {
@@ -100,15 +75,14 @@ const processes = [
 const Process = () => {
 
   return (
-    <ProcessesWrapper id="process">
-      <ContainerTitle>Our Process</ContainerTitle>
+    <Wrapper id="process" maxWidth={"800px"}>
+      <StyledH1 colorIsGrey={true} centered={true}>
+        Our Process
+      </StyledH1>
       {processes.map(process => (
-        <ProcessBlock 
-          process={process} 
-          key={process.processTitle}
-        />
+        <ProcessBlock process={process} key={process.processTitle} />
       ))}
-    </ProcessesWrapper>
+    </Wrapper>
   );
 }
 

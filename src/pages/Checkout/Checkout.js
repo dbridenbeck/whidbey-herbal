@@ -3,33 +3,13 @@ import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { device } from "../../utils/devices";
-import { tabletMargins } from "../../utils/responsiveSCSS";
+import Wrapper from "../../SharedComponents/Wrapper";
+import StyledH1 from "../../SharedComponents/StyledH1";
 
 import { client } from "../../plugins/shopify.js";
 import * as CartActionCreators from '../../state/actions/cart';
 import LineItems from './LineItems';
 import Products from '../../SharedComponents/Products';
-
-
-const CheckoutWrapper = styled.div`
-  display: block;
-  width: 100%;
-  margin-top: 75px;
-  @media ${device.tablet} {
-    ${tabletMargins};
-  }
-`;
-
-const Title = styled.h1`
-  display: inline-block;
-  margin: 0;
-  color: #e3be42;
-  font-size: min(max(26px, 5vw), 54px);
-  font-weight: normal;
-  @media ${device.tablet} {
-    margin-top: -4%;
-  }
-`;
 
 const CheckoutContainer = styled.div`
   display: block;
@@ -213,8 +193,8 @@ export class Checkout extends Component {
     console.log("visibleCartSubtotal is: ", visibleCartSubtotal);
 
     return (
-      <CheckoutWrapper>
-        <Title>Checkout</Title>
+      <Wrapper maxWidth={""}>
+        <StyledH1 colorIsGrey={false} centered={false}>Checkout</StyledH1>
         {hasItems ? (
           <CheckoutContainer>
             <LineItemHeaders>
@@ -247,7 +227,7 @@ export class Checkout extends Component {
             <Products title="Explore the Shop" />
           </CheckoutContainer>
         )}
-      </CheckoutWrapper>
+      </Wrapper>
     );
   }
 };

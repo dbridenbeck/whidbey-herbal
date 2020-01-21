@@ -27,7 +27,6 @@ const RecipeContainer = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   width: 100%;
-  border-top: 2px solid #e3be42;
   padding: 20px;
   @media ${device.tablet} {
     display: block;
@@ -56,7 +55,6 @@ const ShopifyHTML = styled.div`
 const Recipe = ({
   articles,
   match,
-  checkout,
 }) => {
 
   const { handle } = match.params;

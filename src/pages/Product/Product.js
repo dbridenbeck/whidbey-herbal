@@ -3,16 +3,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Products from '../../SharedComponents/Products';
 import Reviews from './Reviews';
-import ProductInfo from './ProductInfo';
-import styled from "styled-components";
-
-// Begin Styled Components
-const ProductWrapper = styled.div`
-  display: block;
-  height: auto;
-  width: 100%;
-  margin: 90px auto 0 auto;
-`;
+import ProductDetails from './ProductDetails';
+import Wrapper from "../../SharedComponents/Wrapper";
 
 // begin component
 const Product = ({
@@ -36,14 +28,14 @@ const Product = ({
 
   // begin component's return
   return (
-    <ProductWrapper>
-      <ProductInfo
+    <Wrapper maxWidth={""}>
+      <ProductDetails
         selectedProduct={selectedProduct}
         doesItemExist={doesItemExist.length}
       />
       <Reviews />
       <Products title={"More Products"} />
-    </ProductWrapper>
+    </Wrapper>
   );
 };
 

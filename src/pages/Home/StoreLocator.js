@@ -1,23 +1,13 @@
 import React from 'react';
 import styled from "styled-components";
 
+import Wrapper from "../../SharedComponents/Wrapper";
+import StyledH1 from "../../SharedComponents/StyledH1";
 import StoreBlock from "./StoreBlock";
 import GoogleMap from "./GoogleMap";
 
 import { device } from "../../utils/devices";
-import { laptopMargins, tabletMargins, mobileMargins, fluidH1 } from "../../utils/responsiveSCSS";
-
-const LocatorWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  ${mobileMargins};
-  @media ${device.tablet} {
-    ${tabletMargins};
-  }
-  @media ${device.laptop} {
-    ${laptopMargins};
-  }
-`;
+import { fluidH1 } from "../../utils/responsiveSCSS";
 
 const ContainerTitle = styled.h1`
   height: 50px;
@@ -75,8 +65,10 @@ const stores = [
 const StoreLocator = () => {
 
   return (
-    <LocatorWrapper id="findstore">
-      <ContainerTitle>Store Locator</ContainerTitle>
+    <Wrapper id="findstore">
+      <StyledH1 colorIsGrey={true} centered={true}>
+        Store Locator
+      </StyledH1>
       <StoreWrapper>
         <StoreList>
           {stores.map(store => (
@@ -85,7 +77,7 @@ const StoreLocator = () => {
         </StoreList>
         <GoogleMap />
       </StoreWrapper>
-    </LocatorWrapper>
+    </Wrapper>
   );
 }
 

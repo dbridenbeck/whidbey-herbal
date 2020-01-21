@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from "styled-components";
-import farm from "../../images/farm-no-lines.jpg";
-import { fluidText } from "../../utils/responsiveSCSS";
-import circleLogo from "../../images/circle-logo.png";
 import { device } from "../../utils/devices";
+import farm from "./images/farm-no-lines.jpg";
+import circleLogo from "./images/circle-logo.png";
+import { fluidText } from "../../utils/responsiveSCSS";
 
-const WelcomeContainer = styled.div`
+const WelcomeWrapper = styled.div`
   width: 100%;
   max-width: 650px;
   margin: 50px auto 0px auto;
@@ -61,13 +61,14 @@ const IllustrationText = styled.p`
 const LogoIllustration = () => {
 
   return (
-    <WelcomeContainer id="home">
+    <WelcomeWrapper>
       <FarmWithLogo>
-        <Logo 
-          src={`${circleLogo}`} 
-          width="800" 
-          height="800" 
-          alt="Whidbey Island Logo" />
+        <Logo
+          src={`${circleLogo}`}
+          width="800"
+          height="800"
+          alt="Whidbey Island Logo"
+        />
         <FarmIllustration src={`${farm}`} />
       </FarmWithLogo>
       <TextBlock>
@@ -78,7 +79,7 @@ const LogoIllustration = () => {
           Grown from the Heart of Whidbey Island.
         </IllustrationText>
       </TextBlock>
-    </WelcomeContainer>
+    </WelcomeWrapper>
   );
 }
 

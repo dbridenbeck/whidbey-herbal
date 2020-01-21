@@ -1,27 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
-import { device } from "../../utils/devices";
-import { laptopMargins, tabletMargins, mobileMargins, fluidText, fluidH1 } from "../../utils/responsiveSCSS";
+import { fluidText } from "../../utils/responsiveSCSS";
 import farmers from './images/farmers.jpg';
-
-const AboutContainer = styled.div`
-  width: 100%;
-  max-width: 600px;
-  ${mobileMargins};
-  @media ${device.tablet} {
-    ${tabletMargins};
-  }
-  @media ${device.laptop} {
-    ${laptopMargins};
-  }
-`;
-
-const Title = styled.h1`
-  font-weight: bold;
-  ${fluidH1}
-  text-align: center;
-  color: #787878;
-`;
+import Wrapper from "../../SharedComponents/Wrapper";
+import StyledH1 from "../../SharedComponents/StyledH1";
 
 const FarmerIllustration = styled.img`
   display: block;
@@ -40,12 +22,15 @@ const AboutText = styled.p`
 
 const About = () => {
   return (
-    <AboutContainer id="about">
-      <Title>About the Farmers</Title>
-      <FarmerIllustration 
-        src={`${farmers}`} 
-        width="1200" 
-        height="1121" 
+    <Wrapper id="about" maxWidth={"600px"}>
+      <StyledH1 colorIsGrey={true} centered={true}>
+        {" "}
+        About the Farmers{" "}
+      </StyledH1>
+      <FarmerIllustration
+        src={`${farmers}`}
+        width="1200"
+        height="1121"
         alt="Watercolor image of Sam and Caitlin, the farmers of Whidbey Herbal"
       />
       <AboutText>
@@ -55,7 +40,7 @@ const About = () => {
         gardening. We live on the farm with our son Forrest and our dogs Bonnie
         and Merlin.
       </AboutText>
-    </AboutContainer>
+    </Wrapper>
   );
 }
 

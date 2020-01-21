@@ -1,15 +1,15 @@
 export const mobileMargins = () => `
-  margin: 90px auto 0 auto;
+  margin: 50px auto 40px auto;
   padding-top: 50px;
 `;
 
 export const laptopMargins = () => `
-  margin: 150px auto 0 auto;
+  margin: 70px auto 130px auto;
   padding-top: 50px;
 `;
 
 export const tabletMargins = () =>`
-  margin: 70px auto 0 auto;
+  margin: 50px auto 40px auto;
   padding-top: 50px;
 `;
 

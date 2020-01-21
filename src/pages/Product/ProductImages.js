@@ -16,13 +16,12 @@ const ProductImagesWrapper = styled.div`
   }
   @media ${device.laptop} {
     width: 35%;
-    margin: 0 7.5%;
   }
 `;
 
 const HeroImage = styled.img`
   display: block;
-  margin-bottom: 30px;
+  margin: 4% auto 30px auto;
   width: 100%;
   height: auto;
   border: 4px solid #e3be42;

@@ -2,32 +2,10 @@ import React from 'react';
 import styled from "styled-components";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import Wrapper from "../../SharedComponents/Wrapper";
+import StyledH1 from "../../SharedComponents/StyledH1";
 
 import RecipeBlock from './RecipeBlock';
-
-import { device } from "../../utils/devices";
-import { laptopMargins, tabletMargins, mobileMargins, fluidH1 } from "../../utils/responsiveSCSS";
-
-const RecipesWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  ${mobileMargins};
-  @media ${device.tablet} {
-    ${tabletMargins};
-  }
-  @media ${device.laptop} {
-    ${laptopMargins};
-  }
-`;
-
-const ContainerTitle = styled.h1`
-  margin: 20px auto;
-  font-weight: bold;
-  ${fluidH1}
-  text-align: center;
-  letter-spacing: 0.01em;
-  color: #787878;
-`;
 
 const RecipeWrapper = styled.div`
   display: flex;
@@ -35,22 +13,21 @@ const RecipeWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: space-evenly;
   width: 100%;
-  margin: 0 auto;
+  margin: 20px auto 0;
 `;
 
 const RecipeSection = ({articles}) => {
   return (
-    <RecipesWrapper id="recipes">
-      <ContainerTitle>Recipes</ContainerTitle>
+    <Wrapper id="recipes" maxWidth={""}>
+      <StyledH1 colorIsGrey={true} centered={true}>
+        Recipes
+      </StyledH1>
       <RecipeWrapper>
         {articles.map(article => (
-          <RecipeBlock 
-            recipe={article} 
-            key={article.node.id} 
-          />
+          <RecipeBlock recipe={article} key={article.node.id} />
         ))}
       </RecipeWrapper>
-    </RecipesWrapper>
+    </Wrapper>
   );
 }
 

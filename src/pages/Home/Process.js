@@ -3,17 +3,17 @@ import styled from "styled-components";
 
 import ProcessBlock from './ProcessBlock';
 
-import { device } from "../utils/devices";
-import { laptopMargins, tabletMargins, mobileMargins, fluidH1 } from "../utils/responsiveSCSS";
+import { device } from "../../utils/devices";
+import { laptopMargins, tabletMargins, mobileMargins, fluidH1 } from "../../utils/responsiveSCSS";
 
-import harvestLeft from '../images/harvestLeft.jpg';
-import harvestRight from '../images/harvestRight.jpg';
-import prepareLeft from '../images/prepareLeft.jpg';
-import prepareRight from '../images/prepareRight.jpg';
-import distill from '../images/distill.jpg';
-import aging from '../images/aging.jpg';
-import bottleLeft from '../images/bottleLeft.jpg';
-import bottleRight from '../images/bottleRight.jpg';
+import harvestLeft from './images/harvestLeft.jpg';
+import harvestRight from "./images/harvestRight.jpg";
+import prepareLeft from "./images/prepareLeft.jpg";
+import prepareRight from "./images/prepareRight.jpg";
+import distill from "./images/distill.jpg";
+import aging from "./images/aging.jpg";
+import bottleLeft from "./images/bottleLeft.jpg";
+import bottleRight from "./images/bottleRight.jpg";
 
 const ProcessesWrapper = styled.div`
   position: relative;

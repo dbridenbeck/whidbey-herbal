@@ -4,8 +4,8 @@ import styled from "styled-components";
 import StoreBlock from "./StoreBlock";
 import GoogleMap from "./GoogleMap";
 
-import { device } from "../utils/devices";
-import { laptopMargins, tabletMargins, mobileMargins, fluidH1 } from "../utils/responsiveSCSS";
+import { device } from "../../utils/devices";
+import { laptopMargins, tabletMargins, mobileMargins, fluidH1 } from "../../utils/responsiveSCSS";
 
 const LocatorWrapper = styled.div`
   position: relative;

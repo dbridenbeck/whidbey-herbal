@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import { fluidText, fluidH2 } from "../utils/responsiveSCSS";
+import { fluidText, fluidH2 } from "../../utils/responsiveSCSS";
 
   const RecipeLink = styled(Link)`
     display: block;

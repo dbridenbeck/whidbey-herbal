@@ -40,7 +40,6 @@ export class BuyButton extends Component {
   createBuyButton = (product, quantity, props ) => {
     const { addLineItem, updateItemQuantity, doesItemExist } = props
 
-
     const createAddtoCartTransition = () => {
       this.setState({
         buyButtonClicked: true
@@ -62,7 +61,7 @@ export class BuyButton extends Component {
       <BuyButtonContainer
         className="buyButton"
         buyButtonClicked={this.state.buyButtonClicked}
-        onClick={doesItemExist.length ? updateQuantity : addItem}
+        onClick={doesItemExist ? updateQuantity : addItem}
       >
         {this.state.buyButtonClicked ? `Added to Cart` : `Add to Cart`}
       </BuyButtonContainer>
@@ -84,7 +83,8 @@ BuyButton.propTypes = {
   products: PropTypes.array,
   updateItemQuantity: PropTypes.func,
   addLineItem: PropTypes.func,
-  selectedProduct: PropTypes.object
+  selectedProduct: PropTypes.object,
+  doesItemExist: PropTypes.number 
 }
 
 const mapStateToProps = ({ checkout, products }) => ({

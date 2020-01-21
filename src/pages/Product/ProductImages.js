@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { device } from "../utils/devices";
+import { device } from "../../utils/devices";
 
-import * as CartActionCreators from "../state/actions/cart";
+import * as CartActionCreators from "../../state/actions/cart";
 import styled from "styled-components";
 
 // Begin Styled Components

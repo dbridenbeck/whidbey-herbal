@@ -20,6 +20,8 @@ const StyledInput = styled.input`
   }
 `;
 
+const maxInputToTwenty = (event) => event.target.value > 20 ? 20 : event.target.value
+
 const QuantityButton = ({quantity, selectedProduct, shouldAddQuantities, labelTitle, onChangeFunction}) => {
   return (
     <div>
@@ -32,7 +34,11 @@ const QuantityButton = ({quantity, selectedProduct, shouldAddQuantities, labelTi
             min="1"
             max="20"
             onChange={event => {
-              onChangeFunction(event.target.value, shouldAddQuantities, selectedProduct);
+              onChangeFunction(
+                maxInputToTwenty(event),
+                shouldAddQuantities,
+                selectedProduct
+              );
             }}
           />
         </label>

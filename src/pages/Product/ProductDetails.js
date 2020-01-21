@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import QuantityButton from "./QuantityButton";
-import BuyButton from "./BuyButton";
+import QuantityButton from "../../SharedComponents/QuantityButton";
+import BuyButton from "../../SharedComponents/BuyButton";
 
-import { device } from "../utils/devices";
+import { device } from "../../utils/devices";
 
-import * as CartActionCreators from "../state/actions/cart";
+import * as CartActionCreators from "../../state/actions/cart";
 import styled from "styled-components";
 
 // Begin Styled Components
@@ -120,7 +120,7 @@ const ProductDetails = ({
 
 ProductDetails.propTypes = {
   selectedProduct: PropTypes.object,
-  doesItemExist: PropTypes.array,
+doesItemExist: PropTypes.number,
   quantityButtonAmount: PropTypes.number,
   updateQuantityButton: PropTypes.func
 };

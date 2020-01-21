@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
-import farm from "../images/farm-no-lines.jpg";
-import { fluidText } from "../utils/responsiveSCSS";
-import circleLogo from "../images/circle-logo.png";
-import { device } from "../utils/devices";
+import farm from "../../images/farm-no-lines.jpg";
+import { fluidText } from "../../utils/responsiveSCSS";
+import circleLogo from "../../images/circle-logo.png";
+import { device } from "../../utils/devices";
 
 const WelcomeContainer = styled.div`
   width: 100%;

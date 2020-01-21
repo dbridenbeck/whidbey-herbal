@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 
 import RecipeBlock from './RecipeBlock';
 
-import { device } from "../utils/devices";
-import { laptopMargins, tabletMargins, mobileMargins, fluidH1 } from "../utils/responsiveSCSS";
+import { device } from "../../utils/devices";
+import { laptopMargins, tabletMargins, mobileMargins, fluidH1 } from "../../utils/responsiveSCSS";
 
 const RecipesWrapper = styled.div`
   position: relative;

@@ -2,10 +2,10 @@ import React from 'react';
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { device } from "../utils/devices";
-import * as CartActionCreators from "../state/actions/cart";
+import { device } from "../../utils/devices";
+import * as CartActionCreators from "../../state/actions/cart";
 
-import QuantityButton from './QuantityButton';
+import QuantityButton from '../../SharedComponents/QuantityButton';
 
 const LineItemWrapper = styled.div`
   display: flex;

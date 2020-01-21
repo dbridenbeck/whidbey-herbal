@@ -1,16 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Products from '../components/Products';
-import { client } from "../plugins/shopify.js";
-import { initialState } from '../state/App';
-import {
-  fetchShopifyProductsAction,
-  fetchShopifyArticlesAction
-} from "../state/fetchShopifyData";
-import * as CartActionCreators from "../state/actions/cart";
+import Products from '../../SharedComponents/Products';
 import styled from "styled-components";
-import { device } from "../utils/devices";
+import { device } from "../../utils/devices";
 
 // Begin Styled Components
 const RecipeWrapper = styled.div`

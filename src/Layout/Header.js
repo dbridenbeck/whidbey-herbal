@@ -9,9 +9,9 @@ import NavPanel from './NavPanel';
 import Hamburger from './Hamburger';
 import { device } from "../utils/devices";
 
-import cart from "../images/cart.png";
-import cartYellow from "../images/cart-yellow.png";
-import horizLogo from "../images/horiz-logo.png";
+import cart from "./images/cart.png";
+import cartYellow from "./images/cart-yellow.png";
+import horizLogo from "./images/horiz-logo.png";
 
 const Navbar = styled.div`
   z-index: 1000;

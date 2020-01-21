@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { device } from "../utils/devices";
-import { tabletMargins } from "../utils/responsiveSCSS";
+import { device } from "../../utils/devices";
+import { tabletMargins } from "../../utils/responsiveSCSS";
 
-import { client } from "../plugins/shopify.js";
-import * as CartActionCreators from '../state/actions/cart';
-import LineItems from '../components/LineItems';
-import Products from '../components/Products';
+import { client } from "../../plugins/shopify.js";
+import * as CartActionCreators from '../../state/actions/cart';
+import LineItems from './LineItems';
+import Products from '../../SharedComponents/Products';
 
 
 const CheckoutWrapper = styled.div`
@@ -91,14 +91,14 @@ const Subtotal = styled.p`
 `;
 
 const RemoveButton = styled.button`
-  width: 40px;
-  height: 40px;
-  margin: 0 3.5%;
+  width: 6%;
+  height: 70%;
+  margin: 1.19%;
   font-size: 24px;
   text-align: center;
   background: none;
   border: 1px solid #c0c0c0;
-  border-radius: 20px;
+  border-radius: 50%;
   color: #787878;
   :focus {
     outline-width: 0;
@@ -106,6 +106,15 @@ const RemoveButton = styled.button`
   :hover {
     background: #c0c0c0;
     color: white;
+  }
+  @media ${device.tablet} {
+    height: 60%;
+    width: 5%;
+    margin: 1.69%;
+  }
+  @media ${device.laptop} {
+    width: 4%;
+    margin: 2.19%;
   }
 `;
 
@@ -159,19 +168,6 @@ export class Checkout extends Component {
       >
         x
       </RemoveButton>
-    );
-  }
-
-  createUpdateItemButton = (product, quantityToUpdate, buttonText) => {
-    const { updateItemQuantity } = this.props;
-    const updateItem = () => updateItemQuantity(quantityToUpdate, "change", product);
-    return (  
-      <button
-        className="update"
-        onClick={updateItem}
-      >
-        {buttonText}
-      </button>
     );
   }
   

@@ -6,12 +6,12 @@ import * as serviceWorker from './serviceWorker';
 import { Reducer1 } from './state/App';
 import { saveToLocalStorage, getFromLocalStorage } from "../src/state/localStorage";
 import thunk from "redux-thunk";
-import Home from '../src/pages/Home';
-import Checkout from '../src/pages/Checkout';
-import Layout from '../src/components/Layout';
-import Product from '../src/pages/Product';
-import Shop from '../src/pages/Shop';
-import Recipe from '../src/pages/Recipe';
+import Home from '../src/pages/Home/Home.js';
+import Checkout from '../src/pages/Checkout/Checkout.js';
+import Layout from './Layout/Layout.js';
+import Product from '../src/pages/Product/Product.js';
+import Shop from '../src/pages/Shop/Shop.js';
+import Recipe from './pages/Recipe/Recipe.js';
 import "./index.css";
 
 const Root = () => {

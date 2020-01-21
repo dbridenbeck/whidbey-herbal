@@ -2,8 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-import { device } from "../utils/devices";
-import { fluidH2 } from "../utils/responsiveSCSS";
+import { device } from "../../utils/devices";
+import { fluidH2 } from "../../utils/responsiveSCSS";
 
   const StoreName = styled.h2`
     margin-bottom: 5px;

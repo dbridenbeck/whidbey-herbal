@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
-import { device } from "../utils/devices";
-import mapFrame from "../images/mapFrame.jpg";
-import googlemapsImg from "../images/googlemapsImg.png";
+import { device } from "../../utils/devices";
+import mapFrame from "./images/mapFrame.jpg";
+import googlemapsImg from "./images/googlemapsImg.png";
 
 const MapWrapper = styled.div`
   display: none;

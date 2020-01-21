@@ -1,6 +1,6 @@
 import React from "react";
-import Products from '../components/Products';
-import { device } from "../utils/devices";
+import Products from '../../SharedComponents/Products';
+import { device } from "../../utils/devices";
 import styled from "styled-components";
 
 

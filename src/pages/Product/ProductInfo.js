@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import ProductDetails from "../components/ProductDetails";
-import ProductImages from "../components/ProductImages";
+import ProductDetails from "./ProductDetails";
+import ProductImages from "./ProductImages";
 
-import { device } from "../utils/devices";
+import { device } from "../../utils/devices";
 
 // Begin Styled Components
 
@@ -38,7 +38,7 @@ const ProductInfo = ({
 
 ProductInfo.propTypes = {
   selectedProduct: PropTypes.object,
-  doesItemExist: PropTypes.array
+  doesItemExist: PropTypes.number
 };
 
 export default ProductInfo;

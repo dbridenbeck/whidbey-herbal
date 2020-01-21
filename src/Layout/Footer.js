@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import instagram from '../images/instagram.png';
-import facebook from '../images/facebook.png';
+import instagram from './images/instagram.png';
+import facebook from './images/facebook.png';
 
   const FooterContainer = styled.div`
     width: 80%;

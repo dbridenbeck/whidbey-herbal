@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Products from '../components/Products';
-import Reviews from '../components/Reviews';
-import ProductInfo from '../components/ProductInfo';
+import Products from '../../SharedComponents/Products';
+import Reviews from './Reviews';
+import ProductInfo from './ProductInfo';
 import styled from "styled-components";
 
 // Begin Styled Components
@@ -39,7 +39,7 @@ const Product = ({
     <ProductWrapper>
       <ProductInfo
         selectedProduct={selectedProduct}
-        doesItemExist={doesItemExist}
+        doesItemExist={doesItemExist.length}
       />
       <Reviews />
       <Products title={"More Products"} />

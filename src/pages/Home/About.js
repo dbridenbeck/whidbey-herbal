@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
-import { device } from "../utils/devices";
-import { laptopMargins, tabletMargins, mobileMargins, fluidText, fluidH1 } from "../utils/responsiveSCSS";
-import farmers from '../images/farmers.jpg';
+import { device } from "../../utils/devices";
+import { laptopMargins, tabletMargins, mobileMargins, fluidText, fluidH1 } from "../../utils/responsiveSCSS";
+import farmers from './images/farmers.jpg';
 
 const AboutContainer = styled.div`
   width: 100%;

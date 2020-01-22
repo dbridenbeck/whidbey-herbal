@@ -6,7 +6,7 @@ const StyledWrapper = styled.div`
   width: 100%;
   max-width: ${props => props.maxWidth};
   margin: 0px auto 120px auto;
-  padding-top: 90px;
+  padding: 50px 20px 0 20px;
 `;
 
 const Wrapper = ({maxWidth, children, id}) => {

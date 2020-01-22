@@ -7,43 +7,30 @@ import styled from 'styled-components';
 import { device } from "../utils/devices";
 
 const NavLinksWrapper = styled.div`
-  display: flex;
   width: 50%;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin-top: 3px;
+  margin-top: 10px;
   padding: 0 5%;
   @media ${device.laptop} {
-    align-items: center;
-    display: flex;
-    width: 100%;
     flex-direction: row;
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 3px;
-    padding: 0 5%;
+    width: 100%;
+    margin-top: 0px;
   }
 `;
 
 const StyledNavLinkContainer = styled.div`
-  display: flex;
-  color: black;
-  justify-content: flex-start;
-  margin-top: 10px;
-  @media ${device.laptop} {
-    margin-top: 0px;
-    justify-content: center;
-  }
+  color: #787878;
 `;
 
 const StyledNavLink = styled(NavLink)`
-  text-decoration: none;
   display: inline-block;
+  text-decoration: none;
   text-align: center;
   font-size: 1rem;
-  color: black;
   :visited {
-    color: black;
+    color: #787878;
   }
   &:hover {
     color: #e3be42;
@@ -77,23 +64,28 @@ const links = [
   },
 ]
 
-const NavLinks = ({clearBurger}) => {
-
-  // Add in functionality to close navpanel by turning burgerToggled to false on click!
-  return (
-    <NavLinksWrapper>
-      {links.map(link => 
+  const createStyledNavLink = (clearBurger, links) => {
+    const handleClearBurger = () => clearBurger();
+    return (
+      links.map(link => 
         <StyledNavLinkContainer key={link.name}>
-        <StyledNavLink 
-          smooth 
-          to={link.destination}
-          onClick={() => clearBurger()}
-        >
-          {link.name}
-        </StyledNavLink>
-      </StyledNavLinkContainer>
-      )}
-    </NavLinksWrapper>
+          <StyledNavLink 
+            smooth 
+            to={link.destination}
+            onClick={handleClearBurger}
+          >
+            {link.name}
+          </StyledNavLink>
+        </StyledNavLinkContainer>
+      )
+    )
+  }
+    
+  const NavLinks = ({clearBurger}) => {
+    return (
+      <NavLinksWrapper>
+        {createStyledNavLink(clearBurger, links)}
+      </NavLinksWrapper>
   );
 }
 

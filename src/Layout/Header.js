@@ -31,21 +31,19 @@ const Navbar = styled.div`
   }
   /* control Navbar show/hide for scroll & hover when on laptop */
   @media ${device.laptop} {
+    /* show Navbar on pages other than homepage */
     opacity: ${props => (props.currentRoute !== "/" ? "0" : "1")};
     &.active {
       opacity: 1;
       transition: opacity 200ms ease-in;
     }
     &.hidden {
+      /* show Navbar on homepage if checkout has lineItems in it */
       opacity: ${props =>
         props.currentRoute !== "/" || props.lineItems.length ? "1" : "0"};
       transition: opacity 200ms ease-out;
       :hover {
-        opacity: ${props =>
-          (props.scrollPos >= 0 && props.scrollPos <= 50) ||
-          props.currentRoute !== "/"
-            ? "1"
-            : "0"};
+        opacity: 1;
       }
     }
   }
@@ -84,7 +82,7 @@ const CheckoutLink = styled(NavLink)`
 const HomeLink = styled.img`
   height: 50px;
   width: auto;
-  margin: 13px 10% 0 10%;
+  margin: 8px 10% 0 10%;
 `;
 
 export class Header extends Component {
@@ -126,17 +124,13 @@ export class Header extends Component {
 
   return (
     <Navbar 
-    className={this.state.show ? "active" : "hidden"}
-    scrollPos={this.state.scrollPos}
-    currentRoute={this.props.location.pathname}
-    lineItems={lineItems}
+      className={this.state.show ? "active" : "hidden"}
+      scrollPos={this.state.scrollPos}
+      currentRoute={this.props.location.pathname}
+      lineItems={lineItems}
     >
-      <Hamburger>
-        {/* This div creates the hamburger using before & after css pseudoclasses */}
-        <div />
-      </Hamburger>
-      
-      <NavLink to={`/#home`}>
+      <Hamburger />      
+      <NavLink smooth to={`/#home`}>
         <HomeLink 
           src={`${horizLogo}`} 
           width="1200"
@@ -144,7 +138,6 @@ export class Header extends Component {
           alt="Whidbey Herbal Logo"
         />
       </NavLink>
-
       <NavPanel
         burgerToggled={burgerToggled}
       />

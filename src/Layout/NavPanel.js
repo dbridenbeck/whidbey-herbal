@@ -5,7 +5,7 @@ import NavLinks from "./NavLinks";
 import { device } from "../utils/devices";
 
 const PanelWrapper = styled.div`
-  /* make navpanel display as hamburger controled slider when mobile */
+  /* make navpanel display as hamburger-controled slider when mobile */
   display: block;
   position: absolute;
   top: 0;
@@ -24,42 +24,42 @@ const PanelWrapper = styled.div`
 `;
 
 const Panel = styled.div`
-  position: absolute;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.8);
-  left: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: absolute;
+  left: 0;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.8);
   transition: all 0.75s ease-in-out;
   &.openPanel {
-    opacity: 1;
     width: 100vw;
     left: 0;
+    opacity: 1;
     transition: all 0.75s ease-in-out;
     /* ignore .openPanel transition and always make visible on laptop */
     @media ${device.laptop} {
-      background: none;
-      width: 100%;
-      height: 100%;
       display: flex;
       left: 0;
+      width: 100%;
+      height: 100%;
+      background: none;
       opacity: 1;
       transition: none;
     }
   }
   &.closePanel {
-    opacity: 0;
     left: -100px;
     width: 0vw;
+    opacity: 0;
     transition: all 0.75s ease-in-out;
     /* ignore .closePanel transition and always make visible on laptop */
     @media ${device.laptop} {
-      background: none;
+      display: flex;
       width: 100%;
       height: 100%;
       left: 0;
-      display: flex;
+      background: none;
       opacity: 1;
       transition: none;
     }

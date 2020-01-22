@@ -4,28 +4,20 @@ import PropTypes from "prop-types";
 import { client } from "../plugins/shopify.js";
 import * as CartActionCreators from "../state/actions/cart";
 import { fetchShopifyProductsAction, fetchShopifyArticlesAction } from '../state/fetchShopifyData';
-import styled from "styled-components";
+import Wrapper from '../SharedComponents/Wrapper';
 import Header from "./Header"
 import Footer from "./Footer"
-
-const MainWrapper = styled.div`
-  margin: 0 auto;
-  padding: 0 20px;
-  display: block;
-  width: 100%;
-  max-width: 1200px;
-`;
 
 const Layout = ({
   children,
   clearCheckoutInState,
   fetchShopifyProducts,
   fetchShopifyArticles,
-  checkout
+  checkoutId
 }) => {
   const clearCheckoutIfCompleted = () => {
-    checkout.checkoutId
-      ? client.checkout.fetch(checkout.checkoutId).then(checkout => {
+    checkoutId
+      ? client.checkout.fetch(checkoutId).then(checkout => {
           if (checkout.completedAt) {
             clearCheckoutInState();
           }
@@ -34,18 +26,18 @@ const Layout = ({
   };
 
   useEffect(() => {
+    console.log("useEffect fired from layout!")
     // if checkout has been completed, clear checkout in state
     clearCheckoutIfCompleted();
-    // populate state with products from shopify
+    // populate state with products and articles from shopify
     fetchShopifyProducts();
-    // populate state with articles from shopify
     fetchShopifyArticles();
   }, []);
 
   return (
     <div>
       <Header />
-      <MainWrapper>{children}</MainWrapper>
+      <Wrapper maxWidth={"1200px"} id="home">{children}</Wrapper>
       <Footer />
     </div>
   );
@@ -53,16 +45,13 @@ const Layout = ({
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  checkout: PropTypes.shape({
-    lineItems: PropTypes.array,
-    checkoutId: PropTypes.string
-  }),
+  checkoutId: PropTypes.string,
   clearCheckoutInState: PropTypes.func,
   fetchProducts: PropTypes.func,
 };
 
-const mapStateToProps = ( {checkout} ) => ({
-  checkout
+const mapStateToProps = ( {checkout: {checkoutId}} ) => ({
+  checkoutId
 });
 
 const mapDispatchToProps = dispatch => ({

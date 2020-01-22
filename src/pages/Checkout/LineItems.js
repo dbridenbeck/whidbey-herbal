@@ -2,7 +2,7 @@ import React from 'react';
 import LineItem from './LineItem';
 import PropTypes from "prop-types";
 
-const LineItems = ({items, createRemoveButton, createUpdateItemButton, removeLineItem}) => {
+const LineItems = ({items, createRemoveButton, createUpdateItemButton}) => {
   return (
     <div>
       {items.map((lineItem, index) => {
@@ -13,7 +13,6 @@ const LineItems = ({items, createRemoveButton, createUpdateItemButton, removeLin
             index={index}
             createRemoveButton={createRemoveButton}
             createUpdateItemButton={createUpdateItemButton}
-            removeLineItem={removeLineItem}
           />
         );
       })}

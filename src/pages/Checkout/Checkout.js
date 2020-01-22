@@ -113,7 +113,7 @@ export class Checkout extends Component {
   }
 
   render() {
-    const { lineItems, removeLineItem } = this.props;
+    const { lineItems } = this.props;
     const hasItems = (lineItems.length && lineItems.length > 0);
     const calculatedCartSubtotal = 
       lineItems.map(lineItem => lineItem.quantity * lineItem.variants.edges[0].node.price)
@@ -132,18 +132,17 @@ export class Checkout extends Component {
             <LineItems
               items={lineItems}
               createRemoveButton={this.createRemoveButton}
-              removeLineItem={removeLineItem}
             />
             <SubtotalSection
               calculatedCartSubtotal={calculatedCartSubtotal}
               createCheckoutButton={this.createCheckoutButton}
             />
-            <Products title="Continue Shopping" />
+            <Products title={"Continue Shopping"} />
           </CheckoutContainer>
         ) : (
           <CheckoutContainer>
             <StyledH2>Your Shopping Cart is empty.</StyledH2>
-            <Products title="Explore the Shop" />
+            <Products title={"Explore the Shop"} />
           </CheckoutContainer>
         )}
       </Wrapper>

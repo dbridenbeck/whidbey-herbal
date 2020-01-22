@@ -26,7 +26,6 @@ const Layout = ({
   };
 
   useEffect(() => {
-    console.log("useEffect fired from layout!")
     // if checkout has been completed, clear checkout in state
     clearCheckoutIfCompleted();
     // populate state with products and articles from shopify

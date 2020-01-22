@@ -12,6 +12,16 @@ const ProductsWrapper = styled.div`
   width: 100%;
   max-width: 1000px;
   margin: 70px auto 0 auto;
+  h2 {
+    margin: 0 0 5px 0px;
+    font-weight: normal;
+    font-size: 1.75em;
+    text-align: left;
+    color: #787878;
+    @media ${device.tablet} {
+      margin: 0 0 5px 50px;
+    }
+  }
 `;
 
 const ProductsContainer = styled.div`
@@ -41,22 +51,11 @@ const ExploreShopLink = styled(Link)`
   }
 `;
 
-const ProductsTitle = styled.h2`
-  margin: 0 0 5px 0px;
-  font-weight: normal;
-  font-size: 1.75em;
-  text-align: left;
-  color: #787878;
-  @media ${device.tablet} {
-    margin: 0 0 5px 50px;
-  }
-`;
-
 const Products = ({products, title}) => {
 
   return (
     <ProductsWrapper>
-      <ProductsTitle> {title} </ProductsTitle>
+      <h2> {title} </h2>
       <ProductsContainer>
         {products
           .filter(product => product.availableForSale)
@@ -78,4 +77,4 @@ Products.propTypes = {
   title: PropTypes.string
 }
 
-export default connect(mapStateToProps)(Products);
+export default connect(mapStateToProps, null)(Products);

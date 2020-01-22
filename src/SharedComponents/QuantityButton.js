@@ -33,11 +33,7 @@ const QuantityButton = ({quantity, selectedProduct, shouldAddQuantities, labelTi
             min="1"
             max="20"
             onChange={event => {
-              onChangeFunction(
-                maxInputToTwenty(event),
-                shouldAddQuantities,
-                selectedProduct
-              );
+              onChangeFunction( maxInputToTwenty(event), shouldAddQuantities, selectedProduct );
             }}
           />
         </label>

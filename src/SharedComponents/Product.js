@@ -6,21 +6,28 @@ import styled from "styled-components";
 import { device } from "../utils/devices";
 import * as CartActionCreators from "../state/actions/cart";
 
-const Title = styled.h2`
-  margin: 0;
-  font-size: 1em;
-  font-weight: normal;
-  color: #787878;
-  text-decoration: none;
-  text-align: center;
-`;
-
 const ProductContainer = styled.div`
   display: block;
   width: 35%;
   margin-bottom: 20px;
-  &:hover ${Title} {
+  .title {
+    margin: 0;
+    font-size: 1em;
+    font-weight: normal;
+    color: #787878;
+    text-decoration: none;
+    text-align: center;
+  }
+  :hover .title {
     color: #e3be42;
+  }
+  .info {
+    margin: 0;
+    font-size: 0.75em;
+    line-height: 1.167em;
+    font-weight: normal;
+    text-align: center;
+    color: #666666;
   }
   @media ${device.tablet} {
     width: 25%;
@@ -43,45 +50,37 @@ const Image = styled.img`
   max-height: 100%;
 `
 
-const Info = styled.p`
-  margin: 0;
-  font-size: 0.75em;
-  line-height: 1.167em;
-  font-weight: normal;
-  text-align: center;
-  color: #666666;
-`;
-
-const createProductLink = (product, clearHeroImg) => {
-  const setHeroImg = () => clearHeroImg();
+const createProduct = (product, clearHeroImg) => {
+  const clearHeroImgAction = () => clearHeroImg();
   return (
-  <ProductLink to={`/product/${product.handle}`} onClick={setHeroImg}>
-    <ImageContainer>
-      <Image
-        src={`${product.images.edges[0].node.src}`}
-        alt={`${product.description}`}
-      />
-    </ImageContainer>
-    <Title> {product.title.toUpperCase()} </Title>
-  </ProductLink>
+    <ProductLink to={`/product/${product.handle}`} onClick={clearHeroImgAction}>
+      <ImageContainer>
+        <Image
+          src={`${product.images.edges[0].node.src}`}
+          alt={`${product.description}`}
+        />
+      </ImageContainer>
+      <h3 className="title"> {product.title.toUpperCase()} </h3>
+      <p className="info">
+        5ml bottle <br />
+        <strong>${product.variants.edges[0].node.price}</strong>
+      </p>
+    </ProductLink>
   )
 }
 
+// begin component
 const Product = ({product, clearHeroImg}) => {
-
   return (
     <ProductContainer>
-      {createProductLink(product, clearHeroImg)}
-      <Info>
-        5ml bottle <br />
-        <strong>${product.variants.edges[0].node.price}</strong>
-      </Info>
+        {createProduct(product, clearHeroImg)}
     </ProductContainer>
   );
 };
 
 Product.propTypes = {
-  product: PropTypes.object
+  product: PropTypes.object,
+  clearHeroImg: PropTypes.func
 }
 
 const mapDispatchToProps = (dispatch) => ({

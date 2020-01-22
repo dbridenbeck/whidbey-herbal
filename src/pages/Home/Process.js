@@ -1,12 +1,7 @@
 import React from 'react';
-import styled from "styled-components";
 import Wrapper from "../../SharedComponents/Wrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
-
 import ProcessBlock from './ProcessBlock';
-
-import { device } from "../../utils/devices";
-import { fluidH1 } from "../../utils/responsiveSCSS";
 
 import harvestLeft from './images/harvestLeft.jpg';
 import harvestRight from "./images/harvestRight.jpg";
@@ -73,7 +68,6 @@ const processes = [
 ];
 
 const Process = () => {
-
   return (
     <Wrapper id="process" maxWidth={"800px"}>
       <StyledH1 colorIsGrey={true} centered={true}> Our Process </StyledH1>

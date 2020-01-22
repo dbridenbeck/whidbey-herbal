@@ -29,11 +29,11 @@ const ExploreShopLink = styled(Link)`
   margin: 30px auto 0 auto;
   padding: 5px;
   color: #e3be42;
+  border: 1px solid #e3be42;
+  border-radius: 10px;
   text-align: center;
   font-size: 1em;
   font-weight: normal;
-  border: 1px solid #e3be42;
-  border-radius: 10px;
   text-decoration: none;
   &:hover {
     background-color: #e3be42;
@@ -58,7 +58,6 @@ const Products = ({products, title}) => {
     <ProductsWrapper>
       <ProductsTitle> {title} </ProductsTitle>
       <ProductsContainer>
-        {/* only display products that are availble for sale */}
         {products
           .filter(product => product.availableForSale)
           .map(product => (
@@ -75,7 +74,8 @@ const mapStateToProps = ( {products} ) => ({
 });
 
 Products.propTypes = {
-  products: PropTypes.array
+  products: PropTypes.array,
+  title: PropTypes.string
 }
 
 export default connect(mapStateToProps)(Products);

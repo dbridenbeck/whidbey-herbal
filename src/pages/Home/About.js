@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from "styled-components";
-import { fluidText } from "../../utils/responsiveSCSS";
 import farmers from './images/farmers.jpg';
 import Wrapper from "../../SharedComponents/Wrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
@@ -25,8 +24,7 @@ const About = () => {
   return (
     <Wrapper id="about" maxWidth={"600px"}>
       <StyledH1 colorIsGrey={true} centered={true}>
-        {" "}
-        About the Farmers{" "}
+        About the Farmers
       </StyledH1>
       <FarmerIllustration
         src={`${farmers}`}

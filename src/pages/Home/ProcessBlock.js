@@ -8,10 +8,7 @@ import PropTypes from 'prop-types';
     width: 100%;
     /* Ternary deals with if process is flanked by two images or not */
     height: ${props => props.imgFlanked ? "120px" : "190px" };
-    margin-bottom: 30%;
-    &:last-child {
-      margin-bottom: 0;
-    }
+    margin-bottom: 200px;
   `;
   
   const Info = styled.div`
@@ -22,25 +19,23 @@ import PropTypes from 'prop-types';
     width: ${props => (props.processTitle === "DISTILL" ? "60%" : "42%")};
     margin-top: ${process.imgFlanked ? "2.25%" : "0"};
     z-index: 2;
-  `;
-  
-  const ProcessTitle = styled.h2`
-    margin: 5% 0 5px 0;
-    font-weight: normal;
-    font-size: 1.5em;
-    text-align: center;
-    color: #787878;
-  `;
-  
-  const Description = styled.p`
-    margin: 0 auto;
-    padding: 0;
-    font-size: 0.875em;
-    line-height: 1.5em;
-    text-align: center;
-    font-style: normal;
-    letter-spacing: 0.01em;
-    color: #787878;
+    .title {
+      margin: 5% 0 5px 0;
+      font-weight: normal;
+      font-size: 1.5em;
+      text-align: center;
+      color: #787878;
+    }
+    .description {
+      margin: 0 auto;
+      padding: 0;
+      font-size: 0.875em;
+      line-height: 1.5em;
+      text-align: center;
+      font-style: normal;
+      letter-spacing: 0.01em;
+      color: #787878;
+    }
   `;
   
   const FlankImgWrapper = styled.div`
@@ -72,37 +67,56 @@ import PropTypes from 'prop-types';
     z-index: 1;
   `;
 
-const ProcessBlock = ({process}) => {
-
+const ProcessBlock = ({
+  process: {
+    imgFlanked,
+    processTitle,
+    description,
+    imgLeft,
+    imgRight,
+    width,
+    height,
+    alt,
+    fullWidthImg
+  }
+}) => {
 return (
-  <ProcessContainer imgFlanked={process.imgFlanked}>
+  <ProcessContainer imgFlanked={imgFlanked}>
     <Info 
-      imgFlanked={process.imgFlanked}
-      processTitle={process.processTitle}
+      imgFlanked={imgFlanked}
+      processTitle={processTitle}
     >
-      <ProcessTitle>{process.processTitle}</ProcessTitle>
-      <Description>{process.description}</Description>
+      <h3 className="title">{processTitle}</h3>
+      <p className="description">{description}</p>
     </Info>
     {/* Render FlankImgWrapper if process is flanked by images, otherwise use FullWidthImg */}
-    {process.imgFlanked ? (
+    {imgFlanked ? (
       <FlankImgWrapper>
         <ImgLeft
-          src={`${process.imgLeft}`}
-          width={`${process.width}`}
-          height={`${process.height}`}
-          alt={`${process.alt}`}
+          src={`${imgLeft}`}
+          width={`${width}`}
+          height={`${height}`}
+          alt={`${alt}`}
         />
-        <ImgRight src={`${process.imgRight}`} />
+        <ImgRight src={`${imgRight}`} />
       </FlankImgWrapper>
     ) : (
-      <FullWidthImg src={`${process.fullWidthImg}`} />
+      <FullWidthImg src={`${fullWidthImg}`} />
     )}
   </ProcessContainer>
 );
 }
 
 ProcessBlock.propTypes = {
-  process: PropTypes.object,
-}
+  imgFlanked: PropTypes.bool,
+  processTitle: PropTypes.string,
+  description: PropTypes.string,
+  imgLeft: PropTypes.string,
+  imgRight: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  alt: PropTypes.string,
+  fullWidthImg: PropTypes.string
+};
 
 export default ProcessBlock;

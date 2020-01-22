@@ -89,7 +89,7 @@ export class Checkout extends Component {
   }
   
   createCheckoutButton = () => {
-    const { lineItems, checkoutId } = this.props;
+    const { lineItems, checkoutId, updateCheckoutId } = this.props;
     const lineItemsToAdd = lineItems.map(
       item => (
         {
@@ -100,10 +100,13 @@ export class Checkout extends Component {
     );
     const goToShopifyCheckout = () => {
       client.checkout
-        .addLineItems(checkoutId, lineItemsToAdd)
+        .create().then(checkout => {
+          updateCheckoutId(checkout.id)
+        })
+        .then(client.checkout.addLineItems(checkoutId, lineItemsToAdd)
         .then(checkout => {
-          window.location.href = checkout.webUrl
-      })
+          window.open(checkout.webUrl);
+      }))
     };
     return (
       <CheckoutButton className="checkout" onClick={(goToShopifyCheckout)}>

@@ -11,9 +11,24 @@ const WelcomeWrapper = styled.div`
   @media ${device.largeScreen} {
     max-width: 1000px;
   }
+  h1 {
+    display: inline-block;
+    margin: 0;
+    color: #e3be42;
+    font-size: 1.625em;
+    font-weight: normal;
+  }
+  p {
+    font-size: 0.875em;
+    line-height: 1.5em;
+    margin-top: -5px;
+    font-style: normal;
+    font-weight: normal;
+    color: #787878;
+  }
 `;
 
-const FarmWithLogo = styled.div`
+const FarmAndLogoContainer = styled.div`
   position: relative;
   width: 100%;
   max-height: 900px;
@@ -34,35 +49,10 @@ const FarmIllustration = styled.img`
   width: 100%;
 `;
 
-const TextBlock = styled.div`
-  display: block;
-  position: relative;
-  margin-top: -5%;
-`;
-
-const WhidbeyHeader = styled.h1`
-  display: inline-block;
-  margin: 0;
-  color: #e3be42;
-  font-size: 1.625em;
-  font-weight: normal;
-`;
-
-const IllustrationText = styled.p`
-  /* fluid typography to control line height and text size see utils/responsiveSCSS.js for details */
-  font-size: 0.875em;
-  line-height: 1.5em;
-  margin-top: -5px;
-  font-style: normal;
-  font-weight: normal;
-  color: #787878;
-`;
-
-const LogoIllustration = () => {
-
+const WelcomeSection = () => {
   return (
     <WelcomeWrapper id="home">
-      <FarmWithLogo>
+      <FarmAndLogoContainer>
         <Logo
           src={`${circleLogo}`}
           width="800"
@@ -70,17 +60,13 @@ const LogoIllustration = () => {
           alt="Whidbey Island Logo"
         />
         <FarmIllustration src={`${farm}`} />
-      </FarmWithLogo>
-      <TextBlock>
-        <WhidbeyHeader>Whidbey Herbal</WhidbeyHeader>
-        <IllustrationText>
-          Small-batch, handcrafted, seed to bottle.
-          <br />
-          Grown from the Heart of Whidbey Island.
-        </IllustrationText>
-      </TextBlock>
+      </FarmAndLogoContainer>
+      <h1>Whidbey Herbal</h1>
+      <p> Small-batch, handcrafted, seed to bottle. <br />
+        Grown from the Heart of Whidbey Island.
+      </p>
     </WelcomeWrapper>
   );
-}
+};
 
-export default LogoIllustration;
+export default WelcomeSection;

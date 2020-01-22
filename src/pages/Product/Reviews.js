@@ -24,57 +24,44 @@ const ReviewsWrapper = styled.div`
   display: block;
   width: 100%;
   margin: 25px auto 70px auto;
+  h2 {
+    margin: 0;
+    padding: 0;
+    color: #787878;
+    font-size: 1.5em;
+    font-weight: normal;
+  }
   @media ${device.tablet} {
-  margin: 25px auto;
-  width: 66%;
+    margin: 25px auto;
+    width: 66%;
   }
   @media ${device.laptop} {
-  margin: 90px auto;
+    margin: 90px auto;
   }
-`;
-
-const Title = styled.h2`
-  margin: 0;
-  padding: 0;
-  color: #787878;
-  font-size: 1.5em;
-  font-weight: normal;
 `;
 
 const ReviewContainer = styled.div`
   width: 100%;
   margin: 0 auto 30px auto;
-`;
-
-const ReviewText = styled.p`
-  display: inline;
-  font-style: italic;
-  font-size: 0.75em;
-  color: #787878;
-  @media ${device.laptop} {
-    font-size: 14px;
+  p {
+    display: inline;
+    font-style: italic;
+    font-size: 0.75em;
+    color: #787878;
+    @media ${device.laptop} {
+      font-size: 0.875em;
+    }
   }
 `;
 
-const ReviewName = styled.p`
-  display: inline;
-  font-size: 0.75em;
-  color: #787878;
-`;
-
 const Reviews = () => {
-
   return (
     <ReviewsWrapper>
-      <Title>Reviews</Title>
+      <h2>Reviews</h2>
       {reviewsList.map(review => (
         <ReviewContainer key={review.name}>
-          <ReviewText>
-            {review.text}
-          </ReviewText>
-          <ReviewName>
-            {" - " + review.name}
-          </ReviewName>
+          <p> {review.text} </p>
+          <p> {" - " + review.name} </p>
         </ReviewContainer>
       ))}
     </ReviewsWrapper>

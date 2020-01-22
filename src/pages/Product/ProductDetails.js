@@ -26,7 +26,7 @@ const ProductInfo = ({
 }) => {
   return (
     <ProductInfoWrapper>
-      <ProductImages selectedProduct={selectedProduct}/>
+      <ProductImages images={selectedProduct.images}/>
       <ProductDescription 
         selectedProduct={selectedProduct} 
         doesItemExist={doesItemExist}
@@ -37,7 +37,7 @@ const ProductInfo = ({
 
 ProductInfo.propTypes = {
   selectedProduct: PropTypes.object,
-  doesItemExist: PropTypes.number
+  doesItemExist: PropTypes.bool
 };
 
 export default ProductInfo;

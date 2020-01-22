@@ -22,19 +22,32 @@ const Product = ({
   const selectedProduct = selectProduct[0];
 
   // check if item exists in checkout already
-  const doesItemExist = checkout.lineItems.filter(
-    lineItem => lineItem.id === selectedProduct.id
-  );
+  const doesItemExist = () => {
+    const filterItems = checkout.lineItems
+      .filter(lineItem => lineItem.id === selectedProduct.id);
+    return (
+      filterItems.length > 0 ? true : false
+    )
+  }
 
+  const createProductDetails = () => {
+    const handleIfItemExists = doesItemExist();
+    return (
+      <div>
+        <ProductDetails
+          selectedProduct={selectedProduct}
+          doesItemExist={handleIfItemExists}
+        />
+        <Reviews />
+        <Products title={"More Products"} />
+      </div>
+    )
+  }
+  
   // begin component's return
   return (
-    <Wrapper maxWidth={""}>
-      <ProductDetails
-        selectedProduct={selectedProduct}
-        doesItemExist={doesItemExist.length}
-      />
-      <Reviews />
-      <Products title={"More Products"} />
+    <Wrapper>
+      {createProductDetails()}
     </Wrapper>
   );
 };

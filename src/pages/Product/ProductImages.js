@@ -47,9 +47,6 @@ const AltImage = styled.img`
   border: ${props =>
     props.isSelected ? "2px solid #e3be42" : "2px solid white"};
   border-radius: 10px;
-  :first-child {
-    ${props => (props.isSelected ? "2px solid #e3be42" : "2px solid white")};
-  }
   :hover {
     border: ${props =>
       props.isSelected ? "2px solid #e3be42" : "2px solid #DADADA"};
@@ -58,7 +55,7 @@ const AltImage = styled.img`
 
 // begin component
 const ProductImages = ({
-  selectedProduct,
+  images,
   heroImgSrc,
   heroImgId,
   handleHeroImg,
@@ -66,13 +63,20 @@ const ProductImages = ({
 
   // when clicked, AltImage updates state and sets heroImg's src to AltImage
   const createAltImage = image => {
-    const setHeroImg = () => handleHeroImg(image.node.src, image.node.id);
-    const isSelected = image.node.id === heroImgId;
+    const {
+      node: {
+        id, 
+        src, 
+        altText
+      }
+    } = image;
+    const setHeroImg = () => handleHeroImg(src, id);
+    const isSelected = id === heroImgId;
     return (
       <AltImage
-        key={image.node.id}
-        src={image.node.src}
-        alt={image.node.altText}
+        key={id}
+        src={src}
+        alt={altText}
         isSelected={isSelected}
         onClick={setHeroImg}
       />
@@ -84,19 +88,19 @@ const ProductImages = ({
     <ProductImagesWrapper>
       <HeroImage
         src={
-          heroImgSrc ? heroImgSrc : selectedProduct.images.edges[0].node.src
+          heroImgSrc ? heroImgSrc : images.edges[0].node.src
         }
         alt="Product Photo"
       />
       <AltImages>
-        {selectedProduct.images.edges.map(image => createAltImage(image))}
+        {images.edges.map(image => createAltImage(image))}
       </AltImages>
     </ProductImagesWrapper>
   );
 };
 
 ProductImages.propTypes = {
-  selectedProduct: PropTypes.object,
+  images: PropTypes.object,
   heroImgSrc: PropTypes.string,
   heroImgId: PropTypes.string,
   handleHeroImg: PropTypes.func

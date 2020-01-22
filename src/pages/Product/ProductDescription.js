@@ -42,8 +42,6 @@ const ProductDetailsWrapper = styled.div`
   }
 `;
 
-const AboutText = styled.p``;
-
 const CTABlock = styled.div`
   display: flex;
   flex-direction: row;
@@ -53,15 +51,22 @@ const CTABlock = styled.div`
   width: 100%;
   padding: 20px 0;
   border-bottom: 4px solid #e3be42;
-`;
-
-const Price = styled.p`
-  display: block;
-  width: 30%;
-  text-align: center;
-  font-size: 1.75em;
-  color: #787878;
-  font-weight: normal;
+  .price {
+    display: block;
+    width: 30%;
+    text-align: center;
+    font-size: 1.5em;
+    color: #787878;
+    font-weight: normal;
+    @media ${device.tablet} {
+      text-align: left;
+      width: 100%;
+    }
+    @media ${device.laptop} {
+      text-align: center;
+      width: 30%;
+    }
+  }
 `;
 
 const ShopifyHTML = styled.div`
@@ -71,26 +76,27 @@ const ShopifyHTML = styled.div`
 // begin component
 const ProductDetails = ({
   selectedProduct,
+  selectedProduct: {title, variants, descriptionHtml},
   doesItemExist,
   quantityButtonAmount,
   updateQuantityButton
 }) => {
+  
+  // handle null values for quantityButtonAmount
   const quantity = quantityButtonAmount === "" ? 0 : quantityButtonAmount;
-  console.log("what is quantity?: ", quantity);
 
   // begin component's return
   return (
       <ProductDetailsWrapper>
-        <StyledH1 colorIsGrey={false} centered={false}>{selectedProduct.title}</StyledH1>
+        <StyledH1 colorIsGrey={false} centered={false}>{title}</StyledH1>
         {/* TODO replace AboutText's content with metafield via shopify once I have it whitelisted via graphql admin api */}
-        <AboutText>
-          {" "}
+        <p>
           We are one of few distilleries creating Western Hemlock essential
           oil. When you smell it, you will understand why we had to have it in
-          our collection, and why it’s the Washington state tree!{" "}
-        </AboutText>
+          our collection, and why it’s the Washington state tree!
+        </p>
         <CTABlock>
-          <Price>${selectedProduct.variants.edges[0].node.price}</Price>
+          <span className="price">${variants.edges[0].node.price}</span>
           <QuantityButton
             selectedProduct={selectedProduct}
             labelTitle={"Quantity: "}
@@ -106,7 +112,7 @@ const ProductDetails = ({
         </CTABlock>
         <ShopifyHTML
           dangerouslySetInnerHTML={{
-            __html: selectedProduct.descriptionHtml
+            __html: descriptionHtml
           }}
         />
       </ProductDetailsWrapper>
@@ -115,7 +121,7 @@ const ProductDetails = ({
 
 ProductDetails.propTypes = {
   selectedProduct: PropTypes.object,
-doesItemExist: PropTypes.number,
+  doesItemExist: PropTypes.bool,
   quantityButtonAmount: PropTypes.number,
   updateQuantityButton: PropTypes.func
 };

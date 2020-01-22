@@ -84,7 +84,7 @@ BuyButton.propTypes = {
   updateItemQuantity: PropTypes.func,
   addLineItem: PropTypes.func,
   selectedProduct: PropTypes.object,
-  doesItemExist: PropTypes.number 
+  doesItemExist: PropTypes.bool 
 }
 
 const mapStateToProps = ({ checkout, products }) => ({

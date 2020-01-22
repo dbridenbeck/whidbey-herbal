@@ -3,25 +3,24 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { device } from "../../utils/devices";
 
-  const StoreName = styled.h2`
-    margin-bottom: 5px;
-    padding: 0;
-    font-weight: bold;
-    font-size: 1.125em;
-    letter-spacing: 0.01em;
-    color: #787878;
-    @media ${device.tablet} {
-      height: 35px;
-    }
-    `;
-
-  const StoreContainer = styled.div`
+const StoreContainer = styled.div`
       position: relative;
       flex-grow: 1;
       width: 40%;
       height: 75px;
       margin: 0 20px 20px 0;
-      &:hover ${StoreName} {
+      .storeTitle {
+        margin-bottom: 5px;
+        padding: 0;
+        font-weight: bold;
+        font-size: 1.125em;
+        letter-spacing: 0.01em;
+        color: #787878;
+      }
+      @media ${device.tablet} {
+        height: 35px;
+      }
+      &:hover .storeTitle {
         color: #e3be42;
       }
       @media ${device.tablet} {
@@ -40,18 +39,19 @@ import { device } from "../../utils/devices";
     color: #787878;
   `;
 
-const StoreBlock = ({store}) => {
+const StoreBlock = ({store: {storeName, address}}) => {
 
   return (
     <StoreContainer>
-      <StoreName>{store.storeName}</StoreName>
-      <StoreAddress>{store.address}</StoreAddress>
+      <h3 className="storeTitle">{storeName}</h3>
+      <StoreAddress>{address}</StoreAddress>
     </StoreContainer>
   );
 }
 
 StoreBlock.propTypes = {
-  store: PropTypes.object
+  storeName: PropTypes.string,
+  address: PropTypes.string,
 }
 
 export default StoreBlock;

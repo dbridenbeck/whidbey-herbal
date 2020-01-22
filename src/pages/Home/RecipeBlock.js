@@ -9,7 +9,13 @@ import { Link } from "react-router-dom";
     text-decoration: none;
   `;
 
-  const RecipeTitle = styled.h2`
+const RecipeContainer = styled.div`
+  position: relative;
+  margin: 0 0px 20px 0;
+  &:hover .recipeTitle {
+    color: #e3be42;
+  }
+  .recipeTitle {
     margin-bottom: 5px;
     padding: 0;
     font-weight: bold;
@@ -17,15 +23,17 @@ import { Link } from "react-router-dom";
     text-align: center;
     letter-spacing: 0.01em;
     color: #787878;
-    `;
-
-  const RecipeContainer = styled.div`
-      position: relative;
-      margin: 0 0px 20px 0;
-      &:hover ${RecipeTitle} {
-        color: #e3be42;
-      }
-    `;
+  }
+  .recipeText {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    font-size: 0.875em;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #787878;
+  }
+`;
 
   const RecipeImage = styled.img`
     display: block;
@@ -34,32 +42,36 @@ import { Link } from "react-router-dom";
     margin: 0 auto 20px auto;
     border-radius: 10px;
   `;
-  
-  const RecipeText = styled.p`
-    margin: 0;
-    padding: 0;
-    font-weight: normal;
-    font-size: 0.875em;
-    text-align: center;
-    letter-spacing: 0.01em;
-    color: #787878;
-  `;
 
-const RecipeBlock = ({recipe}) => {
+const RecipeBlock = ({
+  recipe: {
+    node: {
+      title,
+      handle,
+      excerpt,
+      image: {
+        originalSrc
+      }
+    }
+  }
+}) => {
 
   return (
-    <RecipeLink to={`/recipe/${recipe.node.handle}`}>
-      <RecipeContainer recipeName={recipe.node.title}>
-        <RecipeImage src={`${recipe.node.image.originalSrc}`} />
-        <RecipeTitle>{recipe.node.title}</RecipeTitle>
-        <RecipeText>{recipe.node.excerpt}</RecipeText>
+    <RecipeLink to={`/recipe/${handle}`}>
+      <RecipeContainer recipeName={title}>
+        <RecipeImage src={`${originalSrc}`} />
+        <h2 className="recipeTitle">{title}</h2>
+        <p className="recipeText">{excerpt}</p>
       </RecipeContainer>
     </RecipeLink>
   );
 }
 
 RecipeBlock.propTypes = {
-  recipe: PropTypes.object
+  title: PropTypes.string,
+  handle: PropTypes.string,
+  excerpt: PropTypes.string,
+  originalSrc: PropTypes.string,
 }
 
 export default RecipeBlock;

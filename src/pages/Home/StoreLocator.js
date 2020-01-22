@@ -7,19 +7,8 @@ import StoreBlock from "./StoreBlock";
 import GoogleMap from "./GoogleMap";
 
 import { device } from "../../utils/devices";
-import { fluidH1 } from "../../utils/responsiveSCSS";
 
-const ContainerTitle = styled.h1`
-  height: 50px;
-  margin: 20px auto;
-  font-weight: bold;
-  ${fluidH1}
-  text-align: center;
-  letter-spacing: 0.01em;
-  color: #787878;
-`;
-
-const StoreWrapper = styled.div`
+const LocationsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -69,14 +58,14 @@ const StoreLocator = () => {
       <StyledH1 colorIsGrey={true} centered={true}>
         Store Locator
       </StyledH1>
-      <StoreWrapper>
+      <LocationsWrapper>
         <StoreList>
           {stores.map(store => (
             <StoreBlock store={store} key={store.storeName} />
           ))}
         </StoreList>
         <GoogleMap />
-      </StoreWrapper>
+      </LocationsWrapper>
     </Wrapper>
   );
 }

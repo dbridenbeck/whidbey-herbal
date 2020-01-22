@@ -7,7 +7,7 @@ import StyledH1 from "../../SharedComponents/StyledH1";
 
 import RecipeBlock from './RecipeBlock';
 
-const RecipeWrapper = styled.div`
+const RecipeContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -22,11 +22,11 @@ const RecipeSection = ({articles}) => {
       <StyledH1 colorIsGrey={true} centered={true}>
         Recipes
       </StyledH1>
-      <RecipeWrapper>
+      <RecipeContainer>
         {articles.map(article => (
           <RecipeBlock recipe={article} key={article.node.id} />
         ))}
-      </RecipeWrapper>
+      </RecipeContainer>
     </Wrapper>
   );
 }

@@ -51,17 +51,23 @@ const Recipe = ({
   const selectRecipe = articles.filter(
     recipe => handle === recipe.node.handle
   );
-  const selectedRecipe = selectRecipe[0];
+  const {
+    node: {
+      title,
+      image: {originalSrc},
+      contentHtml
+    }
+  } = selectRecipe[0];
 
   // begin component's return
   return (
     <Wrapper>
-      <StyledH1 centered={false} colorIsGrey={false}>{selectedRecipe.node.title}</StyledH1>
+      <StyledH1 centered={false} colorIsGrey={false}>{title}</StyledH1>
       <RecipeContainer>
-        <RecipeImage src={selectedRecipe.node.image.originalSrc} />
+        <RecipeImage src={originalSrc} />
         <ShopifyHTML dangerouslySetInnerHTML=
         {{
-          __html: selectedRecipe.node.contentHtml
+          __html: contentHtml
         }}
         />
       </RecipeContainer>

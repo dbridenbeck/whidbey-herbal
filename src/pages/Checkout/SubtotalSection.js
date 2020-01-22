@@ -25,16 +25,18 @@ const SubtotalWrapper = styled.div`
   }
 `;
 
-const SubtotalSection = ({visibleCartSubtotal, createCheckoutButton}) =>
+const SubtotalSection = ({ calculatedCartSubtotal, createCheckoutButton }) => (
   <SubtotalWrapper>
     <div className="subtotalContainer">
-      <p className="subtotal"> <strong>Subtotal:</strong> ${visibleCartSubtotal} </p>  
-      <p className="shippingInfo">
-        Shipping & taxes calculated at checkout
+      <p className="subtotal">
+        {" "}
+        <strong>Subtotal:</strong> ${calculatedCartSubtotal}{" "}
       </p>
+      <p className="shippingInfo">Shipping & taxes calculated at checkout</p>
       {createCheckoutButton()}
     </div>
-  </SubtotalWrapper>          
+  </SubtotalWrapper>
+);          
 SubtotalSection.propTypes = {
   visibleCartSubtotal: PropTypes.number,
   createCheckoutButton: PropTypes.func

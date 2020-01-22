@@ -22,10 +22,10 @@ const LineItemHeadersWrapper = styled.div`
 
 const LineItemHeaders = () => 
   <LineItemHeadersWrapper>
-    <span class="product">Product</span>
-    <span class="sixthColumn">Price</span>
-    <span class="sixthColumn">Quantity</span>
-    <span class="sixthColumn">Total</span>
+    <span className="product">Product</span>
+    <span className="sixthColumn">Price</span>
+    <span className="sixthColumn">Quantity</span>
+    <span className="sixthColumn">Total</span>
   </LineItemHeadersWrapper>;
 
 export default LineItemHeaders;

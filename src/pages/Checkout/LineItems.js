@@ -2,10 +2,10 @@ import React from 'react';
 import LineItem from './LineItem';
 import PropTypes from "prop-types";
 
-const LineItems = ({checkout, createRemoveButton, createUpdateItemButton, removeLineItem}) => {
+const LineItems = ({items, createRemoveButton, createUpdateItemButton, removeLineItem}) => {
   return (
     <div>
-      {checkout.lineItems.map((lineItem, index) => {
+      {items.map((lineItem, index) => {
         return (
           <LineItem
             key={lineItem.id}

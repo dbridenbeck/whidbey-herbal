@@ -15,18 +15,22 @@ const LineItemWrapper = styled.div`
   height: 50px;
   width: 100%;
   color: #787878;
-  font-size: 1em;
+  font-size: 0.875em;
   border-top: 1px solid #C0C0C0;
+  .twelvethColumn {
+    display: block;
+    width: 8.37%;
+  }
+  .sixthColumn {
+    display: block;
+    width: 16.67%;
+  }
   :last-child {
     border-bottom: 2px solid #e3be42;
   }
   @media ${device.tablet} {
     height: 70px;
   }
-`;
-
-const ProductImgContainer = styled.div`
-  width: 8.37%;
 `;
 
 const ProductImg = styled.img`
@@ -39,22 +43,12 @@ const ProductImg = styled.img`
 
 const ProductTitleLink = styled(Link)`
   width: 33%;
-  font-size: 1.125;
   font-weight: normal;
   color: #e3be42;
   text-decoration: none;
   :hover {
     color: #787878;
   }
-`;
-
-const ProductPrice = styled.span`
-  width: 16.7%;
-`;
-
-const ProductTotal = styled.span`
-  width: 16.7%;
-  text-align: right;
 `;
 
 const LineItem = ({
@@ -71,20 +65,27 @@ const LineItem = ({
   return (
     <LineItemWrapper key={lineItem.id}>
       {createRemoveButton(lineItem.id, index)}
-      <ProductImgContainer>
+      <div className="twelvethColumn">
         <ProductImg src={lineItem.images.edges[0].node.src} />
-      </ProductImgContainer>
-      <ProductTitleLink to={`/product/${lineItem.handle}`} onClick={clearHeroImg}>
+      </div>
+      <ProductTitleLink
+        to={`/product/${lineItem.handle}`}
+        onClick={clearHeroImg}
+      >
         {lineItem.title}
       </ProductTitleLink>
-      <ProductPrice>${lineItem.variants.edges[0].node.price}</ProductPrice>
-      <QuantityButton
-        selectedProduct={lineItem}
-        quantity={lineItem.quantity}
-        shouldAddQuantities={false}
-        onChangeFunction={updateItemQuantity}
-      />
-      <ProductTotal>${total}</ProductTotal>
+      <span className="sixthColumn">
+        ${lineItem.variants.edges[0].node.price}
+      </span>
+      <div className="sixthColumn">
+        <QuantityButton
+          selectedProduct={lineItem}
+          quantity={lineItem.quantity}
+          shouldAddQuantities={false}
+          onChangeFunction={updateItemQuantity}
+        />
+      </div>
+      <span className="sixthColumn">${total}</span>
     </LineItemWrapper>
   );
 };

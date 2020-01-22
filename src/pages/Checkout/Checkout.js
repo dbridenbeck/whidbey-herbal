@@ -64,18 +64,13 @@ const StyledH2 = styled.h2`
 
 export class Checkout extends Component {
   componentDidMount() {
-    const { checkout, updateCheckoutId } = this.props;
+    const { checkoutId, updateCheckoutId } = this.props;
      // create the checkout if it doesn't already exist
-    if (!checkout.checkoutId) {
+    if (!checkoutId) {
       client.checkout.create().then(checkout => {
         updateCheckoutId(checkout.id)
       });
     }
-  }
-
-  removeItem = (id, index) => {
-    const { removeLineItem } = this.props;
-    removeLineItem(id, index);
   }
 
   createRemoveButton = (id, index) => {
@@ -94,9 +89,8 @@ export class Checkout extends Component {
   }
   
   createCheckoutButton = () => {
-    const { checkout } = this.props;
-    const checkoutId = checkout.checkoutId;
-    const lineItemsToAdd = checkout.lineItems.map(
+    const { lineItems, checkoutId } = this.props;
+    const lineItemsToAdd = lineItems.map(
       item => (
         {
           variantId: item.variants.edges[0].node.id,
@@ -104,15 +98,13 @@ export class Checkout extends Component {
         }
       )
     );
-
     const goToShopifyCheckout = () => {
       client.checkout
         .addLineItems(checkoutId, lineItemsToAdd)
         .then(checkout => {
           window.location.href = checkout.webUrl
       })
-    }
-    
+    };
     return (
       <CheckoutButton className="checkout" onClick={(goToShopifyCheckout)}>
         Proceed to Checkout
@@ -121,27 +113,31 @@ export class Checkout extends Component {
   }
 
   render() {
-    const { checkout, removeLineItem } = this.props;
-    const hasItems = (checkout.lineItems.length && checkout.lineItems.length > 0);
-    const calculateCartSubtotal = checkout.lineItems.map(lineItem => lineItem.quantity * lineItem.variants.edges[0].node.price)
-                          .reduce((cartSubtotal, currentItemSubtotal) => (currentItemSubtotal + cartSubtotal), 0)
-                          .toFixed(2);
-
-    const visibleCartSubtotal =
-      isNaN(calculateCartSubtotal) ? "0.00" : calculateCartSubtotal;
+    const { lineItems, removeLineItem } = this.props;
+    const hasItems = (lineItems.length && lineItems.length > 0);
+    const calculatedCartSubtotal = 
+      lineItems.map(lineItem => lineItem.quantity * lineItem.variants.edges[0].node.price)
+        .filter(Boolean)
+        .reduce((cartSubtotal, currentItemSubtotal) => (currentItemSubtotal + cartSubtotal), 0)
+        .toFixed(2);
 
     return (
       <Wrapper maxWidth={""}>
-        <StyledH1 colorIsGrey={false} centered={false}>Checkout</StyledH1>
+        <StyledH1 colorIsGrey={false} centered={false}>
+          Checkout
+        </StyledH1>
         {hasItems ? (
           <CheckoutContainer>
             <LineItemHeaders />
             <LineItems
-              checkout={checkout}
+              items={lineItems}
               createRemoveButton={this.createRemoveButton}
               removeLineItem={removeLineItem}
             />
-            <SubtotalSection visibleCartSubtotal={visibleCartSubtotal} createCheckoutButton={this.createCheckoutButton} />
+            <SubtotalSection
+              calculatedCartSubtotal={calculatedCartSubtotal}
+              createCheckoutButton={this.createCheckoutButton}
+            />
             <Products title="Continue Shopping" />
           </CheckoutContainer>
         ) : (
@@ -156,14 +152,16 @@ export class Checkout extends Component {
 };
 
 Checkout.propTypes = {
-  checkout: PropTypes.object,
+  lineItems: PropTypes.array,
+  checkoutId: PropTypes.string,
   removeLineItem: PropTypes.func,
   updateCheckoutId: PropTypes.func,
   updateItemQuantity: PropTypes.func,
 }
 
-const mapStateToProps = ( {checkout} ) => ({
-  checkout
+const mapStateToProps = ( {checkout: {lineItems, checkoutId}} ) => ({
+  lineItems,
+  checkoutId
 });
 
 const mapDispatchToProps = dispatch => ({

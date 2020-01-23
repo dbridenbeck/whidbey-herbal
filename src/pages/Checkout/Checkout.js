@@ -98,8 +98,12 @@ export class Checkout extends Component {
         }
       )
     );
+
     const goToShopifyCheckout = () => {
       client.checkout
+      // update checkoutId to ensure that a fresh checkout is used
+      // this avoids the edge case where a user checks out but doesn't finish
+      // and then returns to the store to update their cart and re-checkout
         .create().then(checkout => {
           updateCheckoutId(checkout.id)
         })

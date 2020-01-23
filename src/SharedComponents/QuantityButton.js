@@ -4,6 +4,7 @@ import styled from "styled-components";
 const Quantity = styled.form`
   font-size: 1em;
   flex: 1;
+  margin-top: 10px;
   color: #787878;
 `;
 
@@ -17,6 +18,16 @@ const StyledInput = styled.input`
   :focus {
     outline-width: 0;
   }
+  `;
+ const ExceededMaxQuantity = styled.span`
+    display: block;
+    opacity: ${props => props.quantity >= "20" ? "1" : "0"};
+    height: 10px;
+    min-width: 100px;
+    color: red;
+    font-style: italic;
+    font-size: 0.75em;
+    /* opacity: ${props => props.quantity > 20 ? "1" : "0"}; */
 `;
 
 const maxInputToTwenty = (event) => event.target.value > 20 ? 20 : event.target.value
@@ -38,6 +49,7 @@ const QuantityButton = ({quantity, selectedProduct, shouldAddQuantities, labelTi
           />
         </label>
       </Quantity>
+      <ExceededMaxQuantity quantity={quantity}>Limit 20 per order</ExceededMaxQuantity>
     </div>
   );
 };

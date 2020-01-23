@@ -1,6 +1,14 @@
 import React from 'react';
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import ExceededMaxQuantityWarning from './ExceededMaxQuantityWarning';
+
+const QuantityWrapper = styled.div`
+  align-self: flex-start;
+  padding-bottom: 5px;
+  /* border: 1px solid red; */
+`;
 
 const Quantity = styled.form`
   font-size: 1em;
@@ -23,9 +31,30 @@ const StyledInput = styled.input`
 
 const maxInputToTwenty = (event) => event.target.value > 20 ? 20 : event.target.value
 
-const QuantityButton = ({quantity, selectedProduct, shouldAddQuantities, labelTitle, onChangeFunction}) => {
+const QuantityButton = 
+({
+  lineItems,
+  quantity, 
+  selectedProduct, 
+  shouldAddQuantities, 
+  labelTitle, 
+  onChangeFunction,
+  location: {pathname}
+}) => {
+
+  const selectedLineItemQuantity = () => { 
+    if (lineItems) {
+      return lineItems
+              .filter(lineItem => lineItem.handle === selectedProduct.handle)
+              .reduce((total, lineItem) => lineItem.quantity, 0)
+    }
+}
+
+const buttonPlusProductQuantities = quantity + selectedLineItemQuantity();
+const quantityBasedOnRoute = pathname !== "/checkout" ? buttonPlusProductQuantities : quantity
+
   return (
-    <div>
+    <QuantityWrapper>
       <Quantity>
         <label>
           {labelTitle}
@@ -44,9 +73,18 @@ const QuantityButton = ({quantity, selectedProduct, shouldAddQuantities, labelTi
           />
         </label>
       </Quantity>
-      <ExceededMaxQuantityWarning buttonQuantity={quantity} maxQuantity={20} />
-    </div>
+      <ExceededMaxQuantityWarning
+        buttonQuantity={quantity}
+        maxQuantity={20}
+      >
+        Limit 20 per order
+      </ExceededMaxQuantityWarning>
+    </QuantityWrapper>
   );
 };
 
-export default QuantityButton;
+const mapStatetoProps = ({checkout: {lineItems}}) => ({
+  lineItems
+})
+
+export default connect(mapStatetoProps, null)(withRouter(QuantityButton));

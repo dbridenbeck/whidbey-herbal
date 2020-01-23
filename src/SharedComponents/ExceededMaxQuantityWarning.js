@@ -4,21 +4,24 @@ import styled from "styled-components";
  const ExceededMaxQuantity = styled.span`
     display: block;
     opacity: ${props => props.buttonQuantity >= props.maxQuantity ? "1" : "0"};
-    height: 10px;
     min-width: 100px;
+    max-width: 150px;
+    height: 0px;
+    /* margin-top: 5px; */
     color: red;
     font-style: italic;
     font-size: 0.75em;
-    /* opacity: ${props => (props.quantity > 20 ? "1" : "0")}; */
+    line-height: 1.1em;
 `;
 
-const ExceededMaxQuantityWarning = ({buttonQuantity, maxQuantity}) => {
+const ExceededMaxQuantityWarning = ({buttonQuantity, maxQuantity, children}) => {
   return (
       <ExceededMaxQuantity 
         buttonQuantity={buttonQuantity}
         maxQuantity={maxQuantity}
       >
-        Limit {maxQuantity} per order</ExceededMaxQuantity>
+      {children}
+      </ExceededMaxQuantity>
   );
 };
 

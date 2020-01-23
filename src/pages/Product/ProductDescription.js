@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import QuantityButton from "../../SharedComponents/QuantityButton";
-import BuyButton from "../../SharedComponents/BuyButton";
+import BuyButton from "./BuyButton";
 import StyledH1 from "../../SharedComponents/StyledH1";
 
 import { device } from "../../utils/devices";
@@ -47,9 +47,9 @@ const CTABlock = styled.div`
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: baseline;
   width: 100%;
-  padding: 20px 0;
+  padding: 20px 0 35px 0;
   border-bottom: 4px solid #e3be42;
   .price {
     display: block;
@@ -108,6 +108,7 @@ const ProductDetails = ({
             selectedProduct={selectedProduct}
             quantity={quantity}
             doesItemExist={doesItemExist}
+            maxQuantity={20}
           />
         </CTABlock>
         <ShopifyHTML

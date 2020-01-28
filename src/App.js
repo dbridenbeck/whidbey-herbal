@@ -13,8 +13,9 @@ import "./index.css";
 const App = () => {
     
   const { location } = useContext(__RouterContext);
-  // set y position to top after transition
-  const [, setY] = useSpring(() => ({ y: 0 }))
+  // set y position to top after transition, duration set just under the value in navlinks' setInterval
+  // this allows the homepage hashlinks to scroll
+  const [, setY] = useSpring(() => ({config: { duration: 399 }, y: 0 }))
   
   // react spring transition for route switching
   const transitions = useTransition(location, location => location.pathname, {
@@ -23,12 +24,12 @@ const App = () => {
       // first, scroll to top
       await setY({
         y: 0,
-        reset: false,
+        reset: true,
         from: { y: window.scrollY },
-        onFrame: props => window.scroll(0, props.y)
+        onFrame: props => window.scroll(0, props.y),
       });
       // then move right off the screen
-      await next({ opacity: 0, transform: "translate(100%, 0)" })
+      await next({ opacity: 0, transform: "translate(100%, 0)"})
     },
     from: { opacity: 0, transform: "translate(0%, 0)" }
   });

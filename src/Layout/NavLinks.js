@@ -70,7 +70,7 @@ const links = [
       links.map(link => 
         <StyledNavLinkContainer key={link.name}>
           <StyledNavLink 
-            scroll={el => setTimeout((() => el.scrollIntoView({behavior: 'smooth'})), 250)} 
+            scroll={el => setTimeout((() => el.scrollIntoView({behavior: 'smooth'})), 400)} 
             to={link.destination}
             onClick={handleClearBurger}
           >

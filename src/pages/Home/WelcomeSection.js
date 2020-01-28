@@ -5,6 +5,7 @@ import farm from "./images/farm-no-lines.jpg";
 import circleLogo from "./images/circle-logo.png";
 
 const WelcomeWrapper = styled.div`
+  position: relative;
   width: 100%;
   max-width: 650px;
   margin: 0px auto 0px auto;

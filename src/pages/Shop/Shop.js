@@ -1,15 +1,17 @@
 import React from "react";
 import Products from '../../SharedComponents/Products';
-import Wrapper from "../../SharedComponents/Wrapper";
+import PageWrapper from "../../SharedComponents/PageWrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
+import Footer from "../../SharedComponents/Footer";
 
 const Shop = () => {
 
   return (
-    <Wrapper>
+    <PageWrapper>
       <StyledH1 centered={false} colorIsGrey={false}>Shop</StyledH1>
       <Products title={''} />
-    </Wrapper>
+      <Footer />
+    </PageWrapper>
   );
 };
 

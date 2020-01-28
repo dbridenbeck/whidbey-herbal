@@ -6,7 +6,8 @@ import styled from "styled-components";
 import { device } from "../../utils/devices";
 
 import Products from '../../SharedComponents/Products';
-import Wrapper from '../../SharedComponents/Wrapper';
+import Footer from "../../SharedComponents/Footer";
+import PageWrapper from '../../SharedComponents/PageWrapper';
 import StyledH1 from '../../SharedComponents/StyledH1';
 
 // Begin Styled Components
@@ -61,7 +62,7 @@ const Recipe = ({
 
   // begin component's return
   return (
-    <Wrapper>
+    <PageWrapper>
       <StyledH1 centered={false} colorIsGrey={false}>{title}</StyledH1>
       <RecipeContainer>
         <RecipeImage src={originalSrc} />
@@ -72,7 +73,8 @@ const Recipe = ({
         />
       </RecipeContainer>
       <Products title={"Explore the Shop"} />
-    </Wrapper>
+      <Footer />
+    </PageWrapper>
   );
 };
 

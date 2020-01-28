@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import farmers from './images/farmers.jpg';
-import Wrapper from "../../SharedComponents/Wrapper";
+import Wrapper from "../../SharedComponents/ComponentWrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
 
 const FarmerIllustration = styled.img`
@@ -22,7 +22,7 @@ const AboutText = styled.p`
 
 const About = () => {
   return (
-    <Wrapper id="about" maxWidth={"600px"}>
+    <Wrapper id="about" maxWidth={"600px"} positionRelative={true}>
       <StyledH1 colorIsGrey={true} centered={true}>
         About the Farmers
       </StyledH1>

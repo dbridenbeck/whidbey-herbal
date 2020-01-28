@@ -4,9 +4,17 @@ import PropTypes from "prop-types";
 import { client } from "../plugins/shopify.js";
 import * as CartActionCreators from "../state/actions/cart";
 import { fetchShopifyProductsAction, fetchShopifyArticlesAction } from '../state/fetchShopifyData';
-import Wrapper from '../SharedComponents/Wrapper';
+import styled from "styled-components";
 import Header from "./Header"
-import Footer from "./Footer"
+
+const MasterWrapper = styled.div`
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0px auto 120px auto;
+  padding: 50px 20px 0 20px;
+`;
 
 const Layout = ({
   children,
@@ -36,8 +44,7 @@ const Layout = ({
   return (
     <div>
       <Header />
-      <Wrapper maxWidth={"1200px"} id="home">{children}</Wrapper>
-      <Footer />
+      <MasterWrapper id="home">{children}</MasterWrapper>
     </div>
   );
 };

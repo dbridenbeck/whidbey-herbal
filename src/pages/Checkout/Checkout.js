@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Wrapper from "../../SharedComponents/Wrapper";
+import PageWrapper from "../../SharedComponents/PageWrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
 
 import { client } from "../../plugins/shopify.js";
@@ -11,6 +11,7 @@ import LineItems from './LineItems';
 import LineItemHeaders from './LineItemHeaders';
 import SubtotalSection from './SubtotalSection';
 import Products from '../../SharedComponents/Products';
+import Footer from "../../SharedComponents/Footer";
 
 const CheckoutContainer = styled.div`
   display: block;
@@ -129,7 +130,7 @@ export class Checkout extends Component {
         .toFixed(2);
 
     return (
-      <Wrapper maxWidth={""}>
+      <PageWrapper maxWidth={""}>
         <StyledH1 colorIsGrey={false} centered={false}>
           Checkout
         </StyledH1>
@@ -152,7 +153,8 @@ export class Checkout extends Component {
             <Products title={"Explore the Shop"} />
           </CheckoutContainer>
         )}
-      </Wrapper>
+        <Footer />
+      </PageWrapper>
     );
   }
 };

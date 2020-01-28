@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 
-import Wrapper from "../../SharedComponents/Wrapper";
+import Wrapper from "../../SharedComponents/ComponentWrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
 import StoreBlock from "./StoreBlock";
 import GoogleMap from "./GoogleMap";
@@ -54,7 +54,7 @@ const stores = [
 const StoreLocator = () => {
 
   return (
-    <Wrapper id="findstore">
+    <Wrapper id="findstore" positionRelative={true}>
       <StyledH1 colorIsGrey={true} centered={true}>
         Store Locator
       </StyledH1>

@@ -1,17 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import  { BrowserRouter as Router } from 'react-router-dom';
+import  { __RouterContext } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
+
 import * as serviceWorker from './serviceWorker';
 import { Reducer1 } from './state/App';
+import App from './App';
+import ScrollToTop from './SharedComponents/ScrollToTop'
 import { saveToLocalStorage, getFromLocalStorage } from "../src/state/localStorage";
 import thunk from "redux-thunk";
-import Home from '../src/pages/Home/Home.js';
-import Checkout from '../src/pages/Checkout/Checkout.js';
-import Layout from './Layout/Layout.js';
-import Product from '../src/pages/Product/Product.js';
-import Shop from '../src/pages/Shop/Shop.js';
-import Recipe from './pages/Recipe/Recipe.js';
 import "./index.css";
 
 const Root = () => {
@@ -36,18 +34,13 @@ const Root = () => {
   });
     
   return (
-  <Provider store={store}>
-    <Router>
-      <Layout>
-        <Route exact path="/" component={Home} />
-        <Route path="/checkout" component={Checkout} />
-        <Route path="/shop" component={Shop} />
-        <Route path="/product/:handle" component={Product}/>
-        <Route path="/recipe/:handle" component={Recipe}/>
-      </Layout>
-    </Router>
-  </Provider>
-  )
+    <Provider store={store}>
+      <Router>
+        <ScrollToTop />
+        <App />
+      </Router>
+    </Provider>
+  );
 }
 
 // If you want your app to work offline and load faster, you can change

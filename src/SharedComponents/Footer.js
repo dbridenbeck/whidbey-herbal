@@ -2,12 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import instagram from './images/instagram.png';
 import facebook from './images/facebook.png';
+import ComponentWrapper from "./ComponentWrapper";
 
   const FooterContainer = styled.div`
+    display: block;
     width: 80%;
     border-top: 1px solid #787878;
     margin: 130px auto 0 auto;
-    display: block;
   `;
 
   const SocialIconWrapper = styled.div`
@@ -37,23 +38,25 @@ import facebook from './images/facebook.png';
 const Footer = () => {
 
   return (
-    <FooterContainer>
-      <SocialIconWrapper>
-        <SocialIcon
-          src={`${instagram}`}
-          height="512"
-          width="512"
-          alt="Instagram logo"
-        />
-        <SocialIcon
-          src={`${facebook}`}
-          height="512"
-          width="512"
-          alt="Facebook logo"
-        />
-      </SocialIconWrapper>
-      <CopyrightText>© 2019, Whidbey Herbal</CopyrightText>
-    </FooterContainer>
+    <ComponentWrapper>
+      <FooterContainer>
+        <SocialIconWrapper>
+          <SocialIcon
+            src={`${instagram}`}
+            height="512"
+            width="512"
+            alt="Instagram logo"
+          />
+          <SocialIcon
+            src={`${facebook}`}
+            height="512"
+            width="512"
+            alt="Facebook logo"
+          />
+        </SocialIconWrapper>
+        <CopyrightText>© 2019, Whidbey Herbal</CopyrightText>
+      </FooterContainer>
+    </ComponentWrapper>
   );
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Wrapper from "../../SharedComponents/Wrapper";
+import Wrapper from "../../SharedComponents/ComponentWrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
 import ProcessBlock from './ProcessBlock';
 
@@ -69,8 +69,11 @@ const processes = [
 
 const Process = () => {
   return (
-    <Wrapper id="process" maxWidth={"800px"}>
-      <StyledH1 colorIsGrey={true} centered={true}> Our Process </StyledH1>
+    <Wrapper id="process" maxWidth={"800px"} positionRelative={true}>
+      <StyledH1 colorIsGrey={true} centered={true}>
+        {" "}
+        Our Process{" "}
+      </StyledH1>
       {processes.map(process => (
         <ProcessBlock process={process} key={process.processTitle} />
       ))}

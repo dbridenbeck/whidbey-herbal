@@ -75,14 +75,10 @@ export class BuyButton extends Component {
         return 0;
       }
     }
-
-    console.log("what is calculateLineItemQuantity", calculateLineItemQuantity());
     
     const lineItemPlusQuantityButton = (parseInt(quantity, 10) + parseInt(calculateLineItemQuantity(), 10));
     const quantityAllowed = maxQuantity - parseInt(calculateLineItemQuantity(), 10);
-
     const exceededMaxQuantity = lineItemPlusQuantityButton > maxQuantity;
-    console.log("what is quantityAllowed", quantityAllowed);
 
     if (exceededMaxQuantity) {
       return (

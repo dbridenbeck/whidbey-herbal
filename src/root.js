@@ -7,7 +7,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import * as serviceWorker from './serviceWorker';
 import { Reducer1 } from './state/App';
 import App from './App';
-import ScrollToTop from './SharedComponents/ScrollToTop'
 import { saveToLocalStorage, getFromLocalStorage } from "../src/state/localStorage";
 import thunk from "redux-thunk";
 import "./index.css";
@@ -36,7 +35,6 @@ const Root = () => {
   return (
     <Provider store={store}>
       <Router>
-        <ScrollToTop />
         <App />
       </Router>
     </Provider>

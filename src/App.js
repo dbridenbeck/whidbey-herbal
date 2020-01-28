@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import  { Switch, Route } from 'react-router-dom';
 import  { __RouterContext } from 'react-router-dom';
-import { useTransition, animated, useSpring } from 'react-spring';
+import { useTransition, animated, useSpring, config } from 'react-spring';
 import Home from './pages/Home/Home.js';
 import Checkout from './pages/Checkout/Checkout.js';
 import Layout from './Layout/Layout.js';
@@ -13,23 +13,22 @@ import "./index.css";
 const App = () => {
     
   const { location } = useContext(__RouterContext);
-
-  console.log("location is: ", location)
-
+  // set y position to top after transition
   const [, setY] = useSpring(() => ({ y: 0 }))
-
+  
+  // react spring transition for route switching
   const transitions = useTransition(location, location => location.pathname, {
     enter: { opacity: 1, transform: "translate(0%, 0)" },
     leave: location => async (next, cancel) => {
-      if (location.pathname === "/") {
-        await setY({
-          y: 0,
-          reset: true,
-          from: { y: window.scrollY },
-          onFrame: props => window.scroll(0, props.y)
-        })
-      }
-      await next({ opacity: 0, transform: "translate(100%, 0)" });
+      // first, scroll to top
+      await setY({
+        y: 0,
+        reset: false,
+        from: { y: window.scrollY },
+        onFrame: props => window.scroll(0, props.y)
+      });
+      // then move right off the screen
+      await next({ opacity: 0, transform: "translate(100%, 0)" })
     },
     from: { opacity: 0, transform: "translate(0%, 0)" }
   });

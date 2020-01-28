@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { client } from "../plugins/shopify.js";
 import * as CartActionCreators from "../state/actions/cart";
 import { fetchShopifyProductsAction, fetchShopifyArticlesAction } from '../state/fetchShopifyData';
+import ComponentWrapper from '../SharedComponents/ComponentWrapper';
 import styled from "styled-components";
 import Header from "./Header"
 
@@ -42,10 +43,10 @@ const Layout = ({
   }, []);
 
   return (
-    <div>
+    <MasterWrapper>
       <Header />
-      <MasterWrapper id="home">{children}</MasterWrapper>
-    </div>
+      <ComponentWrapper id="home" maxWidth={"1200px"}>{children}</ComponentWrapper>
+    </MasterWrapper>
   );
 };
 

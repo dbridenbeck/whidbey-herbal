@@ -1,6 +1,8 @@
 import { fetchPending, fetchSuccess, fetchError } from './actions/cart';
 import { client } from "../plugins/shopify.js";
 
+// Here's the actions for fetching shopify data
+
 // create query for shopify articles, used in getArticles
 const articlesQuery = client.graphQLClient.query(root => {
     root.addConnection("articles", { args: { first: 4 } }, article => {
@@ -71,18 +73,3 @@ export const fetchShopifyProductsAction = () => {
       });
   };
 };
-
-// export const fetchShopifyProductsAction = () => {
-//   return dispatch => {
-//     dispatch(fetchPending());
-//     client.product.fetchAll()
-//     .then(products => {
-//       // add products from shopify to redux
-//       dispatch(fetchSuccess("products", products));
-//       return products;
-//     })
-//     .catch(error => {
-//       dispatch(fetchError(error));
-//     });
-//   }
-// }

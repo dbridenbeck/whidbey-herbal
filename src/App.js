@@ -35,6 +35,7 @@ const App = () => {
   });
 
   return (
+    // Layout is called top level at App.js
     <Layout>
       {transitions.map(({ item, props, key }) => (
         <animated.div key={key} style={props}>

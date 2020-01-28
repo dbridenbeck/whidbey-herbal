@@ -34,6 +34,7 @@ const Layout = ({
       : console.log("checkout doesn't exist");
   };
 
+  // Inside Layout, I use useEffect to fetch shopify data
   useEffect(() => {
     // if checkout has been completed, clear checkout in state
     clearCheckoutIfCompleted();

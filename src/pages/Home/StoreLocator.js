@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Wrapper from "../../SharedComponents/ComponentWrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
 import StoreBlock from "./StoreBlock";
-import GoogleMapComponent from "./GoogleMap";
+import GoogleMapWrapper from "./GoogleMapWrapper";
 
 import { device } from "../../utils/devices";
 
@@ -64,7 +64,7 @@ const StoreLocator = () => {
             <StoreBlock store={store} key={store.storeName} />
           ))}
         </StoreList>
-        <GoogleMapComponent />
+        <GoogleMapWrapper />
       </LocationsWrapper>
     </Wrapper>
   );

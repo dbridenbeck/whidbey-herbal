@@ -19,7 +19,7 @@ const App = () => {
   
   // react spring transition for route switching
   const transitions = useTransition(location, location => location.pathname, {
-    enter: { opacity: 1, transform: "translate(0%, 0)" },
+    enter: { opacity: 1 },
     leave: location => async (next, cancel) => {
       // first, scroll to top
       await setY({
@@ -29,9 +29,9 @@ const App = () => {
         onFrame: props => window.scroll(0, props.y),
       });
       // then move right off the screen
-      await next({ opacity: 0, transform: "translate(100%, 0)"})
+      await next({ opacity: 0 })
     },
-    from: { opacity: 0, transform: "translate(0%, 0)" }
+    from: { opacity: 0 }
   });
 
   return (

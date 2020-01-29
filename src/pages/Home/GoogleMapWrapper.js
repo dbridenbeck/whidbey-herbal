@@ -53,8 +53,8 @@ class GoogleMapWrapper extends Component {
     this.setState({
       infoboxMessage: message,
       isInfoboxVisible: !this.state.isInfoboxVisible,
-      markerLang: lang + 0.006,
-      markerLat: lat - 0.0004
+      markerLang: lang + 0.516,
+      markerLat: lat
     })
   }
 

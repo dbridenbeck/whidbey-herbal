@@ -14,6 +14,9 @@ export const initialState = {
   heroImgSrc: "",
   heroImgId: "",
   quantityButtonAmount: 1,
+  googleMapInfoWindow: {
+    selectedStoreName: '',
+  }
 };
 
 export const Reducer1 = (state = initialState, action) => {
@@ -126,6 +129,13 @@ export const Reducer1 = (state = initialState, action) => {
       return {
         ...state,
         quantityButtonAmount: action.quantity
+      };
+    case CartActionTypes.SET_GOOGLE_MAP_INFO_WINDOW:
+      return {
+        ...state,
+        googleMapInfoWindow: {
+          selectedStoreName: action.selectedStoreName,
+        }
       };
     default:
       return state;

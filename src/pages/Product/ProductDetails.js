@@ -20,7 +20,7 @@ const ProductInfoWrapper = styled.div`
 `;
 
 // begin component
-const ProductInfo = ({
+const ProductDetails = ({
   selectedProduct,
   doesItemExist,
 }) => {
@@ -35,9 +35,9 @@ const ProductInfo = ({
   );
 };
 
-ProductInfo.propTypes = {
+ProductDetails.propTypes = {
   selectedProduct: PropTypes.object,
   doesItemExist: PropTypes.bool
 };
 
-export default ProductInfo;
+export default ProductDetails;

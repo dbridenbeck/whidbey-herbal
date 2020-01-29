@@ -8,6 +8,7 @@ body {
   border: 0;
   font-family: 'Sarala', sans-serif;
   font-size: 1em;
+  overflow-x: hidden;
 }
 
 @media (min-width: 768px) {

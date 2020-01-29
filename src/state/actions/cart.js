@@ -65,3 +65,8 @@ export const updateQuantityButton = (quantity) => ({
   type: CartActionTypes.UPDATE_QUANTITY_BUTTON,
   quantity
 });
+
+export const setGoogleMapInfoWindow = (selectedStoreName) => ({
+  type: CartActionTypes.SET_GOOGLE_MAP_INFO_WINDOW,
+  selectedStoreName
+});

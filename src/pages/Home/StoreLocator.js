@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from "styled-components";
-
 import Wrapper from "../../SharedComponents/ComponentWrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
 import StoreBlock from "./StoreBlock";

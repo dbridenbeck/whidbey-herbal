@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
+import * as CartActionCreators from "../../state/actions/cart";
+import { connect } from "react-redux";
+
 import PropTypes from "prop-types";
 import { device } from "../../utils/devices";
 
@@ -7,7 +10,6 @@ const StoreContainer = styled.div`
       position: relative;
       flex-grow: 1;
       width: 40%;
-      height: 75px;
       margin: 0 20px 20px 0;
       .storeTitle {
         margin-bottom: 5px;
@@ -39,10 +41,10 @@ const StoreContainer = styled.div`
     color: #787878;
   `;
 
-const StoreBlock = ({store: {storeName, address}}) => {
+const StoreBlock = ({setGoogleMapInfoWindow, store: {storeName, address}}) => {
 
   return (
-    <StoreContainer>
+    <StoreContainer onClick={() => setGoogleMapInfoWindow(storeName)}>
       <h3 className="storeTitle">{storeName}</h3>
       <StoreAddress>{address}</StoreAddress>
     </StoreContainer>
@@ -54,4 +56,9 @@ StoreBlock.propTypes = {
   address: PropTypes.string,
 }
 
-export default StoreBlock;
+const mapDispatchtoProps = dispatch => ({
+  setGoogleMapInfoWindow: (selectedStoreName) =>
+    dispatch(CartActionCreators.setGoogleMapInfoWindow(selectedStoreName))
+});
+
+export default connect(null, mapDispatchtoProps)(StoreBlock);

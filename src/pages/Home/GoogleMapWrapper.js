@@ -16,7 +16,7 @@ const Wrap = styled.div`
   width: 60%;
   max-width: 530px;
   position: relative;
-  height: auto;
+  height: 80%;
   @media ${device.tablet} {
     display: block;
   }

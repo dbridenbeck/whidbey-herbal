@@ -38,7 +38,10 @@ const GoogleMapComponentWithMarker = withScriptjs(
         
           {store.storeName === props.selectedStoreName && (
             <InfoWindow>
+              <>
                 <h4>{store.storeName}</h4>
+                <a href={store.googleMapUrl} target="_blank">See in Google Maps</a>
+              </>
             </InfoWindow>
           )}
         </Marker>

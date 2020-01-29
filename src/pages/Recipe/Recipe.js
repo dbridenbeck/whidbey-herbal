@@ -45,33 +45,50 @@ const Recipe = ({
   articles,
   match,
 }) => {
+  console.log("articles: ", articles)
+  
+  const createRecipe = () => {
+    const { handle } = match.params;
+  
+    // select the current product
+    const selectRecipe = articles.filter(
+      recipe => handle === recipe.node.handle
+    );
 
-  const { handle } = match.params;
+    const selectedRecipe = selectRecipe[0];
 
-  // select the current product
-  const selectRecipe = articles.filter(
-    recipe => handle === recipe.node.handle
-  );
-  const {
-    node: {
-      title,
-      image: {originalSrc},
-      contentHtml
+    // handle direct navigation to recipe page
+    if (selectedRecipe) {
+      const {
+        node: {
+          title,
+          image: {originalSrc},
+          contentHtml
+        }
+      } = selectedRecipe;
+  
+      return (
+        <>
+          <StyledH1 centered={false} colorIsGrey={false}>{title}</StyledH1>
+          <RecipeContainer>
+            <RecipeImage src={originalSrc} />
+            <ShopifyHTML dangerouslySetInnerHTML=
+            {{
+              __html: contentHtml
+            }}
+            />
+          </RecipeContainer>
+        </>
+      )
+    } else {
+      return null
     }
-  } = selectRecipe[0];
+  }
 
   // begin component's return
   return (
     <PageWrapper>
-      <StyledH1 centered={false} colorIsGrey={false}>{title}</StyledH1>
-      <RecipeContainer>
-        <RecipeImage src={originalSrc} />
-        <ShopifyHTML dangerouslySetInnerHTML=
-        {{
-          __html: contentHtml
-        }}
-        />
-      </RecipeContainer>
+      {createRecipe()}
       <Products title={"Explore the Shop"} />
       <Footer />
     </PageWrapper>

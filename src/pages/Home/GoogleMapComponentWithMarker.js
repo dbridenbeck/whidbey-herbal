@@ -10,16 +10,17 @@ const GoogleMapComponentWithMarker = withScriptjs(
     <GoogleMap
       defaultZoom={6}
       defaultCenter={{
-        lat: 47.041318, // latitude for the center of the map
-        lng: -122.444056 // longitude for the center of the map
+        lat: 47.041318,
+        lng: -122.444056
       }}
       defaultOptions={{
-        disableDefaultUI: true, // disable default map UI
-        draggable: true, // make map draggable
-        keyboardShortcuts: false, // disable keyboard shortcuts
-        scaleControl: true, // allow scale controle
-        scrollwheel: true, // allow scroll wheel
-        styles: styles // change default map styles
+        disableDefaultUI: true, 
+        zoomControl: true,
+        draggable: true,
+        keyboardShortcuts: false,
+        scaleControl: true, 
+        scrollwheel: true, 
+        styles: styles
       }}
     >
       {stores.map(store => (
@@ -29,24 +30,15 @@ const GoogleMapComponentWithMarker = withScriptjs(
             lat: store.lat,
             lng: store.lng
           }}
-          // convert onClick to a redux action that stores name and storeName to isInfoboxVisible
-          // then I need to change props.isInfoboxVisible to compare store.storeName with storeName stored in redux
-          // if true, switch isInfoboxVisible to true. or something...
-          onClick={(message, lang, lat) =>
-            props.handleMarkerClick(`${store.storeName}`, store.lat, store.lng)
+
+          onClick={(storeName) =>
+            props.handleMarkerClick(`${store.storeName}`)
           }
         >
         
-          {props.isInfoboxVisible && (
-            <InfoWindow
-              position={{
-                lat: props.infoboxPosY,
-                lng: props.infoboxPosX
-              }}
-            >
-              <div>
-                <h4>{props.infoboxMessage}</h4>
-              </div>
+          {store.storeName === props.selectedStoreName && (
+            <InfoWindow>
+                <h4>{store.storeName}</h4>
             </InfoWindow>
           )}
         </Marker>
@@ -55,6 +47,5 @@ const GoogleMapComponentWithMarker = withScriptjs(
     </GoogleMap>
   ))
 );
-
 
 export default GoogleMapComponentWithMarker;

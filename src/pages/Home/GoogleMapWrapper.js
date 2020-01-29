@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import * as CartActionCreators from "../../state/actions/cart";
 import { device } from "../../utils/devices";
 import mapFrame from "./images/mapFrame.jpg";
 import GoogleMapComponentWithMarker from "./GoogleMapComponentWithMarker";
 
+const GOOGLE_MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY;
+
+const mapURL = `https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${GOOGLE_MAPS_KEY}`
+
 const Wrap = styled.div`
   display: none;
+  width: 60%;
+  max-width: 530px;
+  position: relative;
+  height: auto;
   @media ${device.tablet} {
     display: block;
-    position: relative;
-    width: 60%;
-    height: auto;
   }
 `;
 
@@ -24,10 +32,6 @@ const MapContainer = styled.div`
   height: 80%;
   overflow: hidden;
   border-radius: 10px;
-  @media ${device.laptop} {
-    left: 15%;
-    width: 380px;
-  }
 `;
 
 const MapImg = styled.img`
@@ -44,8 +48,6 @@ class GoogleMapWrapper extends Component {
     this.state = {
       infoboxMessage: '',
       isInfoboxVisible: false,
-      markerLang: 0,
-      markerLat: 0
     }
   }
 
@@ -53,39 +55,44 @@ class GoogleMapWrapper extends Component {
     this.setState({
       infoboxMessage: message,
       isInfoboxVisible: !this.state.isInfoboxVisible,
-      markerLang: lang + 0.516,
-      markerLat: lat
-    })
-  }
-
-  handleInfoboxClick = () => {
-    this.setState({
-      isInfoboxVisible: false
     })
   }
 
   render() {
+    const { setGoogleMapInfoWindow, selectedStoreName } = this.props;
     return (
       <Wrap>
         <MapContainer>
           <GoogleMapComponentWithMarker
-            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDmIu2NlnSVprmtT1AP05Ajae0OhLxpXy0"
+            googleMapURL={mapURL}
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `100%` }} />}
             mapElement={<div style={{ height: `100%` }} />}
             isInfoboxVisible={this.state.isInfoboxVisible}
             infoboxMessage={this.state.infoboxMessage}
-            handleInfoboxClick={this.handleInfoboxClick}
-            handleMarkerClick={this.handleMarkerClick}
-            infoboxPosY={this.state.markerLang}
-            infoboxPosX={this.state.markerLat}
+            handleMarkerClick={setGoogleMapInfoWindow}
+            selectedStoreName={selectedStoreName}
           />
         </MapContainer>
-  
+
         <MapImg src={`${mapFrame}`} />
       </Wrap>
     );
   }
 }
 
-export default GoogleMapWrapper;
+GoogleMapWrapper.propTypes = {
+  selectedStoreName: PropTypes.string,
+  googleMapInfoWindow: PropTypes.func
+};
+
+const mapStatetoProps = ({ googleMapInfoWindow: { selectedStoreName } }) => ({
+  selectedStoreName
+});
+
+const mapDispatchtoProps = dispatch => ({
+  setGoogleMapInfoWindow: selectedStoreName =>
+    dispatch(CartActionCreators.setGoogleMapInfoWindow(selectedStoreName))
+});
+
+export default connect(mapStatetoProps, mapDispatchtoProps)(GoogleMapWrapper);

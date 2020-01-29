@@ -33,7 +33,7 @@ const Product = ({
 
   const createProductDetails = () => {
     const handleIfItemExists = doesItemExist();
-    return (
+    return selectedProduct ? (
       <div>
         <ProductDetails
           selectedProduct={selectedProduct}
@@ -42,7 +42,7 @@ const Product = ({
         <Reviews />
         <Products title={"More Products"} />
       </div>
-    )
+    ) : null
   }
   
   // begin component's return

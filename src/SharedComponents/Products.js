@@ -77,4 +77,4 @@ Products.propTypes = {
   title: PropTypes.string
 }
 
-export default connect(mapStateToProps, null)(Products);
+export default connect(mapStateToProps)(Products);

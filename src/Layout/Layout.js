@@ -22,7 +22,8 @@ const Layout = ({
   clearCheckoutInState,
   fetchShopifyProducts,
   fetchShopifyArticles,
-  checkoutId
+  checkoutId,
+  products
 }) => {
   const clearCheckoutIfCompleted = () => {
     checkoutId
@@ -34,14 +35,15 @@ const Layout = ({
       : console.log("checkout doesn't exist");
   };
 
-  // Inside Layout, I use useEffect to fetch shopify data
-  useEffect(() => {
+  // if products haven't been fetched, fetch them
+  if (!products.length) {
     // if checkout has been completed, clear checkout in state
     clearCheckoutIfCompleted();
     // populate state with products and articles from shopify
     fetchShopifyProducts();
     fetchShopifyArticles();
-  }, []);
+    console.log("this is firing!");
+  }
 
   return (
     <MasterWrapper>
@@ -58,8 +60,9 @@ Layout.propTypes = {
   fetchProducts: PropTypes.func,
 };
 
-const mapStateToProps = ( {checkout: {checkoutId}} ) => ({
-  checkoutId
+const mapStateToProps = ( {products, checkout: {checkoutId}} ) => ({
+  checkoutId,
+  products
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import  { Switch, Route } from 'react-router-dom';
+import  { Switch, Route, Redirect } from 'react-router-dom';
 import  { __RouterContext } from 'react-router-dom';
 import { useTransition, animated, useSpring, config } from 'react-spring';
 import Home from './pages/Home/Home.js';
@@ -44,7 +44,9 @@ const App = () => {
             <Route path="/checkout" component={Checkout} />
             <Route path="/shop" component={Shop} />
             <Route path="/product/:handle" component={Product} />
+            <Redirect from="/product/" to="/shop" />
             <Route path="/recipe/:handle" component={Recipe} />
+            <Redirect from="/recipe/" to="/" />
           </Switch>
         </animated.div>
       ))}

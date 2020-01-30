@@ -76,7 +76,12 @@ const ShopifyHTML = styled.div`
 // begin component
 const ProductDetails = ({
   selectedProduct,
-  selectedProduct: {title, variants, descriptionHtml},
+  selectedProduct: {
+    title, 
+    variants, 
+    descriptionHtml,
+    metafields
+  },
   doesItemExist,
   quantityButtonAmount,
   updateQuantityButton
@@ -84,39 +89,42 @@ const ProductDetails = ({
   
   // handle null values for quantityButtonAmount
   const quantity = quantityButtonAmount === "" ? 0 : quantityButtonAmount;
-
+  console.log("what is metafields?: ", metafields)
   // begin component's return
   return (
-      <ProductDetailsWrapper>
-        <StyledH1 colorIsGrey={false} centered={false}>{title}</StyledH1>
-        {/* TODO replace AboutText's content with metafield via shopify once I have it whitelisted via graphql admin api */}
-        <p>
-          We are one of few distilleries creating Western Hemlock essential
-          oil. When you smell it, you will understand why we had to have it in
-          our collection, and why it’s the Washington state tree!
-        </p>
-        <CTABlock>
-          <span className="price">${variants.edges[0].node.price}</span>
-          <QuantityButton
-            selectedProduct={selectedProduct}
-            labelTitle={"Quantity: "}
-            quantity={quantityButtonAmount}
-            shouldAddQuantities={true}
-            onChangeFunction={updateQuantityButton}
-          />
-          <BuyButton
-            selectedProduct={selectedProduct}
-            quantity={quantity}
-            doesItemExist={doesItemExist}
-            maxQuantity={20}
-          />
-        </CTABlock>
-        <ShopifyHTML
-          dangerouslySetInnerHTML={{
-            __html: descriptionHtml
-          }}
+    <ProductDetailsWrapper>
+      <StyledH1 colorIsGrey={false} centered={false}>
+        {title}
+      </StyledH1>
+      {/* TODO replace AboutText's content with metafield via shopify once I have it whitelisted via graphql admin api */}
+      <ShopifyHTML
+        dangerouslySetInnerHTML={{
+          __html: metafields.edges[0].node.value
+        }}
+      />
+      <CTABlock>
+        <span className="price">${variants.edges[0].node.price}</span>
+        <QuantityButton
+          selectedProduct={selectedProduct}
+          labelTitle={"Quantity: "}
+          quantity={quantityButtonAmount}
+          shouldAddQuantities={true}
+          onChangeFunction={updateQuantityButton}
+          maxQuantity={parseInt(metafields.edges[1].node.value)}
         />
-      </ProductDetailsWrapper>
+        <BuyButton
+          selectedProduct={selectedProduct}
+          quantity={quantity}
+          doesItemExist={doesItemExist}
+          maxQuantity={parseInt(metafields.edges[1].node.value)}
+        />
+      </CTABlock>
+      <ShopifyHTML
+        dangerouslySetInnerHTML={{
+          __html: descriptionHtml
+        }}
+      />
+    </ProductDetailsWrapper>
   );
 };
 

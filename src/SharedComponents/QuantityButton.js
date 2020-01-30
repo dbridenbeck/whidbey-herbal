@@ -27,7 +27,7 @@ const StyledInput = styled.input`
   }
   `;
 
-const maxInputToTwenty = (event) => event.target.value > 20 ? 20 : event.target.value
+const maxInputToTwenty = (event, maxQuantity) => event.target.value > maxQuantity ? maxQuantity : event.target.value
 
 const QuantityButton = 
 ({
@@ -36,6 +36,7 @@ const QuantityButton =
   shouldAddQuantities, 
   labelTitle, 
   onChangeFunction,
+  maxQuantity
 }) => {
 
   return (
@@ -50,7 +51,7 @@ const QuantityButton =
             max="20"
             onChange={event => {
               onChangeFunction(
-                maxInputToTwenty(event),
+                maxInputToTwenty(event, maxQuantity),
                 shouldAddQuantities,
                 selectedProduct
               );
@@ -60,9 +61,9 @@ const QuantityButton =
       </Quantity>
       <ExceededMaxQuantityWarning
         buttonQuantity={quantity}
-        maxQuantity={20}
+        maxQuantity={maxQuantity}
       >
-        Limit 20 per order
+        Limit {maxQuantity} per order
       </ExceededMaxQuantityWarning>
     </QuantityWrapper>
   );

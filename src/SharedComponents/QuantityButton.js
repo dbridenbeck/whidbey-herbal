@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from "styled-components";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import ExceededMaxQuantityWarning from './ExceededMaxQuantityWarning';
 
 const QuantityWrapper = styled.div`
@@ -33,7 +31,6 @@ const maxInputToTwenty = (event) => event.target.value > 20 ? 20 : event.target.
 
 const QuantityButton = 
 ({
-  lineItems,
   quantity, 
   selectedProduct, 
   shouldAddQuantities, 
@@ -71,8 +68,5 @@ const QuantityButton =
   );
 };
 
-const mapStatetoProps = ({checkout: {lineItems}}) => ({
-  lineItems
-})
 
-export default connect(mapStatetoProps, null)(withRouter(QuantityButton));
+export default QuantityButton;

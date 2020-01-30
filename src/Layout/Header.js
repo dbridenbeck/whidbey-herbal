@@ -157,7 +157,6 @@ export class Header extends PureComponent {
   }
 
   render() {
-    console.log("header is rendering!")
   return (
     <>
       {this.createNavBar()}

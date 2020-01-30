@@ -32,7 +32,7 @@ export const Reducer1 = (state = initialState, action) => {
             ...state.checkout.lineItems,
             { 
               ...action.product, 
-              quantity: action.quantity 
+              quantity: parseInt(action.quantity)
             }
           ]
         }

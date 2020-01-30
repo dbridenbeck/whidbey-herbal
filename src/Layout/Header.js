@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { withRouter } from "react-router-dom";
 import { NavHashLink as NavLink } from "react-router-hash-link";
 import { connect } from "react-redux";
@@ -85,44 +85,54 @@ const HomeLink = styled.img`
   margin: 8px 10% 0 10%;
 `;
 
-export class Header extends Component {
+export class Header extends PureComponent {
 // Using component state to control show/hide behavior for header
   constructor(props) {
     super(props);
     this.state = {
       show: false,
-      scrollPos: 50
     };
     this.handleScroll = this.handleScroll.bind(this);
+    this.createCheckoutLink = this.createCheckoutLink.bind(this);
+    this.createNavBar = this.createNavBar.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
   }
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  }
-
+  
   handleScroll() {
-    this.setState({
-      scrollPos: document.body.getBoundingClientRect().top,
-      show: document.body.getBoundingClientRect().top < 0
-    });
+    if (
+      this.state.show === false ||
+      document.body.getBoundingClientRect().top === 0
+    ) {
+      this.setState({
+        show: document.body.getBoundingClientRect().top < -50
+      });
+    }
   }
   
-  render() {
-  const { burgerToggled, lineItems } = this.props
-  const itemsInCart = () => {
-    if (lineItems.length) {
-      return lineItems
-              .map(lineItem => lineItem.quantity)
-              .filter(Boolean)
-              .reduce((itemTotal, quantity) => (parseFloat(quantity, 2) + itemTotal ), 0)
-    }
-  };
+  createCheckoutLink = () => {
+    const { lineItems } = this.props
+    const itemsInCart = () => {
+      if (lineItems.length) {
+        return lineItems
+                .map(lineItem => lineItem.quantity)
+                .filter(Boolean)
+                .reduce((itemTotal, quantity) => (parseFloat(quantity, 2) + itemTotal ), 0)
+      }
+    };
+    return (
+    <CheckoutLink to={`/checkout`} itemsincart={itemsInCart()}>
+      <div className="item-counter">{itemsInCart()}</div>
+    </CheckoutLink>
+    )
+  }
 
-  return (
+  createNavBar = () => {
+    const { burgerToggled, lineItems } = this.props;
+    
+    return (
     <Navbar 
       className={this.state.show ? "active" : "hidden"}
       scrollPos={this.state.scrollPos}
@@ -141,10 +151,17 @@ export class Header extends Component {
       <NavPanel
         burgerToggled={burgerToggled}
       />
-      <CheckoutLink to={`/checkout`} itemsincart={itemsInCart()}>
-        <div className="item-counter">{itemsInCart()}</div>
-      </CheckoutLink>
+      {this.createCheckoutLink()}
     </Navbar>
+    )
+  }
+
+  render() {
+    console.log("header is rendering!")
+  return (
+    <>
+      {this.createNavBar()}
+    </>
     );
   }
 }

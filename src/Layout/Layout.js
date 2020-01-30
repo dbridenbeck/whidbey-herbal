@@ -42,7 +42,6 @@ const Layout = ({
     // populate state with products and articles from shopify
     fetchShopifyProducts();
     fetchShopifyArticles();
-    console.log("this is firing!");
   }
 
   return (
@@ -72,4 +71,4 @@ const mapDispatchToProps = dispatch => ({
   fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Layout));

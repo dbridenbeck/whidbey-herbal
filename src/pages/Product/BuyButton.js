@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import PropTypes from "prop-types";
@@ -35,18 +35,19 @@ const BuyButtonContainer = styled.button`
   }
 `;
 
-export class BuyButton extends Component {
+export class BuyButton extends PureComponent {
   // component state used to handle animation when button is clicked
   constructor(props) {
     super(props);
     this.state = {
       buyButtonClicked: false
     }
+    this.createBuyButton = this.createBuyButton.bind(this);
   }
 
 // create buy button
-  createBuyButton = (product, quantity, props ) => {
-    const { addLineItem, updateItemQuantity, doesItemExist, lineItems, maxQuantity } = props;
+  createBuyButton = () => {
+    const { addLineItem, updateItemQuantity, doesItemExist, lineItems, maxQuantity, selectedProduct, quantity } = this.props;
     const createAddtoCartTransition = () => {
       this.setState({
         buyButtonClicked: true
@@ -58,18 +59,18 @@ export class BuyButton extends Component {
 
     // onClick, button will either addItem or updateQuantity
     const addItem = () => {
-      addLineItem(product, quantity);
+      addLineItem(selectedProduct, quantity);
       createAddtoCartTransition();
     }
     const updateQuantity = () => {
-      updateItemQuantity(quantity, "add", product);
+      updateItemQuantity(quantity, "add", selectedProduct);
       createAddtoCartTransition();
     }
 
     const calculateLineItemQuantity = () => {      
       if (lineItems.length > 0) {
         return  lineItems
-                  .filter(lineItem => lineItem.handle === product.handle)
+                  .filter(lineItem => lineItem.handle === selectedProduct.handle)
                   .reduce((total, lineItem) => lineItem.quantity, 0)
       } else {
         return 0;
@@ -108,12 +109,10 @@ export class BuyButton extends Component {
     };
   }
 
-
   render() {
-    const {selectedProduct, quantity} = this.props;
     return (
       <div>
-        {this.createBuyButton(selectedProduct, quantity, this.props)}
+        {this.createBuyButton()}
       </div>
     )
   }

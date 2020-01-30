@@ -2,27 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import ComponentWrapper from "./ComponentWrapper";
 
 import Product from './Product';
 import { connect } from "react-redux";
-import { device } from "../utils/devices";
-
-const ProductsWrapper = styled.div`
-  display: block;
-  width: 100%;
-  max-width: 1000px;
-  margin: 70px auto 0 auto;
-  h2 {
-    margin: 0 0 5px 0px;
-    font-weight: normal;
-    font-size: 1.75em;
-    text-align: left;
-    color: #787878;
-    @media ${device.tablet} {
-      margin: 0 0 5px 50px;
-    }
-  }
-`;
 
 const ProductsContainer = styled.div`
   display: flex;
@@ -54,7 +37,7 @@ const ExploreShopLink = styled(Link)`
 const Products = ({products, title}) => {
 
   return (
-    <ProductsWrapper>
+    <ComponentWrapper>
       <h2> {title} </h2>
       <ProductsContainer>
         {products
@@ -64,7 +47,7 @@ const Products = ({products, title}) => {
           ))}
       </ProductsContainer>
       <ExploreShopLink to="/">Explore the Shop</ExploreShopLink>
-    </ProductsWrapper>
+    </ComponentWrapper>
   );
 };
 

@@ -5,7 +5,7 @@ const StyledWrapper = styled.div`
   display: block;
   position: absolute;
   width: 100%;
-  margin: 0px auto 120px auto;
+  margin: 0px auto 0px auto;
   padding: 50px 20px 0 20px;
 `;
 

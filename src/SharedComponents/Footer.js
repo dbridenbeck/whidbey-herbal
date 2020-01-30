@@ -6,9 +6,9 @@ import ComponentWrapper from "./ComponentWrapper";
 
   const FooterContainer = styled.div`
     display: block;
-    width: 80%;
+    width: 100%;
     border-top: 1px solid #787878;
-    margin: 130px auto 0 auto;
+    margin: 0px auto 0px auto;
   `;
 
   const SocialIconWrapper = styled.div`
@@ -38,7 +38,6 @@ import ComponentWrapper from "./ComponentWrapper";
 const Footer = () => {
 
   return (
-    <ComponentWrapper>
       <FooterContainer>
         <SocialIconWrapper>
           <SocialIcon
@@ -56,7 +55,6 @@ const Footer = () => {
         </SocialIconWrapper>
         <CopyrightText>© 2019, Whidbey Herbal</CopyrightText>
       </FooterContainer>
-    </ComponentWrapper>
   );
 }
 

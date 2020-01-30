@@ -83,6 +83,7 @@ const LineItem = ({
           quantity={lineItem.quantity}
           shouldAddQuantities={false}
           onChangeFunction={updateItemQuantity}
+          maxQuantity={parseInt(lineItem.metafields.edges[1].node.value)}
         />
       </div>
       <span className="sixthColumn">${total}</span>

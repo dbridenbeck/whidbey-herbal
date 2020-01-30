@@ -8,7 +8,7 @@ const WelcomeWrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 650px;
-  margin: 0px auto 0px auto;
+  margin: -50px auto 0px auto;
   @media ${device.largeScreen} {
     max-width: 1000px;
   }

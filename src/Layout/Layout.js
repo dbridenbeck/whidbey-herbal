@@ -14,7 +14,7 @@ const MasterWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0px auto 120px auto;
-  padding: 50px 20px 0 20px;
+  padding: 0px 20px 0 20px;
 `;
 
 const Layout = ({

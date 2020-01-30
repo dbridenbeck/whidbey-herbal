@@ -14,12 +14,12 @@ const GoogleMapComponentWithMarker = withScriptjs(
         lng: -122.444056
       }}
       defaultOptions={{
-        disableDefaultUI: true, 
+        disableDefaultUI: true,
         zoomControl: true,
         draggable: true,
         keyboardShortcuts: false,
-        scaleControl: true, 
-        scrollwheel: true, 
+        scaleControl: true,
+        scrollwheel: true,
         styles: styles
       }}
     >
@@ -30,23 +30,24 @@ const GoogleMapComponentWithMarker = withScriptjs(
             lat: store.lat,
             lng: store.lng
           }}
-
-          onClick={(storeName) =>
-            props.handleMarkerClick(`${store.storeName}`)
-          }
+          onClick={storeName => props.handleMarkerClick(`${store.storeName}`)}
         >
-        
           {store.storeName === props.selectedStoreName && (
             <InfoWindow>
               <>
                 <h4>{store.storeName}</h4>
-                <a href={store.googleMapUrl} target="_blank">See in Google Maps</a>
+                <a
+                  href={store.googleMapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  See in Google Maps
+                </a>
               </>
             </InfoWindow>
           )}
         </Marker>
       ))}
-
     </GoogleMap>
   ))
 );

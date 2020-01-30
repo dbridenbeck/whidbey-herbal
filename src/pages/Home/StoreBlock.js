@@ -61,11 +61,9 @@ const StoreBlock = ({setGoogleMapInfoWindow, selectedStoreName, store: {storeNam
   // TODO: Make storeName stay highlighted when clicked, add more info to InfoWindow's message (address, link to go to see in google maps)
   return (
     <StoreContainer onClick={() => setGoogleMapInfoWindow(storeName)}>
-      <StoreTitle storeIsSelected={storeIsSelected}>
-        {storeName}
-      </StoreTitle>
+      <StoreTitle storeIsSelected={storeIsSelected}>{storeName}</StoreTitle>
       <StoreAddress>{address}</StoreAddress>
-      <a href={website} target="_blank">
+      <a href={website} target="_blank" rel="noopener noreferrer">
         View Website
       </a>
     </StoreContainer>

@@ -123,7 +123,7 @@ const ProductDetails = ({
 ProductDetails.propTypes = {
   selectedProduct: PropTypes.object,
   doesItemExist: PropTypes.bool,
-  quantityButtonAmount: PropTypes.string,
+  quantityButtonAmount: PropTypes.number,
   updateQuantityButton: PropTypes.func
 };
 

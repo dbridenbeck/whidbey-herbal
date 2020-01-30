@@ -128,7 +128,7 @@ export const Reducer1 = (state = initialState, action) => {
     case CartActionTypes.UPDATE_QUANTITY_BUTTON:
       return {
         ...state,
-        quantityButtonAmount: action.quantity
+        quantityButtonAmount: parseInt(action.quantity)
       };
     case CartActionTypes.SET_GOOGLE_MAP_INFO_WINDOW:
       return {

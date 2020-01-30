@@ -39,19 +39,7 @@ const QuantityButton =
   shouldAddQuantities, 
   labelTitle, 
   onChangeFunction,
-  location: {pathname}
 }) => {
-
-  const selectedLineItemQuantity = () => { 
-    if (lineItems) {
-      return lineItems
-              .filter(lineItem => lineItem.handle === selectedProduct.handle)
-              .reduce((total, lineItem) => lineItem.quantity, 0)
-    }
-}
-
-const buttonPlusProductQuantities = quantity + selectedLineItemQuantity();
-const quantityBasedOnRoute = pathname !== "/checkout" ? buttonPlusProductQuantities : quantity
 
   return (
     <QuantityWrapper>
@@ -60,7 +48,7 @@ const quantityBasedOnRoute = pathname !== "/checkout" ? buttonPlusProductQuantit
           {labelTitle}
           <StyledInput
             type="number"
-            value={quantity}
+            value={parseInt(quantity)}
             min="1"
             max="20"
             onChange={event => {

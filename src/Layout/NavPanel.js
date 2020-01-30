@@ -67,7 +67,6 @@ const Panel = styled.div`
 `;
 
 const NavPanel = ({burgerToggled}) => {
-
   return (
     <PanelWrapper className="PanelWrapper">
       <Panel
@@ -83,4 +82,4 @@ NavPanel.propTypes = {
   burgerToggled: PropTypes.bool,
 }
 
-export default NavPanel;
+export default React.memo(NavPanel);

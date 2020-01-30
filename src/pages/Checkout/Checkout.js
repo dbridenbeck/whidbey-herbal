@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import styled from "styled-components";
@@ -63,7 +63,14 @@ const StyledH2 = styled.h2`
   font-weight: normal;
 `;
 
-export class Checkout extends Component {
+export class Checkout extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.createRemoveButton = this.createRemoveButton.bind(this);
+    this.createCheckoutButton = this.createCheckoutButton.bind(this);
+    this.createCheckoutContainer = this.createCheckoutContainer.bind(this);
+  }
+
   componentDidMount() {
     const { checkoutId, updateCheckoutId } = this.props;
      // create the checkout if it doesn't already exist
@@ -120,7 +127,7 @@ export class Checkout extends Component {
     );
   }
 
-  render() {
+  createCheckoutContainer = () => {
     const { lineItems } = this.props;
     const hasItems = (lineItems.length && lineItems.length > 0);
     const calculatedCartSubtotal = 
@@ -128,31 +135,38 @@ export class Checkout extends Component {
         .filter(Boolean)
         .reduce((cartSubtotal, currentItemSubtotal) => (currentItemSubtotal + cartSubtotal), 0)
         .toFixed(2);
+    
+    return (
+      hasItems ? 
+      (
+        <CheckoutContainer>
+          <LineItemHeaders />
+          <LineItems
+            items={lineItems}
+            createRemoveButton={this.createRemoveButton}
+          />
+          <SubtotalSection
+            calculatedCartSubtotal={calculatedCartSubtotal}
+            createCheckoutButton={this.createCheckoutButton}
+          />
+          <Products title={"Continue Shopping"} />
+        </CheckoutContainer>
+      ) : (
+        <CheckoutContainer>
+          <StyledH2>Your Shopping Cart is empty.</StyledH2>
+          <Products title={"Explore the Shop"} />
+        </CheckoutContainer>
+      )
+    )
+  }
 
+  render() {
     return (
       <PageWrapper maxWidth={""}>
         <StyledH1 colorIsGrey={false} centered={false}>
           Checkout
         </StyledH1>
-        {hasItems ? (
-          <CheckoutContainer>
-            <LineItemHeaders />
-            <LineItems
-              items={lineItems}
-              createRemoveButton={this.createRemoveButton}
-            />
-            <SubtotalSection
-              calculatedCartSubtotal={calculatedCartSubtotal}
-              createCheckoutButton={this.createCheckoutButton}
-            />
-            <Products title={"Continue Shopping"} />
-          </CheckoutContainer>
-        ) : (
-          <CheckoutContainer>
-            <StyledH2>Your Shopping Cart is empty.</StyledH2>
-            <Products title={"Explore the Shop"} />
-          </CheckoutContainer>
-        )}
+        {this.createCheckoutContainer()}
         <Footer />
       </PageWrapper>
     );

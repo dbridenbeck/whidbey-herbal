@@ -1,6 +1,5 @@
 import React from 'react';
 import  { BrowserRouter as Router } from 'react-router-dom';
-import  { __RouterContext } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 

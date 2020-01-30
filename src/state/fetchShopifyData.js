@@ -42,6 +42,13 @@ const productsQuery = client.graphQLClient.query((root) => {
     product.add('descriptionHtml');
     product.add('handle');
     product.add('availableForSale');
+    product.add(
+      "metafield",
+      { args: { key: "about", namespace: "about" } },
+      metafield => {
+        metafield.add("value");
+      }
+    );
     product.addConnection("images", {args: {first: 2}}, image => {
       image.add("id");
       image.add("src");

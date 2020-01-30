@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import { withRouter } from "react-router-dom";
+import * as CartActionCreators from "../state/actions/cart";
 import { NavHashLink as NavLink } from "react-router-hash-link";
 import { connect } from "react-redux";
 import styled from 'styled-components';
@@ -113,24 +114,28 @@ export class Header extends PureComponent {
   }
   
   createCheckoutLink = () => {
-    const { lineItems } = this.props
+    const { lineItems, clearBurger } = this.props
     const itemsInCart = () => {
       if (lineItems.length) {
         return lineItems
-                .map(lineItem => lineItem.quantity)
-                .filter(Boolean)
-                .reduce((itemTotal, quantity) => (parseFloat(quantity, 2) + itemTotal ), 0)
+          .map(lineItem => lineItem.quantity)
+          .filter(Boolean)
+          .reduce((itemTotal, quantity) => (parseFloat(quantity, 2) + itemTotal ), 0)
       }
     };
     return (
-    <CheckoutLink to={`/checkout`} itemsincart={itemsInCart()}>
-      <div className="item-counter">{itemsInCart()}</div>
-    </CheckoutLink>
+      <CheckoutLink 
+        to={`/checkout`} 
+        itemsincart={itemsInCart()}
+        onClick={clearBurger}
+      >
+        <div className="item-counter">{itemsInCart()}</div>
+      </CheckoutLink>
     )
   }
 
   createNavBar = () => {
-    const { burgerToggled, lineItems } = this.props;
+    const { burgerToggled, lineItems, clearBurger } = this.props;
     
     return (
     <Navbar 
@@ -146,6 +151,7 @@ export class Header extends PureComponent {
           width="1200"
           height="263"
           alt="Whidbey Herbal Logo"
+          onClick={clearBurger}
         />
       </NavLink>
       <NavPanel
@@ -157,6 +163,7 @@ export class Header extends PureComponent {
   }
 
   render() {
+    console.log("props in header is: ", this.props)
   return (
     <>
       {this.createNavBar()}
@@ -170,10 +177,13 @@ Header.propTypes = {
   lineItems: PropTypes.array
 };
 
+const mapDispatchtoProps = dispatch => ({
+  clearBurger: () => dispatch(CartActionCreators.clearBurger())
+});
 
-const mapStateToProps = ({burgerToggled, checkout: {lineItems}}) => ({
+const mapStatetoProps = ({burgerToggled, checkout: {lineItems}}) => ({
   burgerToggled,
   lineItems
 });
 
-export default connect(mapStateToProps, null)(withRouter(Header));
+export default connect(mapStatetoProps, mapDispatchtoProps)(withRouter(Header));

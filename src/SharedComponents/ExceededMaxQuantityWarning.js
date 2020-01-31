@@ -7,11 +7,11 @@ import styled from "styled-components";
     min-width: 100px;
     max-width: 150px;
     height: 0px;
-    /* margin-top: 5px; */
     color: red;
     font-style: italic;
-    font-size: 0.75em;
-    line-height: 1.1em;
+    font-size: 0.625em;
+    line-height: 1.5em;
+    height: ${props => props.buttonQuantity >= props.maxQuantity ? "auto" : ''};
 `;
 
 const ExceededMaxQuantityWarning = ({buttonQuantity, maxQuantity, children}) => {

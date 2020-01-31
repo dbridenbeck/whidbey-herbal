@@ -23,6 +23,9 @@ const LineItemWrapper = styled.div`
   }
   .sixthColumn {
     display: block;
+    max-height: 21px;
+    margin: 0;
+    padding: 0;
     width: 16.67%;
   }
   :last-child {

@@ -4,14 +4,13 @@ import ExceededMaxQuantityWarning from './ExceededMaxQuantityWarning';
 
 const QuantityWrapper = styled.div`
   align-self: flex-start;
-  padding-bottom: 5px;
-  /* border: 1px solid red; */
+  height: 50px;
+  padding: 1% 0 5px 0;
 `;
 
 const Quantity = styled.form`
   font-size: 1em;
   flex: 1;
-  margin-top: 10px;
   color: #787878;
 `;
 
@@ -27,7 +26,7 @@ const StyledInput = styled.input`
   }
   `;
 
-const maxInputToTwenty = (event, maxQuantity) => event.target.value > maxQuantity ? maxQuantity : event.target.value
+const maxInput = (event, maxQuantity) => event.target.value > maxQuantity ? maxQuantity : event.target.value
 
 const QuantityButton = 
 ({
@@ -51,7 +50,7 @@ const QuantityButton =
             max="20"
             onChange={event => {
               onChangeFunction(
-                maxInputToTwenty(event, maxQuantity),
+                maxInput(event, maxQuantity),
                 shouldAddQuantities,
                 selectedProduct
               );
@@ -63,7 +62,7 @@ const QuantityButton =
         buttonQuantity={quantity}
         maxQuantity={maxQuantity}
       >
-        Limit {maxQuantity} per order
+        Limit {maxQuantity} per order.
       </ExceededMaxQuantityWarning>
     </QuantityWrapper>
   );

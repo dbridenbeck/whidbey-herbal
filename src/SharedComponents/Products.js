@@ -15,6 +15,10 @@ const ProductsContainer = styled.div`
   position: relative;
 `;
 
+const StyledH2 = styled.h2`
+  color: #787878;
+`;
+
 const ExploreShopLink = styled(Link)`
   display: block;
   width: 40%;
@@ -38,7 +42,7 @@ const Products = ({products, title}) => {
 
   return (
     <ComponentWrapper>
-      <h2> {title} </h2>
+      <StyledH2> {title} </StyledH2>
       <ProductsContainer>
         {products
           .filter(product => product.availableForSale)

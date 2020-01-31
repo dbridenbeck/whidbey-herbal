@@ -8,14 +8,16 @@ import ExceededMaxQuantityWarning from "../../SharedComponents/ExceededMaxQuanti
 const BuyButtonWrapper = styled.div`
   position: relative;
   overflow: visible;
+  align-self: flex-start;
   `;
 
 const BuyButtonContainer = styled.button`
+  align-self: flex-start;
   display: block;
   box-sizing: border-box;
   width: 150px;
   padding: 5px;
-  margin-bottom: 5px;
+  margin: 1% 0 5px 0;
   color: ${props => (props.isEnabled ? "#e3be42" : "#e34267")};
   text-align: center;
   font-size: 1em;
@@ -89,9 +91,11 @@ export class BuyButton extends PureComponent {
           </BuyButtonContainer>
           <ExceededMaxQuantityWarning
             buttonQuantity={lineItemPlusQuantityButton}
-            maxQuantity={20}
+            maxQuantity={maxQuantity}
           >
-            You may only add {quantityAllowed} more to cart.
+            {quantityAllowed
+              ? `You may only add ${quantityAllowed} more to cart. If you wish to order more than ${maxQuantity}, Please email hello@whidbeyherbal.com`
+              : `Your cart currently has ${maxQuantity} of this item, which is the limit. If you wish to order more than ${maxQuantity}, Please email hello@whidbeyherbal.com`}
           </ExceededMaxQuantityWarning>
         </BuyButtonWrapper>
       );

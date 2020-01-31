@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import styled from "styled-components";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -41,50 +41,29 @@ const MapImg = styled.img`
   margin: 0 auto;
 `;
 
-class GoogleMapWrapper extends PureComponent {
-  constructor(props) {
-    super(props)
-    
-    this.state = {
-      infoboxMessage: '',
-      isInfoboxVisible: false,
-    }
-  }
+const GoogleMapWrapper = ({ setGoogleMapInfoWindow, selectedStoreName }) => {
 
-  handleMarkerClick = (message, lang, lat) => {
-    this.setState({
-      infoboxMessage: message,
-      isInfoboxVisible: !this.state.isInfoboxVisible,
-    })
-  }
-
-  createGoogleMapComponentWithMarker = () => {
-    const { setGoogleMapInfoWindow, selectedStoreName } = this.props;
-
+  const createGoogleMapComponentWithMarker = () => {
     return(
       <GoogleMapComponentWithMarker
         googleMapURL={mapURL}
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `100%` }} />}
         mapElement={<div style={{ height: `100%` }} />}
-        isInfoboxVisible={this.state.isInfoboxVisible}
-        infoboxMessage={this.state.infoboxMessage}
         handleMarkerClick={setGoogleMapInfoWindow}
         selectedStoreName={selectedStoreName}
       />
     )
   }
 
-  render() {
-    return (
-      <Wrap>
-        <MapContainer>
-          {this.createGoogleMapComponentWithMarker()}
-        </MapContainer>
-        <MapImg src={`${mapFrame}`} />
-      </Wrap>
-    );
-  }
+  return (
+    <Wrap>
+      <MapContainer>
+        {createGoogleMapComponentWithMarker()}
+      </MapContainer>
+      <MapImg src={`${mapFrame}`} />
+    </Wrap>
+  );
 }
 
 GoogleMapWrapper.propTypes = {

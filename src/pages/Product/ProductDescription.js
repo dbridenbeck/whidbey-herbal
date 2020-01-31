@@ -53,6 +53,7 @@ const CTABlock = styled.div`
   border-bottom: 4px solid #e3be42;
   .price {
     display: block;
+    align-self: flex-start;
     width: 30%;
     text-align: center;
     font-size: 1.5em;

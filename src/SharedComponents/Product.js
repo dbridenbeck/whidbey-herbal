@@ -50,10 +50,14 @@ const Image = styled.img`
   max-height: 100%;
 `
 
-const createProduct = (product, clearHeroImg) => {
-  const clearHeroImgAction = () => clearHeroImg();
+const createProduct = (product, clearHeroImg, updateQuantityButton) => {
+  const clearHeroImgAndQuantityButton = () => {
+    clearHeroImg();
+    updateQuantityButton(1);
+  }
+
   return (
-    <ProductLink to={`/product/${product.handle}`} onClick={clearHeroImgAction}>
+    <ProductLink to={`/product/${product.handle}`} onClick={clearHeroImgAndQuantityButton}>
       <ImageContainer>
         <Image
           src={`${product.images.edges[0].node.src}`}
@@ -66,14 +70,14 @@ const createProduct = (product, clearHeroImg) => {
         <strong>${product.variants.edges[0].node.price}</strong>
       </p>
     </ProductLink>
-  )
-}
+  );
+};
 
 // begin component
-const Product = ({product, clearHeroImg}) => {
+const Product = ({product, clearHeroImg, updateQuantityButton}) => {
   return (
     <ProductContainer>
-        {createProduct(product, clearHeroImg)}
+      {createProduct(product, clearHeroImg, updateQuantityButton)}
     </ProductContainer>
   );
 };
@@ -84,7 +88,8 @@ Product.propTypes = {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  clearHeroImg: () => dispatch(CartActionCreators.clearHeroImg())
+  clearHeroImg: () => dispatch(CartActionCreators.clearHeroImg()),
+  updateQuantityButton: (amount) => dispatch(CartActionCreators.updateQuantityButton(amount))
 })
 
 export default connect(null, mapDispatchToProps)(Product);

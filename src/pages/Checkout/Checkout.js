@@ -20,10 +20,17 @@ const CheckoutContainer = styled.div`
 `;
 
 const RemoveWrapper = styled.div`
+  display: block;
+  box-sizing: border-box;
   width: 8.37%;
   button {
+    box-sizing: border-box;
     display: block;
     margin: 0 auto;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    max-width: 25px;
     font-size: 1rem;
     color: #e34267;
     border: 1px solid #787878;
@@ -39,18 +46,15 @@ const RemoveWrapper = styled.div`
     }
     @media ${device.tablet} {
       height: 35px;
-      width: 35px;
+      max-width: 35px;
     }
-  }
-  @media ${device.laptop} {
-    width: 8.37%;
   }
 `;
 
 const CheckoutButton = styled.button`
   display: block;
   height: 40px;
-  width: 222px;
+  min-width: 222px;
   margin: 20px 0;
   font-size: 1.125em;
   background: none;

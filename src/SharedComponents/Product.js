@@ -13,6 +13,7 @@ const ProductContainer = styled.div`
   .title {
     margin: 0;
     font-size: 1em;
+    line-height: 1.25em;
     font-weight: normal;
     color: #787878;
     text-decoration: none;

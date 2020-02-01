@@ -46,7 +46,7 @@ const productsQuery = client.graphQLClient.query((root) => {
       metafield.add("key")
       metafield.add("value");
     });
-    product.addConnection("images", {args: {first: 2}}, image => {
+    product.addConnection("images", {args: {first: 10}}, image => {
       image.add("id");
       image.add("src");
       image.add("altText");

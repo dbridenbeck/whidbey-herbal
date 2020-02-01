@@ -21,28 +21,29 @@ const CheckoutContainer = styled.div`
 
 const RemoveWrapper = styled.div`
   width: 8.37%;
-    button {
-      display: block;
-      margin: 0 auto;
-      height: 25px;
-      width: 25px;
-      font-size: 1rem;
-      color: #e34267;
-      border: 1px solid #787878;
-      border-radius: 50%;
-      background: none;
-      :focus {
-        outline-width: 0;
-      }
-      :hover {
-        background: #e34267;
-        color: white;
-        border: 1px solid #e34267;
-      }
+  button {
+    display: block;
+    margin: 0 auto;
+    font-size: 1rem;
+    color: #e34267;
+    border: 1px solid #787878;
+    border-radius: 50%;
+    background: none;
+    :focus {
+      outline-width: 0;
+    }
+    :hover {
+      background: #e34267;
+      color: white;
+      border: 1px solid #e34267;
+    }
     @media ${device.tablet} {
       height: 35px;
       width: 35px;
     }
+  }
+  @media ${device.laptop} {
+    width: 8.37%;
   }
 `;
 

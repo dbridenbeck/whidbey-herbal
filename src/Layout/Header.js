@@ -54,7 +54,7 @@ const CheckoutLink = styled(NavLink)`
   position: relative;
   width: 48px;
   height: 100%;
-  margin: 0 3%;
+  margin-right: 15px;
   background-image: url(${cart});
   background-position: center;
   background-size: auto 60%;
@@ -78,12 +78,18 @@ const CheckoutLink = styled(NavLink)`
     border-radius: 50%;
     transition: all 0.5s ease-in-out;
   }
+  @media ${device.laptop} {
+    margin: 0 3%;
+  }
 `;
 
 const HomeLink = styled.img`
   height: 50px;
   width: auto;
-  margin: 8px 10% 0 10%;
+  margin: 7px auto 0 auto;
+  @media ${device.laptop} {
+    margin: 8px 10% 0 10%;
+  }
 `;
 
 export class Header extends PureComponent {

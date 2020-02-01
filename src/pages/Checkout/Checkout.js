@@ -23,11 +23,13 @@ const RemoveWrapper = styled.div`
   button {
     display: block;
     margin: 0 auto;
-    height: 35px;
-    width: 35px;
+    height: 25px;
+    width: 25px;
     font-size: 1rem;
     color: #e34267;
+    border: 1px solid #787878;
     border-radius: 50%;
+    background: none;
     :focus {
       outline-width: 0;
     }
@@ -117,9 +119,9 @@ export class Checkout extends PureComponent {
         })
         .then(client.checkout.addLineItems(checkoutId, lineItemsToAdd)
         .then(checkout => {
-          window.location.href = checkout.webUrl;
+          window.location.href = checkout.webUrl
       }))
-    };
+    };  
     return (
       <CheckoutButton className="checkout" onClick={(goToShopifyCheckout)}>
         Proceed to Checkout

@@ -49,6 +49,7 @@ const ProductTitleLink = styled(Link)`
   font-weight: normal;
   color: #e3be42;
   text-decoration: none;
+  line-height: 1.125em;
   :hover {
     color: #787878;
   }

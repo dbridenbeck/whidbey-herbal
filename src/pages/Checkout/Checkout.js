@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import PageWrapper from "../../SharedComponents/PageWrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
+import { device } from "../../utils/devices";
 
 import { client } from "../../plugins/shopify.js";
 import * as CartActionCreators from '../../state/actions/cart';
@@ -20,23 +21,27 @@ const CheckoutContainer = styled.div`
 
 const RemoveWrapper = styled.div`
   width: 8.37%;
-  button {
-    display: block;
-    margin: 0 auto;
-    height: 25px;
-    width: 25px;
-    font-size: 1rem;
-    color: #e34267;
-    border: 1px solid #787878;
-    border-radius: 50%;
-    background: none;
-    :focus {
-      outline-width: 0;
-    }
-    :hover {
-      background: #e34267;
-      color: white;
-      border: 1px solid #e34267;
+    button {
+      display: block;
+      margin: 0 auto;
+      height: 25px;
+      width: 25px;
+      font-size: 1rem;
+      color: #e34267;
+      border: 1px solid #787878;
+      border-radius: 50%;
+      background: none;
+      :focus {
+        outline-width: 0;
+      }
+      :hover {
+        background: #e34267;
+        color: white;
+        border: 1px solid #e34267;
+      }
+    @media ${device.tablet} {
+      height: 35px;
+      width: 35px;
     }
   }
 `;

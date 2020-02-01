@@ -117,7 +117,7 @@ export class Checkout extends PureComponent {
         })
         .then(client.checkout.addLineItems(checkoutId, lineItemsToAdd)
         .then(checkout => {
-          window.open(checkout.webUrl);
+          window.location.href = checkout.webUrl;
       }))
     };
     return (

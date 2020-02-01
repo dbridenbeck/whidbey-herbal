@@ -22,6 +22,7 @@ const StyledH2 = styled.h2`
 const ExploreShopLink = styled(Link)`
   display: block;
   width: 40%;
+  min-width: 145px;
   max-width: 300px;
   margin: 30px auto 0 auto;
   padding: 5px;

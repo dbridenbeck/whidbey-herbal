@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 // Begin Styled Components
 const ProductImagesWrapper = styled.div`
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
   @media ${device.tablet} {
     width: 45%;
@@ -31,8 +31,8 @@ const HeroImage = styled.img`
 const AltImages = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-content: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
   height: auto;
   width: 100%;
   margin: 0 auto;
@@ -40,16 +40,15 @@ const AltImages = styled.div`
 
 const AltImage = styled.img`
   display: block;
-  width: 120px;
-  height: 120px;
+  width: 25%;
   align-self: center;
-  margin: 0 10px;
+  margin: 10px;
   border: ${props =>
-    props.isSelected ? "2px solid #e3be42" : "2px solid white"};
+    props.isSelected ? "2px solid #e3be42" : "2px solid #DADADA"};
   border-radius: 10px;
   :hover {
     border: ${props =>
-      props.isSelected ? "2px solid #e3be42" : "2px solid #DADADA"};
+      props.isSelected ? "2px solid #e3be42" : "2px solid #787878"};
   }
 `;
 

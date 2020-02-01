@@ -8,9 +8,10 @@ import { device } from "../../utils/devices";
 
 const StoreContainer = styled.div`
   position: relative;
+  align-self: flex-start;
   flex-grow: 1;
   width: 40%;
-  margin-bottom: 40px;
+  margin: 0 10px 40px 0;
   a {
     display: block;
     font-size: 0.75em;
@@ -31,11 +32,13 @@ const StoreContainer = styled.div`
    margin: 0;
    padding: 0;
    font-weight: bold;
-   font-size: 1.125em;
+   font-size: 1em;
+   line-height: 1.1em;
    letter-spacing: 0.01em;
+   font-weight: bold;
    color: #787878;
-   @media ${device.tablet} {
-    color: ${props => (props.storeIsSelected ? "#42e0e3" : "#787878")};
+  @media ${device.tablet} {
+     color: ${props => (props.storeIsSelected ? "#42e0e3" : "#787878")};
      :hover {
        cursor: pointer;
        color: #e3be42;

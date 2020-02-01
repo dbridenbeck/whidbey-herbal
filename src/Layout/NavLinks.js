@@ -29,14 +29,14 @@ const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   text-align: center;
   font-size: 1rem;
+  color: #787878;
   :visited {
     color: #787878;
   }
   &:hover {
     color: #e3be42;
   }
-  @media ${device.laptop}
-  {
+  @media ${device.laptop} {
     text-align: center;
   }
 `;

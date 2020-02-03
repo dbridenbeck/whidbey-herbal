@@ -2,13 +2,28 @@ import React from 'react';
 import styled from 'styled-components';
 import instagram from './images/instagram.png';
 import facebook from './images/facebook.png';
+import whPattern from './images/wh-pattern.jpg';
 import NewsletterSignup from './NewsletterSignup';
 
   const FooterContainer = styled.div`
     display: block;
-    width: 100%;
-    border-top: 1px solid #787878;
+    position: relative;
+    height: 630px;
+    width: 100vw;
     margin: 0px auto 0px auto;
+    background-color: rgb(230, 197, 100);
+    ::after {
+      content: "";
+      background: url(${whPattern});
+      opacity: 0.05;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
   `;
 
   const SocialIconWrapper = styled.div`
@@ -39,6 +54,7 @@ const Footer = () => {
 
   return (
     <FooterContainer>
+    <NewsletterSignup />
       <SocialIconWrapper>
         <a href="https://www.instagram.com/whidbeyherbal/">
           <SocialIcon
@@ -58,7 +74,6 @@ const Footer = () => {
         </a>
       </SocialIconWrapper>
 
-    <NewsletterSignup />
 
       <CopyrightText>© 2019, Whidbey Herbal</CopyrightText>
     </FooterContainer>

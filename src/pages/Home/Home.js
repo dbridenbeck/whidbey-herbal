@@ -2,7 +2,6 @@ import React from "react"
 import WelcomeSection from "./WelcomeSection"
 import Products from "../../SharedComponents/Products"
 import PageWrapper from "../../SharedComponents/PageWrapper"
-import Footer from "../../SharedComponents/Footer";
 
 import About from "./About"
 import Process from "./Process"
@@ -17,7 +16,6 @@ const Home = () =>
       <Process />
       <StoreLocator />
       <RecpieSection />
-      <Footer />
     </PageWrapper>
 
 export default Home;

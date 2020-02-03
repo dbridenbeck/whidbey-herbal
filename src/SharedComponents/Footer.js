@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import instagram from './images/instagram.png';
 import facebook from './images/facebook.png';
+import NewsletterSignup from './NewsletterSignup';
 
   const FooterContainer = styled.div`
     display: block;
@@ -57,59 +58,7 @@ const Footer = () => {
         </a>
       </SocialIconWrapper>
 
-      <div id="mc_embed_signup">
-        <form
-          action="https://whidbeyherbal.us9.list-manage.com/subscribe/post?u=bbd87421737359b6e8f874c7e&amp;id=b69511f62c"
-          method="post"
-          id="mc-embedded-subscribe-form"
-          name="mc-embedded-subscribe-form"
-          class="validate"
-          target="_blank"
-          novalidate
-        >
-          <div id="mc_embed_signup_scroll">
-            <h2>Subscribe to Our Newsletter</h2>
-            <div class="mc-field-group">
-              <label for="mce-EMAIL">Email Address </label>
-              <input
-                type="email"
-                value=""
-                name="EMAIL"
-                class="required email"
-                id="mce-EMAIL"
-              />
-            </div>
-            <div id="mce-responses" class="clear">
-              <div
-                class="response"
-                id="mce-error-response"
-                style={{ display: "none" }}
-              ></div>
-              <div
-                class="response"
-                id="mce-success-response"
-                style={{ display: "none" }}
-              ></div>
-            </div>
-            <div style={{position: 'absolute', left: '-5000px'}}>
-              <input
-                type="text"
-                name="b_bbd87421737359b6e8f874c7e_b69511f62c"
-                tabindex="-1"
-                value=""
-              />
-            </div>
-            <div class="clear">
-              <input
-                type="submit"
-                value="Subscribe"
-                name="subscribe"
-                class="button"
-              />
-            </div>
-          </div>
-        </form>
-      </div>
+    <NewsletterSignup />
 
       <CopyrightText>© 2019, Whidbey Herbal</CopyrightText>
     </FooterContainer>

@@ -29,6 +29,7 @@ import facebook from './images/facebook.png';
     }
     @media ${device.tablet} {
       width: 35%;
+      max-width: 448px;
       margin-top: 20px;
     }
   `;

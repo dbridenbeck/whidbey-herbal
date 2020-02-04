@@ -21,6 +21,7 @@ const SignupWrapper = styled.div`
   }
   @media ${device.tablet} {
     width: 65%;
+    max-width: 832px;
   }
 `;
 

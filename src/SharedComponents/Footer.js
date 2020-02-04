@@ -28,7 +28,7 @@ import ContactAndSocials from './ContactAndSocials';
     @media ${device.tablet} {
       display: flex;
       flex-direction: row;
-      position: relative;
+      justify-content: center;
     }
   `;
 

@@ -12,11 +12,11 @@ import ContactAndSocials from './ContactAndSocials';
     width: 100vw;
     margin: 0px auto 0px auto;
     padding: 150px 20px 0 20px;
-    background-color: rgba(230, 197, 100, 0.95);
-    ::after {
+    background-color: rgba(230, 197, 100, 1);
+    ::before {
       content: "";
       background: url(${whPattern});
-      z-index: -1;
+      opacity: 0.04;
       position: absolute;
       width: 100%;
       height: 100%;

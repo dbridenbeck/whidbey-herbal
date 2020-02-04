@@ -51,7 +51,7 @@ const Products = ({products, title}) => {
             <Product key={product.id} product={product} />
           ))}
       </ProductsContainer>
-      <ExploreShopLink to="/">Explore the Shop</ExploreShopLink>
+      <ExploreShopLink to="/shop">Explore the Shop</ExploreShopLink>
     </ComponentWrapper>
   );
 };

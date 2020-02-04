@@ -5,6 +5,7 @@ import { client } from "../plugins/shopify.js";
 import * as CartActionCreators from "../state/actions/cart";
 import { fetchShopifyProductsAction, fetchShopifyArticlesAction } from '../state/fetchShopifyData';
 import ComponentWrapper from '../SharedComponents/ComponentWrapper';
+import Footer from '../SharedComponents/Footer';
 import styled from "styled-components";
 import Header from "./Header"
 
@@ -12,6 +13,7 @@ const MasterWrapper = styled.div`
   display: block;
   position: relative;
   width: 100%;
+  height: ${props => props.height};
   max-width: 1200px;
   margin: 0px auto 120px auto;
   padding: 0px 20px 0 20px;
@@ -44,11 +46,17 @@ const Layout = ({
     fetchShopifyArticles();
   }
 
+  // calculate document height to keep footer at bottom of page
+  const height = document.documentElement.scrollHeight;
+
   return (
-    <MasterWrapper>
-      <Header />
-      <ComponentWrapper id="home" maxWidth={"1200px"}>{children}</ComponentWrapper>
-    </MasterWrapper>
+    <>
+      <MasterWrapper id='MasterWrapper' height={height}>
+        <Header />
+        <ComponentWrapper id="home" maxWidth={"1200px"}>{children}</ComponentWrapper>
+      </MasterWrapper>
+      <Footer />
+    </>
   );
 };
 

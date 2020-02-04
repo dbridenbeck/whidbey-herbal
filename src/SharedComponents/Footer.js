@@ -1,60 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
-import instagram from './images/instagram.png';
-import facebook from './images/facebook.png';
-import ComponentWrapper from "./ComponentWrapper";
+import whPattern from './images/wh-pattern.jpg';
+import { device } from "../utils/devices";
+import NewsletterSignup from './NewsletterSignup';
+import ContactAndSocials from './ContactAndSocials';
 
   const FooterContainer = styled.div`
     display: block;
-    width: 100%;
-    border-top: 1px solid #787878;
+    position: relative;
+    height: 630px;
+    width: 100vw;
     margin: 0px auto 0px auto;
-  `;
-
-  const SocialIconWrapper = styled.div`
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    width: 70px;
-  `;
-
-  const SocialIcon = styled.img`
-    display: inline-block;
-    height: 25px;
-    width: 25px;
-    margin: 25px 5px 0px 5px;
-  `;
-
-  const CopyrightText = styled.p`
-    width: 100%;
-    text-align: center;
-    color: #787878;
-    letter-spacing: 0.01em;
-    font-size: 14px;
-    font-weight: normal;
+    padding: 150px 20px 0 20px;
+    background-color: rgba(230, 197, 100, 0.95);
+    ::after {
+      content: "";
+      background: url(${whPattern});
+      z-index: -1;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+    @media ${device.tablet} {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
   `;
 
 const Footer = () => {
 
   return (
-      <FooterContainer>
-        <SocialIconWrapper>
-          <SocialIcon
-            src={`${instagram}`}
-            height="512"
-            width="512"
-            alt="Instagram logo"
-          />
-          <SocialIcon
-            src={`${facebook}`}
-            height="512"
-            width="512"
-            alt="Facebook logo"
-          />
-        </SocialIconWrapper>
-        <CopyrightText>© 2019, Whidbey Herbal</CopyrightText>
-      </FooterContainer>
+    <FooterContainer>
+      <NewsletterSignup />
+      <ContactAndSocials />
+    </FooterContainer>
   );
 }
 

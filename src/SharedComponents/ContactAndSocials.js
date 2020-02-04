@@ -1,27 +1,60 @@
 import React from 'react';
 import styled from 'styled-components';
+import { device } from "../utils/devices";
 import instagram from './images/instagram.png';
 import facebook from './images/facebook.png';
 
-  const SocialIconWrapper = styled.div`
+  const ContactAndSocialsWrapper = styled.div`
+    display: block;
+    width: 100%;
+    margin-top: 50px;
+    p {
+      display: block;
+      font-size: 1em;
+      font-style: normal;
+      font-weight: 300;
+      color: #2e2e2e;
+      margin: 20px 0;
+      :hover {
+        color: black;
+      }
+    }
+    a {
+      font-weight: 300;
+      color: #2e2e2e;
+      text-decoration: none;
+      :hover {
+        color: black;
+      }
+    }
+    @media ${device.tablet} {
+      width: 35%;
+      margin-top: 20px;
+    }
+  `;
+
+  const SocialIconContainer = styled.div`
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    width: 70px;
+    justify-content: flex-start;
+    width: 100%;
   `;
 
   const SocialIcon = styled.img`
     display: inline-block;
     height: 25px;
     width: 25px;
-    margin: 25px 10px 0px 10px;
+    margin: 10px 20px 0 0;
   `;
 
 
 const ContactAndSocials = () => {
   return (
-      <SocialIconWrapper>
+    <ContactAndSocialsWrapper>
+      <a href="mailto:hello@whidbeyherbal.com">hello@whidbeyherbal.com</a>
+      <p>(360) 386-5831</p>
+      <SocialIconContainer>
         <a href="https://www.instagram.com/whidbeyherbal/">
           <SocialIcon
             src={`${instagram}`}
@@ -38,7 +71,8 @@ const ContactAndSocials = () => {
             alt="Facebook logo"
           />
         </a>
-      </SocialIconWrapper>
+      </SocialIconContainer>
+    </ContactAndSocialsWrapper>
   );
 };
 

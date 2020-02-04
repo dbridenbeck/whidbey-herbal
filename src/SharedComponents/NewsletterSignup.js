@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { device } from "../utils/devices";
 import StyledH1 from './StyledH1';
 import StyledH3 from './StyledH3';
 import loop from "./images/loop.png";
@@ -8,17 +9,18 @@ const SignupWrapper = styled.div`
   display: block;
   position: relative;
   width: 100%;
-  padding-top: 176px;
   .setH1Width {
     display: inline-block;
     position: relative;
-    height: 100%;
     img {
       position: absolute;
       top: 1%;
       right: -19.5%;
       width: 33%;
     }
+  }
+  @media ${device.tablet} {
+    width: 65%;
   }
 `;
 
@@ -30,6 +32,7 @@ const FormContainer = styled.div`
     border: 1px solid blue;
     font-family: "Open Sans", sans-serif;
     border: 1px solid #787878;
+    height: 2.25em;
     padding: 0;
     margin: 0;
   }
@@ -44,9 +47,9 @@ const FormContainer = styled.div`
   .submitInput {
     padding: 0 10px;
     margin-left: 20px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.25);
     :hover {
-      background-color: rgba(255, 255, 255, 0.25);
+      background-color: rgba(255, 255, 255, 0.5);
     }
   }
 `;

@@ -5,12 +5,13 @@ import NewsletterSignup from './NewsletterSignup';
 import ContactAndSocials from './ContactAndSocials';
 
   const FooterContainer = styled.div`
-    display: block;
+    display: flex;
+    flex-direction: row;
     position: relative;
     height: 630px;
     width: 100vw;
     margin: 0px auto 0px auto;
-    padding: 0 20px;
+    padding: 150px 20px 0 20px;
     background-color: rgba(230, 197, 100, 0.95);
     ::after {
       content: "";

@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import whPattern from './images/wh-pattern.jpg';
+import { device } from "../utils/devices";
 import NewsletterSignup from './NewsletterSignup';
 import ContactAndSocials from './ContactAndSocials';
 
   const FooterContainer = styled.div`
-    display: flex;
-    flex-direction: row;
+    display: block;
     position: relative;
     height: 630px;
     width: 100vw;
@@ -24,6 +24,11 @@ import ContactAndSocials from './ContactAndSocials';
       left: 0;
       bottom: 0;
       right: 0;
+    }
+    @media ${device.tablet} {
+      display: flex;
+      flex-direction: row;
+      position: relative;
     }
   `;
 

@@ -11,6 +11,9 @@ const LocationsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
+  /* max-width mirrors MasterWrapper's max-width (in Layout.js) */
+  max-width: 1200px;
+  margin: 0 auto;
 `;
 
 const StoreList = styled.div`

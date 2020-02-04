@@ -3,7 +3,7 @@ import { device } from "../utils/devices";
 import styled from "styled-components";
 
 const H3Component = styled.h3`
-  margin: 0;
+  margin: 0 0 10px 0;
   font-style: normal;
   font-weight: 600;
   font-size: 1.125rem;

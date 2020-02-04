@@ -3,12 +3,22 @@ import styled from "styled-components";
 
 const StyledWrapper = styled.div`
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: auto;
   max-width: ${props => props.maxWidth};
   margin: 0px auto 120px auto;
-  padding-top: 50px;
-  background-color: ${props => props.backgroundColor ? props.backgroundColor : 'white'};
+  padding: 50px 0 140px 0;
+  ${({ backgroundColor }) =>
+    backgroundColor &&
+    `
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-color: ${backgroundColor};
+    `}
 `;
 
 const ComponentWrapper = ({maxWidth, children, id, backgroundColor}) => {

@@ -31,36 +31,21 @@ const StoreContainer = styled.div`
       color: #e3be42;
     }
     h3 {
-      color: ${props => (props.storeIsSelected ? "#42e0e3" : "#787878")};
+      color: ${props => (props.storeIsSelected ? "#42e0e3" : "#2e2e2e")};
     }
   }
 `;
-
- const StoreTitle = styled.div`
-   margin: 0;
-   padding: 0;
-   font-weight: 600;
-   font-size: 1.75rem;
-   font-weight: bold;
-   color: #787878;
-  @media ${device.tablet} {
-     color: ${props => (props.storeIsSelected ? "#42e0e3" : "#787878")};
-     :hover {
-       cursor: pointer;
-       color: #e3be42;
-     }
-   }
- `;
   
 const StoreAddress = styled.p`
   display: block;
   margin: 0;
   padding: 0;
-  font-weight: normal;
-  font-size: 0.875em;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.5rem;
   line-height: 1.5em;
   letter-spacing: 0.01em;
-  color: #787878;
+  color: #2e2e2e;
 `;
 
 const StoreBlock = ({setGoogleMapInfoWindow, selectedStoreName, store: {storeName, address, website}}) => {

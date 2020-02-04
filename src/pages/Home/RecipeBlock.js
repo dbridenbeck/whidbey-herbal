@@ -3,35 +3,47 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-  const RecipeLink = styled(Link)`
-    display: block;
-    width: 33.33%;
-    text-decoration: none;
-  `;
+const RecipeLink = styled(Link)`
+  display: block;
+  width: 39%;
+  text-decoration: none;
+`;
 
 const RecipeContainer = styled.div`
   position: relative;
   margin: 0 0px 20px 0;
-  &:hover .recipeTitle {
+  &:hover h5 {
     color: #e3be42;
   }
-  .recipeTitle {
+  &:hover .arrow {
+    fill: #e3be42;
+  }
+`;
+
+const RecipeInfo = styled.div`
+  position: relative;
+  h5 {
     margin-bottom: 5px;
     padding: 0;
     font-weight: bold;
-    font-size: 1em;
-    text-align: center;
-    letter-spacing: 0.01em;
-    color: #787878;
+    font-size: 1.313rem;
+    color: #2e2e2e;
   }
   .recipeText {
     margin: 0;
     padding: 0;
     font-weight: normal;
-    font-size: 0.875em;
-    text-align: center;
-    letter-spacing: 0.01em;
-    color: #787878;
+    font-style: normal;
+    font-size: 1.313rem;
+    color: #2e2e2e;
+  }
+  svg {
+    position: absolute;
+    top: 5px;
+    right: 2px;
+  }
+  .arrow {
+    fill: black;
   }
 `;
 
@@ -40,7 +52,6 @@ const RecipeContainer = styled.div`
     width: 100%;
     height: auto;
     margin: 0 auto 20px auto;
-    border-radius: 10px;
   `;
 
 const RecipeBlock = ({
@@ -60,8 +71,25 @@ const RecipeBlock = ({
     <RecipeLink to={`/recipe/${handle}`}>
       <RecipeContainer recipeName={title}>
         <RecipeImage src={`${originalSrc}`} />
-        <h2 className="recipeTitle">{title}</h2>
-        <p className="recipeText">{excerpt}</p>
+        <RecipeInfo>
+          <h5>{title}</h5>
+          {/* SVG for right arrow icon */}
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path className="arrow"
+              d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z"
+              fill="black"
+              fill-opacity="0.54"
+            />
+          </svg>
+
+          <p className="recipeText">{excerpt}</p>
+        </RecipeInfo>
       </RecipeContainer>
     </RecipeLink>
   );

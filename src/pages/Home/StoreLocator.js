@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
-import StyledH1 from "../../SharedComponents/StyledH1";
+import StyledH2 from "../../SharedComponents/StyledH2";
 import StoreBlock from "./StoreBlock";
 import GoogleMapWrapper from "./GoogleMapWrapper";
 
@@ -78,17 +78,15 @@ export const stores = [
 const StoreLocator = () => {
 
   return (
-    <ComponentWrapper id="findstore" positionRelative={true}>
-      <StyledH1 colorIsGrey={true} centered={true}>
-        Store Locator
-      </StyledH1>
+    <ComponentWrapper id="findstore" backgroundColor={"#FFF3D1"}>
+      <StyledH2>Store Locator</StyledH2>
       <LocationsWrapper>
+        <GoogleMapWrapper />
         <StoreList>
           {stores.map(store => (
             <StoreBlock store={store} key={store.storeName} />
           ))}
         </StoreList>
-        <GoogleMapWrapper />
       </LocationsWrapper>
     </ComponentWrapper>
   );

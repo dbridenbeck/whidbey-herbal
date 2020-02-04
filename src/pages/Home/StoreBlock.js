@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import * as CartActionCreators from "../../state/actions/cart";
 import { connect } from "react-redux";
+import StyledH3 from "../../SharedComponents/StyledH3";
 
 import PropTypes from "prop-types";
 import { device } from "../../utils/devices";
@@ -25,16 +26,21 @@ const StoreContainer = styled.div`
   @media ${device.tablet} {
     width: 100%;
     margin-bottom: 20px;
+    :hover h3 {
+      cursor: pointer;
+      color: #e3be42;
+    }
+    h3 {
+      color: ${props => (props.storeIsSelected ? "#42e0e3" : "#787878")};
+    }
   }
 `;
 
  const StoreTitle = styled.div`
    margin: 0;
    padding: 0;
-   font-weight: bold;
-   font-size: 1em;
-   line-height: 1.1em;
-   letter-spacing: 0.01em;
+   font-weight: 600;
+   font-size: 1.75rem;
    font-weight: bold;
    color: #787878;
   @media ${device.tablet} {
@@ -63,8 +69,11 @@ const StoreBlock = ({setGoogleMapInfoWindow, selectedStoreName, store: {storeNam
 
   // TODO: Make storeName stay highlighted when clicked, add more info to InfoWindow's message (address, link to go to see in google maps)
   return (
-    <StoreContainer onClick={() => setGoogleMapInfoWindow(storeName)}>
-      <StoreTitle storeIsSelected={storeIsSelected}>{storeName}</StoreTitle>
+    <StoreContainer
+      onClick={() => setGoogleMapInfoWindow(storeName)}
+      storeIsSelected={storeIsSelected}
+    >
+      <StyledH3>{storeName}</StyledH3>
       <StoreAddress>{address}</StoreAddress>
       <a href={website} target="_blank" rel="noopener noreferrer">
         View Website

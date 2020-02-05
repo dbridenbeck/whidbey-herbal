@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { device } from "../utils/devices";
 
 const H2Component = styled.h2`
-  margin: 0 0 40px 0;
+  margin: 0 0 96px 0;
   font-weight: 600;
   font-size: 2rem;
   line-height: 1.138em;

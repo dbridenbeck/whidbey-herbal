@@ -7,7 +7,7 @@ const StyledWrapper = styled.div`
   height: auto;
   max-width: ${props => props.maxWidth};
   margin: 0px auto 120px auto;
-  padding: 50px 0 140px 0;
+  padding: 200px 0 140px 0;
   ${({ backgroundColor }) =>
     backgroundColor &&
     `

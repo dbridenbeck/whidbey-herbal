@@ -8,6 +8,7 @@ import facebook from './images/facebook.png';
     display: block;
     width: 100%;
     margin-top: 50px;
+    z-index: 5;
     p {
       display: block;
       font-size: 1em;

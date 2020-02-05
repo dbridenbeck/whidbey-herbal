@@ -7,15 +7,27 @@ const StyledWrapper = styled.div`
   height: auto;
   max-width: ${props => props.maxWidth};
   margin: 0px auto 120px auto;
-  padding-top: 50px;
+  padding: 200px 0 140px 0;
+  ${({ backgroundColor }) =>
+    backgroundColor &&
+    `
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-color: ${backgroundColor};
+    `}
 `;
 
-const ComponentWrapper = ({maxWidth, children, id}) => {
+const ComponentWrapper = ({maxWidth, children, id, backgroundColor}) => {
 
   return (
     <StyledWrapper
       maxWidth={maxWidth}
       id={id}
+      backgroundColor={backgroundColor}
     >{children}</StyledWrapper>
   );
 }

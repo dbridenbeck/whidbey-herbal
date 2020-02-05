@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import * as CartActionCreators from "../../state/actions/cart";
 import { connect } from "react-redux";
+import StyledH3 from "../../SharedComponents/StyledH3";
 
 import PropTypes from "prop-types";
 import { device } from "../../utils/devices";
@@ -10,13 +11,13 @@ const StoreContainer = styled.div`
   position: relative;
   align-self: flex-start;
   flex-grow: 1;
-  width: 40%;
-  margin: 0 10px 40px 0;
+  width: 45%;
+  margin: 0 10px 52px 0;
   a {
     display: block;
     font-size: 0.75em;
     font-style: italic;
-    color: #c0c0c0;
+    color: #787878;
     text-decoration: none;
     :hover {
       color: #e3be42;
@@ -24,37 +25,36 @@ const StoreContainer = styled.div`
   }
   @media ${device.tablet} {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    :hover h3 {
+      cursor: pointer;
+      color: #e3be42;
+    }
+    h3 {
+      color: ${props => (props.storeIsSelected ? "#42e0e3" : "#2e2e2e")};
+    }
   }
 `;
-
- const StoreTitle = styled.div`
-   margin: 0;
-   padding: 0;
-   font-weight: bold;
-   font-size: 1em;
-   line-height: 1.1em;
-   letter-spacing: 0.01em;
-   font-weight: bold;
-   color: #787878;
-  @media ${device.tablet} {
-     color: ${props => (props.storeIsSelected ? "#42e0e3" : "#787878")};
-     :hover {
-       cursor: pointer;
-       color: #e3be42;
-     }
-   }
- `;
   
 const StoreAddress = styled.p`
   display: block;
   margin: 0;
   padding: 0;
-  font-weight: normal;
-  font-size: 0.875em;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 0.825rem;
   line-height: 1.5em;
   letter-spacing: 0.01em;
-  color: #787878;
+  color: #2e2e2e;
+  white-space: pre;
+  @media ${device.tablet} {
+    font-size: 1rem;
+    
+  }
+  @media ${device.laptop} {
+    font-size: 1.125rem;
+    
+  }
 `;
 
 const StoreBlock = ({setGoogleMapInfoWindow, selectedStoreName, store: {storeName, address, website}}) => {
@@ -63,8 +63,11 @@ const StoreBlock = ({setGoogleMapInfoWindow, selectedStoreName, store: {storeNam
 
   // TODO: Make storeName stay highlighted when clicked, add more info to InfoWindow's message (address, link to go to see in google maps)
   return (
-    <StoreContainer onClick={() => setGoogleMapInfoWindow(storeName)}>
-      <StoreTitle storeIsSelected={storeIsSelected}>{storeName}</StoreTitle>
+    <StoreContainer
+      onClick={() => setGoogleMapInfoWindow(storeName)}
+      storeIsSelected={storeIsSelected}
+    >
+      <StyledH3>{storeName}</StyledH3>
       <StoreAddress>{address}</StoreAddress>
       <a href={website} target="_blank" rel="noopener noreferrer">
         View Website

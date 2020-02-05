@@ -13,8 +13,8 @@ const mapURL = `https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geomet
 
 const Wrap = styled.div`
   display: none;
-  width: 60%;
-  max-width: 530px;
+  width: 80%;
+  max-width: 670px;
   position: relative;
   height: 80%;
   @media ${device.tablet} {
@@ -27,9 +27,9 @@ const MapContainer = styled.div`
   position: absolute;
   top: 9%;
   left: 10%;
-  width: 72%;
-  max-width: 390px;
+  width: 73%;
   height: 80%;
+  max-width: 480px;
   overflow: hidden;
   border-radius: 10px;
 `;
@@ -37,7 +37,7 @@ const MapContainer = styled.div`
 const MapImg = styled.img`
   display: block;
   width: 100%;
-  max-width: 530px;
+  max-width: 670px;
   margin: 0 auto;
 `;
 

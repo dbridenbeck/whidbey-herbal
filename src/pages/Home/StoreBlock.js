@@ -11,13 +11,13 @@ const StoreContainer = styled.div`
   position: relative;
   align-self: flex-start;
   flex-grow: 1;
-  width: 40%;
-  margin: 0 10px 40px 0;
+  width: 45%;
+  margin: 0 10px 52px 0;
   a {
     display: block;
     font-size: 0.75em;
     font-style: italic;
-    color: #c0c0c0;
+    color: #787878;
     text-decoration: none;
     :hover {
       color: #e3be42;
@@ -25,7 +25,7 @@ const StoreContainer = styled.div`
   }
   @media ${device.tablet} {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     :hover h3 {
       cursor: pointer;
       color: #e3be42;
@@ -42,10 +42,19 @@ const StoreAddress = styled.p`
   padding: 0;
   font-style: normal;
   font-weight: 300;
-  font-size: 1.5rem;
+  font-size: 0.825rem;
   line-height: 1.5em;
   letter-spacing: 0.01em;
   color: #2e2e2e;
+  white-space: pre;
+  @media ${device.tablet} {
+    font-size: 1rem;
+    
+  }
+  @media ${device.laptop} {
+    font-size: 1.125rem;
+    
+  }
 `;
 
 const StoreBlock = ({setGoogleMapInfoWindow, selectedStoreName, store: {storeName, address, website}}) => {

@@ -23,17 +23,23 @@ const StoreList = styled.div`
   align-items: center;
   justify-content: space-evenly;
   width: 90%;
+  max-width: 450px;
   margin: 0 auto;
   @media ${device.tablet} {
     flex-direction: column;
-    width: 40%;
+    max-width: '';
+    margin: 0 auto 0 20px;
+    width: 60%;
+  }
+  @media ${device.laptop} {
+    margin: 0 auto 0 40px;
   }
 `;
 
 export const stores = [
          {
            storeName: "Worn Path",
-           address: "4007 N. Mississippi Ave. Portland, OR 97227",
+           address: `4007 N. Mississippi Ave. \nPortland, OR 97227`,
            lat: 45.552305,
            lng: -122.675666,
            website: "https://www.worn-path.com/",
@@ -42,7 +48,7 @@ export const stores = [
          },
          {
            storeName: "3 Sisters Market",
-           address: "779 Holbrook Road Coupeville, WA 98239",
+           address: "779 Holbrook Road \nCoupeville, WA 98239",
            lat: 48.237278,
            lng: -122.719937,
            website: "https://www.3sistersmarket.com/",
@@ -51,7 +57,7 @@ export const stores = [
          },
          {
            storeName: "Wish by the Sea",
-           address: "208 1st St. Langley, WA 98260",
+           address: "208 1st \nSt. Langley, WA 98260",
            lat: 48.040886,
            lng: -122.408415,
            website: "https://www.facebook.com/wishsisters/",
@@ -60,7 +66,7 @@ export const stores = [
          },
          {
            storeName: "Flying Bear Florist",
-           address: "207 1st St. Langley, WA 98260",
+           address: "207 1st \nSt. Langley, WA 98260",
            lat: 48.040654,
            lng: -122.408515,
            website: "http://www.flyingbearfarm.com/",
@@ -69,7 +75,7 @@ export const stores = [
          },
          {
            storeName: "Madrona Supply Co.",
-           address: "8754 Washington 525, Clinton, WA 98236",
+           address: "8754 Washington 525 \nClinton, WA 98236",
            lat: 47.977944,
            lng: -122.354667,
            website: "https://www.madronasupplyco.com/",

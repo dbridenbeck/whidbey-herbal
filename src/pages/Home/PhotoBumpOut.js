@@ -5,7 +5,6 @@ import bottlesAndHoney from "./images/bottles-and-honey.jpg";
 const BumpOutContainer = styled.div`
   position: relative;
   width: 51%;
-  border: 1px solid blue;
   /* negative right margin to push image to right of screen on laptop/tablet/mobile */
   margin: 230px -12.5% 0 0;
   img {
@@ -21,7 +20,6 @@ const BumpOutContainer = styled.div`
     top: 0;
     left: 0;
     z-index: 1;
-    /* border: 1px solid green; */
   }
   circle {
     fill: #e6c564;
@@ -33,18 +31,11 @@ const BumpOutContainer = styled.div`
     left: -15%;
     width: 63.7%;
     height: 51%;
-    /* border: 1px solid red; */
   }
 `;
 
 
 const PhotoBumpOut = () => {
-
-  const processWidth = document.getElementById('process');
-
-  console.log("processWidth: ", processWidth);
-
-  // const distanceToWindowRight = window.innerWidth - 
 
   return (
     <BumpOutContainer>

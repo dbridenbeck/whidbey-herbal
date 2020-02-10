@@ -10,7 +10,7 @@ import StyledH5 from "./StyledH5";
 const ProductContainer = styled.div`
   display: block;
   width: 35%;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   :hover h5 {
     color: #e3be42;
   }
@@ -24,6 +24,7 @@ const ProductContainer = styled.div`
   }
   @media ${device.tablet} {
     width: 25%;
+    margin-bottom: 20px;
   }
 `;
 
@@ -59,8 +60,7 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
       </ImageContainer>
       <StyledH5 centered={true}> {product.title.toUpperCase()} </StyledH5>
       <p className="info">
-        5ml bottle <br />
-        <strong>${product.variants.edges[0].node.price}</strong>
+        ${product.variants.edges[0].node.price}
       </p>
     </ProductLink>
   );

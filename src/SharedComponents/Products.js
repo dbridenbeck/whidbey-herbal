@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import ComponentWrapper from "./ComponentWrapper";
+import StyledH2 from "./StyledH2";
 
 import Product from './Product';
 import { connect } from "react-redux";
@@ -15,9 +16,6 @@ const ProductsContainer = styled.div`
   position: relative;
 `;
 
-const StyledH2 = styled.h2`
-  color: #787878;
-`;
 
 const ExploreShopLink = styled(Link)`
   display: block;
@@ -25,13 +23,13 @@ const ExploreShopLink = styled(Link)`
   min-width: 145px;
   max-width: 300px;
   margin: 30px auto 0 auto;
-  padding: 5px;
+  padding: 10px 5px;
   color: #e3be42;
-  border: 1px solid #e3be42;
+  border: 2px solid #e3be42;
   border-radius: 10px;
   text-align: center;
-  font-size: 1em;
-  font-weight: normal;
+  font-size: 1.225em;
+  font-weight: 300;
   text-decoration: none;
   &:hover {
     background-color: #e3be42;
@@ -42,7 +40,7 @@ const ExploreShopLink = styled(Link)`
 const Products = ({products, title}) => {
 
   return (
-    <ComponentWrapper>
+    <ComponentWrapper hasTopBottomBorders={true}>
       <StyledH2> {title} </StyledH2>
       <ProductsContainer>
         {products

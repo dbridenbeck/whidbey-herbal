@@ -5,21 +5,13 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { device } from "../utils/devices";
 import * as CartActionCreators from "../state/actions/cart";
+import StyledH5 from "./StyledH5";
 
 const ProductContainer = styled.div`
   display: block;
   width: 35%;
   margin-bottom: 20px;
-  .title {
-    margin: 0;
-    font-size: 1em;
-    line-height: 1.25em;
-    font-weight: normal;
-    color: #787878;
-    text-decoration: none;
-    text-align: center;
-  }
-  :hover .title {
+  :hover h5 {
     color: #e3be42;
   }
   .info {
@@ -28,7 +20,7 @@ const ProductContainer = styled.div`
     line-height: 1.167em;
     font-weight: normal;
     text-align: center;
-    color: #666666;
+    color: black;
   }
   @media ${device.tablet} {
     width: 25%;
@@ -65,7 +57,7 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
           alt={`${product.description}`}
         />
       </ImageContainer>
-      <h3 className="title"> {product.title.toUpperCase()} </h3>
+      <StyledH5 centered={true}> {product.title.toUpperCase()} </StyledH5>
       <p className="info">
         5ml bottle <br />
         <strong>${product.variants.edges[0].node.price}</strong>

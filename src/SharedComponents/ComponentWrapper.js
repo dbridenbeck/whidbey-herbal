@@ -12,6 +12,8 @@ const StyledWrapper = styled.div`
     props.id === "process" ? "0px auto -3% auto" : "0px auto 120px auto"};
   padding: ${props =>
     props.id === "process" ? "200px 0 12% 0" : "200px 0 140px 0"};
+  border-top: ${props => props.hasTopBottomBorders ? "1px solid black" : "none"};
+  border-bottom: ${props => props.hasTopBottomBorders ? "1px solid black" : "none"};
   ${({ backgroundColor }) =>
     backgroundColor &&
     `
@@ -25,13 +27,14 @@ const StyledWrapper = styled.div`
     `}
 `;
 
-const ComponentWrapper = ({maxWidth, children, id, backgroundColor}) => {
+const ComponentWrapper = ({maxWidth, children, id, backgroundColor, hasTopBottomBorders}) => {
 
   return (
     <StyledWrapper
       maxWidth={maxWidth}
       id={id}
       backgroundColor={backgroundColor}
+      hasTopBottomBorders={hasTopBottomBorders}
     >{children}</StyledWrapper>
   );
 }

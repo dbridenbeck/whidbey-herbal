@@ -9,6 +9,7 @@ const PhotoContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  /* width 120% and negative margin-left keep photos to edge of screen */
   width: 120%;
   max-height: 785px;
   margin-left: -10%;

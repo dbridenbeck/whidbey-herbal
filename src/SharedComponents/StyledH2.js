@@ -13,7 +13,7 @@ const H2Component = styled.h2`
   font-size: 3rem;
 }
 @media ${device.laptop} {
-  font-size: 3rem;
+  font-size: 4rem;
 }
 `;
 

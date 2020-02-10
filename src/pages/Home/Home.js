@@ -4,18 +4,20 @@ import Products from "../../SharedComponents/Products"
 import PageWrapper from "../../SharedComponents/PageWrapper"
 
 import About from "./About"
+import PhotoSection from './PhotoSection'
 import Process from "./Process"
 import StoreLocator from "./StoreLocator"
-import RecpieSection from './RecipeSection'
+import RecipeSection from './RecipeSection'
 
 const Home = () =>
     <PageWrapper>
       <WelcomeSection />
       <Products title={""}/>
       <About />
+      <PhotoSection />
       <Process />
       <StoreLocator />
-      <RecpieSection />
+      <RecipeSection />
     </PageWrapper>
 
 export default Home;

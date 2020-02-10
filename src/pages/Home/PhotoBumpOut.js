@@ -6,7 +6,9 @@ const BumpOutContainer = styled.div`
   position: relative;
   width: 51%;
   /* negative right margin to push image to right of screen on laptop/tablet/mobile */
-  margin: 230px -12.5% 0 0;
+  /* negative top margin to stagger it with the last processblock */
+  margin: -22% -12.5% 0 0;
+  align-self: flex-end;
   img {
     position: relative;
     display: block;

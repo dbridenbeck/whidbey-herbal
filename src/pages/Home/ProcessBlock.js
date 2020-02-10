@@ -1,18 +1,31 @@
 import React from 'react';
 import styled from "styled-components";
 import PropTypes from 'prop-types';
+import { device } from '../../utils/devices';
 
   const ProcessContainer = styled.div`
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
     position: relative;
+    height: 400px;
     width: 40%;
-    /* help stagger horizontal positioning of process blocks */
-    :nth-child(even) {
-      margin-top: 230px;
-      align-self: baseline;
+    /* stagger process containers vertically and horizontally center the two columns */
+    margin: -10% 5% 0 5%;
+    @media ${device.tablet} {
+      height: 425px;
     }
-    :last-child {
-      margin: 0px auto 0 5%;
+    @media ${device.tablet} {
+      height: 500px;
+    }
+    /* set first child to have no negative top margin */
+    :first-child {
+      margin-top: 0;
+    }
+    /* stagger horizontal positioning of process blocks */
+    :nth-child(even) {
+      align-self: flex-end;
     }
   `;
   
@@ -20,25 +33,37 @@ import PropTypes from 'prop-types';
     position: relative;
     margin: 0;
     .title {
-      margin: ${props => (props.isLandscape ? "0 0 32px 0" : "48px 0 32px 0")};
+      margin: ${props => (props.fullWidth ? "0 0 32px 0" : "48px 0 32px 0")};
       padding: 0;
       font-family: "Domine", sans-serif;
       font-weight: normal;
       font-style: normal;
-      font-size: 2.5rem;
+      font-size: 1.5rem;
       text-align: center;
       color: #787878;
+      @media ${device.tablet} {
+        font-size: 2rem;
+      }
+      @media ${device.laptop} {
+        font-size: 2.5rem;
+      }
     }
     .description {
       margin: 0 auto;
       padding: 0;
-      font-size: 1.5rem;
+      font-size: 1rem;
       line-height: 1.375em;
       font-weight: 300;
       text-align: center;
       font-style: normal;
       letter-spacing: 0.01em;
       color: #787878;
+      @media ${device.tablet} {
+        font-size: 1.25rem;
+      }
+      @media ${device.laptop} {
+        font-size: 1.5rem;
+      }
     }
   `;
     
@@ -46,13 +71,13 @@ const Img = styled.img`
   display: block;
   margin: 0 auto;
   /* handle width for images that are landscape */
-  width: ${props => props.isLandscape ? "100%" : "60%"};
+  width: ${props => props.fullWidth ? "100%" : "60%"};
   height: auto;
 `;
   
 const ProcessBlock = ({
   process: {
-    isLandscape,
+    fullWidth,
     processTitle,
     description,
     img,
@@ -68,9 +93,9 @@ return (
       width={`${width}`}
       height={`${height}`}
       alt={`${alt}`}
-      isLandscape={isLandscape}
+      fullWidth={fullWidth}
     />
-    <Info isLandscape={isLandscape}>
+    <Info fullWidth={fullWidth}>
       <h6 className="title">{processTitle}</h6>
       <p className="description">{description}</p>
     </Info>
@@ -79,7 +104,7 @@ return (
 }
 
 ProcessBlock.propTypes = {
-  isLandscape: PropTypes.bool,
+  fullWidth: PropTypes.bool,
   processTitle: PropTypes.string,
   description: PropTypes.string,
   img: PropTypes.string,

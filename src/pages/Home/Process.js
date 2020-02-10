@@ -72,8 +72,7 @@ const Process = () => {
   return (
     <ComponentWrapper id="process">
       <StyledH2>
-        
-        Our Process
+        The Process
       </StyledH2>
       <ProcessWrapper>
         {processes.map(process => (

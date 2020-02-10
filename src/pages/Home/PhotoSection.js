@@ -10,9 +10,9 @@ const PhotoContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   /* width 120% and negative margin-left keep photos to edge of screen */
-  width: 120%;
+  width: 125%;
   max-height: 785px;
-  margin-left: -10%;
+  margin-left: -12.5%;
   @media ${device.tablet} {
     width: 115%;
     max-height: 785px;

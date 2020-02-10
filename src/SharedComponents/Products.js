@@ -37,10 +37,10 @@ const ExploreShopLink = styled(Link)`
   }
 `;
 
-const Products = ({products, title}) => {
+const Products = ({products, title, hasTopBottomBorders}) => {
 
   return (
-    <ComponentWrapper hasTopBottomBorders={true}>
+    <ComponentWrapper hasTopBottomBorders={hasTopBottomBorders}>
       <StyledH2> {title} </StyledH2>
       <ProductsContainer>
         {products

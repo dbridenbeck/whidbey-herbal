@@ -12,7 +12,7 @@ import RecipeSection from './RecipeSection'
 const Home = () =>
     <PageWrapper>
       <WelcomeSection />
-      <Products title={"Featured Products"}/>
+      <Products title={"Featured Products"} hasTopBottomBorders={true}/>
       <About />
       <PhotoSection />
       <Process />

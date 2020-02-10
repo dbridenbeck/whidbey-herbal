@@ -1,66 +1,67 @@
 import React from 'react';
-import Wrapper from "../../SharedComponents/ComponentWrapper";
-import StyledH1 from "../../SharedComponents/StyledH1";
+import styled from "styled-components";
+import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
+import StyledH2 from "../../SharedComponents/StyledH2";
 import ProcessBlock from './ProcessBlock';
-
+import PhotoBumpOut from './PhotoBumpOut';
 import harvestLeft from './images/harvestLeft.jpg';
-import harvestRight from "./images/harvestRight.jpg";
-import prepareLeft from "./images/prepareLeft.jpg";
-import prepareRight from "./images/prepareRight.jpg";
-import distill from "./images/distill.jpg";
-import aging from "./images/aging.jpg";
-import bottleLeft from "./images/bottleLeft.jpg";
+import handBright from "./images/hand-bright.jpg";
 import bottleRight from "./images/bottleRight.jpg";
+import aging from "./images/aging.jpg";
+import distill from "./images/distill.jpg";
+
+  const ProcessWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  `;
 
 const processes = [
   {
-    processTitle: "HARVEST",
+    processTitle: "Harvest",
     description:
       "Our harvest methods vary for each oil. We forage for downed fir bows and use the lavendar from our farm.",
-    imgFlanked: true,
-    imgLeft: `${harvestLeft}`, 
-    imgRight: `${harvestRight}`, 
+    img: `${harvestLeft}`,
+    fullWidth: false,
     width: "450",
     height: "450",
     alt: "A watercolor of a fir bow"
   },
   {
-    processTitle: "PREPARE",
+    processTitle: "Prepare",
     description:
-    "Plants are trimmed as needed and packed into the still for distillation.",
-    imgFlanked: true, 
-    imgLeft: `${prepareLeft}`, 
-    imgRight: `${prepareRight}`,
+      "Plants are trimmed as needed and packed into the still for distillation.",
+    img: `${handBright}`,
+    fullWidth: true,
     width: "200",
     height: "225",
     alt: "A watercolor of a hand pruning a fir bow"
   },
   {
-    processTitle: "DISTILL",
+    processTitle: "Distill",
     description:
-    "The still boils water and pushes steam through the plant material to remove the aromatic oils. The steam is then recondensed into essential oil which is tapped off for aging.",
-    imgFlanked: false, 
-    fullWidthImg: `${distill}`,
+      "The still boils water and pushes steam through the plant material to remove the aromatic oils. The steam is then recondensed into essential oil which is tapped off for aging.",
     width: "1550",
+    img: `${distill}`,
+    fullWidth: true,
     height: "549",
     alt: "A watercolor of a copper still for distilling essential oils"
   },
   {
-    processTitle: "AGING",
+    processTitle: "Aging",
     description:
-    "Oils are 'dried' using epsom salt, and aged between 6 and 12 weeks depending on the plant.",
-    imgFlanked: false, 
-    fullWidthImg: `${aging}`,
+      "Oils are 'dried' using epsom salt, and aged between 6 and 12 weeks depending on the plant.",
+    img: `${aging}`,
+    fullWidth: true,
     width: "1950",
     height: "700",
     alt: "A watercolor of differnt moon phases"
   },
   {
-    processTitle: "BOTTLE",
+    processTitle: "Bottle",
     description: "We then hand bottle the oils and bring them to market!",
-    imgFlanked: true, 
-    imgLeft: `${bottleLeft}`, 
-    imgRight: `${bottleRight}`,
+    img: `${bottleRight}`,
+    fullWidth: false,
     width: "200",
     height: "225",
     alt: "A watercolor of a flower"
@@ -69,15 +70,18 @@ const processes = [
 
 const Process = () => {
   return (
-    <Wrapper id="process" maxWidth={"800px"} positionRelative={true}>
-      <StyledH1 colorIsGrey={true} centered={true}>
-        {" "}
-        Our Process{" "}
-      </StyledH1>
-      {processes.map(process => (
-        <ProcessBlock process={process} key={process.processTitle} />
-      ))}
-    </Wrapper>
+    <ComponentWrapper id="process">
+      <StyledH2>
+        
+        Our Process
+      </StyledH2>
+      <ProcessWrapper>
+        {processes.map(process => (
+          <ProcessBlock process={process} key={process.processTitle} />
+        ))}
+      <PhotoBumpOut />
+      </ProcessWrapper>
+    </ComponentWrapper>
   );
 }
 

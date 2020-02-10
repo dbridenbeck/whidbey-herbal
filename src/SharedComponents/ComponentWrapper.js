@@ -6,8 +6,12 @@ const StyledWrapper = styled.div`
   width: 100%;
   height: auto;
   max-width: ${props => props.maxWidth};
-  margin: 0px auto 120px auto;
-  padding: 200px 0 140px 0;
+  /* conditional for process allows the yellow svg circle to position correctly
+  and responsively overlap the storeLocator component */
+  margin: ${props =>
+    props.id === "process" ? "0px auto -3% auto" : "0px auto 120px auto"};
+  padding: ${props =>
+    props.id === "process" ? "200px 0 12% 0" : "200px 0 140px 0"};
   ${({ backgroundColor }) =>
     backgroundColor &&
     `

@@ -1,122 +1,116 @@
 import React from 'react';
 import styled from "styled-components";
 import PropTypes from 'prop-types';
+import { device } from '../../utils/devices';
 
   const ProcessContainer = styled.div`
-    display: table;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
     position: relative;
-    width: 100%;
-    /* Ternary deals with if process is flanked by two images or not */
-    height: ${props => props.imgFlanked ? "120px" : "190px" };
-    margin-bottom: 200px;
+    height: 400px;
+    width: 40%;
+    /* stagger process containers vertically and horizontally center the two columns */
+    margin: -10% 5% 0 5%;
+    @media ${device.tablet} {
+      height: 425px;
+    }
+    @media ${device.tablet} {
+      height: 500px;
+    }
+    /* set first child to have no negative top margin */
+    :first-child {
+      margin-top: 0;
+    }
+    /* stagger horizontal positioning of process blocks */
+    :nth-child(even) {
+      align-self: flex-end;
+    }
   `;
   
   const Info = styled.div`
-    position: absolute;
-    top: ${props => (props.imgFlanked ? "10%" : "45%")};
-    /* the "Distill" process needs some special casing due to it's image dimensions */
-    left: ${props => (props.processTitle === "DISTILL" ? "20%" : "29%")};
-    width: ${props => (props.processTitle === "DISTILL" ? "60%" : "42%")};
-    margin-top: ${process.imgFlanked ? "2.25%" : "0"};
-    z-index: 2;
+    position: relative;
+    margin: 0;
     .title {
-      margin: 5% 0 5px 0;
+      margin: ${props => (props.fullWidth ? "0 0 32px 0" : "48px 0 32px 0")};
+      padding: 0;
+      font-family: "Domine", sans-serif;
       font-weight: normal;
-      font-size: 1.5em;
+      font-style: normal;
+      font-size: 1.5rem;
       text-align: center;
       color: #787878;
+      @media ${device.tablet} {
+        font-size: 2rem;
+      }
+      @media ${device.laptop} {
+        font-size: 2.5rem;
+      }
     }
     .description {
       margin: 0 auto;
       padding: 0;
-      font-size: 0.875em;
-      line-height: 1.5em;
+      font-size: 1rem;
+      line-height: 1.375em;
+      font-weight: 300;
       text-align: center;
       font-style: normal;
       letter-spacing: 0.01em;
       color: #787878;
+      @media ${device.tablet} {
+        font-size: 1.25rem;
+      }
+      @media ${device.laptop} {
+        font-size: 1.5rem;
+      }
     }
   `;
+    
+const Img = styled.img`
+  display: block;
+  margin: 0 auto;
+  /* handle width for images that are landscape */
+  width: ${props => props.fullWidth ? "100%" : "60%"};
+  height: auto;
+`;
   
-  const FlankImgWrapper = styled.div`
-    display: table;
-    position: relative;
-    width: 100%;
-    height: 100%;
-  `;
-  
-  const ImgLeft = styled.img`
-    display: block;
-    float: left;
-    width: 30%;
-    height: auto;
-  `;
-  
-  const ImgRight = styled.img`
-    display: block;
-    float: right;
-    width: 30%;
-    height: auto;
-  `;
-  
-  const FullWidthImg = styled.img`
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
-    z-index: 1;
-  `;
-
 const ProcessBlock = ({
   process: {
-    imgFlanked,
+    fullWidth,
     processTitle,
     description,
-    imgLeft,
-    imgRight,
+    img,
     width,
     height,
     alt,
-    fullWidthImg
   }
 }) => {
 return (
-  <ProcessContainer imgFlanked={imgFlanked}>
-    <Info 
-      imgFlanked={imgFlanked}
-      processTitle={processTitle}
-    >
-      <h3 className="title">{processTitle}</h3>
+  <ProcessContainer>
+    <Img
+      src={`${img}`}
+      width={`${width}`}
+      height={`${height}`}
+      alt={`${alt}`}
+      fullWidth={fullWidth}
+    />
+    <Info fullWidth={fullWidth}>
+      <h6 className="title">{processTitle}</h6>
       <p className="description">{description}</p>
     </Info>
-    {/* Render FlankImgWrapper if process is flanked by images, otherwise use FullWidthImg */}
-    {imgFlanked ? (
-      <FlankImgWrapper>
-        <ImgLeft
-          src={`${imgLeft}`}
-          width={`${width}`}
-          height={`${height}`}
-          alt={`${alt}`}
-        />
-        <ImgRight src={`${imgRight}`} />
-      </FlankImgWrapper>
-    ) : (
-      <FullWidthImg src={`${fullWidthImg}`} />
-    )}
   </ProcessContainer>
 );
 }
 
 ProcessBlock.propTypes = {
-  imgFlanked: PropTypes.bool,
+  fullWidth: PropTypes.bool,
   processTitle: PropTypes.string,
   description: PropTypes.string,
-  imgLeft: PropTypes.string,
-  imgRight: PropTypes.string,
+  img: PropTypes.string,
   width: PropTypes.number,
   height: PropTypes.number,
   alt: PropTypes.string,
-  fullWidthImg: PropTypes.string
 };
 
 export default ProcessBlock;

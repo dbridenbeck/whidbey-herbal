@@ -37,7 +37,7 @@ const PhotoSection = styled.div`
   position: relative;
   background-image: url(${PhotoSectionSVG});
   background-position: center;
-  margin: 0 -999rem 140px -999rem;
+  margin: 0 -999rem 50% -999rem;
   padding: 0 999rem;
   @media ${device.tablet} {
   /* create full-width bar effect on non-mobile screens */

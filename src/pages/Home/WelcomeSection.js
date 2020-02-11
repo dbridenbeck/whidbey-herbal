@@ -37,8 +37,7 @@ const PhotoSection = styled.div`
   position: relative;
   background-image: url(${PhotoSectionSVG});
   background-position: center;
-  border: 1px solid blue;
-  margin: 0 -999rem;
+  margin: 0 -999rem 140px -999rem;
   padding: 0 999rem;
   @media ${device.tablet} {
   /* create full-width bar effect on non-mobile screens */
@@ -53,11 +52,11 @@ const PhotoContainer = styled.div`
   justify-content: flex-start;
   flex-wrap: wrap;
   width: 110vw;
-  margin: 0% 0 0 -15%;
-  border: 1px solid red;
+  max-height: 225px;
+  margin: 7.5% 0 0 -15%;
   img {
     margin-top: -10%;
-    width: 48vw;
+    width: 45vw;
   }
   .circle-photo {
       max-height: 580px;
@@ -69,8 +68,13 @@ const PhotoContainer = styled.div`
     }
   p {
     margin: 10% 5% 0 5%;
-    text-align: left;
+    padding-right: 5%;
     width: 45%;
+    font-size: .7rem;
+    font-weight: 300;
+    @media ${device.laptop} {
+      font-size: 2.375rem;
+    }
   }
   @media ${device.laptop} {
     width: 1200px;

@@ -27,20 +27,35 @@ const WelcomeWrapper = styled.div`
     font-weight: normal;
     color: #787878;
   }
+`;
+
+const PhotoSection = styled.div`
+  display: block;
+  
   svg {
     /* make sure svg wave covers full width of screen */
-    width: 120vw;
-    margin-left: -10%;
+    width: 125vw;
+    margin-left: -15%;
     @media ${device.tablet} {
-      width: 120vw;
       margin-left: -30%;
     }
     @media ${device.laptop} {
-      width: 120vw;
       margin-left: -50%;
     }
   }
 `;
+  
+const PhotoContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 1200px;
+  .circle-photo {
+      border-radius: 50%;
+    }
+    .right-rect-photo {
+    }
+`;
+
 
 const FarmAndLogoContainer = styled.div`
   position: relative;
@@ -81,14 +96,23 @@ const WelcomeSection = () => {
         Small-batch, handcrafted, seed to bottle. <br />
         Grown from the Heart of Whidbey Island.
       </p>
-
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path
-          fill="#0099ff"
-          fill-opacity="1"
-          d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,170.7C960,203,1056,245,1152,245.3C1248,245,1344,203,1392,181.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-        ></path>
-      </svg>
+      <PhotoSection>
+        <svg
+          viewBox="0 0 1279 854"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M640 42.9994C994 -53 1280 42.9994 1280 42.9994V184V670V811.001C1280 811.001 994 907 640 811.001C286 715.001 0 811.001 0 811.001V670V184V42.9994C0 42.9994 286 138.999 640 42.9994Z"
+            fill="#FFF3D1"
+          />
+        </svg>
+        <p></p>
+        <PhotoContainer>
+          {/* <img class="circle-photo" src={} />
+          <img class="right-rect-photo" src={} /> */}
+        </PhotoContainer>
+      </PhotoSection>
     </WelcomeWrapper>
   );
 };

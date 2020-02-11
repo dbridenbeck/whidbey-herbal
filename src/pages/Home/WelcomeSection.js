@@ -2,7 +2,10 @@ import React from 'react';
 import styled from "styled-components";
 import { device } from "../../utils/devices";
 import farm from "./images/farm-no-lines.jpg";
-import circleLogo from "./images/circle-logo.png";
+import CircleLogo from "./images/circle-logo.png";
+import Dock from "./images/dock.jpg";
+import HoneyAndBottles from "./images/honey-and-bottles.jpg";
+import PhotoSectionSVG from './images/photosectionsvg.svg';
 
 const WelcomeWrapper = styled.div`
   position: relative;
@@ -31,29 +34,47 @@ const WelcomeWrapper = styled.div`
 
 const PhotoSection = styled.div`
   display: block;
-  
-  svg {
-    /* make sure svg wave covers full width of screen */
-    width: 125vw;
-    margin-left: -15%;
-    @media ${device.tablet} {
-      margin-left: -30%;
-    }
-    @media ${device.laptop} {
-      margin-left: -50%;
-    }
+  position: relative;
+  background-image: url(${PhotoSectionSVG});
+  background-position: center;
+  border: 1px solid blue;
+  margin: 0 -999rem;
+  padding: 0 999rem;
+  @media ${device.tablet} {
+  /* create full-width bar effect on non-mobile screens */
+  margin: 0 -9999rem;
+  padding: 0 9999rem;
   }
 `;
   
 const PhotoContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 1200px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 110vw;
+  margin: 0% 0 0 -15%;
+  border: 1px solid red;
+  img {
+    margin-top: -10%;
+    width: 48vw;
+  }
   .circle-photo {
+      max-height: 580px;
       border-radius: 50%;
+      align-self: flex-end;
+      margin: 0 5%;
     }
     .right-rect-photo {
     }
+  p {
+    margin: 10% 5% 0 5%;
+    text-align: left;
+    width: 45%;
+  }
+  @media ${device.laptop} {
+    width: 1200px;
+  }
 `;
 
 
@@ -83,7 +104,7 @@ const WelcomeSection = () => {
     <WelcomeWrapper>
       <FarmAndLogoContainer>
         <Logo
-          src={`${circleLogo}`}
+          src={`${CircleLogo}`}
           width="800"
           height="800"
           alt="Whidbey Island Logo"
@@ -97,20 +118,14 @@ const WelcomeSection = () => {
         Grown from the Heart of Whidbey Island.
       </p>
       <PhotoSection>
-        <svg
-          viewBox="0 0 1279 854"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M640 42.9994C994 -53 1280 42.9994 1280 42.9994V184V670V811.001C1280 811.001 994 907 640 811.001C286 715.001 0 811.001 0 811.001V670V184V42.9994C0 42.9994 286 138.999 640 42.9994Z"
-            fill="#FFF3D1"
-          />
-        </svg>
-        <p></p>
         <PhotoContainer>
-          {/* <img class="circle-photo" src={} />
-          <img class="right-rect-photo" src={} /> */}
+        <p>
+          We’re a family farm that grows and distills each of our essential
+          oils, fresh from the heart of beautiful Whidbey Island in the Salish
+          Sea.
+        </p> 
+          <img class="circle-photo" src={HoneyAndBottles} />
+          <img class="right-rect-photo" src={Dock} />
         </PhotoContainer>
       </PhotoSection>
     </WelcomeWrapper>

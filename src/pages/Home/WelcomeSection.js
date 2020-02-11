@@ -51,29 +51,30 @@ const PhotoContainer = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
+  /* 110vw width to ensure that screen width is fully covered */
   width: 110vw;
   max-height: 225px;
-  margin: 7.5% 0 0 -15%;
+  /* negative margin to push PhotoContainer slightly beyond left of screen */
+  margin-left: -20%;
   img {
-    margin-top: -10%;
-    width: 45vw;
+    width: 45%;
+    /* push images closer to p */
+    margin-top: -13%;
   }
   .circle-photo {
-      max-height: 580px;
-      border-radius: 50%;
-      align-self: flex-end;
-      margin: 0 5%;
-    }
-    .right-rect-photo {
-    }
+    align-self: flex-end;
+    width: 55%;
+    border-radius: 50%;
+    padding: 0 6.4%;
+  }
   p {
-    margin: 10% 5% 0 5%;
-    padding-right: 5%;
-    width: 45%;
-    font-size: .7rem;
+    width: 42%;
+    /* 6.4% left and right margins ensures this is centered above circle-photo */
+    margin: 10% 6.4% 0 6.4%;
+    font-size: .725rem;
     font-weight: 300;
-    @media ${device.laptop} {
-      font-size: 2.375rem;
+    @media ${device.tablet} {
+      font-size: 1.375rem;
     }
   }
   @media ${device.laptop} {

@@ -16,6 +16,7 @@ const Quantity = styled.form`
 
 const StyledInput = styled.input`
   margin: 0 auto;
+  max-width: 45px;
   border: 1px solid #787878;
   border-radius: 10px;
   text-align: center;

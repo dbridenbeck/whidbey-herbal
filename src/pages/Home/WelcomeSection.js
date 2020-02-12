@@ -2,7 +2,10 @@ import React from 'react';
 import styled from "styled-components";
 import { device } from "../../utils/devices";
 import farm from "./images/farm-no-lines.jpg";
-import circleLogo from "./images/circle-logo.png";
+import CircleLogo from "./images/circle-logo.png";
+import Dock from "./images/dock.jpg";
+import HoneyAndBottles from "./images/honey-and-bottles.jpg";
+import PhotoSectionSVG from './images/photosectionsvg.svg';
 
 const WelcomeWrapper = styled.div`
   position: relative;
@@ -28,6 +31,57 @@ const WelcomeWrapper = styled.div`
     color: #787878;
   }
 `;
+
+const PhotoSection = styled.div`
+  display: block;
+  position: relative;
+  background-image: url(${PhotoSectionSVG});
+  background-position: center;
+  margin: 0 -999rem 50% -999rem;
+  padding: 0 999rem;
+  @media ${device.tablet} {
+  /* create full-width bar effect on non-mobile screens */
+  margin: 0 -9999rem;
+  padding: 0 9999rem;
+  }
+`;
+  
+const PhotoContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  /* 110vw width to ensure that screen width is fully covered */
+  width: 110vw;
+  max-height: 225px;
+  /* negative margin to push PhotoContainer slightly beyond left of screen */
+  margin-left: -20%;
+  img {
+    width: 45%;
+    /* push images closer to p */
+    margin-top: -13%;
+  }
+  .circle-photo {
+    align-self: flex-end;
+    width: 55%;
+    border-radius: 50%;
+    padding: 0 6.4%;
+  }
+  p {
+    width: 42%;
+    /* 6.4% left and right margins ensures this is centered above circle-photo */
+    margin: 10% 6.4% 0 6.4%;
+    font-size: .725rem;
+    font-weight: 300;
+    @media ${device.tablet} {
+      font-size: 1.375rem;
+    }
+  }
+  @media ${device.laptop} {
+    width: 1200px;
+  }
+`;
+
 
 const FarmAndLogoContainer = styled.div`
   position: relative;
@@ -55,7 +109,7 @@ const WelcomeSection = () => {
     <WelcomeWrapper>
       <FarmAndLogoContainer>
         <Logo
-          src={`${circleLogo}`}
+          src={`${CircleLogo}`}
           width="800"
           height="800"
           alt="Whidbey Island Logo"
@@ -63,9 +117,22 @@ const WelcomeSection = () => {
         <FarmIllustration src={`${farm}`} />
       </FarmAndLogoContainer>
       <h1>Whidbey Herbal</h1>
-      <p> Small-batch, handcrafted, seed to bottle. <br />
+      <p>
+        {" "}
+        Small-batch, handcrafted, seed to bottle. <br />
         Grown from the Heart of Whidbey Island.
       </p>
+      <PhotoSection>
+        <PhotoContainer>
+        <p>
+          We’re a family farm that grows and distills each of our essential
+          oils, fresh from the heart of beautiful Whidbey Island in the Salish
+          Sea.
+        </p> 
+          <img class="circle-photo" src={HoneyAndBottles} />
+          <img class="right-rect-photo" src={Dock} />
+        </PhotoContainer>
+      </PhotoSection>
     </WelcomeWrapper>
   );
 };

@@ -83,16 +83,6 @@ export class Checkout extends PureComponent {
     this.createCheckoutContainer = this.createCheckoutContainer.bind(this);
   }
 
-  componentDidMount() {
-    const { checkoutId, updateCheckoutId } = this.props;
-     // create the checkout if it doesn't already exist
-    if (!checkoutId) {
-      client.checkout.create().then(checkout => {
-        updateCheckoutId(checkout.id)
-      });
-    }
-  }
-
   createRemoveButton = (id, index) => {
     const { removeLineItem } = this.props;
     const remove = () => removeLineItem(id, index);
@@ -109,7 +99,7 @@ export class Checkout extends PureComponent {
   }
   
   createCheckoutButton = () => {
-    const { lineItems, checkoutId, updateCheckoutId } = this.props;
+    const { lineItems, updateCheckoutId } = this.props;
     const lineItemsToAdd = lineItems.map(
       item => (
         {
@@ -119,21 +109,24 @@ export class Checkout extends PureComponent {
       )
     );
 
-    const goToShopifyCheckout = () => {
-      client.checkout
-      // update checkoutId to ensure that a fresh checkout is used
-      // this avoids the edge case where a user checks out but doesn't finish
-      // and then returns to the store to update their cart and re-checkout
-        .create().then(checkout => {
-          updateCheckoutId(checkout.id)
-        })
-        .then(client.checkout.addLineItems(checkoutId, lineItemsToAdd)
-        .then(checkout => {
-          window.location.href = checkout.webUrl
-      }))
-    };  
+   const createIdAndCheckout = () =>
+    client.checkout.create()
+      .then(checkout => {
+        updateCheckoutId(checkout.id)
+        return checkout.id
+      })
+      .then(checkoutId =>
+        client.checkout.addLineItems(checkoutId, lineItemsToAdd)
+          .then(checkout => {
+            window.location.href = checkout.webUrl;
+          })
+          .catch(error =>
+            console.log("Error creating ID and Checking Out: ", error)
+          )
+      );
+
     return (
-      <CheckoutButton className="checkout" onClick={(goToShopifyCheckout)}>
+      <CheckoutButton className="checkout" onClick={createIdAndCheckout}>
         Proceed to Checkout
       </CheckoutButton>
     );

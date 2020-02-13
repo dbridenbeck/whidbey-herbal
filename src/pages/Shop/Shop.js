@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import styled from "styled-components";
 import PageWrapper from "../../SharedComponents/PageWrapper";
-import FeaturedProduct from "../../SharedComponents/FeaturedProduct";
+import Product from "../../SharedComponents/Product";
 import StyledH1 from "../../SharedComponents/StyledH1";
 
 const ProductsContainer = styled.div`
@@ -25,7 +25,7 @@ const Shop = ({products}) => {
         {products
           .filter(product => product.availableForSale)
           .map(product => (
-            <FeaturedProduct key={product.id} product={product} />
+            <Product key={product.id} product={product} />
           ))}
       </ProductsContainer>
     </PageWrapper>

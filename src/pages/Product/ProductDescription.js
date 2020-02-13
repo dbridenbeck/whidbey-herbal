@@ -90,7 +90,6 @@ const ProductDetails = ({
   
   // handle null values for quantityButtonAmount
   const quantity = quantityButtonAmount === "" ? 0 : quantityButtonAmount;
-  console.log("what is metafields?: ", metafields)
   // begin component's return
   return (
     <ProductDetailsWrapper>

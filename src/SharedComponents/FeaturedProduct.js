@@ -59,6 +59,8 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
     updateQuantityButton(1);
   }
 
+  console.log("what is product in FeaturedProduct?: ", product)
+
   return (
     <ProductLink to={`/product/${product.handle}`} onClick={clearHeroImgAndQuantityButton}>
       <ImageContainer>
@@ -76,10 +78,10 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
 };
 
 // begin component
-const Product = ({product, clearHeroImg, updateQuantityButton}) => {
+const Product = ({product: {node}, clearHeroImg, updateQuantityButton}) => {
   return (
     <ProductContainer>
-      {createProduct(product, clearHeroImg, updateQuantityButton)}
+      {createProduct(node, clearHeroImg, updateQuantityButton)}
     </ProductContainer>
   );
 };

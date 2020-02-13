@@ -37,11 +37,14 @@ export const fetchShopifyArticlesAction = () => {
 
 // Build a custom products query using the unoptimized version of the SDK
 const productsQuery = client.graphQLClient.query((root) => {
-  root.addConnection('products', {args: {first: 4}}, (product) => {
+  root.addConnection('products', {args: {first: 20}}, (product) => {
     product.add('title');
     product.add('descriptionHtml');
     product.add('handle');
     product.add('availableForSale');
+    product.addConnection("collections", {args: {first: 2}}, collection => {
+      collection.add("handle");
+    });
     product.addConnection("metafields", {args: {first: 2}}, metafield => {
       metafield.add("key")
       metafield.add("value");

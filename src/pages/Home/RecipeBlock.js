@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 
 const RecipeLink = styled(Link)`
   display: block;
-  width: 38%;
+  width: 47%;
   text-decoration: none;
   /* position last item aligned left if last item is odd */
   :last-child:nth-child(odd) {
-    margin: 0 auto 0 8%;
+    margin: 0 auto 0 2%;
   }
 `;
 

@@ -7,7 +7,7 @@ const RecipeLink = styled(Link)`
   display: block;
   width: 47%;
   text-decoration: none;
-  /* position last item aligned left if last item is odd */
+    /* position last item aligned left if last item is odd */
   :last-child:nth-child(odd) {
     margin: 0 auto 0 2%;
   }

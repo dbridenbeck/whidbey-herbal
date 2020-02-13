@@ -16,9 +16,9 @@ import facebook from './images/facebook.png';
       font-weight: 300;
       color: #2e2e2e;
       margin: 20px 0;
-      :hover {
-        color: black;
-      }
+    }
+    .member-text {
+      font-size: 0.825em;
     }
     a {
       font-weight: 300;
@@ -56,6 +56,7 @@ const ContactAndSocials = () => {
     <ContactAndSocialsWrapper>
       <a href="mailto:hello@whidbeyherbal.com">hello@whidbeyherbal.com</a>
       <p>(360) 386-5831</p>
+      <p className="member-text">Proud member of the Whidbey Island Grown cooperative.</p>
       <SocialIconContainer>
         <a href="https://www.instagram.com/whidbeyherbal/">
           <SocialIcon

@@ -7,7 +7,7 @@ import facebook from './images/facebook.png';
   const ContactAndSocialsWrapper = styled.div`
     display: block;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 20px;
     z-index: 5;
     p {
       display: block;
@@ -31,7 +31,6 @@ import facebook from './images/facebook.png';
     @media ${device.tablet} {
       width: 35%;
       max-width: 448px;
-      margin-top: 20px;
     }
   `;
 

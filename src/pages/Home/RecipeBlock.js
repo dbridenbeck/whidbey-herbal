@@ -5,13 +5,18 @@ import { Link } from "react-router-dom";
 
 const RecipeLink = styled(Link)`
   display: block;
-  width: 39%;
+  width: 38%;
   text-decoration: none;
+  /* position last item aligned left if last item is odd */
+  :last-child:nth-child(odd) {
+    margin: 0 auto 0 8%;
+  }
 `;
 
 const RecipeContainer = styled.div`
   position: relative;
-  margin: 0 0px 20px 0;
+  /* use relative positioning to make margin for :last-child:nth-child(odd) on RecipeLink work */
+  margin: 0 6% 70px 6%;
   &:hover h5 {
     color: #e3be42;
   }

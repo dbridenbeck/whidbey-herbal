@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 
 import * as serviceWorker from './serviceWorker';
-import { Reducer1 } from './state/App';
+import { Reducer1 } from './state/app';
 import App from './App';
 import { saveToLocalStorage, getFromLocalStorage } from "../src/state/localStorage";
 import thunk from "redux-thunk";

@@ -2,6 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { device } from "../../utils/devices";
+
 
 const RecipeLink = styled(Link)`
   display: block;
@@ -31,16 +33,28 @@ const RecipeInfo = styled.div`
     margin-bottom: 5px;
     padding: 0;
     font-weight: bold;
-    font-size: 1.313rem;
+    font-size: 0.825rem;
     color: #2e2e2e;
+    @media ${device.tablet} {
+      font-size: 1.125rem;
+    }
+    @media ${device.laptop} {
+      font-size: 1.313rem;
+    }
   }
   .recipeText {
     margin: 0;
     padding: 0;
     font-weight: normal;
     font-style: normal;
-    font-size: 1.313rem;
+    font-size: 0.825rem;
     color: #2e2e2e;
+    @media ${device.tablet} {
+      font-size: 1.125rem;
+    }
+    @media ${device.laptop} {
+      font-size: 1.313rem;
+    }
   }
   svg {
     position: absolute;

@@ -24,7 +24,7 @@ const HeroImage = styled.img`
   margin: 2.5% auto 30px auto;
   width: 100%;
   height: auto;
-  border: 4px solid #e3be42;
+  /* border: 4px solid #e3be42; */
   border-radius: 10px;
 `;
 

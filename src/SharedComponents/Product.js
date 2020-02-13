@@ -22,9 +22,18 @@ const ProductContainer = styled.div`
     text-align: center;
     color: black;
   }
+  :last-child {
+    display: none;
+    @media ${device.laptop} {
+      display: block;
+    }
+  }
   @media ${device.tablet} {
     width: 25%;
     margin-bottom: 20px;
+  }
+  @media ${device.laptop} {
+    width: 20%;
   }
 `;
 

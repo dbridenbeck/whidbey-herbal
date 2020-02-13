@@ -2,20 +2,27 @@ import React from 'react';
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { device } from "../../utils/devices";
+
 
 const RecipeLink = styled(Link)`
   display: block;
-  width: 39%;
+  width: 47%;
   text-decoration: none;
+    /* position last item aligned left if last item is odd */
+  :last-child:nth-child(odd) {
+    margin: 0 auto 0 2%;
+  }
 `;
 
 const RecipeContainer = styled.div`
   position: relative;
-  margin: 0 0px 20px 0;
+  /* use relative positioning to make margin for :last-child:nth-child(odd) on RecipeLink work */
+  margin: 0 6% 70px 6%;
   &:hover h5 {
     color: #e3be42;
   }
-  &:hover .arrow {
+  &:hover svg path {
     fill: #e3be42;
   }
 `;
@@ -23,27 +30,41 @@ const RecipeContainer = styled.div`
 const RecipeInfo = styled.div`
   position: relative;
   h5 {
+    display: block;
     margin-bottom: 5px;
-    padding: 0;
+    padding-right: 8%;
     font-weight: bold;
-    font-size: 1.313rem;
+    font-size: 0.825rem;
     color: #2e2e2e;
+    @media ${device.tablet} {
+      font-size: 1.125rem;
+    }
+    @media ${device.laptop} {
+      font-size: 1.313rem;
+    }
   }
   .recipeText {
     margin: 0;
     padding: 0;
     font-weight: normal;
     font-style: normal;
-    font-size: 1.313rem;
+    font-size: 0.825rem;
     color: #2e2e2e;
+    @media ${device.tablet} {
+      font-size: 1.125rem;
+    }
+    @media ${device.laptop} {
+      font-size: 1.313rem;
+    }
   }
   svg {
     position: absolute;
-    top: 5px;
-    right: 2px;
-  }
-  .arrow {
-    fill: black;
+    top: 2px;
+    right: 0px;
+    width: 8%;
+    @media ${device.tablet} {
+      top: 5px;
+    }
   }
 `;
 
@@ -81,7 +102,7 @@ const RecipeBlock = ({
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path className="arrow"
+            <path
               d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z"
               fill="black"
               fill-opacity="0.54"

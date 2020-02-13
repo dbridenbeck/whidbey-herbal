@@ -20,7 +20,7 @@ const ProductsContainer = styled.div`
 const ExploreShopLink = styled(Link)`
   display: block;
   width: 40%;
-  min-width: 145px;
+  min-width: 200px;
   max-width: 300px;
   margin: 30px auto 0 auto;
   padding: 10px 5px;

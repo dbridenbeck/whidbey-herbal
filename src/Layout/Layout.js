@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { client } from "../plugins/shopify.js";
 import * as CartActionCreators from "../state/actions/cart";
 import { fetchShopifyProductsAction, fetchShopifyArticlesAction } from '../state/fetchShopifyData';
-import ComponentWrapper from '../SharedComponents/ComponentWrapper';
 import Footer from '../SharedComponents/Footer';
 import styled from "styled-components";
 import Header from "./Header"
@@ -15,7 +14,7 @@ const MasterWrapper = styled.div`
   width: 100%;
   height: ${props => props.height};
   max-width: 1200px;
-  margin: 0px auto 120px auto;
+  margin: 60px auto 120px auto;
   padding: 0px 20px 0 20px;
 `;
 
@@ -53,7 +52,7 @@ const Layout = ({
     <>
       <MasterWrapper id='MasterWrapper' height={height}>
         <Header />
-        <ComponentWrapper id="home" maxWidth={"1200px"}>{children}</ComponentWrapper>
+        <div id="home">{children}</div>
       </MasterWrapper>
       <Footer />
     </>

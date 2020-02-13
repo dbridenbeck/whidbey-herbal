@@ -9,16 +9,11 @@ import { device } from '../../utils/devices';
     align-content: center;
     justify-content: center;
     position: relative;
-    height: 400px;
-    width: 40%;
-    /* stagger process containers vertically and horizontally center the two columns */
-    margin: -10% 5% 0 5%;
-    @media ${device.tablet} {
-      height: 425px;
-    }
-    @media ${device.tablet} {
-      height: 500px;
-    }
+    height: 375px;
+    width: 60%;
+    /* use margins to stagger process containers vertically 
+    and horizontally center the two columns */
+      margin: 0% 5% 0 5%;
     /* set first child to have no negative top margin */
     :first-child {
       margin-top: 0;
@@ -26,6 +21,15 @@ import { device } from '../../utils/devices';
     /* stagger horizontal positioning of process blocks */
     :nth-child(even) {
       align-self: flex-end;
+    }
+    @media ${device.tablet} {
+      width: 40%;
+      height: 500px;
+      margin: -20% 5% 0 5%;
+    }
+    @media ${device.laptop} {
+      height: 500px;
+      margin: -10% 5% 0 5%;
     }
   `;
   

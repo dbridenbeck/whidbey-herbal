@@ -5,7 +5,7 @@ import { client } from "../plugins/shopify.js";
 
 // create query for shopify articles, used in getArticles
 const articlesQuery = client.graphQLClient.query(root => {
-    root.addConnection("articles", { args: { first: 4 } }, article => {
+    root.addConnection("articles", { args: { first: 20 } }, article => {
       article.add("title");
       article.add("handle");
       article.add("url");

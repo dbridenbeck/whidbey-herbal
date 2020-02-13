@@ -30,8 +30,9 @@ const RecipeContainer = styled.div`
 const RecipeInfo = styled.div`
   position: relative;
   h5 {
+    display: block;
     margin-bottom: 5px;
-    padding: 0;
+    padding-right: 8%;
     font-weight: bold;
     font-size: 0.825rem;
     color: #2e2e2e;

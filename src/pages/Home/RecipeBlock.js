@@ -22,7 +22,7 @@ const RecipeContainer = styled.div`
   &:hover h5 {
     color: #e3be42;
   }
-  &:hover .arrow {
+  &:hover svg path {
     fill: #e3be42;
   }
 `;
@@ -58,11 +58,12 @@ const RecipeInfo = styled.div`
   }
   svg {
     position: absolute;
-    top: 5px;
-    right: 2px;
-  }
-  .arrow {
-    fill: black;
+    top: 2px;
+    right: 0px;
+    width: 8%;
+    @media ${device.tablet} {
+      top: 5px;
+    }
   }
 `;
 
@@ -100,7 +101,7 @@ const RecipeBlock = ({
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path className="arrow"
+            <path
               d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z"
               fill="black"
               fill-opacity="0.54"

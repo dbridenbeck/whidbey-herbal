@@ -44,7 +44,6 @@ const Products = ({products, title, hasTopBottomBorders}) => {
       <StyledH2> {title} </StyledH2>
       <ProductsContainer>
         {products
-          .filter(product => product.collections.edges[0].node.handle === "featured-products")
           .map(product => (
             <Product key={product.id} product={product} />
           ))}

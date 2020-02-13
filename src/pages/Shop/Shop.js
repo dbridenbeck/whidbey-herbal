@@ -14,6 +14,7 @@ const ProductsContainer = styled.div`
   margin: 70px 0;
 `;
 
+
 const Shop = ({products}) => {
 
   return (

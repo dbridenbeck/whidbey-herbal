@@ -57,7 +57,7 @@ const Products = ({ title, hasTopBottomBorders }) => {
       <ProductsContainer>
         {featuredProducts
         .map(product => (
-          <Product key={product.id} product={product} />
+          <Product key={product.node.id} product={product} />
         ))}
       </ProductsContainer>
       <ExploreShopLink to="/shop">Explore the Shop</ExploreShopLink>

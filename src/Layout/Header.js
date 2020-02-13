@@ -169,6 +169,7 @@ export class Header extends PureComponent {
   }
 
   render() {
+    console.log("props in header is: ", this.props)
   return (
     <>
       {this.createNavBar()}

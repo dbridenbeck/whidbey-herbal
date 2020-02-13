@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { client } from "../plugins/shopify.js";
 import ComponentWrapper from "./ComponentWrapper";
 import StyledH2 from "./StyledH2";
+
 import Product from './Product';
-import { queryFeaturedProductsCollection } from '../state/fetchShopifyData';
+import { connect } from "react-redux";
 
 const ProductsContainer = styled.div`
   display: flex;
@@ -15,6 +15,7 @@ const ProductsContainer = styled.div`
   justify-content: space-evenly;
   position: relative;
 `;
+
 
 const ExploreShopLink = styled(Link)`
   display: block;
@@ -36,38 +37,30 @@ const ExploreShopLink = styled(Link)`
   }
 `;
 
-const Products = ({ title, hasTopBottomBorders }) => {
-  const [featuredProducts, setFeaturedProducts] = useState([]);
-
-  // TODO: figure out how to avoid re-fetching on route changes
-  if (featuredProducts.length === 0) {
-    // make query with items sorted by MANUAL order
-    client.graphQLClient
-      .send(queryFeaturedProductsCollection, { sortKey: "MANUAL" })
-      .then(({ model, data }) => {
-        // store products in local state
-        setFeaturedProducts(data.collectionByHandle.products.edges);
-      })
-      .catch( error => console.log("Error fetching featured-products collection: ", error));
-  }
+const Products = ({products, title, hasTopBottomBorders}) => {
 
   return (
     <ComponentWrapper hasTopBottomBorders={hasTopBottomBorders}>
       <StyledH2> {title} </StyledH2>
       <ProductsContainer>
-        {featuredProducts
-        .map(product => (
-          <Product key={product.id} product={product} />
-        ))}
+        {products
+          .filter(product => product.collections.edges[0].node.handle === "featured-products")
+          .map(product => (
+            <Product key={product.id} product={product} />
+          ))}
       </ProductsContainer>
       <ExploreShopLink to="/shop">Explore the Shop</ExploreShopLink>
     </ComponentWrapper>
   );
 };
 
+const mapStateToProps = ( {products} ) => ({
+  products
+});
+
 Products.propTypes = {
   products: PropTypes.array,
   title: PropTypes.string
 }
 
-export default Products;
+export default connect(mapStateToProps)(Products);

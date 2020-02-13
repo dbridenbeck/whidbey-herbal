@@ -1,6 +1,6 @@
 import React from "react"
 import WelcomeSection from "./WelcomeSection"
-import FeaturedProducts from "../../SharedComponents/FeaturedProducts"
+import Products from "../../SharedComponents/Products"
 import PageWrapper from "../../SharedComponents/PageWrapper"
 
 import About from "./About"
@@ -12,7 +12,7 @@ import RecipeSection from './RecipeSection'
 const Home = () =>
     <PageWrapper>
       <WelcomeSection />
-      <FeaturedProducts title={"Featured Products"} hasTopBottomBorders={true}/>
+      <Products title={"Featured Products"} hasTopBottomBorders={true}/>
       <About />
       <PhotoSection />
       <Process />

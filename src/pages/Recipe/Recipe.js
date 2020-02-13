@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { device } from "../../utils/devices";
 
-import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
+import Products from '../../SharedComponents/Products';
 import PageWrapper from '../../SharedComponents/PageWrapper';
 import StyledH1 from '../../SharedComponents/StyledH1';
 
@@ -88,7 +88,7 @@ const Recipe = ({
   return (
     <PageWrapper>
       {createRecipe()}
-      <FeaturedProducts title={"Explore the Shop"} />
+      <Products title={"Explore the Shop"} />
     </PageWrapper>
   );
 };

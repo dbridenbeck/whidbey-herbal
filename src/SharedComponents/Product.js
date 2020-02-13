@@ -76,10 +76,10 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
 };
 
 // begin component
-const Product = ({product: {node}, clearHeroImg, updateQuantityButton}) => {
+const Product = ({product, clearHeroImg, updateQuantityButton}) => {
   return (
     <ProductContainer>
-      {createProduct(node, clearHeroImg, updateQuantityButton)}
+      {createProduct(product, clearHeroImg, updateQuantityButton)}
     </ProductContainer>
   );
 };

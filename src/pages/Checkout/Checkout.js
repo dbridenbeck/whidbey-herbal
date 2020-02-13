@@ -12,7 +12,6 @@ import LineItems from './LineItems';
 import LineItemHeaders from './LineItemHeaders';
 import SubtotalSection from './SubtotalSection';
 import Products from '../../SharedComponents/Products';
-import Footer from "../../SharedComponents/Footer";
 
 const CheckoutContainer = styled.div`
   display: block;
@@ -179,7 +178,6 @@ export class Checkout extends PureComponent {
           Checkout
         </StyledH1>
         {this.createCheckoutContainer()}
-        <Footer />
       </PageWrapper>
     );
   }

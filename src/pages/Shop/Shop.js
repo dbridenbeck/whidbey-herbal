@@ -4,7 +4,6 @@ import styled from "styled-components";
 import PageWrapper from "../../SharedComponents/PageWrapper";
 import Product from "../../SharedComponents/Product";
 import StyledH1 from "../../SharedComponents/StyledH1";
-import Footer from "../../SharedComponents/Footer";
 
 const ProductsContainer = styled.div`
   display: flex;
@@ -30,7 +29,6 @@ const Shop = ({products}) => {
             <Product key={product.id} product={product} />
           ))}
       </ProductsContainer>
-      <Footer />
     </PageWrapper>
   );
 };

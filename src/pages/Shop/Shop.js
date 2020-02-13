@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import styled from "styled-components";
 import PageWrapper from "../../SharedComponents/PageWrapper";
-import Product from "../../SharedComponents/Product";
+import FeaturedProduct from "../../SharedComponents/FeaturedProduct";
 import StyledH1 from "../../SharedComponents/StyledH1";
 
 const ProductsContainer = styled.div`
@@ -13,7 +13,6 @@ const ProductsContainer = styled.div`
   position: relative;
   margin: 70px 0;
 `;
-
 
 const Shop = ({products}) => {
 
@@ -26,7 +25,7 @@ const Shop = ({products}) => {
         {products
           .filter(product => product.availableForSale)
           .map(product => (
-            <Product key={product.id} product={product} />
+            <FeaturedProduct key={product.id} product={product} />
           ))}
       </ProductsContainer>
     </PageWrapper>

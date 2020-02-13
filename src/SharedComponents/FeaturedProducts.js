@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import ComponentWrapper from "./ComponentWrapper";
 import StyledH2 from "./StyledH2";
 
-import Product from './Product';
+import FeaturedProduct from './FeaturedProduct';
 import { connect } from "react-redux";
 
 const ProductsContainer = styled.div`
@@ -46,7 +46,7 @@ const Products = ({products, title, hasTopBottomBorders}) => {
         {products
           .filter(product => product.collections.edges[0].node.handle === "featured-products")
           .map(product => (
-            <Product key={product.id} product={product} />
+            <FeaturedProduct key={product.id} product={product} />
           ))}
       </ProductsContainer>
       <ExploreShopLink to="/shop">Explore the Shop</ExploreShopLink>

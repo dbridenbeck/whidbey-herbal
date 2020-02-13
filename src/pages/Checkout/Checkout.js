@@ -11,7 +11,7 @@ import * as CartActionCreators from '../../state/actions/cart';
 import LineItems from './LineItems';
 import LineItemHeaders from './LineItemHeaders';
 import SubtotalSection from './SubtotalSection';
-import Products from '../../SharedComponents/Products';
+import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
 
 const CheckoutContainer = styled.div`
   display: block;
@@ -160,12 +160,12 @@ export class Checkout extends PureComponent {
             calculatedCartSubtotal={calculatedCartSubtotal}
             createCheckoutButton={this.createCheckoutButton}
           />
-          <Products title={"Continue Shopping"} />
+          <FeaturedProducts title={"Continue Shopping"} />
         </CheckoutContainer>
       ) : (
         <CheckoutContainer>
           <StyledH2>Your Shopping Cart is empty.</StyledH2>
-          <Products title={"Explore the Shop"} />
+          <FeaturedProducts title={"Explore the Shop"} />
         </CheckoutContainer>
       )
     )

@@ -24,7 +24,7 @@ const Navbar = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 50px;
+  height: 60px;
   background-color: rgba(255, 255, 255, 0.8);
   border-bottom: 2px solid #e3be42;
   :hover {

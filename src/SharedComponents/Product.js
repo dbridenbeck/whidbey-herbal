@@ -30,14 +30,14 @@ const ProductContainer = styled.div`
     z-index: 99;
     span {
       display: block;
-      width: 75%;
+      width: 100%;
       margin: 50% auto 0 auto;
       padding: 10px;
       color: #525252;
       font-size: 1.25em;
+      font-weight: 300;
       text-align: center;
       background: rgba(230, 197, 100, 0.5);
-
     }
   }
   /* 

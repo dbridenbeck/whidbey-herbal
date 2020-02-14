@@ -26,7 +26,10 @@ const ProductDetails = ({
 }) => {
   return (
     <ProductInfoWrapper>
-      <ProductImages images={selectedProduct.images}/>
+      <ProductImages 
+        images={selectedProduct.images}
+        selectedProduct={selectedProduct}
+      />
       <ProductDescription 
         selectedProduct={selectedProduct} 
         doesItemExist={doesItemExist}

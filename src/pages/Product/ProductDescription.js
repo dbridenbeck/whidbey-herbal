@@ -43,6 +43,7 @@ const ProductDetailsWrapper = styled.div`
 `;
 
 const CTABlock = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -68,41 +69,38 @@ const CTABlock = styled.div`
       width: 30%;
     }
   }
+  .soldOutWarning {
+    position: absolute;
+    width: 100%;
+    span {
+      display: block;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0px;
+      color: #525252;
+      font-size: 1.5em;
+      font-weight: 300;
+      text-align: right;
+    }
+  }
 `;
 
 const ShopifyHTML = styled.div`
   margin-top: 30px;
 `;
 
-// begin component
-const ProductDetails = ({
-  selectedProduct,
-  selectedProduct: {
-    title, 
+const createCTABlock = (selectedProduct, doesItemExist, updateQuantityButton, quantityButtonAmount) => {
+  const { 
     variants, 
-    descriptionHtml,
-    metafields
-  },
-  doesItemExist,
-  quantityButtonAmount,
-  updateQuantityButton
-}) => {
-  
+    metafields,
+    availableForSale
+  } = selectedProduct;
+
   // handle null values for quantityButtonAmount
   const quantity = quantityButtonAmount === "" ? 0 : quantityButtonAmount;
-  console.log("what is metafields?: ", metafields)
-  // begin component's return
+
   return (
-    <ProductDetailsWrapper>
-      <StyledH1 colorIsGrey={false} centered={false}>
-        {title}
-      </StyledH1>
-      {/* TODO replace AboutText's content with metafield via shopify once I have it whitelisted via graphql admin api */}
-      <ShopifyHTML
-        dangerouslySetInnerHTML={{
-          __html: metafields.edges[0].node.value
-        }}
-      />
+    availableForSale ? (
       <CTABlock>
         <span className="price">${variants.edges[0].node.price}</span>
         <QuantityButton
@@ -120,6 +118,51 @@ const ProductDetails = ({
           maxQuantity={parseInt(metafields.edges[1].node.value)}
         />
       </CTABlock>
+    ) : (
+      <CTABlock>
+        <span className="price">${variants.edges[0].node.price}</span>
+        <div className="soldOutWarning">
+          {" "}
+          <span>SOLD OUT</span>{" "}
+        </div>
+      </CTABlock>
+    )
+  )
+}
+
+// begin component
+const ProductDetails = ({
+  selectedProduct,
+  selectedProduct: {
+    title, 
+    descriptionHtml,
+    metafields
+  },
+  doesItemExist,
+  quantityButtonAmount,
+  updateQuantityButton
+}) => {
+
+  // begin component's return
+  return (
+    <ProductDetailsWrapper>
+      <StyledH1 colorIsGrey={false} centered={false}>
+        {title}
+      </StyledH1>
+      {/* below HTML is for "about" section */}
+      <ShopifyHTML
+        dangerouslySetInnerHTML={{
+          __html: metafields.edges[0].node.value
+        }}
+      />
+      {/* CTA block is conditionally rendered depending on availableForSale */}
+      {createCTABlock(
+        selectedProduct,
+        doesItemExist,
+        updateQuantityButton,
+        quantityButtonAmount
+      )}
+      {/* below HTML is for Characteristics, Uses, and Common-Sense Caution */}
       <ShopifyHTML
         dangerouslySetInnerHTML={{
           __html: descriptionHtml

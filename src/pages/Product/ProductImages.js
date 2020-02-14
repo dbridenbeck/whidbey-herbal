@@ -9,8 +9,25 @@ import styled from "styled-components";
 
 // Begin Styled Components
 const ProductImagesWrapper = styled.div`
+  position: relative;
   width: 100%;
   margin: 0 auto;
+  .soldOutWarning {
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    span {
+      display: block;
+      width: 100%;
+      margin: 50% auto 0 auto;
+      padding: 10px;
+      color: #525252;
+      font-size: 2em;
+      font-weight: 300;
+      text-align: center;
+      background: rgba(230, 197, 100, 0.5);
+    }
+  }
   @media ${device.tablet} {
     width: 45%;
   }
@@ -58,6 +75,7 @@ const ProductImages = ({
   heroImgSrc,
   heroImgId,
   handleHeroImg,
+  selectedProduct: {availableForSale}
 }) => {
 
   // when clicked, AltImage updates state and sets heroImg's src to AltImage
@@ -85,15 +103,17 @@ const ProductImages = ({
   // begin component's return
   return (
     <ProductImagesWrapper>
+      {!availableForSale ? (
+        <div className="soldOutWarning">
+          {" "}
+          <span>SOLD OUT</span>{" "}
+        </div>
+      ) : null}
       <HeroImage
-        src={
-          heroImgSrc ? heroImgSrc : images.edges[0].node.src
-        }
+        src={heroImgSrc ? heroImgSrc : images.edges[0].node.src}
         alt="Product Photo"
       />
-      <AltImages>
-        {images.edges.map(image => createAltImage(image))}
-      </AltImages>
+      <AltImages>{images.edges.map(image => createAltImage(image))}</AltImages>
     </ProductImagesWrapper>
   );
 };

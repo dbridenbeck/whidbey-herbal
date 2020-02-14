@@ -41,9 +41,9 @@ const ProductContainer = styled.div`
     }
   }
   /* 
-    The below :last-child rule allows 5 featured products to be shown on laptop
-    on Mobile/Tablet, the last product in the Featured-Products collection will be hidden
-    If you are on the /shop route, ignore this rule and show all products in shop
+    :last-child allows 5 featured products to be shown on laptop, but on Mobile/Tablet
+    the last product in the Featured-Products collection will be hidden. 
+    If you are on the /shop route, ignore this rule altogether and show all products in shop.
   */
     ${props =>
       props.pathname !== "/shop"

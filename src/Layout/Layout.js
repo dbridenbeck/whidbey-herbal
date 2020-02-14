@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { client } from "../plugins/shopify.js";
@@ -6,7 +6,9 @@ import * as CartActionCreators from "../state/actions/cart";
 import {
   fetchShopifyProductsAction,
   fetchShopifyArticlesAction,
-  fetchFeaturedProductsAction
+  fetchFeaturedProductsAction,
+  updateShopifyProductsAction,
+  updateFeaturedProductsAction
 } from "../state/fetchShopifyData";
 import Footer from '../SharedComponents/Footer';
 import styled from "styled-components";
@@ -28,8 +30,11 @@ const Layout = ({
   fetchShopifyProducts,
   fetchShopifyArticles,
   fetchFeaturedProducts,
+  updateShopifyProducts,
+  updateFeaturedProducts,
   checkoutId,
-  products
+  products,
+  featuredProducts
 }) => {
   const clearCheckoutIfCompleted = () => {
     checkoutId
@@ -51,6 +56,14 @@ const Layout = ({
     fetchShopifyArticles();
   }
 
+  // every time Layout is rendered, check shopify to see if articles, collection, or products have changed
+  // if so, update redux with the new information from shopify
+  useEffect(() => {
+    updateShopifyProducts(products);
+    // updateShopifyArticles(articles);
+    updateFeaturedProducts(featuredProducts);
+  }, [])
+    
   // calculate document height to keep footer at bottom of page
   const height = document.documentElement.scrollHeight;
 
@@ -72,9 +85,10 @@ Layout.propTypes = {
   fetchProducts: PropTypes.func,
 };
 
-const mapStateToProps = ( {products, checkout: {checkoutId}} ) => ({
+const mapStateToProps = ( {products, featuredProducts, checkout: {checkoutId}} ) => ({
   checkoutId,
-  products
+  products,
+  featuredProducts
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -82,7 +96,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch(CartActionCreators.clearCheckoutInState()),
   fetchShopifyProducts: () => dispatch(fetchShopifyProductsAction()),
   fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
-  fetchFeaturedProducts: () => dispatch(fetchFeaturedProductsAction())
+  fetchFeaturedProducts: () => dispatch(fetchFeaturedProductsAction()),
+  updateShopifyProducts: productsFromRedux =>
+    dispatch(updateShopifyProductsAction(productsFromRedux)),
+  updateFeaturedProducts: featuredProductsFromRedux =>
+    dispatch(updateFeaturedProductsAction(featuredProductsFromRedux))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Layout));

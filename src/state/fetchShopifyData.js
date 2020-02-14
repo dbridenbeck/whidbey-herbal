@@ -1,63 +1,67 @@
-import { fetchPending, fetchSuccess, fetchError } from './actions/cart';
+import { fetchPending, fetchSuccess, fetchError } from "./actions/cart";
 import { client } from "../plugins/shopify.js";
 
-// Here's the actions for fetching shopify data
+// Below are three sections: articles, products, and collections
+// In each section there are three peices: a query, the method to fetch data on initial load, and the method to update data if
+// it is different than what's in redux
 
-// FETCH ARTICLES
+// ARTICLES SECTION
 const articlesQuery = client.graphQLClient.query(root => {
-    root.addConnection("articles", { args: { first: 20 } }, article => {
-      article.add("title");
-      article.add("handle");
-      article.add("url");
-      article.add("contentHtml");
-      article.add("excerpt");
-      article.addField("image", {}, image => {
-        image.add("id");
-        image.add("originalSrc");
-      });
-    });
-  });
-
-export const fetchShopifyArticlesAction = () => {
-         return dispatch => {
-           dispatch(fetchPending());
-           client.graphQLClient
-             .send(articlesQuery)
-             .then(({ model, data }) => {
-               const articles = data.articles.edges;
-               // add articles from shopify to redux
-               dispatch(fetchSuccess("articles", articles));
-               return articles;
-             })
-             .catch(error => {
-               dispatch(fetchError(error));
-             });
-         };
-       };
-
-// FETCH PRODUCTS
-const productsQuery = client.graphQLClient.query((root) => {
-  root.addConnection('products', {args: {first: 20}}, (product) => {
-    product.add('title');
-    product.add('descriptionHtml');
-    product.add('handle');
-    product.add('availableForSale');
-    product.addConnection("metafields", {args: {first: 2}}, metafield => {
-      metafield.add("key")
-      metafield.add("value");
-    });
-    product.addConnection("images", {args: {first: 10}}, image => {
+  root.addConnection("articles", { args: { first: 20 } }, article => {
+    article.add("title");
+    article.add("handle");
+    article.add("url");
+    article.add("contentHtml");
+    article.add("excerpt");
+    article.addField("image", {}, image => {
       image.add("id");
-      image.add("src");
-      image.add("altText");
-    });
-    product.addConnection('variants', {args: {first: 1}}, variant => {
-      variant.add('id');
-      variant.add('price');
+      image.add("originalSrc");
     });
   });
 });
 
+// GET articles on initial page load
+export const fetchShopifyArticlesAction = () => {
+  return dispatch => {
+    dispatch(fetchPending());
+    client.graphQLClient
+      .send(articlesQuery)
+      .then(({ model, data }) => {
+        const articles = data.articles.edges;
+        // add articles from shopify to redux
+        dispatch(fetchSuccess("articles", articles));
+        return articles;
+      })
+      .catch(error => {
+        dispatch(fetchError(error));
+      });
+  };
+};
+
+// PRODUCTS SECTION
+const productsQuery = client.graphQLClient.query(root => {
+  root.addConnection("products", { args: { first: 20 } }, product => {
+    product.add("title");
+    product.add("descriptionHtml");
+    product.add("handle");
+    product.add("availableForSale");
+    product.addConnection("metafields", { args: { first: 2 } }, metafield => {
+      metafield.add("key");
+      metafield.add("value");
+    });
+    product.addConnection("images", { args: { first: 10 } }, image => {
+      image.add("id");
+      image.add("src");
+      image.add("altText");
+    });
+    product.addConnection("variants", { args: { first: 1 } }, variant => {
+      variant.add("id");
+      variant.add("price");
+    });
+  });
+});
+
+// GET products on initial page load
 export const fetchShopifyProductsAction = () => {
   return dispatch => {
     dispatch(fetchPending());
@@ -65,11 +69,9 @@ export const fetchShopifyProductsAction = () => {
     client.graphQLClient
       .send(productsQuery)
       .then(({ model, data }) => {
-        const products = data.products.edges.map(
-          product => product.node
-        );
+        const products = data.products.edges.map(product => product.node);
         // add products from shopify to redux
-          dispatch(fetchSuccess("products", products));
+        dispatch(fetchSuccess("products", products));
         return products;
       })
       .catch(error => {
@@ -78,15 +80,39 @@ export const fetchShopifyProductsAction = () => {
   };
 };
 
-// FETCH "featured-products" COLLECTION
-  // create variable to use sortKey
-  const sortKey = client.graphQLClient.variable(
-    "sortKey",
-    "ProductCollectionSortKeys"
-  );
-  
-  // query to get collection with handle === "featured-products"
-  const queryFeaturedProductsCollection = client.graphQLClient.query([sortKey], root => {
+// UPDATE products on initial page load
+export const updateShopifyProductsAction = productsFromRedux => {
+  return dispatch => {
+    dispatch(fetchPending());
+    // Call the send method with the custom products query
+    client.graphQLClient
+      .send(productsQuery)
+      .then(({ model, data }) => {
+        console.log("products are updating!")
+        const products = data.products.edges.map(product => product.node);
+        // check to see if products in redux is the same as products from shopify
+        // if not, add the products to redux
+        return productsFromRedux === products
+          ? null
+          : dispatch(fetchSuccess("products", products));
+      })
+      .catch(error => {
+        dispatch(fetchError(error));
+      });
+  };
+};
+
+// "featured-products" COLLECTION SECTION
+// create variable to use sortKey
+const sortKey = client.graphQLClient.variable(
+  "sortKey",
+  "ProductCollectionSortKeys"
+);
+
+// query to GET collection with handle === "featured-products"
+const queryFeaturedProductsCollection = client.graphQLClient.query(
+  [sortKey],
+  root => {
     root.add(
       "collectionByHandle",
       { args: { handle: "featured-products" } },
@@ -94,7 +120,7 @@ export const fetchShopifyProductsAction = () => {
         collection.add("id");
         collection.addConnection(
           "products",
-          { args: { sortKey: sortKey, first: 5} },
+          { args: { sortKey: sortKey, first: 5 } },
           product => {
             product.add("title");
             product.add("descriptionHtml");
@@ -132,21 +158,43 @@ export const fetchShopifyProductsAction = () => {
         );
       }
     );
-  });
+  }
+);
 
-  export const fetchFeaturedProductsAction = () => {
-    return dispatch => {
-      dispatch(fetchPending());
-      client.graphQLClient
-        .send(queryFeaturedProductsCollection)
-        .then(({ model, data }) => {
-          console.log("what is data within fetchFeaturedProductsAction", data)
-          const featuredProducts = data.collectionByHandle.products.edges;
-          // add products from collection to redux
-          dispatch(fetchSuccess("featuredProducts", featuredProducts));
-        })
-        .catch(error => {
-          dispatch(fetchError(error));
-        });
-    };
+// GET Featured-Products collection on initial page load
+export const fetchFeaturedProductsAction = () => {
+  return dispatch => {
+    dispatch(fetchPending());
+    client.graphQLClient
+      .send(queryFeaturedProductsCollection)
+      .then(({ model, data }) => {
+        console.log("what is data within fetchFeaturedProductsAction", data);
+        const featuredProducts = data.collectionByHandle.products.edges;
+        // add products from collection to redux
+        dispatch(fetchSuccess("featuredProducts", featuredProducts));
+      })
+      .catch(error => {
+        dispatch(fetchError(error));
+      });
   };
+};
+
+export const updateFeaturedProductsAction = featuredProductsFromRedux => {
+  return dispatch => {
+    dispatch(fetchPending());
+    // Call the send method with the custom products query
+    client.graphQLClient
+      .send(queryFeaturedProductsCollection)
+      .then(({ model, data }) => {
+        const featuredProducts = data.collectionByHandle.products.edges;
+        // check to see if featuredProducts in redux is the same as products from shopify
+        // if not, add the featuredProducts to redux
+        return featuredProductsFromRedux === featuredProducts
+          ? null
+          : dispatch(fetchSuccess("featuredProducts", featuredProducts));
+      })
+      .catch(error => {
+        dispatch(fetchError(error));
+      });
+  };
+};

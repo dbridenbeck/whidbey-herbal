@@ -34,11 +34,10 @@ const ProductContainer = styled.div`
       margin: 50% auto 0 auto;
       padding: 10px;
       color: #525252;
-      font-weight: bold;
+      font-size: 1.25em;
       text-align: center;
       background: rgba(230, 197, 100, 0.5);
-      border: 2px solid #525252;
-      border-radius: 10px;
+
     }
   }
   /* 

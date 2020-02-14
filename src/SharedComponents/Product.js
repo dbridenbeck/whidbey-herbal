@@ -53,6 +53,7 @@ const ProductContainer = styled.div`
         @media ${device.laptop} {
           display: block;
         }
+      }
       `
         : null}
   @media ${device.tablet} {

@@ -24,7 +24,6 @@ const Shop = ({products}) => {
       </StyledH1>
       <ProductsContainer>
         {products
-          .filter(product => product.availableForSale)
           .map(product => (
             <Product key={product.id} product={product} />
           ))}

@@ -9,6 +9,7 @@ import StyledH5 from "./StyledH5";
 
 const ProductContainer = styled.div`
   display: block;
+  position: relative;
   width: 35%;
   margin-bottom: 40px;
   :hover h5 {
@@ -22,22 +23,39 @@ const ProductContainer = styled.div`
     text-align: center;
     color: black;
   }
+  .soldOutWarning {
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    z-index: 99;
+    span {
+      display: block;
+      width: 75%;
+      margin: 50% auto 0 auto;
+      padding: 10px;
+      color: #525252;
+      font-weight: bold;
+      text-align: center;
+      background: rgba(230, 197, 100, 0.5);
+      border: 2px solid #525252;
+      border-radius: 10px;
+    }
+  }
   /* 
     The below :last-child rule allows 5 featured products to be shown on laptop
     on Mobile/Tablet, the last product in the Featured-Products collection will be hidden
     If you are on the /shop route, ignore this rule and show all products in shop
   */
-  ${props => props.pathname !== "/shop" ? 
-    `
-    :last-child {
-      display: none;
-      @media ${device.laptop} {
-        display: block;
-      }
-    `
-    : null
-  }
-  }
+    ${props =>
+      props.pathname !== "/shop"
+        ? `
+      :last-child {
+        display: none;
+        @media ${device.laptop} {
+          display: block;
+        }
+      `
+        : null}
   @media ${device.tablet} {
     width: 25%;
     margin-bottom: 20px;
@@ -52,15 +70,17 @@ const ProductLink = styled(Link)`
 `;
 
 const ImageContainer = styled.div`
-    display: block;
-    max-width: 100%;
-    margin-bottom: 20px;
+  position: relative;
+  display: block;
+  max-width: 100%;
+  margin-bottom: 20px;
 `;
 
 const Image = styled.img`
   display: block;
   max-width: 100%;
   max-height: 100%;
+${props => !props.isAvailable ? "opacity: .5" : "opacity: 1"};
 `
 
 const createProduct = (product, clearHeroImg, updateQuantityButton) => {
@@ -70,17 +90,26 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
   }
 
   return (
-    <ProductLink to={`/product/${product.handle}`} onClick={clearHeroImgAndQuantityButton}>
+    <ProductLink
+      to={`/product/${product.handle}`}
+      onClick={clearHeroImgAndQuantityButton}
+      isAvailable={product.availableForSale}
+    >
       <ImageContainer>
+        {!product.availableForSale ? (
+          <div className="soldOutWarning">
+            {" "}
+            <span>SOLD OUT</span>{" "}
+          </div>
+        ) : null}
         <Image
           src={`${product.images.edges[0].node.src}`}
           alt={`${product.description}`}
+          isAvailable={product.availableForSale}
         />
       </ImageContainer>
       <StyledH5 centered={true}> {product.title.toUpperCase()} </StyledH5>
-      <p className="info">
-        ${product.variants.edges[0].node.price}
-      </p>
+      <p className="info">${product.variants.edges[0].node.price}</p>
     </ProductLink>
   );
 };

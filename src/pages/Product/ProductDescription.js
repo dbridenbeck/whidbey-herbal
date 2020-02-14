@@ -143,26 +143,26 @@ const ProductDetails = ({
   updateQuantityButton
 }) => {
 
-  console.log("what is selectedProduct?: ", selectedProduct);
-
   // begin component's return
   return (
     <ProductDetailsWrapper>
       <StyledH1 colorIsGrey={false} centered={false}>
         {title}
       </StyledH1>
-      {/* TODO replace AboutText's content with metafield via shopify once I have it whitelisted via graphql admin api */}
+      {/* below HTML is for "about" section */}
       <ShopifyHTML
         dangerouslySetInnerHTML={{
           __html: metafields.edges[0].node.value
         }}
       />
+      {/* CTA block is conditionally rendered depending on availableForSale */}
       {createCTABlock(
         selectedProduct,
         doesItemExist,
         updateQuantityButton,
         quantityButtonAmount
       )}
+      {/* below HTML is for Characteristics, Uses, and Common-Sense Caution */}
       <ShopifyHTML
         dangerouslySetInnerHTML={{
           __html: descriptionHtml

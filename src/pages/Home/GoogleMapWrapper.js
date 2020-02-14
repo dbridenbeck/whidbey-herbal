@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import * as CartActionCreators from "../../state/actions/cart";
 import { device } from "../../utils/devices";
-import mapFrame from "./images/mapFrame.jpg";
+import mapFrame from "./images/map-frame.png";
 import GoogleMapComponentWithMarker from "./GoogleMapComponentWithMarker";
 
 const GOOGLE_MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY;

@@ -2,10 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-
 import { device } from "../../utils/devices";
-
-import Products from '../../SharedComponents/Products';
+import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
 import PageWrapper from '../../SharedComponents/PageWrapper';
 import StyledH1 from '../../SharedComponents/StyledH1';
 
@@ -88,7 +86,7 @@ const Recipe = ({
   return (
     <PageWrapper>
       {createRecipe()}
-      <Products title={"Explore the Shop"} />
+      <FeaturedProducts title={"Explore the Shop"} />
     </PageWrapper>
   );
 };

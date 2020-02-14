@@ -37,16 +37,15 @@ const ExploreShopLink = styled(Link)`
   }
 `;
 
-const Products = ({products, title, hasTopBottomBorders}) => {
+const Products = ({featuredProducts, title, hasTopBottomBorders}) => {
 
   return (
     <ComponentWrapper hasTopBottomBorders={hasTopBottomBorders}>
       <StyledH2> {title} </StyledH2>
       <ProductsContainer>
-        {products
-          .filter(product => product.collections.edges[0].node.handle === "featured-products")
+        {featuredProducts
           .map(product => (
-            <Product key={product.id} product={product} />
+            <Product key={product.id} product={product.node} />
           ))}
       </ProductsContainer>
       <ExploreShopLink to="/shop">Explore the Shop</ExploreShopLink>
@@ -54,8 +53,8 @@ const Products = ({products, title, hasTopBottomBorders}) => {
   );
 };
 
-const mapStateToProps = ( {products} ) => ({
-  products
+const mapStateToProps = ( {featuredProducts} ) => ({
+  featuredProducts
 });
 
 Products.propTypes = {

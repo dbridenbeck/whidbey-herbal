@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Products from '../../SharedComponents/Products';
+import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
 import Reviews from './Reviews';
 import ProductDetails from './ProductDetails';
 import PageWrapper from "../../SharedComponents/PageWrapper";
@@ -39,7 +39,7 @@ const Product = ({
           doesItemExist={handleIfItemExists}
         />
         <Reviews />
-        <Products title={"More Products"} />
+        <FeaturedProducts title={"More Products"} />
       </div>
     ) : null
   }

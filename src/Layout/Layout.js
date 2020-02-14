@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { client } from "../plugins/shopify.js";
 import * as CartActionCreators from "../state/actions/cart";
-import { fetchShopifyProductsAction, fetchShopifyArticlesAction } from '../state/fetchShopifyData';
+import {
+  fetchShopifyProductsAction,
+  fetchShopifyArticlesAction,
+  fetchFeaturedProductsAction
+} from "../state/fetchShopifyData";
 import Footer from '../SharedComponents/Footer';
 import styled from "styled-components";
 import Header from "./Header"
@@ -23,6 +27,7 @@ const Layout = ({
   clearCheckoutInState,
   fetchShopifyProducts,
   fetchShopifyArticles,
+  fetchFeaturedProducts,
   checkoutId,
   products
 }) => {
@@ -42,6 +47,7 @@ const Layout = ({
     clearCheckoutIfCompleted();
     // populate state with products and articles from shopify
     fetchShopifyProducts();
+    fetchFeaturedProducts();
     fetchShopifyArticles();
   }
 
@@ -76,6 +82,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(CartActionCreators.clearCheckoutInState()),
   fetchShopifyProducts: () => dispatch(fetchShopifyProductsAction()),
   fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
+  fetchFeaturedProducts: () => dispatch(fetchFeaturedProductsAction())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Layout));

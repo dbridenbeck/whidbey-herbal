@@ -2,8 +2,8 @@ import { fetchPending, fetchSuccess, fetchError } from "./actions/cart";
 import { client } from "../plugins/shopify.js";
 
 // Below are three sections: articles, products, and collections
-// In each section there are three peices: a query, the method to fetch data on initial load, and the method to update data if
-// it is different than what's in redux
+// In each section there are three peices: a query, the method to fetch data on initial load, 
+// and the method to update data if it is different than what's in redux
 
 // ARTICLES SECTION
 const articlesQuery = client.graphQLClient.query(root => {
@@ -31,6 +31,24 @@ export const fetchShopifyArticlesAction = () => {
         // add articles from shopify to redux
         dispatch(fetchSuccess("articles", articles));
         return articles;
+      })
+      .catch(error => {
+        dispatch(fetchError(error));
+      });
+  };
+};
+
+// UPDATE articles
+export const updateShopifyArticlesAction = (articlesFromRedux) => {
+  return dispatch => {
+    dispatch(fetchPending());
+    client.graphQLClient
+      .send(articlesQuery)
+      .then(({ model, data }) => {
+        const articles = data.articles.edges;
+        return articlesFromRedux === articles
+          ? null
+          : dispatch(fetchSuccess("articles", articles));
       })
       .catch(error => {
         dispatch(fetchError(error));
@@ -80,7 +98,7 @@ export const fetchShopifyProductsAction = () => {
   };
 };
 
-// UPDATE products on initial page load
+// UPDATE products
 export const updateShopifyProductsAction = productsFromRedux => {
   return dispatch => {
     dispatch(fetchPending());
@@ -88,7 +106,6 @@ export const updateShopifyProductsAction = productsFromRedux => {
     client.graphQLClient
       .send(productsQuery)
       .then(({ model, data }) => {
-        console.log("products are updating!")
         const products = data.products.edges.map(product => product.node);
         // check to see if products in redux is the same as products from shopify
         // if not, add the products to redux
@@ -168,7 +185,6 @@ export const fetchFeaturedProductsAction = () => {
     client.graphQLClient
       .send(queryFeaturedProductsCollection)
       .then(({ model, data }) => {
-        console.log("what is data within fetchFeaturedProductsAction", data);
         const featuredProducts = data.collectionByHandle.products.edges;
         // add products from collection to redux
         dispatch(fetchSuccess("featuredProducts", featuredProducts));
@@ -179,6 +195,7 @@ export const fetchFeaturedProductsAction = () => {
   };
 };
 
+// UPDATE featured-products
 export const updateFeaturedProductsAction = featuredProductsFromRedux => {
   return dispatch => {
     dispatch(fetchPending());

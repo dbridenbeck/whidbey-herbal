@@ -8,7 +8,8 @@ import {
   fetchShopifyArticlesAction,
   fetchFeaturedProductsAction,
   updateShopifyProductsAction,
-  updateFeaturedProductsAction
+  updateFeaturedProductsAction,
+  updateShopifyArticlesAction
 } from "../state/fetchShopifyData";
 import Footer from '../SharedComponents/Footer';
 import styled from "styled-components";
@@ -32,8 +33,10 @@ const Layout = ({
   fetchFeaturedProducts,
   updateShopifyProducts,
   updateFeaturedProducts,
+  updateShopifyArticles,
   checkoutId,
   products,
+  articles,
   featuredProducts
 }) => {
   const clearCheckoutIfCompleted = () => {
@@ -60,7 +63,7 @@ const Layout = ({
   // if so, update redux with the new information from shopify
   useEffect(() => {
     updateShopifyProducts(products);
-    // updateShopifyArticles(articles);
+    updateShopifyArticles(articles);
     updateFeaturedProducts(featuredProducts);
   }, [])
     
@@ -85,10 +88,11 @@ Layout.propTypes = {
   fetchProducts: PropTypes.func,
 };
 
-const mapStateToProps = ( {products, featuredProducts, checkout: {checkoutId}} ) => ({
+const mapStateToProps = ( {products, articles, featuredProducts, checkout: {checkoutId}} ) => ({
   checkoutId,
   products,
-  featuredProducts
+  featuredProducts,
+  articles
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -100,7 +104,9 @@ const mapDispatchToProps = dispatch => ({
   updateShopifyProducts: productsFromRedux =>
     dispatch(updateShopifyProductsAction(productsFromRedux)),
   updateFeaturedProducts: featuredProductsFromRedux =>
-    dispatch(updateFeaturedProductsAction(featuredProductsFromRedux))
+    dispatch(updateFeaturedProductsAction(featuredProductsFromRedux)),
+  updateShopifyArticles: articlesFromRedux =>
+    dispatch(updateShopifyArticlesAction(articlesFromRedux))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Layout));

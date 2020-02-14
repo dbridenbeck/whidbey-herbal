@@ -2,9 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-
 import { device } from "../../utils/devices";
-
 import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
 import PageWrapper from '../../SharedComponents/PageWrapper';
 import StyledH1 from '../../SharedComponents/StyledH1';

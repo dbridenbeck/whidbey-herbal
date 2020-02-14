@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { device } from "../utils/devices";
@@ -22,11 +22,21 @@ const ProductContainer = styled.div`
     text-align: center;
     color: black;
   }
-  :last-child {
-    display: none;
-    @media ${device.laptop} {
-      display: block;
-    }
+  /* 
+    The below :last-child rule allows 5 featured products to be shown on laptop
+    on Mobile/Tablet, the last product in the Featured-Products collection will be hidden
+    If you are on the /shop route, ignore this rule and show all products in shop
+  */
+  ${props => props.pathname !== "/shop" ? 
+    `
+    :last-child {
+      display: none;
+      @media ${device.laptop} {
+        display: block;
+      }
+    `
+    : null
+  }
   }
   @media ${device.tablet} {
     width: 25%;
@@ -76,9 +86,9 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
 };
 
 // begin component
-const Product = ({product, clearHeroImg, updateQuantityButton}) => {
+const Product = ({location: {pathname}, product, clearHeroImg, updateQuantityButton}) => {
   return (
-    <ProductContainer>
+    <ProductContainer pathname={pathname}>
       {createProduct(product, clearHeroImg, updateQuantityButton)}
     </ProductContainer>
   );
@@ -94,4 +104,4 @@ const mapDispatchToProps = (dispatch) => ({
   updateQuantityButton: (amount) => dispatch(CartActionCreators.updateQuantityButton(amount))
 })
 
-export default connect(null, mapDispatchToProps)(Product);
+export default connect(null, mapDispatchToProps)(withRouter(Product));

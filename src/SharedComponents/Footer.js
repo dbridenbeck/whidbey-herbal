@@ -33,7 +33,6 @@ import ContactAndSocials from './ContactAndSocials';
   `;
 
 const Footer = () => {
-
   return (
     <FooterContainer>
       <NewsletterSignup />

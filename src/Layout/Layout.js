@@ -76,7 +76,7 @@ const Layout = ({
         <Header />
         <div id="home">{children}</div>
       </MasterWrapper>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

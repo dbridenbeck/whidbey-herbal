@@ -14,13 +14,14 @@ const StyledWrapper = styled.div`
     props.id === "process" ? "200px 0 12% 0" : "200px 0 0px 0"};
   border-top: ${props => props.hasTopBottomBorders ? "1px solid black" : "none"};
   border-bottom: ${props => props.hasTopBottomBorders ? "1px solid black" : "none"};
+  /* Create full width color bars */
   ${({ backgroundColor }) =>
     backgroundColor &&
     `
     position: relative;
-    width: 100vw;
-    left: 50%;
-    right: 50%;
+    width: 110vw;
+    left: 45%;
+    right: 45%;
     margin-left: -50vw;
     margin-right: -50vw;
     background-color: ${backgroundColor};

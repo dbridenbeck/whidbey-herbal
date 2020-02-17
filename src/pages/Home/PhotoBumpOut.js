@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import { device } from "../../utils/devices";
 import bottlesAndHoney from "./images/bottles-and-honey.jpg";
 
 const BumpOutContainer = styled.div`
@@ -7,7 +8,10 @@ const BumpOutContainer = styled.div`
   width: 51%;
   /* negative right margin to push image to right of screen on laptop/tablet/mobile */
   /* negative top margin to stagger it with the last processblock */
-  margin: -22% -12.5% 0 0;
+  margin: 10% -12.5% 0 0;
+  @media ${device.tablet} {
+    margin: -22% -8% 0 0;
+  }
   align-self: flex-end;
   img {
     position: relative;

@@ -16,6 +16,7 @@ const PageWrapper = ({maxWidth, children, id, positionRelative}) => {
       maxWidth={maxWidth}
       id={id}
       positionRelative={positionRelative}
+      className="page-wrapper"
     >{children}</StyledWrapper>
   );
 }

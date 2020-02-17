@@ -21,7 +21,6 @@ const MasterWrapper = styled.div`
   height: ${props => props.height};
   max-width: 1200px;
   margin: 60px auto 120px auto;
-  padding: 0px 20px 0 20px;
 `;
 
 const Layout = ({

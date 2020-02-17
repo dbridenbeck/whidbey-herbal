@@ -11,7 +11,7 @@ const StyledWrapper = styled.div`
   margin: ${props =>
     props.id === "process" ? "0px auto -3% auto" : "0px auto 0px auto"};
   padding: ${props =>
-    props.id === "process" ? "200px 0 12% 0" : "200px 0 0px 0"};
+    props.id === "process" ? "200px 0 12% 0" : "200px 0px 0px 0px"};
   border-top: ${props => props.hasTopBottomBorders ? "1px solid black" : "none"};
   border-bottom: ${props => props.hasTopBottomBorders ? "1px solid black" : "none"};
   /* Create full width color bars */

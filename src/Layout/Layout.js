@@ -11,7 +11,6 @@ import {
   updateFeaturedProductsAction,
   updateShopifyArticlesAction
 } from "../state/fetchShopifyData";
-import Footer from '../SharedComponents/Footer';
 import styled from "styled-components";
 import Header from "./Header"
 
@@ -76,7 +75,6 @@ const Layout = ({
         <Header />
         <div id="home">{children}</div>
       </MasterWrapper>
-      {/* <Footer /> */}
     </>
   );
 };

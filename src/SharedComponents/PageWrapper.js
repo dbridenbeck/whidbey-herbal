@@ -6,7 +6,7 @@ const StyledWrapper = styled.div`
   position: absolute;
   width: 100%;
   margin: 0px auto 0px auto;
-  padding: 50px 20px 0px 20px;
+  padding: 0px 20px 0px 20px;
 `;
 
 const PageWrapper = ({maxWidth, children, id, positionRelative}) => {

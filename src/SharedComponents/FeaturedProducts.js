@@ -16,7 +16,6 @@ const ProductsContainer = styled.div`
   position: relative;
 `;
 
-
 const ExploreShopLink = styled(Link)`
   display: block;
   width: 40%;
@@ -43,10 +42,11 @@ const Products = ({featuredProducts, title, hasTopBottomBorders}) => {
     <ComponentWrapper hasTopBottomBorders={hasTopBottomBorders}>
       <StyledH2> {title} </StyledH2>
       <ProductsContainer>
-        {featuredProducts
-          .map(product => (
-            <Product key={product.id} product={product.node} />
-          ))}
+        {featuredProducts ? 
+          featuredProducts
+            .map(product => (
+              <Product key={product.id} product={product.node} />
+            )) : null}
       </ProductsContainer>
       <ExploreShopLink to="/shop">Explore the Shop</ExploreShopLink>
     </ComponentWrapper>

@@ -6,6 +6,7 @@ import { device } from "../../utils/devices";
 import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
 import PageWrapper from '../../SharedComponents/PageWrapper';
 import StyledH1 from '../../SharedComponents/StyledH1';
+import Footer from "../../SharedComponents/Footer";
 
 // Begin Styled Components
 const RecipeContainer = styled.div`
@@ -87,6 +88,7 @@ const Recipe = ({
     <PageWrapper>
       {createRecipe()}
       <FeaturedProducts title={"Explore the Shop"} />
+      <Footer />
     </PageWrapper>
   );
 };

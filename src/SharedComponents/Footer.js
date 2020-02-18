@@ -9,9 +9,10 @@ import ContactAndSocials from './ContactAndSocials';
     display: block;
     position: relative;
     height: 630px;
-    width: 100vw;
-    margin: 0px auto 0px auto;
-    padding: 150px 20px 0 20px;
+    /* oversize width, negative left margin, and positive right margin create full-bar effect */
+    width: 120vw;
+    margin: 140px auto 0 -22%;
+    padding: 10% 12% 0 22%;
     background-color: rgba(230, 197, 100, 1);
     ::before {
       content: "";
@@ -30,10 +31,19 @@ import ContactAndSocials from './ContactAndSocials';
       flex-direction: row;
       justify-content: center;
     }
+    /* adjust full bar effect for large screens */
+    @media ${device.largeScreen} {
+      width: 100vw;
+      margin-top: 140px;
+      /* maring-left and margin-right used to create full bar given Layout's MasterWrapper 
+      has a known width of 1200px on large screens and -20px is used to offset pagewrapper's 20px left padding */
+      margin-left: calc(((-100vw / 2) + (1200px / 2)) - 20px);
+      margin-right: calc(-100vw / 2 + 1200px / 2);
+
+    }
   `;
 
 const Footer = () => {
-
   return (
     <FooterContainer>
       <NewsletterSignup />

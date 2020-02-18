@@ -3,11 +3,10 @@ import styled from "styled-components";
 
 const StyledWrapper = styled.div`
   display: block;
-  position: relative;
+  position: absolute;
   width: 100%;
-  height: 100%;
   margin: 0px auto 0px auto;
-  padding: 50px 20px 0px 20px;
+  padding: 0px 20px 0px 20px;
 `;
 
 const PageWrapper = ({maxWidth, children, id, positionRelative}) => {
@@ -17,6 +16,7 @@ const PageWrapper = ({maxWidth, children, id, positionRelative}) => {
       maxWidth={maxWidth}
       id={id}
       positionRelative={positionRelative}
+      className="page-wrapper"
     >{children}</StyledWrapper>
   );
 }

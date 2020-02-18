@@ -5,6 +5,7 @@ import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
 import Reviews from './Reviews';
 import ProductDetails from './ProductDetails';
 import PageWrapper from "../../SharedComponents/PageWrapper";
+import Footer from "../../SharedComponents/Footer";
 
 // begin component
 const Product = ({
@@ -48,6 +49,7 @@ const Product = ({
   return (
     <PageWrapper>
       {createProductDetails()}
+      <Footer />
     </PageWrapper>
   );
 };

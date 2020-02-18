@@ -39,7 +39,6 @@ import ContactAndSocials from './ContactAndSocials';
       has a known width of 1200px on large screens and -20px is used to offset pagewrapper's 20px left padding */
       margin-left: calc(((-100vw / 2) + (1200px / 2)) - 20px);
       margin-right: calc(-100vw / 2 + 1200px / 2);
-
     }
   `;
 

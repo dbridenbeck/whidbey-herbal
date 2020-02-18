@@ -5,7 +5,7 @@ import farm from "./images/farm-no-lines.jpg";
 import CircleLogo from "./images/circle-logo.png";
 import Dock from "./images/dock.jpg";
 import HoneyAndBottles from "./images/honey-and-bottles.jpg";
-import PhotoSectionSVG from './images/photosectionsvg.svg';
+import WaveSVG from './images/photosectionsvg.svg';
 
 const WelcomeWrapper = styled.div`
   position: relative;
@@ -32,10 +32,10 @@ const WelcomeWrapper = styled.div`
   }
 `;
 
-const PhotoSection = styled.div`
+const FeaturedPhotos = styled.div`
   display: block;
   position: relative;
-  background-image: url(${PhotoSectionSVG});
+  background-image: url(${WaveSVG});
   background-position: center;
   margin: 0 -999rem 50% -999rem;
   padding: 0 999rem;
@@ -47,15 +47,18 @@ const PhotoSection = styled.div`
 `;
   
 const PhotoContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
-  /* 110vw width to ensure that screen width is fully covered */
-  width: 110vw;
   max-height: 225px;
-  /* negative margin to push PhotoContainer slightly beyond left of screen */
-  margin-left: -20%;
+  /* width, left, right, and margins keep PhotoContainer full-width */
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   img {
     width: 45%;
     /* push images closer to p */
@@ -76,9 +79,6 @@ const PhotoContainer = styled.div`
     @media ${device.tablet} {
       font-size: 1.375rem;
     }
-  }
-  @media ${device.laptop} {
-    width: 1200px;
   }
 `;
 
@@ -122,7 +122,7 @@ const WelcomeSection = () => {
         Small-batch, handcrafted, seed to bottle. <br />
         Grown from the Heart of Whidbey Island.
       </p>
-      <PhotoSection>
+      <FeaturedPhotos>
         <PhotoContainer>
         <p>
           We’re a family farm that grows and distills each of our essential
@@ -132,7 +132,7 @@ const WelcomeSection = () => {
           <img class="circle-photo" src={HoneyAndBottles} />
           <img class="right-rect-photo" src={Dock} />
         </PhotoContainer>
-      </PhotoSection>
+      </FeaturedPhotos>
     </WelcomeWrapper>
   );
 };

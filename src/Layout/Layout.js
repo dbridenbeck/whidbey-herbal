@@ -47,10 +47,13 @@ const Layout = ({
       : console.log("checkout doesn't exist");
   };
 
+  // if checkout exists, clear checkout in state if checkout was completed
+  if (checkoutId) {
+    clearCheckoutIfCompleted();
+  }
+
   // if products haven't been fetched, fetch them
   if (!products.length) {
-    // if checkout has been completed, clear checkout in state
-    clearCheckoutIfCompleted();
     // populate state with products and articles from shopify
     fetchShopifyProducts();
     fetchFeaturedProducts();

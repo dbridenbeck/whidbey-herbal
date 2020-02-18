@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import styled from "styled-components";
@@ -75,26 +75,9 @@ const StyledH2 = styled.h2`
   font-weight: normal;
 `;
 
-export class Checkout extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.createRemoveButton = this.createRemoveButton.bind(this);
-    this.createCheckoutButton = this.createCheckoutButton.bind(this);
-    this.createCheckoutContainer = this.createCheckoutContainer.bind(this);
-  }
+const Checkout = ({lineItems, removeLineItem, updateCheckoutId }) => {
 
-  componentDidMount() {
-    const { checkoutId, updateCheckoutId } = this.props;
-     // create the checkout if it doesn't already exist
-    if (!checkoutId) {
-      client.checkout.create().then(checkout => {
-        updateCheckoutId(checkout.id)
-      });
-    }
-  }
-
-  createRemoveButton = (id, index) => {
-    const { removeLineItem } = this.props;
+  const createRemoveButton = (id, index) => {
     const remove = () => removeLineItem(id, index);
     return (  
       <RemoveWrapper>
@@ -108,39 +91,33 @@ export class Checkout extends PureComponent {
     );
   }
   
-  createCheckoutButton = () => {
-    const { lineItems, checkoutId, updateCheckoutId } = this.props;
-    const lineItemsToAdd = lineItems.map(
-      item => (
-        {
-          variantId: item.variants.edges[0].node.id,
-          quantity: item.quantity
-        }
-      )
-    );
-
-    const goToShopifyCheckout = () => {
-      client.checkout
-      // update checkoutId to ensure that a fresh checkout is used
-      // this avoids the edge case where a user checks out but doesn't finish
-      // and then returns to the store to update their cart and re-checkout
-        .create().then(checkout => {
-          updateCheckoutId(checkout.id)
-        })
-        .then(client.checkout.addLineItems(checkoutId, lineItemsToAdd)
-        .then(checkout => {
-          window.location.href = checkout.webUrl
-      }))
-    };  
+  const createCheckout = (lineItemsToAdd) => async () => {
+    try {
+      const checkout = await client.checkout.create();
+      await updateCheckoutId(checkout.id);
+      await client.checkout.addLineItems(checkout.id, lineItemsToAdd);
+      window.location.assign(`${checkout.webUrl}`)
+    } catch (error) {
+      console.log("Error creating checkout: ", error);
+    }
+  }
+  
+  const createCheckoutButton = () => {
+    const createLineItemObject = item => ({
+      variantId: item.variants.edges[0].node.id,
+      quantity: item.quantity
+    });
+    const lineItemsToAdd = lineItems.map(createLineItemObject);
+    const checkout = createCheckout(lineItemsToAdd);
+    
     return (
-      <CheckoutButton className="checkout" onClick={(goToShopifyCheckout)}>
+      <CheckoutButton className="checkout" onClick={checkout}>
         Proceed to Checkout
       </CheckoutButton>
     );
   }
-
-  createCheckoutContainer = () => {
-    const { lineItems } = this.props;
+  
+  const createCheckoutContainer = () => {
     const hasItems = (lineItems.length && lineItems.length > 0);
     const calculatedCartSubtotal = 
       lineItems.map(lineItem => lineItem.quantity * lineItem.variants.edges[0].node.price)
@@ -155,11 +132,11 @@ export class Checkout extends PureComponent {
           <LineItemHeaders />
           <LineItems
             items={lineItems}
-            createRemoveButton={this.createRemoveButton}
+            createRemoveButton={createRemoveButton}
           />
           <SubtotalSection
             calculatedCartSubtotal={calculatedCartSubtotal}
-            createCheckoutButton={this.createCheckoutButton}
+            createCheckoutButton={createCheckoutButton}
           />
           <FeaturedProducts title={"Continue Shopping"} />
         </CheckoutContainer>
@@ -172,17 +149,15 @@ export class Checkout extends PureComponent {
     )
   }
 
-  render() {
     return (
       <PageWrapper maxWidth={""}>
         <StyledH1 colorIsGrey={false} centered={false}>
           Checkout
         </StyledH1>
-        {this.createCheckoutContainer()}
+        {createCheckoutContainer()}
         <Footer />
       </PageWrapper>
     );
-  }
 };
 
 Checkout.propTypes = {

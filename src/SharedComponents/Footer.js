@@ -9,6 +9,7 @@ import ContactAndSocials from './ContactAndSocials';
     display: block;
     position: relative;
     height: 630px;
+    /* oversize width, negative left margin, and positive right margin create full-bar effect */
     width: 120vw;
     margin: 140px auto 0 -22%;
     padding: 10% 12% 0 22%;
@@ -29,6 +30,14 @@ import ContactAndSocials from './ContactAndSocials';
       display: flex;
       flex-direction: row;
       justify-content: center;
+    }
+    /* adjust full bar effect for large screens */
+    @media ${device.largeScreen} {
+      width: 100vw;
+      margin-top: 140px;
+      margin-left: calc(((-100vw / 2) + (1200px / 2)) - 20px);
+      margin-right: calc(-100vw / 2 + 1200px / 2);
+
     }
   `;
 

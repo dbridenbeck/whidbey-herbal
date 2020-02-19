@@ -23,7 +23,7 @@ const reviewsList = [
 const ReviewsWrapper = styled.div`
   display: block;
   width: 100%;
-  margin: 25px auto 70px auto;
+  margin: 25px auto 0px auto;
   h2 {
     margin: 0;
     padding: 0;
@@ -32,11 +32,11 @@ const ReviewsWrapper = styled.div`
     font-weight: normal;
   }
   @media ${device.tablet} {
-    margin: 25px auto;
+    margin: 25px auto 0 auto;
     width: 66%;
   }
   @media ${device.laptop} {
-    margin: 90px auto;
+    margin: 90px auto 0 auto;
   }
 `;
 

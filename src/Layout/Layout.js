@@ -18,7 +18,6 @@ const MasterWrapper = styled.div`
   display: block;
   position: relative;
   width: 100%;
-  height: ${props => props.height};
   max-width: 1200px;
   margin: 60px auto 120px auto;
 `;
@@ -67,13 +66,10 @@ const Layout = ({
     updateShopifyArticles(articles);
     updateFeaturedProducts(featuredProducts);
   }, [])
-    
-  // calculate document height to keep footer at bottom of page
-  const height = document.documentElement.scrollHeight;
 
   return (
     <>
-      <MasterWrapper id='MasterWrapper' height={height}>
+      <MasterWrapper id='MasterWrapper'>
         <Header />
         <div id="home">{children}</div>
       </MasterWrapper>

@@ -12,7 +12,8 @@ const FullWidthSVG = styled.div`
   /* width, height and margin-left keep SVG positioned center */
   width: 200vw;
   height: 55%;
-  margin-left: -6vw;
+  /* -200px margin offset's componentwrapper's margin */
+  margin: -200px 0 0 -6vw;
   background-image: url(${WaveSVG});
   /* adjust positioning and size of SVG for bigger screens */
   @media ${device.tablet} {
@@ -35,8 +36,7 @@ const PhotoContainer = styled.div`
   width: 105vw;
   left: 50%;
   right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  margin: -200px -50vw 0 -50vw;
   padding-top: 20%;
   img {
     width: 50%;

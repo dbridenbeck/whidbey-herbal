@@ -19,7 +19,7 @@ const NavLinksWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 475px;
+    width: 600px;
   }
 `;
 
@@ -31,10 +31,11 @@ const StyledNavLink = styled(NavLink)`
   display: inline-block;
   text-decoration: none;
   text-align: center;
-  font-size: 1rem;
-  color: #787878;
+  font-size: 1.125rem;
+  font-weight: 300;
+  color: black;
   :visited {
-    color: #787878;
+    color: black;
   }
   &:hover {
     color: #e3be42;

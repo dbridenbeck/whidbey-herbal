@@ -7,16 +7,19 @@ import styled from 'styled-components';
 import { device } from "../utils/devices";
 
 const NavLinksWrapper = styled.div`
+  display: block;
+  position: relative;
   width: 50%;
-  margin-top: 10px;
-  padding: 0 5%;
+  margin-top: 15px;
+  padding-left: 5%;
   @media ${device.laptop} {
+    position: absolute;
+    right: 0;
     flex-direction: row;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    margin-top: 0px;
+    width: 475px;
   }
 `;
 

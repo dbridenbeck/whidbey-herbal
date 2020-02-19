@@ -36,6 +36,7 @@ const PhotoContainer = styled.div`
   width: 105vw;
   left: 50%;
   right: 50%;
+  /* negative margin compensates for componentwrapper's 200px top margin*/
   margin: -200px -50vw 0 -50vw;
   padding-top: 20%;
   img {

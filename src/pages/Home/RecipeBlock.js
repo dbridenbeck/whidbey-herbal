@@ -13,6 +13,9 @@ const RecipeLink = styled(Link)`
   :last-child:nth-child(odd) {
     margin: 0 auto 0 2%;
   }
+  @media ${device.tablet} {
+    width: 33%;
+  }
 `;
 
 const RecipeContainer = styled.div`
@@ -37,10 +40,10 @@ const RecipeInfo = styled.div`
     font-size: 0.825rem;
     color: #2e2e2e;
     @media ${device.tablet} {
-      font-size: 1.125rem;
+      font-size: 1rem;
     }
     @media ${device.laptop} {
-      font-size: 1.313rem;
+      font-size: 1.124rem;
     }
   }
   .recipeText {
@@ -51,10 +54,10 @@ const RecipeInfo = styled.div`
     font-size: 0.825rem;
     color: #2e2e2e;
     @media ${device.tablet} {
-      font-size: 1.125rem;
+      font-size: 0.925rem;
     }
     @media ${device.laptop} {
-      font-size: 1.313rem;
+      font-size: 1rem;
     }
   }
   svg {

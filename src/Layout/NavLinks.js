@@ -7,16 +7,19 @@ import styled from 'styled-components';
 import { device } from "../utils/devices";
 
 const NavLinksWrapper = styled.div`
+  display: block;
+  position: relative;
   width: 50%;
-  margin-top: 10px;
-  padding: 0 5%;
+  margin-top: 15px;
   @media ${device.laptop} {
-    flex-direction: row;
+    position: absolute;
+    right: 0;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    margin-top: 0px;
+    width: 600px;
+    padding: 0;
   }
 `;
 
@@ -28,15 +31,18 @@ const StyledNavLink = styled(NavLink)`
   display: inline-block;
   text-decoration: none;
   text-align: center;
-  font-size: 1rem;
-  color: #787878;
+  font-size: 1.125rem;
+  font-weight: 300;
+  color: black;
+  padding: 1% 5%;
   :visited {
-    color: #787878;
+    color: black;
   }
   &:hover {
     color: #e3be42;
   }
   @media ${device.laptop} {
+    padding: 0;
     text-align: center;
   }
 `;

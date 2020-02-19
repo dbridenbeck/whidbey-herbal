@@ -24,7 +24,10 @@ body {
 }
 
 @media (min-width: 768px) {
-  body {font-size: 1.125em;}
+  body {
+    font-size: 1.125em;
+    overflow-x: visible;
+  }
 }
 
 @media (min-width: 1024px) {

@@ -83,11 +83,11 @@ const CheckoutLink = styled(NavLink)`
 `;
 
 const HomeLink = styled.img`
-  height: 50px;
+  height: 60px;
   width: auto;
   margin: 7px auto 0 auto;
   @media ${device.laptop} {
-    margin: 8px 10% 0 10%;
+    margin: 5px 10% 0 10%;
   }
 `;
 
@@ -107,13 +107,13 @@ export class Header extends PureComponent {
     window.addEventListener("scroll", this.handleScroll);
   }
   
+  // Set show to true if document is scrolled lower than 60px from
   handleScroll() {
     if (
-      this.state.show === false ||
-      document.body.getBoundingClientRect().top === 0
+      this.state.show === false
     ) {
       this.setState({
-        show: document.body.getBoundingClientRect().top < -50
+        show: document.body.getBoundingClientRect().top < -60
       });
     }
   }

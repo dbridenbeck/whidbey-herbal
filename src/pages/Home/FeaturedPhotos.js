@@ -9,12 +9,11 @@ import WaveSVG from './images/photosectionsvg.svg';
 const FullWidthSVG = styled.div`
   display: block;
   position: absolute;
-  /* width, height and margin-left keep SVG positioned */
+  /* width, height and margin-left keep SVG positioned center */
   width: 200vw;
   height: 55%;
   margin-left: -6vw;
   background-image: url(${WaveSVG});
-  background-position: left top;
   /* adjust positioning and size of SVG for bigger screens */
   @media ${device.tablet} {
     height: 65%;
@@ -38,10 +37,17 @@ const PhotoContainer = styled.div`
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+  padding-top: 20%;
   img {
     width: 50%;
     /* push images closer to p */
-    margin-top: -5%;
+    margin-top: -12.5%;
+    @media ${device.laptop} {
+      margin-top: -8%;
+    }
+    @media ${device.largeScreen} {
+      margin-top: -12%;
+    }
   }
   .circle-photo {
     align-self: flex-end;
@@ -55,11 +61,15 @@ const PhotoContainer = styled.div`
     /* padding right keeps p over */
     padding-right: 45%;
     /* 6.4% left and right margins ensures this is centered above circle-photo */
-    margin: 10% 6.4% 0 6.4%;
-    font-size: .725rem;
+    margin: 0% 6.4% 0 3.2%;
+    font-size: 0.825rem;
+    line-height: 1.36em;
     font-weight: 300;
     @media ${device.tablet} {
-      font-size: 1.375rem;
+      font-size: 1.5rem;
+    }
+    @media ${device.laptop} {
+      font-size: 2.375rem;
     }
   }
 `;

@@ -11,15 +11,15 @@ const NavLinksWrapper = styled.div`
   position: relative;
   width: 50%;
   margin-top: 15px;
-  padding-left: 5%;
   @media ${device.laptop} {
     position: absolute;
     right: 0;
-    flex-direction: row;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 600px;
+    padding: 0;
   }
 `;
 
@@ -34,6 +34,7 @@ const StyledNavLink = styled(NavLink)`
   font-size: 1.125rem;
   font-weight: 300;
   color: black;
+  padding: 1% 5%;
   :visited {
     color: black;
   }
@@ -41,6 +42,7 @@ const StyledNavLink = styled(NavLink)`
     color: #e3be42;
   }
   @media ${device.laptop} {
+    padding: 0;
     text-align: center;
   }
 `;

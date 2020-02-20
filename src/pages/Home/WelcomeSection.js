@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from "styled-components";
 import { device } from "../../utils/devices";
-import farm from "./images/farm-no-lines.jpg";
-import CircleLogo from "./images/circle-logo.png";
+import farm from "./images/farm-with-lines.jpg";
 
 const WelcomeWrapper = styled.div`
   position: relative;
   width: 100%;
-  max-width: 650px;
+  max-width: 837px;
   margin: -50px auto 0px auto;
   @media ${device.largeScreen} {
     max-width: 1000px;
@@ -27,15 +26,14 @@ const WelcomeWrapper = styled.div`
     font-weight: normal;
     color: #787878;
   }
+  img {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+  }
 `;
 
 
-const FarmAndLogoContainer = styled.div`
-  position: relative;
-  width: 100%;
-  max-height: 900px;
-  margin: 0 auto;
-`;
 
 const Logo = styled.img`
   display: block;
@@ -54,15 +52,7 @@ const FarmIllustration = styled.img`
 const WelcomeSection = () => {
   return (
     <WelcomeWrapper>
-      <FarmAndLogoContainer>
-        <Logo
-          src={`${CircleLogo}`}
-          width="800"
-          height="800"
-          alt="Whidbey Island Logo"
-        />
-        <FarmIllustration src={`${farm}`} />
-      </FarmAndLogoContainer>
+      <img src={`${farm}`} />
       <h1>Whidbey Herbal</h1>
       <p>
         {" "}

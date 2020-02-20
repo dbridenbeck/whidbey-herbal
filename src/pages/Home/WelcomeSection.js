@@ -18,7 +18,7 @@ const WelcomeWrapper = styled.div`
     right: 50%;
     margin: -20% -50vw 0 -46vw;
     color: black;
-    font-size: 3rem;
+    font-size: 1.75rem;
     font-weight: bold;
     @media ${device.tablet} {
       font-size: 4rem;

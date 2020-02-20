@@ -83,9 +83,12 @@ const CheckoutLink = styled(NavLink)`
 `;
 
 const HomeLink = styled.img`
-  height: 60px;
-  width: auto;
+  height: auto;
+  width: 225px;
   margin: 7px auto 0 auto;
+  @media ${device.tablet} {
+    width: 275px;
+  }
   @media ${device.laptop} {
     margin: 5px 10% 0 10%;
   }

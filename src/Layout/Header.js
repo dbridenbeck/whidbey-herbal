@@ -83,10 +83,12 @@ const CheckoutLink = styled(NavLink)`
 `;
 
 const HomeLink = styled.img`
-  height: 60px;
-  width: auto;
+  width: 100%;
+  max-width: 225px;
+  height: auto;
   margin: 7px auto 0 auto;
   @media ${device.laptop} {
+    max-width: 275px;
     margin: 5px 10% 0 10%;
   }
 `;

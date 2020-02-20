@@ -14,14 +14,16 @@ const PhotoContainer = styled.div`
   margin-left: -12.5%;
   @media ${device.tablet} {
     width: 115%;
-    max-height: 785px;
     margin-left: -7.5%;
   }
 `;
 
 const Photo = styled.img`
+  position: relative;
   display: block;
   width: 49%;
+  height: auto;
+  border: 1px solid green;
 `;
 
 const PhotoSection = () => {

@@ -14,7 +14,10 @@ const RecipeLink = styled(Link)`
     margin: 0 auto 0 2%;
   }
   @media ${device.tablet} {
-    width: 33%;
+    width: 30%;
+    :last-child:nth-child(odd) {
+      margin: 0;
+    }
   }
 `;
 

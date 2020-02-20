@@ -30,7 +30,7 @@ const Tagline = styled.div`
     width: 783px;
   }
   @media ${device.laptop} {
-    width: 150%;
+    width: 1255px;
   }
   h1 {
     display: inline-block;

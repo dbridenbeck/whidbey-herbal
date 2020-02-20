@@ -10,26 +10,25 @@ const PhotoContainer = styled.div`
   /* width 120% and negative margin-left keep photos to edge of screen */
   width: 125%;
   margin-left: -12.5%;
+  img {
+    position: relative;
+    display: inline-block;
+    width: 48%;
+    height: auto;
+    margin: 0 1%;
+  }
   @media ${device.tablet} {
     width: 115%;
     margin-left: -7.5%;
   }
 `;
 
-const Photo = styled.img`
-  position: relative;
-  display: inline-block;
-  width: 48%;
-  height: auto;
-  margin: 0 1%;
-`;
-
 const PhotoSection = () => {
   return (
     <ComponentWrapper id="photo-section">
       <PhotoContainer>
-        <Photo src={ClippingPhoto} />
-        <Photo src={SamCaitlin} />
+        <img src={ClippingPhoto} />
+        <img src={SamCaitlin} />
       </PhotoContainer>
     </ComponentWrapper>
   );

@@ -9,13 +9,12 @@ const StyledWrapper = styled.div`
   padding: 0px 20px 0px 20px;
 `;
 
-const PageWrapper = ({maxWidth, children, id, positionRelative}) => {
+const PageWrapper = ({maxWidth, children, id}) => {
 
   return (
     <StyledWrapper
       maxWidth={maxWidth}
       id={id}
-      positionRelative={positionRelative}
       className="page-wrapper"
     >{children}</StyledWrapper>
   );

@@ -96,7 +96,8 @@ export class Header extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      show: false,
+      // If you want to re-instate hidden Header on load, change to show: false
+      show: true,
     };
     this.handleScroll = this.handleScroll.bind(this);
     this.createCheckoutLink = this.createCheckoutLink.bind(this);

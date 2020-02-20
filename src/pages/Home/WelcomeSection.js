@@ -7,24 +7,25 @@ const WelcomeWrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 837px;
-  margin: -50px auto 0px auto;
+  margin: -60px auto 0px auto;
   @media ${device.largeScreen} {
     max-width: 1000px;
   }
   h1 {
-    display: inline-block;
-    margin: 0;
-    color: #e3be42;
-    font-size: 1.625em;
-    font-weight: normal;
-  }
-  p {
-    font-size: 0.875em;
-    line-height: 1.5em;
-    margin-top: -5px;
-    font-style: normal;
-    font-weight: normal;
-    color: #787878;
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin: -20% -50vw 0 -46vw;
+    color: black;
+    font-size: 3rem;
+    font-weight: bold;
+    @media ${device.tablet} {
+      font-size: 4rem;
+    }
+    @media ${device.laptop} {
+      font-size: 5rem;
+    }
   }
   img {
     position: relative;
@@ -33,32 +34,14 @@ const WelcomeWrapper = styled.div`
   }
 `;
 
-
-
-const Logo = styled.img`
-  display: block;
-  position: absolute;
-  width: 20%;
-  max-width: 400px;
-  height: auto;
-`;
-
-const FarmIllustration = styled.img`
-  display: block;
-  margin: 0 auto;
-  width: 100%;
-`;
-
 const WelcomeSection = () => {
   return (
     <WelcomeWrapper>
       <img src={`${farm}`} />
-      <h1>Whidbey Herbal</h1>
-      <p>
+      <h1>
         {" "}
-        Small-batch, handcrafted, seed to bottle. <br />
-        Grown from the Heart of Whidbey Island.
-      </p>
+        Small batch handcrafted. <br/> Seed-to-bottle.
+      </h1>
     </WelcomeWrapper>
   );
 };

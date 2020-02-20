@@ -2,7 +2,7 @@ import React from 'react';
 import  { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-
+import ScrollToTop from './utils/ScrollToTop';
 import * as serviceWorker from './serviceWorker';
 import { Reducer1 } from './state/app';
 import App from './App';
@@ -34,6 +34,7 @@ const Root = () => {
   return (
     <Provider store={store}>
       <Router>
+        <ScrollToTop />
         <App />
       </Router>
     </Provider>

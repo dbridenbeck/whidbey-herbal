@@ -10,7 +10,7 @@ import { device } from "../../utils/devices";
 const LocationsWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 100vw;
   /* max-width mirrors MasterWrapper's max-width (in Layout.js) */
   max-width: 1200px;
   margin: 0 auto;

@@ -6,9 +6,7 @@ import ClippingPhoto from "./images/clipping-photo-500.jpg";
 import { device } from '../../utils/devices';
 
 const PhotoContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: block;
   /* width 120% and negative margin-left keep photos to edge of screen */
   width: 125%;
   margin-left: -12.5%;
@@ -20,10 +18,10 @@ const PhotoContainer = styled.div`
 
 const Photo = styled.img`
   position: relative;
-  display: block;
-  width: 49%;
+  display: inline-block;
+  width: 48%;
   height: auto;
-  border: 1px solid green;
+  margin: 0 1%;
 `;
 
 const PhotoSection = () => {

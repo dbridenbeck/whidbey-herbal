@@ -34,13 +34,11 @@ const PhotoContainer = styled.div`
   /* negative margin compensates for componentwrapper's 200px top margin*/
   margin: -200px -50vw 0 -50vw;
   padding-top: 20%;
-  border: 1px solid blue;
   img {
     display: inline-block;
     position: relative;
     width: 50%;
-    height: auto !important;
-    border: 1px solid green;
+    height: auto;
   }
   .circle-photo {
     align-self: flex-end;

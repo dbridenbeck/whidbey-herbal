@@ -10,7 +10,7 @@ const NavLinksWrapper = styled.div`
   display: block;
   position: relative;
   width: 50%;
-  margin-top: 15px;
+  margin: 15px 0 0 50px;
   @media ${device.laptop} {
     position: absolute;
     right: 0;
@@ -32,9 +32,9 @@ const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   text-align: center;
   font-size: 1.125rem;
+  line-height: 1.5em;
   font-weight: 300;
   color: black;
-  padding: 1% 5%;
   :visited {
     color: black;
   }

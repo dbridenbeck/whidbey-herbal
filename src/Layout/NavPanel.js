@@ -35,8 +35,9 @@ const Panel = styled.div`
   &.openPanel {
     width: 100vw;
     left: 0;
+    left: 0;
     opacity: 1;
-    transition: all 0.75s ease-in-out;
+    transition: all 0.5s ease-in-out;
     /* ignore .openPanel transition and always make visible on laptop */
     @media ${device.laptop} {
       display: flex;
@@ -49,10 +50,10 @@ const Panel = styled.div`
     }
   }
   &.closePanel {
-    left: -100px;
-    width: 0vw;
+    left: -200px;
+    width: 25vw;
     opacity: 0;
-    transition: all 0.75s ease-in-out;
+    transition: all .5s ease-in-out;
     /* ignore .closePanel transition and always make visible on laptop */
     @media ${device.laptop} {
       display: flex;

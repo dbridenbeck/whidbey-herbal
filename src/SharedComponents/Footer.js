@@ -10,7 +10,7 @@ import ContactAndSocials from './ContactAndSocials';
     position: relative;
     height: 630px;
     width: 100vw;
-    margin: 140px auto 0 0;
+    margin: 50px auto 0 0;
     padding: 15% 5% 5% 5%;
     background-color: rgba(230, 197, 100, 1);
     ::before {

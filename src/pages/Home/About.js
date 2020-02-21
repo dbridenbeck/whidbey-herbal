@@ -23,7 +23,7 @@ const AboutText = styled.p`
 
 const About = () => {
   return (
-    <Wrapper id="about" maxWidth={"600px"} positionRelative={true}>
+    <Wrapper id="about" maxWidth={"600px"}>
       <StyledH2 colorIsGrey={true} centered={true}>
         The Farmers
       </StyledH2>

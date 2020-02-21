@@ -19,7 +19,7 @@ const MasterWrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 1200px;
-  margin: 60px auto 120px auto;
+  margin: 60px auto 0px auto;
 `;
 
 const Layout = ({

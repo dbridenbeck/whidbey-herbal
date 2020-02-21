@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import  { Switch, Route, Redirect } from 'react-router-dom';
 import  { __RouterContext } from 'react-router-dom';
-import { useTransition, animated, useSpring } from 'react-spring';
 import Home from './pages/Home/Home.js';
 import Checkout from './pages/Checkout/Checkout.js';
 import Layout from './Layout/Layout.js';

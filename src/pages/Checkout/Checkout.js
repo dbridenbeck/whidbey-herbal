@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import PageWrapper from "../../SharedComponents/PageWrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
 import { device } from "../../utils/devices";
 
@@ -150,13 +149,13 @@ const Checkout = ({lineItems, removeLineItem, updateCheckoutId }) => {
   }
 
     return (
-      <PageWrapper maxWidth={""}>
+      <>
         <StyledH1 colorIsGrey={false} centered={false}>
           Checkout
         </StyledH1>
         {createCheckoutContainer()}
         <Footer />
-      </PageWrapper>
+      </>
     );
 };
 

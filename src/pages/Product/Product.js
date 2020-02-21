@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
 import Reviews from './Reviews';
 import ProductDetails from './ProductDetails';
-import PageWrapper from "../../SharedComponents/PageWrapper";
 import Footer from "../../SharedComponents/Footer";
 
 // begin component
@@ -47,10 +46,10 @@ const Product = ({
   
   // begin component's return
   return (
-    <PageWrapper>
+    <>
       {createProductDetails()}
       <Footer />
-    </PageWrapper>
+    </>
   );
 };
 

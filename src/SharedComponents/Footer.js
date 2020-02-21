@@ -37,7 +37,7 @@ import ContactAndSocials from './ContactAndSocials';
       margin-top: 140px;
       /* maring-left and margin-right used to create full bar given Layout's MasterWrapper 
       has a known width of 1200px on large screens and -20px is used to offset pagewrapper's 20px left padding */
-      margin-left: calc(((-100vw / 2) + (1200px / 2)) - 20px);
+      margin-left: calc((-100vw / 2) + (1200px / 2));
       margin-right: calc(-100vw / 2 + 1200px / 2);
     }
   `;

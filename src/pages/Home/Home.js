@@ -17,7 +17,7 @@ const Home = () =>
       <FeaturedProducts title={"Featured Products"} hasTopBottomBorders={true}/>
       <About />
       <PhotoSection />
-      {/* <Process /> */}
+      <Process />
       {/* <StoreLocator /> */}
       <RecipeSection />
       <Footer />

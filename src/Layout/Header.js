@@ -53,7 +53,7 @@ const CheckoutLink = styled(NavLink)`
   position: relative;
   width: 48px;
   height: 100%;
-  margin-right: 15px;
+  margin-right: 20px;
   background-image: url(${cart});
   background-position: center;
   background-size: auto 60%;

@@ -147,7 +147,7 @@ const ProductDetails = ({
   // begin component's return
   return (
     <ProductDetailsWrapper>
-      <StyledH1 colorIsGrey={false} centered={false}>
+      <StyledH1  >
         {title}
       </StyledH1>
       {/* below HTML is for "about" section */}

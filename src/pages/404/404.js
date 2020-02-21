@@ -16,7 +16,7 @@ const StyledImg = styled.img`
 
 const NotFoundPage = () => (
       <>
-        <StyledH1 centered={true} colorIsGrey={false}>Uh oh!</StyledH1>
+        <StyledH1>Uh oh!</StyledH1>
         <StyledP>We can't find that page.</StyledP>
         <StyledImg src={Loading} />
       </>

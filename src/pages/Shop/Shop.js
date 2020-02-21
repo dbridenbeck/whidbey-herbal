@@ -19,7 +19,7 @@ const Shop = ({products}) => {
 
   return (
     <>
-      <StyledH1 centered={false} colorIsGrey={false}>
+      <StyledH1  >
         Shop
       </StyledH1>
       <ProductsContainer>

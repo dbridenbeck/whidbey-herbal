@@ -66,7 +66,7 @@ const Recipe = ({
   
       return (
         <>
-          <StyledH1 centered={false} colorIsGrey={false}>{title}</StyledH1>
+          <StyledH1  >{title}</StyledH1>
           <RecipeContainer>
             <RecipeImage src={originalSrc} />
             <ShopifyHTML dangerouslySetInnerHTML=

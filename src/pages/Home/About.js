@@ -33,7 +33,7 @@ const AboutText = styled.p`
 const About = () => {
   return (
     <ComponentWrapper id="about" maxWidth={"590px"}>
-      <StyledH2 colorIsGrey={true} centered={true}>
+      <StyledH2 >
         The Farmers
       </StyledH2>
       <FarmerIllustration

@@ -108,7 +108,7 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
           isAvailable={product.availableForSale}
         />
       </ImageContainer>
-      <StyledH5 centered={true}> {product.title.toUpperCase()} </StyledH5>
+      <StyledH5 > {product.title.toUpperCase()} </StyledH5>
       <p className="info">${product.variants.edges[0].node.price}</p>
     </ProductLink>
   );

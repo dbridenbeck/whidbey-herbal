@@ -174,7 +174,7 @@ const Checkout = ({lineItems, removeLineItem, updateCheckoutId }) => {
 
     return (
       <>
-        <StyledH1 colorIsGrey={false} centered={false}>
+        <StyledH1>
           Checkout
         </StyledH1>
         {createCheckoutContainer()}

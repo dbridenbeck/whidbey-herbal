@@ -16,7 +16,7 @@ const H1Component = styled.h1`
 }
 `;
 
-const StyledH1 = (children}) => {
+const StyledH1 = ({children}) => {
 
   return (
     <H1Component

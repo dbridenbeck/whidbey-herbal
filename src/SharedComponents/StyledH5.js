@@ -8,7 +8,7 @@ const H5Component = styled.h5`
   font-size: .925rem;
   font-weight: bold;
   color: #2e2e2e;
-  text-align: ${props => props.centered ? "center" : "left" };
+  text-align: center;
   @media ${device.tablet} {
   font-size: 1.125rem;
     
@@ -19,10 +19,10 @@ const H5Component = styled.h5`
   }
 `;
 
-const StyledH5 = ({children, centered}) => {
+const StyledH5 = ({children}) => {
 
   return (
-    <H5Component centered={centered}>{children}</H5Component>
+    <H5Component>{children}</H5Component>
   );
 }
 

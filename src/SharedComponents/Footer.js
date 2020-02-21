@@ -10,8 +10,8 @@ import ContactAndSocials from './ContactAndSocials';
     position: relative;
     height: 630px;
     /* oversize width, negative left margin, and positive right margin create full-bar effect */
-    width: 120vw;
-    margin: 140px auto 0 -22%;
+    width: 100vw;
+    margin: 140px auto 0 0;
     padding: 10% 12% 0 22%;
     background-color: rgba(230, 197, 100, 1);
     ::before {

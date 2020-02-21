@@ -18,19 +18,19 @@ const BuyButtonContainer = styled.button`
   width: 150px;
   padding: 5px;
   margin: 1% 0 5px 0;
-  color: ${props => (props.isEnabled ? "#e3be42" : "#e34267")};
+  color: ${props => (props.exceededMaxQuantity ? "#e3be42" : "#e34267")};
   text-align: center;
   font-size: 1em;
   font-weight: normal;
   text-decoration: none;
   border: ${props =>
-    props.isEnabled ? "3px solid #e3be42" : "3px solid #787878"};
+    props.exceededMaxQuantity ? "3px solid #e3be42" : "3px solid #787878"};
   border-radius: 10px;
   background-color: white;
   transition: opacity 1s ease-in-out;
   &:hover {
-    color: ${props => (props.isEnabled ? "white" : "#e34267")};
-    background-color: ${props => (props.isEnabled ? "#e3be42" : "white")};
+    color: ${props => (props.exceededMaxQuantity ? "white" : "#e34267")};
+    background-color: ${props => (props.exceededMaxQuantity ? "#e3be42" : "white")};
   }
   :focus {
     outline-width: 0;
@@ -86,7 +86,7 @@ const BuyButton = ({
     if (exceededMaxQuantity) {
       return (
         <BuyButtonWrapper>
-          <BuyButtonContainer isEnabled={false}>
+          <BuyButtonContainer exceededMaxQuantity={!exceededMaxQuantity}>
             Met Item Limit
           </BuyButtonContainer>
           <ExceededMaxQuantityWarning
@@ -103,7 +103,7 @@ const BuyButton = ({
       return (
         <BuyButtonContainer
           className="buyButton"
-          isEnabled={true}
+          exceededMaxQuantity={!exceededMaxQuantity}
           buyButtonClicked={buyButtonClicked}
           onClick={doesItemExist ? updateQuantity : addItem}
         >

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { device } from "../../utils/devices";
 import * as CartActionCreators from "../../state/actions/cart";
 import ExceededMaxQuantityWarning from "../../SharedComponents/ExceededMaxQuantityWarning";
 
@@ -9,11 +10,29 @@ const BuyButtonWrapper = styled.div`
   position: relative;
   overflow: visible;
   align-self: flex-start;
+  .addedToCartAlert {
+    display: block;
+    position: absolute;
+    width: 150px;
+    top: ${props => props.buyButtonClicked? "-25px" : "-15px"};
+    left: 50%;
+    z-index: 1;
+    margin: 0 0 0 -75px;
+    padding: 2px 0;
+    color: #2e2e2e;
+    font-size: 0.725rem;
+    text-align: center;
+    background-color: rgba( 277, 190, 66, 0.33);
+    border-radius: 10px;
+    opacity: ${props => (props.buyButtonClicked ? "1" : "0")};
+    transition: all .75s ease-in-out;
+  }
   `;
 
 const BuyButtonContainer = styled.button`
   align-self: flex-start;
   display: block;
+  position: relative;
   box-sizing: border-box;
   width: 150px;
   padding: 5px;
@@ -27,13 +46,17 @@ const BuyButtonContainer = styled.button`
     props.exceededMaxQuantity ? "3px solid #e3be42" : "3px solid #787878"};
   border-radius: 10px;
   background-color: white;
-  transition: opacity 1s ease-in-out;
+  z-index: 5;
   &:hover {
     color: ${props => (props.exceededMaxQuantity ? "white" : "#e34267")};
-    background-color: ${props => (props.exceededMaxQuantity ? "#e3be42" : "white")};
+    background-color: ${props =>
+      props.exceededMaxQuantity ? "#e3be42" : "white"};
   }
   :focus {
-    outline-width: 0;
+    outline: none;
+    }
+  :focus-visible {
+    outline-width: 5px solid red;
   }
 `;
 
@@ -54,7 +77,7 @@ const BuyButton = ({
     const createAddtoCartTransition = () => {
       setBuyButtonClicked(true);
       // reset state so that animation can happen again
-      setTimeout( () => setBuyButtonClicked(false), 1000);
+      setTimeout( () => setBuyButtonClicked(false), 750);
     };
 
     // onClick, button will either addItem or updateQuantity
@@ -85,7 +108,8 @@ const BuyButton = ({
 
     if (exceededMaxQuantity) {
       return (
-        <BuyButtonWrapper>
+        <BuyButtonWrapper buyButtonClicked={buyButtonClicked}>
+          <span className="addedToCartAlert">Added!</span>
           <BuyButtonContainer exceededMaxQuantity={!exceededMaxQuantity}>
             Met Item Limit
           </BuyButtonContainer>
@@ -101,14 +125,17 @@ const BuyButton = ({
       );
     } else {
       return (
-        <BuyButtonContainer
-          className="buyButton"
-          exceededMaxQuantity={!exceededMaxQuantity}
-          buyButtonClicked={buyButtonClicked}
-          onClick={doesItemExist ? updateQuantity : addItem}
-        >
-          {buyButtonClicked ? `Added to Cart` : `Add to Cart`}
-        </BuyButtonContainer>
+        <BuyButtonWrapper buyButtonClicked={buyButtonClicked}>
+          <span className="addedToCartAlert">Added!</span>
+          <BuyButtonContainer
+            className="buyButton"
+            exceededMaxQuantity={!exceededMaxQuantity}
+            buyButtonClicked={buyButtonClicked}
+            onClick={doesItemExist ? updateQuantity : addItem}
+          >
+            Add to Cart
+          </BuyButtonContainer>
+        </BuyButtonWrapper>
       );
     }
   };

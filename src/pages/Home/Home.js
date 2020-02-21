@@ -18,7 +18,7 @@ const Home = () =>
       <About />
       <PhotoSection />
       <Process />
-      {/* <StoreLocator /> */}
+      <StoreLocator />
       <RecipeSection />
       <Footer />
     </>

@@ -18,9 +18,9 @@ const StyledWrapper = styled.div`
     backgroundColor &&
     `
     position: relative;
-    width: 110vw;
-    left: 45%;
-    right: 45%;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
     background-color: ${backgroundColor};

@@ -12,7 +12,7 @@ const LineItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 55px;
+  height: 65px;
   width: 100%;
   color: #787878;
   font-size: 0.875em;

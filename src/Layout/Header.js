@@ -149,6 +149,7 @@ export class Header extends PureComponent {
     
     return (
     <Navbar 
+      id="home"
       className={this.state.show ? "active" : "hidden"}
       scrollPos={this.state.scrollPos}
       currentRoute={this.props.location.pathname}

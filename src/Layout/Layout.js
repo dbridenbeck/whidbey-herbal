@@ -71,7 +71,7 @@ const Layout = ({
     <>
       <MasterWrapper id='MasterWrapper'>
         <Header />
-        <div id="home">{children}</div>
+        {children}
       </MasterWrapper>
     </>
   );

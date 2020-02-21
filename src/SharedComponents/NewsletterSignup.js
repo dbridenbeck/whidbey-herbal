@@ -9,6 +9,7 @@ const SignupWrapper = styled.div`
   display: block;
   position: relative;
   width: 100%;
+  padding: 0 5% 5% 0;
   .setH1Width {
     display: inline-block;
     position: relative;

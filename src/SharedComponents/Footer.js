@@ -11,7 +11,7 @@ import ContactAndSocials from './ContactAndSocials';
     height: 630px;
     width: 100vw;
     margin: 140px auto 0 0;
-    padding: 10% 12% 0 22%;
+    padding: 15% 5% 5% 5%;
     background-color: rgba(230, 197, 100, 1);
     ::before {
       content: "";

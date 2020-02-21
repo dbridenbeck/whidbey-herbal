@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import PropTypes from "prop-types";
@@ -37,50 +37,50 @@ const BuyButtonContainer = styled.button`
   }
 `;
 
-export class BuyButton extends PureComponent {
-  // component state used to handle animation when button is clicked
-  constructor(props) {
-    super(props);
-    this.state = {
-      buyButtonClicked: false
-    }
-    this.createBuyButton = this.createBuyButton.bind(this);
-  }
+const BuyButton = ({
+  addLineItem,
+  updateItemQuantity,
+  doesItemExist,
+  lineItems,
+  maxQuantity,
+  selectedProduct,
+  quantity
+}) => {
 
-// create buy button
-  createBuyButton = () => {
-    const { addLineItem, updateItemQuantity, doesItemExist, lineItems, maxQuantity, selectedProduct, quantity } = this.props;
+  const [buyButtonClicked, setBuyButtonClicked] = useState(false);
+
+  // create buy button
+  const createBuyButton = () => {
     const createAddtoCartTransition = () => {
-      this.setState({
-        buyButtonClicked: true
-      })
+      setBuyButtonClicked(true);
       // reset state so that animation can happen again
-      setTimeout(() => this.setState({
-        buyButtonClicked: false
-      }), 1000)}
+      setTimeout( () => setBuyButtonClicked(false), 1000);
+    };
 
     // onClick, button will either addItem or updateQuantity
     const addItem = () => {
       addLineItem(selectedProduct, quantity);
       createAddtoCartTransition();
-    }
+    };
     const updateQuantity = () => {
       updateItemQuantity(quantity, "add", selectedProduct);
       createAddtoCartTransition();
-    }
+    };
 
-    const calculateLineItemQuantity = () => {      
+    const calculateLineItemQuantity = () => {
       if (lineItems.length > 0) {
-        return  lineItems
-                  .filter(lineItem => lineItem.handle === selectedProduct.handle)
-                  .reduce((total, lineItem) => lineItem.quantity, 0)
+        return lineItems
+          .filter(lineItem => lineItem.handle === selectedProduct.handle)
+          .reduce((total, lineItem) => lineItem.quantity, 0);
       } else {
         return 0;
       }
-    }
-    
-    const lineItemPlusQuantityButton = (parseInt(quantity, 10) + parseInt(calculateLineItemQuantity(), 10));
-    const quantityAllowed = maxQuantity - parseInt(calculateLineItemQuantity(), 10);
+    };
+
+    const lineItemPlusQuantityButton =
+      parseInt(quantity, 10) + parseInt(calculateLineItemQuantity(), 10);
+    const quantityAllowed =
+      maxQuantity - parseInt(calculateLineItemQuantity(), 10);
     const exceededMaxQuantity = lineItemPlusQuantityButton > maxQuantity;
 
     if (exceededMaxQuantity) {
@@ -104,23 +104,18 @@ export class BuyButton extends PureComponent {
         <BuyButtonContainer
           className="buyButton"
           isEnabled={true}
-          buyButtonClicked={this.state.buyButtonClicked}
+          buyButtonClicked={buyButtonClicked}
           onClick={doesItemExist ? updateQuantity : addItem}
         >
-          {this.state.buyButtonClicked ? `Added to Cart` : `Add to Cart`}
+          {buyButtonClicked ? `Added to Cart` : `Add to Cart`}
         </BuyButtonContainer>
       );
-    };
-  }
+    }
+  };
 
-  render() {
-    return (
-      <div>
-        {this.createBuyButton()}
-      </div>
-    )
-  }
-}
+  // BuyButton component render
+  return <div>{createBuyButton()}</div>;
+};
 
 BuyButton.propTypes = {
   updateItemQuantity: PropTypes.func,

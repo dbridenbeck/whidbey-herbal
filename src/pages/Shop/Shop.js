@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
 import styled from "styled-components";
-import PageWrapper from "../../SharedComponents/PageWrapper";
 import Product from "../../SharedComponents/Product";
 import StyledH1 from "../../SharedComponents/StyledH1";
 import Footer from "../../SharedComponents/Footer";
@@ -19,7 +18,7 @@ const ProductsContainer = styled.div`
 const Shop = ({products}) => {
 
   return (
-    <PageWrapper>
+    <>
       <StyledH1 centered={false} colorIsGrey={false}>
         Shop
       </StyledH1>
@@ -30,7 +29,7 @@ const Shop = ({products}) => {
           ))}
       </ProductsContainer>
       <Footer />
-    </PageWrapper>
+    </>
   );
 };
 

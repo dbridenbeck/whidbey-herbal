@@ -10,13 +10,14 @@ const FullWidthSVG = styled.div`
   display: block;
   position: absolute;
   /* width, height and margin-left keep SVG positioned center */
-  width: 200vw;
+  width: 100vw;
   height: 75%;
   /* -200px margin offset's componentwrapper's margin */
-  margin: -200px 0 0 -6vw;
+  margin: -200px 0 0 -0vw;
   background-image: url(${WaveSVG});
   /* adjust positioning and size of SVG for bigger screens */
   @media ${device.tablet} {
+    width: 200vw;
     margin-left: -5vw;
   }
   @media ${device.largeScreen} {
@@ -26,19 +27,19 @@ const FullWidthSVG = styled.div`
 
 const PhotoContainer = styled.div`
   position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  /* width, left, right, and margins keep PhotoContainer full-width */
-  width: 105vw;
+  display: block;
+  width: 100vw;
+  height: auto;
   left: 50%;
   right: 50%;
   /* negative margin compensates for componentwrapper's 200px top margin*/
   margin: -200px -50vw 0 -50vw;
   padding-top: 20%;
   img {
+    display: inline-block;
+    position: relative;
     width: 50%;
+    height: auto;
   }
   .circle-photo {
     align-self: flex-end;
@@ -72,11 +73,11 @@ const FeaturedPhotos = () => {
     <ComponentWrapper>
       <FullWidthSVG />
       <PhotoContainer>
-      <FeaturedText>
-        We’re a family farm that grows and distills each of our essential
-        oils, fresh from the heart of beautiful Whidbey Island in the Salish
-        Sea.
-      </FeaturedText> 
+        <FeaturedText>
+          We’re a family farm that grows and distills each of our essential
+          oils, fresh from the heart of beautiful Whidbey Island in the Salish
+          Sea.
+        </FeaturedText> 
         <img class="circle-photo" src={HoneyAndBottles} />
         <img class="right-rect-photo" src={Dock} />
       </PhotoContainer>

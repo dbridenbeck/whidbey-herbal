@@ -15,6 +15,7 @@ const ProductDetailsWrapper = styled.div`
   width: 100%;
   height: auto;
   margin: 50px auto 0 auto;
+  padding: 0 20px;
   color: #787878;
   h2 {
     margin: 25px 0 0 0;

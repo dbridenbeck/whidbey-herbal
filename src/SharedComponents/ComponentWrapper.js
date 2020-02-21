@@ -12,29 +12,27 @@ const StyledWrapper = styled.div`
     props.id === "process" ? "0px auto -3% auto" : "0px auto 0px auto"};
   padding: ${props =>
     props.id === "process" ? "200px 0 12% 0" : "200px 0px 0px 0px"};
-  border-bottom: ${props => props.hasTopBottomBorders ? "1px solid black" : "none"};
   /* Create full width color bars */
   ${({ backgroundColor }) =>
     backgroundColor &&
     `
     position: relative;
-    width: 110vw;
-    left: 45%;
-    right: 45%;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
     background-color: ${backgroundColor};
     `}
 `;
 
-const ComponentWrapper = ({maxWidth, children, id, backgroundColor, hasTopBottomBorders}) => {
+const ComponentWrapper = ({maxWidth, children, id, backgroundColor}) => {
 
   return (
     <StyledWrapper
       maxWidth={maxWidth}
       id={id}
       backgroundColor={backgroundColor}
-      hasTopBottomBorders={hasTopBottomBorders}
     >{children}</StyledWrapper>
   );
 }

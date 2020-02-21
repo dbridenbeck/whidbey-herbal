@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import Wrapper from "../../SharedComponents/ComponentWrapper";
+import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
 import StyledH2 from "../../SharedComponents/StyledH2";
 
 import RecipeBlock from './RecipeBlock';
@@ -18,7 +18,7 @@ const RecipeContainer = styled.div`
 
 const RecipeSection = ({articles}) => {
   return (
-    <Wrapper id="recipes" maxWidth={""} positionRelative={true}>
+    <ComponentWrapper id="recipes" maxWidth={""}>
       <StyledH2>
         Recipes
       </StyledH2>
@@ -27,7 +27,7 @@ const RecipeSection = ({articles}) => {
           <RecipeBlock recipe={article} key={article.node.id} />
         ))}
       </RecipeContainer>
-    </Wrapper>
+    </ComponentWrapper>
   );
 }
 

@@ -13,6 +13,7 @@ const FarmerIllustration = styled.img`
 `;
 
 const AboutText = styled.p`
+  padding: 0 20px;
   font-size: 0.875em;
   line-height: 1.5em;
   font-style: normal;

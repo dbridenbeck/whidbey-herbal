@@ -7,10 +7,7 @@ const WelcomeWrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 837px;
-  margin: -60px auto 0px auto;
-  @media ${device.largeScreen} {
-    max-width: 1000px;
-  }
+  margin: -60px auto 0 auto;
   img {
     position: relative;
     width: 100%;
@@ -21,7 +18,7 @@ const WelcomeWrapper = styled.div`
 const Tagline = styled.div`
   display: block;
   position: relative;
-  width: 365px;
+  width: 345px;
   left: 50%;
   right: 50%;
   margin: -27% -46vw 0 -46vw;
@@ -49,7 +46,7 @@ const Tagline = styled.div`
     position: absolute;
     background-color: #E6C564;
     top: 31%;
-    right: 6%;
+    right: 0.5%;
     height: 1.225rem;
     width: 175px;
     @media ${device.tablet} {

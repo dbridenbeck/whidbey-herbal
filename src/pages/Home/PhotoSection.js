@@ -6,30 +6,29 @@ import ClippingPhoto from "./images/clipping-photo-500.jpg";
 import { device } from '../../utils/devices';
 
 const PhotoContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  /* width 120% and negative margin-left keep photos to edge of screen */
-  width: 125%;
-  margin-left: -12.5%;
+  display: block;
+  width: 100%;
+  img {
+    position: relative;
+    display: inline-block;
+    width: 49%;
+    height: auto;
+    :first-child {
+      margin-right: 2%;
+    }
+  }
   @media ${device.tablet} {
     width: 115%;
-    max-height: 785px;
     margin-left: -7.5%;
   }
-`;
-
-const Photo = styled.img`
-  display: block;
-  width: 49%;
 `;
 
 const PhotoSection = () => {
   return (
     <ComponentWrapper id="photo-section">
       <PhotoContainer>
-        <Photo src={ClippingPhoto} />
-        <Photo src={SamCaitlin} />
+        <img src={ClippingPhoto} />
+        <img src={SamCaitlin} />
       </PhotoContainer>
     </ComponentWrapper>
   );

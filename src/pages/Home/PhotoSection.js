@@ -7,15 +7,15 @@ import { device } from '../../utils/devices';
 
 const PhotoContainer = styled.div`
   display: block;
-  /* width 120% and negative margin-left keep photos to edge of screen */
-  width: 125%;
-  margin-left: -12.5%;
+  width: 100%;
   img {
     position: relative;
     display: inline-block;
-    width: 48%;
+    width: 49%;
     height: auto;
-    margin: 0 1%;
+    :first-child {
+      margin-right: 2%;
+    }
   }
   @media ${device.tablet} {
     width: 115%;

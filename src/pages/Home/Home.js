@@ -14,9 +14,9 @@ const Home = () =>
     <>
       <WelcomeSection />
       <FeaturedPhotos />
-      {/* <FeaturedProducts title={"Featured Products"} hasTopBottomBorders={true}/> */}
-      {/* <About /> */}
-      {/* <PhotoSection /> */}
+      <FeaturedProducts title={"Featured Products"} hasTopBottomBorders={true}/>
+      <About />
+      <PhotoSection />
       {/* <Process /> */}
       {/* <StoreLocator /> */}
       <RecipeSection />

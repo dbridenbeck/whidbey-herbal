@@ -27,9 +27,9 @@ const RemoveWrapper = styled.div`
     display: block;
     margin: 0 auto;
     padding: 0;
-    height: 100%;
+    height: 30px;
     width: 100%;
-    max-width: 25px;
+    max-width: 30px;
     font-size: 1rem;
     color: #e34267;
     border: 1px solid #787878;
@@ -83,9 +83,7 @@ const Checkout = ({lineItems, removeLineItem, updateCheckoutId }) => {
         <button
           className="remove"
           onClick={remove}
-        >
-        x
-        </button>
+        >x</button>
       </RemoveWrapper>
     );
   }

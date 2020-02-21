@@ -13,7 +13,7 @@ import Footer from "../../SharedComponents/Footer";
 const Home = () =>
     <>
       <WelcomeSection />
-      {/* <FeaturedPhotos /> */}
+      <FeaturedPhotos />
       {/* <FeaturedProducts title={"Featured Products"} hasTopBottomBorders={true}/> */}
       {/* <About /> */}
       {/* <PhotoSection /> */}

@@ -10,13 +10,14 @@ const FullWidthSVG = styled.div`
   display: block;
   position: absolute;
   /* width, height and margin-left keep SVG positioned center */
-  width: 200vw;
+  width: 100vw;
   height: 75%;
   /* -200px margin offset's componentwrapper's margin */
-  margin: -200px 0 0 -6vw;
+  margin: -200px 0 0 -0vw;
   background-image: url(${WaveSVG});
   /* adjust positioning and size of SVG for bigger screens */
   @media ${device.tablet} {
+    width: 200vw;
     margin-left: -5vw;
   }
   @media ${device.largeScreen} {
@@ -27,7 +28,7 @@ const FullWidthSVG = styled.div`
 const PhotoContainer = styled.div`
   position: relative;
   display: block;
-  width: 105vw;
+  width: 100vw;
   height: auto;
   left: 50%;
   right: 50%;

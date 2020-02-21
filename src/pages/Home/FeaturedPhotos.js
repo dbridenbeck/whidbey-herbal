@@ -11,7 +11,7 @@ const FullWidthSVG = styled.div`
   position: absolute;
   /* width, height and margin-left keep SVG positioned center */
   width: 100vw;
-  height: 75%;
+  height: 100%;
   /* -200px margin offset's componentwrapper's margin */
   margin: -200px 0 0 -0vw;
   background-image: url(${WaveSVG});

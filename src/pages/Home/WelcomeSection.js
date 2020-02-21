@@ -7,7 +7,7 @@ const WelcomeWrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 837px;
-  margin: -60px auto 0 auto;
+  margin: -60px auto 100px auto;
   img {
     position: relative;
     width: 100%;

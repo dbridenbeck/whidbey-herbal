@@ -33,7 +33,7 @@ const AltImages = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-content: flex-start;
   height: auto;
   width: 100%;

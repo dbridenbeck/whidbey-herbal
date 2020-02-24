@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from "react-router-dom";
 import styled from 'styled-components';
 import whPattern from './images/wh-pattern.jpg';
 import { device } from "../utils/devices";
@@ -10,8 +11,9 @@ import ContactAndSocials from './ContactAndSocials';
     position: relative;
     height: 630px;
     width: 100vw;
-    margin: 50px auto 0 0;
-    padding: 125px 5% 25px 5%;
+    /* Adjust right margin for homepage */
+    margin: ${props => props.pathname === "/" ? "50px auto 0 0px" : "50px auto 0 -20px"};
+    padding: 125px 10px 25px 10px;
     background-color: rgba(230, 197, 100, 1);
     ::before {
       content: "";
@@ -30,18 +32,16 @@ import ContactAndSocials from './ContactAndSocials';
       flex-direction: row;
       justify-content: center;
     }
-    @media ${device.largeScreen} {
-      
-    }
   `;
 
-const Footer = () => {
+const Footer = ({location: {pathname}}) => {
+  console.log("pathname from footer: ", pathname);
   return (
-    <FooterContainer>
+    <FooterContainer pathname={pathname}>
       <NewsletterSignup />
       <ContactAndSocials />
     </FooterContainer>
   );
 }
 
-export default Footer;
+export default withRouter(Footer);

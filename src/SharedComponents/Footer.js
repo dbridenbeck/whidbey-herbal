@@ -11,7 +11,7 @@ import ContactAndSocials from './ContactAndSocials';
     height: 630px;
     width: 100vw;
     margin: 50px auto 0 0;
-    padding: 15% 5% 5% 5%;
+    padding: 125px 5% 25px 5%;
     background-color: rgba(230, 197, 100, 1);
     ::before {
       content: "";
@@ -31,10 +31,7 @@ import ContactAndSocials from './ContactAndSocials';
       justify-content: center;
     }
     @media ${device.largeScreen} {
-      /* maring-left and margin-right used to create full bar given Layout's MasterWrapper 
-      has a known width of 1200px on large screens and -20px is used to offset pagewrapper's 20px left padding */
-      margin-left: calc((-100vw / 2) + (1200px / 2));
-      margin-right: calc(-100vw / 2 + 1200px / 2);
+      
     }
   `;
 

@@ -24,7 +24,7 @@ const ReviewsWrapper = styled.div`
   display: block;
   width: 100%;
   margin: 25px auto 0px auto;
-  padding: 0 20px;
+  padding: 0;
   h2 {
     margin: 0;
     padding: 0;

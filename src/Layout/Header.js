@@ -86,11 +86,7 @@ const HomeLink = styled.img`
   height: auto;
   width: 225px;
   margin: 7px auto 0 auto;
-  @media ${device.tablet} {
-    width: 275px;
-  }
   @media ${device.laptop} {
-    max-width: 275px;
     margin: 5px 10% 0 10%;
   }
 `;

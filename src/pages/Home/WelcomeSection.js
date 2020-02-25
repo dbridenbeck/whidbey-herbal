@@ -68,7 +68,7 @@ const Tagline = styled.div`
     }
     @media ${device.laptop} {
       top: 31%;
-      right: 29.5%;
+      right: 372px;
       height: 3.25rem;
       width: 450px;
       }

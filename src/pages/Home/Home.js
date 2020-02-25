@@ -22,7 +22,7 @@ const Home = () =>
       <WelcomeSection />
       <FeaturedPhotos />
       <FeaturedProducts title={"Featured Products"} hasTopBottomBorders={true}/>
-      <HorizLine />
+      {/* <HorizLine /> */}
       <About />
       <PhotoSection />
       <Process />

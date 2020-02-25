@@ -11,6 +11,9 @@ const FarmerIllustration = styled.img`
   width: 87%;
   max-width: 400px;
   margin: 0 auto;
+  @media (min-width: 1281px) {
+    max-width: 800px;
+  }
 `;
 
 const AboutText = styled.p`
@@ -20,6 +23,8 @@ const AboutText = styled.p`
   font-weight: 300;
   text-align: center;
   color: #2e2e2e;
+  width: 48%;
+  margin: 0 auto;
   @media ${device.tablet} {
     font-size: 1rem;
     padding: 0;
@@ -32,7 +37,7 @@ const AboutText = styled.p`
 
 const About = () => {
   return (
-    <ComponentWrapper id="about" maxWidth={"590px"}>
+    <ComponentWrapper id="about">
       <StyledH2 >
         The Farmers
       </StyledH2>

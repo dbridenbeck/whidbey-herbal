@@ -1,7 +1,8 @@
-import React, { PureComponent } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { device } from "../../utils/devices";
 import * as CartActionCreators from "../../state/actions/cart";
 import ExceededMaxQuantityWarning from "../../SharedComponents/ExceededMaxQuantityWarning";
 
@@ -9,84 +10,107 @@ const BuyButtonWrapper = styled.div`
   position: relative;
   overflow: visible;
   align-self: flex-start;
+  .addedToCartAlert {
+    display: block;
+    position: absolute;
+    width: 150px;
+    top: ${props => props.buyButtonClicked? "-25px" : "-15px"};
+    left: 50%;
+    z-index: 1;
+    margin: 0 0 0 -75px;
+    padding: 2px 0;
+    color: #2e2e2e;
+    font-size: 0.725rem;
+    text-align: center;
+    background-color: rgba( 277, 190, 66, 0.33);
+    border-radius: 10px;
+    opacity: ${props => (props.buyButtonClicked ? "1" : "0")};
+    transition: all .75s ease-in-out;
+  }
   `;
 
 const BuyButtonContainer = styled.button`
   align-self: flex-start;
   display: block;
+  position: relative;
   box-sizing: border-box;
   width: 150px;
   padding: 5px;
   margin: 1% 0 5px 0;
-  color: ${props => (props.isEnabled ? "#e3be42" : "#e34267")};
+  color: ${props => (props.exceededMaxQuantity ? "#e3be42" : "#e34267")};
   text-align: center;
   font-size: 1em;
   font-weight: normal;
   text-decoration: none;
   border: ${props =>
-    props.isEnabled ? "3px solid #e3be42" : "3px solid #787878"};
+    props.exceededMaxQuantity ? "3px solid #e3be42" : "3px solid #787878"};
   border-radius: 10px;
   background-color: white;
-  transition: opacity 1s ease-in-out;
+  z-index: 5;
   &:hover {
-    color: ${props => (props.isEnabled ? "white" : "#e34267")};
-    background-color: ${props => (props.isEnabled ? "#e3be42" : "white")};
+    color: ${props => (props.exceededMaxQuantity ? "white" : "#e34267")};
+    background-color: ${props =>
+      props.exceededMaxQuantity ? "#e3be42" : "white"};
   }
   :focus {
-    outline-width: 0;
+    outline: none;
+    }
+  :focus-visible {
+    outline-width: 5px solid red;
   }
 `;
 
-export class BuyButton extends PureComponent {
-  // component state used to handle animation when button is clicked
-  constructor(props) {
-    super(props);
-    this.state = {
-      buyButtonClicked: false
-    }
-    this.createBuyButton = this.createBuyButton.bind(this);
-  }
+const BuyButton = ({
+  addLineItem,
+  updateItemQuantity,
+  doesItemExist,
+  lineItems,
+  maxQuantity,
+  selectedProduct,
+  quantity
+}) => {
 
-// create buy button
-  createBuyButton = () => {
-    const { addLineItem, updateItemQuantity, doesItemExist, lineItems, maxQuantity, selectedProduct, quantity } = this.props;
+  const [buyButtonClicked, setBuyButtonClicked] = useState(false);
+
+  // create buy button
+  const createBuyButton = () => {
     const createAddtoCartTransition = () => {
-      this.setState({
-        buyButtonClicked: true
-      })
+      setBuyButtonClicked(true);
       // reset state so that animation can happen again
-      setTimeout(() => this.setState({
-        buyButtonClicked: false
-      }), 1000)}
+      setTimeout( () => setBuyButtonClicked(false), 750);
+    };
 
     // onClick, button will either addItem or updateQuantity
     const addItem = () => {
       addLineItem(selectedProduct, quantity);
       createAddtoCartTransition();
-    }
+    };
     const updateQuantity = () => {
       updateItemQuantity(quantity, "add", selectedProduct);
       createAddtoCartTransition();
-    }
+    };
 
-    const calculateLineItemQuantity = () => {      
+    const calculateLineItemQuantity = () => {
       if (lineItems.length > 0) {
-        return  lineItems
-                  .filter(lineItem => lineItem.handle === selectedProduct.handle)
-                  .reduce((total, lineItem) => lineItem.quantity, 0)
+        return lineItems
+          .filter(lineItem => lineItem.handle === selectedProduct.handle)
+          .reduce((total, lineItem) => lineItem.quantity, 0);
       } else {
         return 0;
       }
-    }
-    
-    const lineItemPlusQuantityButton = (parseInt(quantity, 10) + parseInt(calculateLineItemQuantity(), 10));
-    const quantityAllowed = maxQuantity - parseInt(calculateLineItemQuantity(), 10);
+    };
+
+    const lineItemPlusQuantityButton =
+      parseInt(quantity, 10) + parseInt(calculateLineItemQuantity(), 10);
+    const quantityAllowed =
+      maxQuantity - parseInt(calculateLineItemQuantity(), 10);
     const exceededMaxQuantity = lineItemPlusQuantityButton > maxQuantity;
 
     if (exceededMaxQuantity) {
       return (
-        <BuyButtonWrapper>
-          <BuyButtonContainer isEnabled={false}>
+        <BuyButtonWrapper buyButtonClicked={buyButtonClicked}>
+          <span className="addedToCartAlert">Added!</span>
+          <BuyButtonContainer exceededMaxQuantity={!exceededMaxQuantity}>
             Met Item Limit
           </BuyButtonContainer>
           <ExceededMaxQuantityWarning
@@ -101,26 +125,24 @@ export class BuyButton extends PureComponent {
       );
     } else {
       return (
-        <BuyButtonContainer
-          className="buyButton"
-          isEnabled={true}
-          buyButtonClicked={this.state.buyButtonClicked}
-          onClick={doesItemExist ? updateQuantity : addItem}
-        >
-          {this.state.buyButtonClicked ? `Added to Cart` : `Add to Cart`}
-        </BuyButtonContainer>
+        <BuyButtonWrapper buyButtonClicked={buyButtonClicked}>
+          <span className="addedToCartAlert">Added!</span>
+          <BuyButtonContainer
+            className="buyButton"
+            exceededMaxQuantity={!exceededMaxQuantity}
+            buyButtonClicked={buyButtonClicked}
+            onClick={doesItemExist ? updateQuantity : addItem}
+          >
+            Add to Cart
+          </BuyButtonContainer>
+        </BuyButtonWrapper>
       );
-    };
-  }
+    }
+  };
 
-  render() {
-    return (
-      <div>
-        {this.createBuyButton()}
-      </div>
-    )
-  }
-}
+  // BuyButton component render
+  return <div>{createBuyButton()}</div>;
+};
 
 BuyButton.propTypes = {
   updateItemQuantity: PropTypes.func,

@@ -2,8 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import { device } from "../../utils/devices";
 import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
-import Dock from "./images/dock.jpg";
-import HoneyAndBottles from "./images/honey-and-bottles.jpg";
+import CaitlinBows from "./images/caitlin-bows.jpg";
+import HandFlower from "./images/hand-flower.jpg";
 import WaveSVG from './images/photosectionsvg.svg';
 
 const FullWidthSVG = styled.div`
@@ -11,7 +11,7 @@ const FullWidthSVG = styled.div`
   position: absolute;
   /* width, height and margin-left keep SVG positioned center */
   width: 100vw;
-  height: 75%;
+  height: 100%;
   /* -200px margin offset's componentwrapper's margin */
   margin: -200px 0 0 -0vw;
   background-image: url(${WaveSVG});
@@ -78,8 +78,8 @@ const FeaturedPhotos = () => {
           oils, fresh from the heart of beautiful Whidbey Island in the Salish
           Sea.
         </FeaturedText> 
-        <img class="circle-photo" src={HoneyAndBottles} />
-        <img class="right-rect-photo" src={Dock} />
+        <img class="circle-photo" src={HandFlower} />
+        <img class="right-rect-photo" src={CaitlinBows} />
       </PhotoContainer>
     </ComponentWrapper>
   );

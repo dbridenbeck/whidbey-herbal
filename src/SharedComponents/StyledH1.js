@@ -16,12 +16,10 @@ const H1Component = styled.h1`
 }
 `;
 
-const StyledH1 = ({centered, colorIsGrey, children}) => {
+const StyledH1 = ({children}) => {
 
   return (
     <H1Component
-      colorIsGrey={colorIsGrey}
-      centered={centered}
     >{children}</H1Component>
   );
 }

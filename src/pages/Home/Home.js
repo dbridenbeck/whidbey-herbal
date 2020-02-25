@@ -13,7 +13,7 @@ import Footer from "../../SharedComponents/Footer";
 
 const HorizLine = styled.div`
   width: 90%;
-  margin: 0 auto;
+  margin: -50px auto 0 auto;
   border-bottom: 1px solid black;
 `;
 
@@ -22,7 +22,7 @@ const Home = () =>
       <WelcomeSection />
       <FeaturedPhotos />
       <FeaturedProducts title={"Featured Products"} hasTopBottomBorders={true}/>
-      <HorizLine />
+      {/* <HorizLine /> */}
       <About />
       <PhotoSection />
       <Process />

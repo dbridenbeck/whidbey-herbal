@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
-import SamCaitlin from "./images/sam-caitlin-500.jpg";
-import ClippingPhoto from "./images/clipping-photo-500.jpg";
+import SamCaitlinLogs from "./images/sam-and-caitlin-logs.jpg";
+import BottlesHoneyCloseup from "./images/bottles-honey-closeup.jpg";
 import { device } from '../../utils/devices';
 
 const PhotoContainer = styled.div`
@@ -27,8 +27,8 @@ const PhotoSection = () => {
   return (
     <ComponentWrapper id="photo-section">
       <PhotoContainer>
-        <img src={ClippingPhoto} />
-        <img src={SamCaitlin} />
+        <img src={BottlesHoneyCloseup} />
+        <img src={SamCaitlinLogs} />
       </PhotoContainer>
     </ComponentWrapper>
   );

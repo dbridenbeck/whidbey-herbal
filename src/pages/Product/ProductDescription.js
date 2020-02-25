@@ -15,7 +15,7 @@ const ProductDetailsWrapper = styled.div`
   width: 100%;
   height: auto;
   margin: 50px auto 0 auto;
-  padding: 0 20px;
+  padding: 0;
   color: #787878;
   h2 {
     margin: 25px 0 0 0;
@@ -147,7 +147,7 @@ const ProductDetails = ({
   // begin component's return
   return (
     <ProductDetailsWrapper>
-      <StyledH1 colorIsGrey={false} centered={false}>
+      <StyledH1  >
         {title}
       </StyledH1>
       {/* below HTML is for "about" section */}

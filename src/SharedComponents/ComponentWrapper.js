@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import { device } from "../utils/devices";
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -8,10 +9,12 @@ const StyledWrapper = styled.div`
   max-width: ${props => props.maxWidth};
   /* conditional for process allows the yellow svg circle to position correctly
   and responsively overlap the storeLocator component */
-  margin: ${props =>
-    props.id === "process" ? "0px auto -3% auto" : "0px auto 0px auto"};
-  padding: ${props =>
-    props.id === "process" ? "200px 0 12% 0" : "200px 0px 0px 0px"};
+  margin: 0 auto;
+  margin-bottom: ${props =>
+    props.id === "process" ? "-3%" : "0px"};
+  padding-top: 100px;
+  padding-bottom: ${props =>
+    props.id === "process" ? "12%" : "0px"};
   /* Create full width color bars */
   ${({ backgroundColor }) =>
     backgroundColor &&
@@ -24,6 +27,9 @@ const StyledWrapper = styled.div`
     margin-right: -50vw;
     background-color: ${backgroundColor};
     `}
+  @media ${device.tablet} {
+    padding-top: 200px;
+  }
 `;
 
 const ComponentWrapper = ({maxWidth, children, id, backgroundColor}) => {

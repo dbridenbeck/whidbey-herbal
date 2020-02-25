@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
+import PageWrapper from '../../SharedComponents/PageWrapper';
 import Reviews from './Reviews';
 import ProductDetails from './ProductDetails';
 import Footer from "../../SharedComponents/Footer";
@@ -46,10 +47,10 @@ const Product = ({
   
   // begin component's return
   return (
-    <>
+    <PageWrapper>
       {createProductDetails()}
       <Footer />
-    </>
+    </PageWrapper>
   );
 };
 

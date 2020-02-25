@@ -31,6 +31,13 @@ import { device } from '../../utils/devices';
       height: 500px;
       margin: -10% 5% 0 5%;
     }
+    @media ${device.largeScreen} {
+      height: 500px;
+      margin: 5% 5% 0 5%;
+      :first-child {
+        margin-top: 5%;
+      }
+    }
   `;
   
   const Info = styled.div`

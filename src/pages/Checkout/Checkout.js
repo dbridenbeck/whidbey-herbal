@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import PageWrapper from "../../SharedComponents/PageWrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
 import { device } from "../../utils/devices";
 
@@ -27,9 +28,9 @@ const RemoveWrapper = styled.div`
     display: block;
     margin: 0 auto;
     padding: 0;
-    height: 100%;
+    height: 30px;
     width: 100%;
-    max-width: 25px;
+    max-width: 30px;
     font-size: 1rem;
     color: #e34267;
     border: 1px solid #787878;
@@ -53,19 +54,23 @@ const RemoveWrapper = styled.div`
 const CheckoutButton = styled.button`
   display: block;
   height: 40px;
+  width: 100%;
   min-width: 222px;
   margin: 20px 0;
+  padding: 0 11%;
   font-size: 1.125em;
-  background: none;
-  color: #e3be42;
+  text-align: left;
   border: 1px solid #e3be42;
+  color: ${props => (props.loadingCheckout ? `#787878` : `#E3BE42`)};
+  background-color: white;
   border-radius: 10px;
   :focus {
     outline-width: 0;
   }
   :hover {
-    color: white;
-    background-color: #E3BE42;
+    color: ${props => (props.loadingCheckout ? `#787878` : `white`)};
+    background-color: ${props =>
+      props.loadingCheckout ? `white` : `#E3BE42`};
   }
 `;
 
@@ -76,6 +81,9 @@ const StyledH2 = styled.h2`
 
 const Checkout = ({lineItems, removeLineItem, updateCheckoutId }) => {
 
+  const [checkoutButtonText, changeCheckoutButtonText] = useState("Proceed to Checkout");
+  const [loadingCheckout, setLoadingCheckoutTrue] = useState(false) 
+
   const createRemoveButton = (id, index) => {
     const remove = () => removeLineItem(id, index);
     return (  
@@ -83,14 +91,31 @@ const Checkout = ({lineItems, removeLineItem, updateCheckoutId }) => {
         <button
           className="remove"
           onClick={remove}
-        >
-        x
-        </button>
+        >x</button>
       </RemoveWrapper>
     );
   }
-  
+
+  const showCheckoutLoading = () => {
+    const loadingCheckoutTextProgress = [
+      `Loading Checkout`,
+      `Loading Checkout.  `,
+      `Loading Checkout.. `,
+      `Loading Checkout...`
+    ];
+    changeCheckoutButtonText("Loading Checkout")
+    let i = 0;
+    setInterval(() => {
+      const text = loadingCheckoutTextProgress[i]
+      changeCheckoutButtonText(text);
+      i++
+      return i === 4 ? i = 0 : null;
+    }, 250);
+  }
+
   const createCheckout = (lineItemsToAdd) => async () => {
+    showCheckoutLoading();
+    setLoadingCheckoutTrue(true);
     try {
       const checkout = await client.checkout.create();
       await updateCheckoutId(checkout.id);
@@ -100,7 +125,7 @@ const Checkout = ({lineItems, removeLineItem, updateCheckoutId }) => {
       console.log("Error creating checkout: ", error);
     }
   }
-  
+
   const createCheckoutButton = () => {
     const createLineItemObject = item => ({
       variantId: item.variants.edges[0].node.id,
@@ -110,8 +135,8 @@ const Checkout = ({lineItems, removeLineItem, updateCheckoutId }) => {
     const checkout = createCheckout(lineItemsToAdd);
     
     return (
-      <CheckoutButton className="checkout" onClick={checkout}>
-        Proceed to Checkout
+      <CheckoutButton loadingCheckout={loadingCheckout} onClick={checkout}>
+        {checkoutButtonText}
       </CheckoutButton>
     );
   }
@@ -149,13 +174,13 @@ const Checkout = ({lineItems, removeLineItem, updateCheckoutId }) => {
   }
 
     return (
-      <>
-        <StyledH1 colorIsGrey={false} centered={false}>
+      <PageWrapper>
+        <StyledH1>
           Checkout
         </StyledH1>
         {createCheckoutContainer()}
         <Footer />
-      </>
+      </PageWrapper>
     );
 };
 

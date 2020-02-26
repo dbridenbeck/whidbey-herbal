@@ -9,7 +9,7 @@ const PanelWrapper = styled.div`
   display: block;
   position: absolute;
   top: 0;
-  margin-top: 50px;
+  margin-top: 60px;
   padding: 0;
   z-index: 6;
   /* make navpanel display in top navbar when on laptop */

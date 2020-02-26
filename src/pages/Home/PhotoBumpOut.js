@@ -43,7 +43,7 @@ const PhotoBumpOut = () => {
 
   return (
     <BumpOutContainer>
-      <img src={bottlesAndHoney} />
+      <img src={bottlesAndHoney} alt="Bottles of essential oil, honeycomb, and lavender stalk laying on a table" />
       <div className="circle">
         <svg height="100%" width="100%">
           <circle
@@ -51,7 +51,7 @@ const PhotoBumpOut = () => {
             cy="50%"
             r="50%"
             stroke="black"
-            stroke-width="0"
+            strokeWidth="0"
             fill="red"
           />
         </svg>

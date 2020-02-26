@@ -27,8 +27,8 @@ const PhotoSection = () => {
   return (
     <ComponentWrapper id="photo-section">
       <PhotoContainer>
-        <img src={BottlesHoneyCloseup} />
-        <img src={SamCaitlinLogs} />
+        <img src={BottlesHoneyCloseup} alt="Three bottles of essential oils and a piece of honey comb sitting on a table" />
+        <img src={SamCaitlinLogs} alt="Sam and Caitlin posing next to a log cabin"/>
       </PhotoContainer>
     </ComponentWrapper>
   );

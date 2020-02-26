@@ -72,7 +72,7 @@ const Tagline = styled.div`
 const WelcomeSection = () => {
   return (
     <WelcomeWrapper>
-      <img src={`${farm}`} />
+      <img src={`${farm}`} alt="A watercolor of Whidbey Herbal farms showing a barn, a house, lavender fields, a dog in a pasture, and a forest in the background"/>
       <Tagline>
         <h1>
           Small batch handcrafted. <br/> Seed-to-bottle.

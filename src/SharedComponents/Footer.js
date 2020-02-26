@@ -35,7 +35,6 @@ import ContactAndSocials from './ContactAndSocials';
   `;
 
 const Footer = ({location: {pathname}}) => {
-  console.log("pathname from footer: ", pathname);
   return (
     <FooterContainer pathname={pathname}>
       <NewsletterSignup />

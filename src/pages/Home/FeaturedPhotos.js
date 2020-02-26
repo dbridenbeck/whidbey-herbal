@@ -79,8 +79,8 @@ const FeaturedPhotos = () => {
           oils, fresh from the heart of beautiful Whidbey Island in the Salish
           Sea.
         </FeaturedText> 
-        <img class="circle-photo" src={HandFlower} />
-        <img class="right-rect-photo" src={CaitlinBows} />
+        <img className="circle-photo" src={HandFlower} alt="A flower in the palm of a hand with green and yellow flowers in the background" />
+        <img className="right-rect-photo" src={CaitlinBows} alt="Caitlin smiling and holding fir bows" />
       </PhotoContainer>
     </ComponentWrapper>
   );

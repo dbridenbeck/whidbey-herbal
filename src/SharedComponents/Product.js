@@ -93,7 +93,6 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
     <ProductLink
       to={`/product/${product.handle}`}
       onClick={clearHeroImgAndQuantityButton}
-      isAvailable={product.availableForSale}
     >
       <ImageContainer>
         {!product.availableForSale ? (

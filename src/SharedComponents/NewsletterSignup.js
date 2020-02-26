@@ -68,8 +68,10 @@ export class NewsletterSignup extends Component {
     return (
       <SignupWrapper>
         <div className="setH1Width">
-          <StyledH1>Stay in <br /> the loop.</StyledH1>
-          <img src={loop} />
+          <StyledH1>
+            Stay in <br /> the loop.
+          </StyledH1>
+          <img src={loop} alt="A hand drawn loop-de-loop" />
         </div>
         <StyledH3>Subscribe to our newsletter below</StyledH3>
         <FormContainer>
@@ -109,6 +111,7 @@ export class NewsletterSignup extends Component {
             >
               <label htmlFor="b_name">Name: </label>
               <input
+                readOnly
                 type="text"
                 name="b_name"
                 tabIndex="-1"
@@ -119,6 +122,7 @@ export class NewsletterSignup extends Component {
 
               <label htmlFor="b_email">Email: </label>
               <input
+                readOnly
                 type="email"
                 name="b_email"
                 tabIndex="-1"

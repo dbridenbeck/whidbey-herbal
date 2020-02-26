@@ -152,7 +152,7 @@ export class Header extends PureComponent {
       lineItems={lineItems}
     >
       <Hamburger />      
-      <NavLink smooth to={`/#home`}>
+      <NavLink to={`/#home`}>
         <HomeLink 
           src={`${horizLogo}`} 
           width="1200"

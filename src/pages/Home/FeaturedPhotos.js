@@ -18,6 +18,7 @@ const FullWidthSVG = styled.div`
   /* adjust positioning and size of SVG for bigger screens */
   @media ${device.tablet} {
     width: 200vw;
+    height: 80%;
     margin-left: -5vw;
   }
   @media ${device.largeScreen} {

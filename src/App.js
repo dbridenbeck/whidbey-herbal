@@ -17,6 +17,8 @@ const App = () => {
     <Layout>
       <Switch>
         <Route exact path="/" component={Home} />
+        {/* /whidbey-herbal path is a test for github pages testing */}
+        <Route exact path="/whidbey-herbal" component={Home} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/shop" component={Shop} />
         <Route path="/product/:handle" component={Product} />

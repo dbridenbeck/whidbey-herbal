@@ -23,13 +23,13 @@ const AboutText = styled.p`
   font-weight: 300;
   text-align: center;
   color: #2e2e2e;
-  width: 48%;
   margin: 0 auto;
   @media ${device.tablet} {
     font-size: 1rem;
     padding: 0;
   }
   @media ${device.laptop} {
+    width: 48%;
     padding: 0;
     font-size: 1.5rem;
   }

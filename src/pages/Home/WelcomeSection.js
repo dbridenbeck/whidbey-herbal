@@ -55,7 +55,7 @@ const Tagline = styled.div`
   }
   .highlight {
     position: absolute;
-    background-color: #E6C564;
+    background-color: #e6c564;
     top: 31%;
     right: 0.5%;
     height: 1.225rem;
@@ -68,13 +68,12 @@ const Tagline = styled.div`
     }
     @media ${device.laptop} {
       top: 31%;
-      right: 372px;
+      left: 432px;
       height: 3.25rem;
       width: 450px;
-      }
     }
-
-  `;
+  }
+`;
 
 const WelcomeSection = () => {
   return (

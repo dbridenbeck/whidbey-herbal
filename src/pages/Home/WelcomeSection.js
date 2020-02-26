@@ -27,23 +27,18 @@ const WelcomeWrapper = styled.div`
 
 const Tagline = styled.div`
   display: block;
-  position: relative;
-  width: 345px;
+  position: absolute;
+  width: 100%;
   left: 50%;
   right: 50%;
   bottom: 0;
   margin: -27% -46vw 0 -46vw;
   color: black;
-  @media ${device.tablet} {
-    width: 783px;
-  }
-  @media ${device.laptop} {
-    margin: -18% -46vw 0 -46vw;
-    width: 1255px;
-  }
   h1 {
     display: inline-block;
     position: relative;
+    padding: 0 0 10px 0;
+    margin: 0;
     font-size: 1.75rem;
     font-weight: bold;
     z-index: 5;
@@ -57,18 +52,16 @@ const Tagline = styled.div`
   .highlight {
     position: absolute;
     background-color: #e6c564;
-    top: 31%;
+    top: 20%;
     left: 168px;
     height: 1.225rem;
     width: 175px;
     @media ${device.tablet} {
-      top: 31%;
       left: 285px;
       height: 2.15rem;
       width: 305px;
     }
     @media ${device.laptop} {
-      top: 31%;
       left: 432px;
       height: 3.25rem;
       width: 450px;

@@ -31,6 +31,7 @@ const Tagline = styled.div`
   width: 345px;
   left: 50%;
   right: 50%;
+  bottom: 0;
   margin: -27% -46vw 0 -46vw;
   color: black;
   @media ${device.tablet} {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { client } from "../plugins/shopify.js";
@@ -42,6 +42,23 @@ const Layout = ({
   articles,
   featuredProducts
 }) => {
+
+  const [shopifyFetchTimestamp, updateTimestamp] = useState(Date.now());
+
+  const checkFiveMinutesSinceLastFetch = () => {
+    const currentTime = Date.now();
+
+    console.log("what is shopifyFetchTimestamp?: ", shopifyFetchTimestamp);
+    console.log("what is currentTime?: ", currentTime);
+
+    // check if current time is 5 minutes past the last shopifyFetchTimestamp
+    if (currentTime > (shopifyFetchTimestamp + 50000)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   const clearCheckoutIfCompleted = () => {
     checkoutId
       ? client.checkout.fetch(checkoutId).then(checkout => {
@@ -57,20 +74,26 @@ const Layout = ({
     clearCheckoutIfCompleted();
   }
 
-  // if products haven't been fetched, fetch them
+  // if products haven't been fetched, fetch all shopify data
   if (!products.length) {
     // populate state with products and articles from shopify
     fetchShopifyProducts();
     fetchFeaturedProducts();
     fetchShopifyArticles();
   }
+  
+  console.log("what is check?: ", checkFiveMinutesSinceLastFetch());
 
   // every time Layout is rendered, check shopify to see if articles, collection, or products have changed
   // if so, update redux with the new information from shopify
   useEffect(() => {
-    updateShopifyProducts(products);
-    updateShopifyArticles(articles);
-    updateFeaturedProducts(featuredProducts);
+    if (checkFiveMinutesSinceLastFetch()) {
+      console.log("it's been five minutes, time to re-fetch!");
+      updateShopifyProducts(products);
+      updateShopifyArticles(articles);
+      updateFeaturedProducts(featuredProducts);
+      updateTimestamp(Date.now());
+    }
   }, [])
 
   return (

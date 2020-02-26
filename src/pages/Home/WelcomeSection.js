@@ -58,12 +58,12 @@ const Tagline = styled.div`
     position: absolute;
     background-color: #e6c564;
     top: 31%;
-    right: 0.5%;
+    left: 168px;
     height: 1.225rem;
     width: 175px;
     @media ${device.tablet} {
       top: 31%;
-      right: 24.5%;
+      left: 285px;
       height: 2.15rem;
       width: 305px;
     }

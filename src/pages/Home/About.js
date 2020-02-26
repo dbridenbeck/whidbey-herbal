@@ -26,10 +26,10 @@ const AboutText = styled.p`
   margin: 0 auto;
   @media ${device.tablet} {
     font-size: 1rem;
+    width: 48%;
     padding: 0;
   }
   @media ${device.laptop} {
-    width: 48%;
     padding: 0;
     font-size: 1.5rem;
   }

@@ -48,8 +48,8 @@ const PhotoBumpOut = () => {
   return (
     <BumpOutContainer>
       <BottlesHoneyPhoto>
-        <source srcset={`${bottlesAndHoneyWebp}`} type="image/webp" />
-        <source srcset={`${bottlesAndHoney}`} type="image/jpeg" />
+        <source srcSet={`${bottlesAndHoneyWebp}`} type="image/webp" />
+        <source srcSet={`${bottlesAndHoney}`} type="image/jpeg" />
         <img src={bottlesAndHoney} alt="Bottles of essential oil, honeycomb, and lavender stalk laying on a table" />
       </BottlesHoneyPhoto>
       <div className="circle">

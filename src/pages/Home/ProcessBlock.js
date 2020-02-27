@@ -102,21 +102,14 @@ const ProcessBlock = ({
 }) => {
 return (
   <ProcessContainer>
-    <Picture>
-      <source 
-        srcset={`${webp}`} 
-        type="image/webp" 
-      />
-      <source 
-        srcset={`${img}`} 
-        type="image/jpeg" 
-      />
-      <img 
+    <Picture fullWidth={fullWidth}>
+      <source srcSet={`${webp}`} type="image/webp" />
+      <source srcSet={`${img}`} type="image/jpeg" />
+      <img
         src={`${img}`}
         width={`${width}`}
         height={`${height}`}
         alt={`${alt}`}
-        fullWidth={fullWidth} 
       />
     </Picture>
     <Info fullWidth={fullWidth}>

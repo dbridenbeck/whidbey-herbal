@@ -77,8 +77,8 @@ const WelcomeSection = () => {
   return (
     <WelcomeWrapper>
       <StyledPicture>
-        <source srcset={`${farmWebp}`} type="image/webp" />
-        <source srcset={`${farm}`} type="image/jpeg" />
+        <source srcSet={`${farmWebp}`} type="image/webp" />
+        <source srcSet={`${farm}`} type="image/jpeg" />
         <img src={`${farm}`} alt="A watercolor of Whidbey Herbal farms showing a barn, a house, lavender fields, a dog in a pasture, and a forest in the background"/>
       </StyledPicture>
       <Tagline>

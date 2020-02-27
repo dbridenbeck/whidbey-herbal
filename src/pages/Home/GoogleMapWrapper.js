@@ -65,8 +65,8 @@ const GoogleMapWrapper = ({ setGoogleMapInfoWindow, selectedStoreName }) => {
         {createGoogleMapComponentWithMarker()}
       </MapContainer>
       <MapImg>
-        <source srcset={`${mapFrameWebp}`} type="image/webp" />
-        <source srcset={`${mapFrame}`} type="image/png" />
+        <source srcSet={`${mapFrameWebp}`} type="image/webp" />
+        <source srcSet={`${mapFrame}`} type="image/png" />
         <img src={`${mapFrame}`} alt="a watercolor of fir bows making a border around a google map" />
       </MapImg> 
     </Wrap>

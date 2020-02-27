@@ -85,13 +85,13 @@ const FeaturedPhotos = () => {
           Sea.
         </FeaturedText> 
         <StyledPicture>
-          <source srcset={`${HandFlowerWebp}`} type="image/webp" />
-          <source srcset={`${HandFlower}`} type="image/jpeg" />
+          <source srcSet={`${HandFlowerWebp}`} type="image/webp" />
+          <source srcSet={`${HandFlower}`} type="image/jpeg" />
           <img className="circle-photo" src={HandFlower} alt="A flower in the palm of a hand with green and yellow flowers in the background" />
         </StyledPicture>
         <StyledPicture>  
-          <source srcset={`${CaitlinBowsWebp}`} type="image/webp" />
-          <source srcset={`${CaitlinBows}`} type="image/jpeg" />
+          <source srcSet={`${CaitlinBowsWebp}`} type="image/webp" />
+          <source srcSet={`${CaitlinBows}`} type="image/jpeg" />
           <img className="right-rect-photo" src={CaitlinBows} alt="Caitlin smiling and holding fir bows" />
         </StyledPicture>
       </PhotoContainer>

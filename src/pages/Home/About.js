@@ -45,8 +45,8 @@ const About = () => {
         The Farmers
       </StyledH2>
       <FarmerIllustration>
-        <source srcset={`${farmersWebp}`} type='image/webp' />
-        <source srcset={`${farmers}`} type='image/jpeg' />
+        <source srcSet={`${farmersWebp}`} type='image/webp' />
+        <source srcSet={`${farmers}`} type='image/jpeg' />
         <img src={`${farmers}`}
         alt="Watercolor image of Sam and Caitlin, the farmers of Whidbey Herbal"
         />

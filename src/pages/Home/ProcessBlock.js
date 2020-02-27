@@ -78,7 +78,7 @@ import { device } from '../../utils/devices';
     }
   `;
     
-const Picture = styled.picture`
+const StyledPicture = styled.picture`
   img {
     display: block;
     margin: 0 auto;
@@ -102,7 +102,7 @@ const ProcessBlock = ({
 }) => {
 return (
   <ProcessContainer>
-    <Picture fullWidth={fullWidth}>
+    <StyledPicture fullWidth={fullWidth}>
       <source srcSet={`${webp}`} type="image/webp" />
       <source srcSet={`${img}`} type="image/jpeg" />
       <img
@@ -111,7 +111,7 @@ return (
         height={`${height}`}
         alt={`${alt}`}
       />
-    </Picture>
+    </StyledPicture>
     <Info fullWidth={fullWidth}>
       <h6 className="title">{processTitle}</h6>
       <p className="description">{description}</p>

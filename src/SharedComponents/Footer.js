@@ -26,8 +26,6 @@ import ContactAndSocials from './ContactAndSocials';
 
   const WHPatternBackground = styled.picture`
     img {
-      content: "";
-      background: url(${whPattern});
       background-size: auto;
       opacity: 0.04;
       position: absolute;
@@ -43,9 +41,9 @@ const Footer = ({location: {pathname}}) => {
   return (
     <FooterContainer pathname={pathname}>
       <WHPatternBackground>
-        <source srcSet={`${whPatternWebp}`} type="image/webp" />
-        <source srcSet={`${whPattern}`} type="image/jpeg" />
-        <img src={`${whPattern}`} alt="Cute Woodland Style Line Drawings" />
+        <source srcSet={whPatternWebp} type="image/webp" />
+        <source srcSet={whPattern} type="image/jpeg" />
+        <img src={whPattern} alt="Cute Woodland Style Line Drawings" />
       </WHPatternBackground>
       <NewsletterSignup />
       <ContactAndSocials />

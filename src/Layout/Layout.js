@@ -67,8 +67,8 @@ const Layout = ({
     fetchShopifyArticles();
   }
 
-  // every time Layout is rendered, check shopify to see if articles, collection, or products have changed
-  // if so, update redux with the new information from shopify
+  // if 5 minutes passed and it's not the initial page load,
+  // check for updates on products, articles, featured products collection, and update timestamp
   if ((Date.now() > lastShopifyFetchTimestamp + 300000) && (lastShopifyFetchTimestamp !== 0)) {
     updateShopifyProducts(products);
     updateShopifyArticles(articles);

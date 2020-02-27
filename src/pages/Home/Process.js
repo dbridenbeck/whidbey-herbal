@@ -10,6 +10,11 @@ import handBright from "./images/hand-bright.jpg";
 import bottleRight from "./images/bottleRight.jpg";
 import aging from "./images/aging.jpg";
 import distill from "./images/distill.jpg";
+import harvestLeftWebp from './images/harvestLeft.webp';
+import handBrightWebp from "./images/hand-bright.webp";
+import bottleRightWebp from "./images/bottleRight.webp";
+import agingWebp from "./images/aging.webp";
+import distillWebp from "./images/distill.webp";
 
 const ProcessWrapper = styled.div`
   display: flex;
@@ -36,6 +41,7 @@ const processes = [
     description:
       "Our harvest methods vary for each oil. We forage for downed fir bows and use the lavendar from our farm.",
     img: `${harvestLeft}`,
+    webp: `${harvestLeftWebp}`,
     fullWidth: false,
     width: "450",
     height: "450",
@@ -46,6 +52,7 @@ const processes = [
     description:
       "Plants are trimmed as needed and packed into the still for distillation.",
     img: `${handBright}`,
+    webp: `${handBrightWebp}`,
     fullWidth: true,
     width: "200",
     height: "225",
@@ -57,6 +64,7 @@ const processes = [
       "The still boils water and pushes steam through the plant material to remove the aromatic oils. The steam is then recondensed into essential oil which is tapped off for aging.",
     width: "1550",
     img: `${distill}`,
+    webp: `${distillWebp}`,
     fullWidth: true,
     height: "549",
     alt: "A watercolor of a copper still for distilling essential oils"
@@ -66,6 +74,7 @@ const processes = [
     description:
       "Oils are 'dried' using epsom salt, and aged between 6 and 12 weeks depending on the plant.",
     img: `${aging}`,
+    webp: `${agingWebp}`,
     fullWidth: true,
     width: "1950",
     height: "700",
@@ -75,6 +84,7 @@ const processes = [
     processTitle: "Bottle",
     description: "We then hand bottle the oils and bring them to market!",
     img: `${bottleRight}`,
+    webp: `${bottleRightWebp}`,
     fullWidth: false,
     width: "200",
     height: "225",

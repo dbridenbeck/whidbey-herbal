@@ -2,6 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import { device } from "../../utils/devices";
 import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
+import CaitlinBowsWebp from "./images/caitlin-bows.webp";
+import HandFlowerWebp from "./images/hand-flower.webp";
 import CaitlinBows from "./images/caitlin-bows.jpg";
 import HandFlower from "./images/hand-flower.jpg";
 import WaveSVG from './images/photosectionsvg.svg';
@@ -36,16 +38,19 @@ const PhotoContainer = styled.div`
   /* negative margin compensates for componentwrapper's 200px top margin*/
   margin: -200px -50vw 0 -50vw;
   padding-top: 20%;
+  .circle-photo {
+    align-self: flex-end;
+    border-radius: 50%;
+    padding: 0 3.2%;
+  }
+`;
+
+const StyledPicture = styled.picture`
   img {
     display: inline-block;
     position: relative;
     width: 50%;
     height: auto;
-  }
-  .circle-photo {
-    align-self: flex-end;
-    border-radius: 50%;
-    padding: 0 3.2%;
   }
 `;
 
@@ -79,8 +84,16 @@ const FeaturedPhotos = () => {
           oils, fresh from the heart of beautiful Whidbey Island in the Salish
           Sea.
         </FeaturedText> 
-        <img className="circle-photo" src={HandFlower} alt="A flower in the palm of a hand with green and yellow flowers in the background" />
-        <img className="right-rect-photo" src={CaitlinBows} alt="Caitlin smiling and holding fir bows" />
+        <StyledPicture>
+          <source srcset={`${HandFlowerWebp}`} type="image/webp" />
+          <source srcset={`${HandFlower}`} type="image/jpeg" />
+          <img className="circle-photo" src={HandFlower} alt="A flower in the palm of a hand with green and yellow flowers in the background" />
+        </StyledPicture>
+        <StyledPicture>  
+          <source srcset={`${CaitlinBowsWebp}`} type="image/webp" />
+          <source srcset={`${CaitlinBows}`} type="image/jpeg" />
+          <img className="right-rect-photo" src={CaitlinBows} alt="Caitlin smiling and holding fir bows" />
+        </StyledPicture>
       </PhotoContainer>
     </ComponentWrapper>
   );

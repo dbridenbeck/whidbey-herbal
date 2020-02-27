@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import { device } from "../../utils/devices";
+import farmWebp from "./images/farm-with-lines.webp";
 import farm from "./images/farm-with-lines.jpg";
 
 const WelcomeWrapper = styled.div`
@@ -8,6 +9,14 @@ const WelcomeWrapper = styled.div`
   width: 100%;
   max-width: 837px;
   margin: -60px auto 100px auto;
+  /* Media screen keeps img 100% height on bigger screens */
+  @media ${device.laptop} {
+    height: calc(100vh - 60px);
+    max-width: 100vw;
+  }
+`;
+
+const StyledPicture = styled.picture`
   img {
     position: relative;
     width: 100%;
@@ -18,12 +27,7 @@ const WelcomeWrapper = styled.div`
       object-fit: contain;
     }
   }
-    /* Media screen keeps img 100% height on bigger screens */
-  @media ${device.laptop} {
-    height: calc(100vh - 60px);
-    max-width: 100vw;
-  }
-  `;
+`;
 
 const Tagline = styled.div`
   display: block;
@@ -72,7 +76,11 @@ const Tagline = styled.div`
 const WelcomeSection = () => {
   return (
     <WelcomeWrapper>
-      <img src={`${farm}`} alt="A watercolor of Whidbey Herbal farms showing a barn, a house, lavender fields, a dog in a pasture, and a forest in the background"/>
+      <StyledPicture>
+        <source srcset={`${farmWebp}`} type="image/webp" />
+        <source srcset={`${farm}`} type="image/jpeg" />
+        <img src={`${farm}`} alt="A watercolor of Whidbey Herbal farms showing a barn, a house, lavender fields, a dog in a pasture, and a forest in the background"/>
+      </StyledPicture>
       <Tagline>
         <h1>
           Small batch handcrafted. <br/> Seed-to-bottle.

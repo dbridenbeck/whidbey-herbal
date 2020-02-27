@@ -14,7 +14,7 @@ import {
   updateShopifyArticlesAction
 } from "../state/fetchShopifyData";
 import styled from "styled-components";
-import Header from "./Header"
+import Header from "./Header";
 
 const MasterWrapper = styled.div`
   display: block;
@@ -37,12 +37,13 @@ const Layout = ({
   updateShopifyProducts,
   updateFeaturedProducts,
   updateShopifyArticles,
+  updateShopifyFetchTimestamp,
+  lastShopifyFetchTimestamp,
   checkoutId,
   products,
   articles,
   featuredProducts
 }) => {
-
   const clearCheckoutIfCompleted = () => {
     checkoutId
       ? client.checkout.fetch(checkoutId).then(checkout => {
@@ -58,25 +59,26 @@ const Layout = ({
     clearCheckoutIfCompleted();
   }
 
-  // if products haven't been fetched, fetch all shopify data
+  // if products haven't been fetched, fetch them
   if (!products.length) {
     // populate state with products and articles from shopify
     fetchShopifyProducts();
     fetchFeaturedProducts();
     fetchShopifyArticles();
   }
-  
+
   // every time Layout is rendered, check shopify to see if articles, collection, or products have changed
   // if so, update redux with the new information from shopify
-  useEffect(() => {
+  if ((Date.now() > lastShopifyFetchTimestamp + 300000) && (lastShopifyFetchTimestamp !== 0)) {
     updateShopifyProducts(products);
     updateShopifyArticles(articles);
     updateFeaturedProducts(featuredProducts);
-  }, [])
+    updateShopifyFetchTimestamp();
+  }
 
   return (
     <>
-      <MasterWrapper id='MasterWrapper'>
+      <MasterWrapper id="MasterWrapper">
         <Header />
         {children}
       </MasterWrapper>
@@ -88,14 +90,21 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   checkoutId: PropTypes.string,
   clearCheckoutInState: PropTypes.func,
-  fetchProducts: PropTypes.func,
+  fetchProducts: PropTypes.func
 };
 
-const mapStateToProps = ( {products, articles, featuredProducts, checkout: {checkoutId}} ) => ({
+const mapStateToProps = ({
+  products,
+  articles,
+  featuredProducts,
+  checkout: { checkoutId },
+  lastShopifyFetchTimestamp
+}) => ({
   checkoutId,
   products,
   featuredProducts,
-  articles
+  articles,
+  lastShopifyFetchTimestamp
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -104,6 +113,8 @@ const mapDispatchToProps = dispatch => ({
   fetchShopifyProducts: () => dispatch(fetchShopifyProductsAction()),
   fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
   fetchFeaturedProducts: () => dispatch(fetchFeaturedProductsAction()),
+  updateShopifyFetchTimestamp: () =>
+    dispatch(CartActionCreators.updateShopifyFetchTimestamp()),
   updateShopifyProducts: productsFromRedux =>
     dispatch(updateShopifyProductsAction(productsFromRedux)),
   updateFeaturedProducts: featuredProductsFromRedux =>

@@ -1,4 +1,9 @@
-import { fetchPending, fetchSuccess, fetchError } from "./actions/cart";
+import {
+  fetchPending,
+  fetchSuccess,
+  fetchError,
+  updateShopifyFetchTimestamp
+} from "./actions/cart";
 import { client } from "../plugins/shopify.js";
 
 // Below are three sections: articles, products, and collections
@@ -31,6 +36,8 @@ export const fetchShopifyArticlesAction = () => {
         const articles = data.articles.edges;
         // add articles from shopify to redux
         dispatch(fetchSuccess("articles", articles));
+        // set timestamp in redux to show shopify data was fetched
+        dispatch(updateShopifyFetchTimestamp());
         return articles;
       })
       .catch(error => {
@@ -91,6 +98,8 @@ export const fetchShopifyProductsAction = () => {
         const products = data.products.edges.map(product => product.node);
         // add products from shopify to redux
         dispatch(fetchSuccess("products", products));
+        // set timestamp in redux to show shopify data was fetched
+        dispatch(updateShopifyFetchTimestamp());
         return products;
       })
       .catch(error => {
@@ -189,6 +198,8 @@ export const fetchFeaturedProductsAction = () => {
         const featuredProducts = data.collectionByHandle.products.edges;
         // add products from collection to redux
         dispatch(fetchSuccess("featuredProducts", featuredProducts));
+        // set timestamp in redux to show shopify data was fetched
+        dispatch(updateShopifyFetchTimestamp());
       })
       .catch(error => {
         dispatch(fetchError(error));

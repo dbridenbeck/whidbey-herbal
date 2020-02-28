@@ -16,7 +16,7 @@ import ContactAndSocials from './ContactAndSocials';
     margin: ${props => props.pathname === "/" ? "50px auto 0 0px" : "50px auto 0 -20px"};
     padding: 125px 10px 25px 10px;
     background-color: rgba(230, 197, 100, 1);
-    overflow-y: hidden;
+    overflow: hidden;
     @media ${device.tablet} {
       display: flex;
       flex-direction: row;
@@ -29,12 +29,13 @@ import ContactAndSocials from './ContactAndSocials';
       background-size: auto;
       opacity: 0.04;
       position: absolute;
-      height: 110%;
+      height: 100%;
       top: 0;
       left: 0;
       bottom: 0;
       right: 0;
     }
+      height: 110%;
   `;
 
 const Footer = ({location: {pathname}}) => {

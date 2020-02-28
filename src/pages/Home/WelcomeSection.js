@@ -32,7 +32,7 @@ const StyledPicture = styled.picture`
 const Tagline = styled.div`
   display: block;
   position: absolute;
-  width: 100%;
+  width: 96%;
   left: 50%;
   right: 50%;
   bottom: 0;

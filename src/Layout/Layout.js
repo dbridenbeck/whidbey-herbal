@@ -21,7 +21,8 @@ const MasterWrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 1200px;
-  margin: 120px auto 0px auto;
+  margin: 0px auto 0px auto;
+  overflow: hidden;
   /* Media screen keeps WelcomeSection's img 100% height on bigger screens */
   @media ${device.laptop} {
     max-width: 100vw;

@@ -8,7 +8,7 @@ const WelcomeWrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 837px;
-  margin: -60px auto 100px auto;
+  margin: 60px auto 100px auto;
   /* Media screen keeps img 100% height on bigger screens */
   @media ${device.laptop} {
     height: calc(100vh - 60px);

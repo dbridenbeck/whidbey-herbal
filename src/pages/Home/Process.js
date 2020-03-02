@@ -5,16 +5,16 @@ import StyledH2 from "../../SharedComponents/StyledH2";
 import { device } from "../../utils/devices";
 import ProcessBlock from './ProcessBlock';
 import PhotoBumpOut from './PhotoBumpOut';
-import harvestLeft from './images/harvestLeft.jpg';
-import handBright from "./images/hand-bright.jpg";
-import bottleRight from "./images/bottleRight.jpg";
-import aging from "./images/aging.jpg";
-import distill from "./images/distill.jpg";
-import harvestLeftWebp from './images/harvestLeft.webp';
-import handBrightWebp from "./images/hand-bright.webp";
-import bottleRightWebp from "./images/bottleRight.webp";
-import agingWebp from "./images/aging.webp";
-import distillWebp from "./images/distill.webp";
+import harvest from './images/harvest700.jpg';
+import handBright from "./images/hand-bright700.jpg";
+import bottle from "./images/bottle700.jpg";
+import aging from "./images/aging700.jpg";
+import distill from "./images/distill700.jpg";
+import harvestWebp from './images/harvest700.webp';
+import handBrightWebp from "./images/hand-bright700.webp";
+import bottleWebp from "./images/bottle700.webp";
+import agingWebp from "./images/aging700.webp";
+import distillWebp from "./images/distill700.webp";
 
 const ProcessWrapper = styled.div`
   display: flex;
@@ -40,9 +40,8 @@ const processes = [
     processTitle: "Harvest",
     description:
       "Our harvest methods vary for each oil. We forage for downed fir bows and use the lavendar from our farm.",
-    img: `${harvestLeft}`,
-    webp: `${harvestLeftWebp}`,
-    fullWidth: false,
+    img: `${harvest}`,
+    webp: `${harvestWebp}`,
     width: "450",
     height: "450",
     alt: "A watercolor of a fir bow"
@@ -53,7 +52,6 @@ const processes = [
       "Plants are trimmed as needed and packed into the still for distillation.",
     img: `${handBright}`,
     webp: `${handBrightWebp}`,
-    fullWidth: true,
     width: "200",
     height: "225",
     alt: "A watercolor of a hand pruning a fir bow"
@@ -65,7 +63,6 @@ const processes = [
     width: "1550",
     img: `${distill}`,
     webp: `${distillWebp}`,
-    fullWidth: true,
     height: "549",
     alt: "A watercolor of a copper still for distilling essential oils"
   },
@@ -75,7 +72,6 @@ const processes = [
       "Oils are 'dried' using epsom salt, and aged between 6 and 12 weeks depending on the plant.",
     img: `${aging}`,
     webp: `${agingWebp}`,
-    fullWidth: true,
     width: "1950",
     height: "700",
     alt: "A watercolor of differnt moon phases"
@@ -83,9 +79,8 @@ const processes = [
   {
     processTitle: "Bottle",
     description: "We then hand bottle the oils and bring them to market!",
-    img: `${bottleRight}`,
-    webp: `${bottleRightWebp}`,
-    fullWidth: false,
+    img: `${bottle}`,
+    webp: `${bottleWebp}`,
     width: "200",
     height: "225",
     alt: "A watercolor of a flower"

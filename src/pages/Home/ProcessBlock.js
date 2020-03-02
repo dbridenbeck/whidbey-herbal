@@ -83,14 +83,13 @@ const StyledPicture = styled.picture`
     display: block;
     margin: 0 auto;
     /* handle width for images that are landscape */
-    width: ${props => props.fullWidth ? "100%" : "60%"};
+    width: 100%;
     height: auto;
   }
 `;
   
 const ProcessBlock = ({
   process: {
-    fullWidth,
     processTitle,
     description,
     img,
@@ -102,7 +101,7 @@ const ProcessBlock = ({
 }) => {
 return (
   <ProcessContainer>
-    <StyledPicture fullWidth={fullWidth}>
+    <StyledPicture>
       <source srcSet={`${webp}`} type="image/webp" />
       <source srcSet={`${img}`} type="image/jpeg" />
       <img
@@ -112,7 +111,7 @@ return (
         alt={`${alt}`}
       />
     </StyledPicture>
-    <Info fullWidth={fullWidth}>
+    <Info>
       <h6 className="title">{processTitle}</h6>
       <p className="description">{description}</p>
     </Info>

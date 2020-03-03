@@ -35,6 +35,9 @@ import ContactAndSocials from './ContactAndSocials';
       bottom: 0;
       right: 0;
     }
+    @media ${device.largeScreen} {
+      
+    }
       height: 110%;
   `;
 

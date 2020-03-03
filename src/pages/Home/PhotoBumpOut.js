@@ -11,7 +11,7 @@ const BumpOutContainer = styled.div`
   @media ${device.tablet} {
     margin-top: -22%;
   }
-  @media ${device.largeScreen} {
+  @media (min-width: 12801px) {
     margin-top: -10%;
   }
   align-self: flex-end;

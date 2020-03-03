@@ -19,7 +19,7 @@ const Shop = ({products}) => {
 
   return (
     <PageWrapper>
-      <StyledH1  >
+      <StyledH1>
         Shop
       </StyledH1>
       <ProductsContainer>

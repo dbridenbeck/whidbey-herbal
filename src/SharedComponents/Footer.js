@@ -13,7 +13,7 @@ import ContactAndSocials from './ContactAndSocials';
     height: 630px;
     width: 100vw;
     /* Adjust right margin for homepage */
-    margin: ${props => props.pathname === "/" ? "50px auto 0 0px" : "50px auto 0 -20px"};
+    margin: ${props => props.pathname === "/" ? "200px auto 0 0px" : "200px auto 0 -20px"};
     padding: 125px 10px 25px 10px;
     background-color: rgba(230, 197, 100, 1);
     overflow: hidden;
@@ -25,6 +25,7 @@ import ContactAndSocials from './ContactAndSocials';
   `;
 
   const WHPatternBackground = styled.picture`
+    height: 110%;
     img {
       background-size: auto;
       opacity: 0.04;
@@ -34,11 +35,10 @@ import ContactAndSocials from './ContactAndSocials';
       left: 0;
       bottom: 0;
       right: 0;
+      @media (min-width: 1281px) {
+        height: 125%;
+      }
     }
-    @media ${device.largeScreen} {
-      
-    }
-      height: 110%;
   `;
 
 const Footer = ({location: {pathname}}) => {

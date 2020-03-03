@@ -17,13 +17,29 @@ const ProductsContainer = styled.div`
 
 const Shop = ({products}) => {
 
+  // copy prodcuts and sort diffuser to end of array
+  const sortDiffuserToEnd = [...products].sort((a,b) => 
+    a.title.includes("&") 
+      ? 0
+      : -1
+  );
+
+  // then sort unavailable products to very end of array
+  const sortedAvailableProducts = [...sortDiffuserToEnd].sort((a, b) =>
+    a.availableForSale === b.availableForSale
+      ? 0
+      : a.availableForSale
+      ? -1
+      : 1
+  );
+
   return (
     <PageWrapper>
       <StyledH1>
         Shop
       </StyledH1>
       <ProductsContainer>
-        {products
+        {sortedAvailableProducts
           .map(product => (
             <ShopProduct key={product.id} product={product} />
           ))}

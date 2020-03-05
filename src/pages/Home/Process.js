@@ -39,7 +39,7 @@ const processes = [
   {
     processTitle: "Harvest",
     description:
-      "Our harvest methods vary for each oil. We forage for downed fir bows and use the lavendar from our farm.",
+      "Our harvest methods vary for each oil. We forage for downed tree bows and use the lavender from our farm.",
     img: `${harvest}`,
     webp: `${harvestWebp}`,
     width: "450",

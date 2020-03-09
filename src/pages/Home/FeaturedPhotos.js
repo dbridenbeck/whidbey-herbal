@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { device } from "../../utils/devices";
 import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
 import CaitlinBowsWebp from "./images/caitlin-bows.webp";
-import HandFlowerWebp from "./images/hand-flower.webp";
 import CaitlinBows from "./images/caitlin-bows.jpg";
-import HandFlower from "./images/hand-flower.jpg";
+import stillOnStump from "./images/still-on-stump.jpg";
+import stillOnStumpWebp from "./images/still-on-stump.webp";
 import WaveSVG from './images/photosectionsvg.svg';
 
 const FullWidthSVG = styled.div`
@@ -23,7 +23,7 @@ const FullWidthSVG = styled.div`
     height: 80%;
     margin-left: -5vw;
   }
-  @media ${device.largeScreen} {
+  @media (min-width: 1281px;) {
     margin-left: -20vw;
   }
 `;
@@ -83,16 +83,24 @@ const FeaturedPhotos = () => {
           We’re a family farm that grows and distills each of our essential
           oils, fresh from the heart of beautiful Whidbey Island in the Salish
           Sea.
-        </FeaturedText> 
+        </FeaturedText>
         <StyledPicture>
-          <source srcSet={`${HandFlowerWebp}`} type="image/webp" />
-          <source srcSet={`${HandFlower}`} type="image/jpeg" />
-          <img className="circle-photo" src={HandFlower} alt="A flower in the palm of a hand with green and yellow flowers in the background" />
+          <source srcSet={`${stillOnStumpWebp}`} type="image/webp" />
+          <source srcSet={`${stillOnStump}`} type="image/jpeg" />
+          <img
+            className="circle-photo"
+            src={stillOnStump}
+            alt="Beatiful copper still sitting on a stump."
+          />
         </StyledPicture>
-        <StyledPicture>  
+        <StyledPicture>
           <source srcSet={`${CaitlinBowsWebp}`} type="image/webp" />
           <source srcSet={`${CaitlinBows}`} type="image/jpeg" />
-          <img className="right-rect-photo" src={CaitlinBows} alt="Caitlin smiling and holding fir bows" />
+          <img
+            className="right-rect-photo"
+            src={CaitlinBows}
+            alt="Caitlin smiling and holding fir bows"
+          />
         </StyledPicture>
       </PhotoContainer>
     </ComponentWrapper>

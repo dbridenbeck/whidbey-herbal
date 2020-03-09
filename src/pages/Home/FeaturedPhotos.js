@@ -23,7 +23,7 @@ const FullWidthSVG = styled.div`
     height: 80%;
     margin-left: -5vw;
   }
-  @media (min-width: 1281px;) {
+  @media (min-width: 1281px) {
     margin-left: -20vw;
   }
 `;

@@ -14,14 +14,15 @@ import {
   updateShopifyArticlesAction
 } from "../state/fetchShopifyData";
 import styled from "styled-components";
-import Header from "./Header"
+import Header from "./Header";
 
 const MasterWrapper = styled.div`
   display: block;
   position: relative;
   width: 100%;
   max-width: 1200px;
-  margin: 120px auto 0px auto;
+  margin: 0px auto 0px auto;
+  overflow: hidden;
   /* Media screen keeps WelcomeSection's img 100% height on bigger screens */
   @media ${device.laptop} {
     max-width: 100vw;
@@ -37,6 +38,8 @@ const Layout = ({
   updateShopifyProducts,
   updateFeaturedProducts,
   updateShopifyArticles,
+  updateShopifyFetchTimestamp,
+  lastShopifyFetchTimestamp,
   checkoutId,
   products,
   articles,
@@ -65,17 +68,18 @@ const Layout = ({
     fetchShopifyArticles();
   }
 
-  // every time Layout is rendered, check shopify to see if articles, collection, or products have changed
-  // if so, update redux with the new information from shopify
-  useEffect(() => {
+  // if 5 minutes passed and it's not the initial page load,
+  // check for updates on products, articles, featured products collection, and update timestamp
+  if ((Date.now() > lastShopifyFetchTimestamp + 300000) && (lastShopifyFetchTimestamp !== 0)) {
     updateShopifyProducts(products);
     updateShopifyArticles(articles);
     updateFeaturedProducts(featuredProducts);
-  }, [])
+    updateShopifyFetchTimestamp();
+  }
 
   return (
     <>
-      <MasterWrapper id='MasterWrapper'>
+      <MasterWrapper id="MasterWrapper">
         <Header />
         {children}
       </MasterWrapper>
@@ -87,14 +91,21 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   checkoutId: PropTypes.string,
   clearCheckoutInState: PropTypes.func,
-  fetchProducts: PropTypes.func,
+  fetchProducts: PropTypes.func
 };
 
-const mapStateToProps = ( {products, articles, featuredProducts, checkout: {checkoutId}} ) => ({
+const mapStateToProps = ({
+  products,
+  articles,
+  featuredProducts,
+  checkout: { checkoutId },
+  lastShopifyFetchTimestamp
+}) => ({
   checkoutId,
   products,
   featuredProducts,
-  articles
+  articles,
+  lastShopifyFetchTimestamp
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -103,6 +114,8 @@ const mapDispatchToProps = dispatch => ({
   fetchShopifyProducts: () => dispatch(fetchShopifyProductsAction()),
   fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
   fetchFeaturedProducts: () => dispatch(fetchFeaturedProductsAction()),
+  updateShopifyFetchTimestamp: () =>
+    dispatch(CartActionCreators.updateShopifyFetchTimestamp()),
   updateShopifyProducts: productsFromRedux =>
     dispatch(updateShopifyProductsAction(productsFromRedux)),
   updateFeaturedProducts: featuredProductsFromRedux =>

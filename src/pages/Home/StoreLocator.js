@@ -14,6 +14,7 @@ const LocationsWrapper = styled.div`
   /* max-width mirrors MasterWrapper's max-width (in Layout.js) */
   max-width: 1200px;
   margin: 0 auto;
+  padding-bottom: 50px;
 `;
 
 const StoreList = styled.div`

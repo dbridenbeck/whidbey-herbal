@@ -10,6 +10,7 @@ export const initialState = {
   articles: [],
   pending: true,
   error: null,
+  lastShopifyFetchTimestamp: 0,
   burgerToggled: false,
   burgerClickedOnce: false,
   heroImgSrc: "",
@@ -31,13 +32,13 @@ export const Reducer1 = (state = initialState, action) => {
           // need to put an ternary in here to either add new line item or update existing line item's quantity
           lineItems: [
             ...state.checkout.lineItems,
-            { 
-              ...action.product, 
+            {
+              ...action.product,
               quantity: parseInt(action.quantity)
             }
           ]
         }
-      }
+      };
     case CartActionTypes.REMOVE_LINE_ITEM:
       return {
         ...state,
@@ -59,7 +60,8 @@ export const Reducer1 = (state = initialState, action) => {
               return {
                 ...action.product,
                 quantity: action.shouldAddQuantities
-                  ? parseFloat(action.quantityToUpdate, 2) + parseFloat(lineItem.quantity, 2)
+                  ? parseFloat(action.quantityToUpdate, 2) +
+                    parseFloat(lineItem.quantity, 2)
                   : parseFloat(action.quantityToUpdate, 2)
               };
             } else {
@@ -135,8 +137,13 @@ export const Reducer1 = (state = initialState, action) => {
       return {
         ...state,
         googleMapInfoWindow: {
-          selectedStoreName: action.selectedStoreName,
+          selectedStoreName: action.selectedStoreName
         }
+      };
+    case CartActionTypes.UPDATE_SHOPIFY_FETCH_TIMESTAMP:
+      return {
+        ...state,
+        lastShopifyFetchTimestamp: action.timestamp
       };
     default:
       return state;

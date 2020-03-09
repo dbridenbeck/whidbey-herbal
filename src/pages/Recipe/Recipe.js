@@ -27,7 +27,7 @@ const RecipeImage = styled.img`
   border-radius: 10px;
   @media ${device.tablet} {
     width: 40%;
-    margin: 10px 10px 10px 50px;
+    margin: 10px 10px 10px 0px;
     float: right;
   }
 `;
@@ -35,6 +35,8 @@ const RecipeImage = styled.img`
 const ShopifyHTML = styled.div`
   color: #787878;
   @media ${device.tablet} {
+    width: 60%;
+    padding: 0 70px 0 50px;
   }
 `;
 

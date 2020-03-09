@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import * as CartActionCreators from "../../state/actions/cart";
 import { device } from "../../utils/devices";
 import mapFrame from "./images/map-frame.png";
+import mapFrameWebp from "./images/map-frame.webp";
 import GoogleMapComponentWithMarker from "./GoogleMapComponentWithMarker";
 
 const GOOGLE_MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY;
@@ -34,11 +35,13 @@ const MapContainer = styled.div`
   border-radius: 10px;
 `;
 
-const MapImg = styled.img`
-  display: block;
-  width: 100%;
-  max-width: 670px;
-  margin: 0 auto;
+const MapImg = styled.picture`
+  img {
+    display: block;
+    width: 100%;
+    max-width: 670px;
+    margin: 0 auto;
+  }
 `;
 
 const GoogleMapWrapper = ({ setGoogleMapInfoWindow, selectedStoreName }) => {
@@ -61,7 +64,11 @@ const GoogleMapWrapper = ({ setGoogleMapInfoWindow, selectedStoreName }) => {
       <MapContainer>
         {createGoogleMapComponentWithMarker()}
       </MapContainer>
-      <MapImg src={`${mapFrame}`} />
+      <MapImg>
+        <source srcSet={`${mapFrameWebp}`} type="image/webp" />
+        <source srcSet={`${mapFrame}`} type="image/png" />
+        <img src={`${mapFrame}`} alt="a watercolor of fir bows making a border around a google map" />
+      </MapImg> 
     </Wrap>
   );
 }

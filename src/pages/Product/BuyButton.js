@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { device } from "../../utils/devices";
 import * as CartActionCreators from "../../state/actions/cart";
 import ExceededMaxQuantityWarning from "../../SharedComponents/ExceededMaxQuantityWarning";
 

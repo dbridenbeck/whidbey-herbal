@@ -21,7 +21,7 @@ const ExploreShopLink = styled(Link)`
   width: 40%;
   min-width: 200px;
   max-width: 300px;
-  margin: 30px auto 154px auto;
+  margin: 30px auto 0px auto;
   padding: 10px 5px;
   color: #e3be42;
   border: 2px solid #e3be42;
@@ -45,7 +45,7 @@ const Products = ({featuredProducts, title, hasTopBottomBorders}) => {
         {featuredProducts ? 
           featuredProducts
             .map(product => (
-              <Product key={product.id} product={product.node} />
+              <Product key={product.node.id} product={product.node} />
             )) : null}
       </ProductsContainer>
       <ExploreShopLink to="/shop">Explore the Shop</ExploreShopLink>

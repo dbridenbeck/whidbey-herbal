@@ -1,5 +1,4 @@
 import React from "react"
-import { useLocation } from 'react-router-dom';
 import Loading from './images/loading.png';
 import styled from "styled-components";
 
@@ -19,10 +18,6 @@ const StyledImg = styled.img`
 
 const NotFoundPage = () => {
   
-  let location = useLocation();
-  
-  console.log("pathname from 404 is: ", location.pathname)
-
   return (
       <PageWrapper>
         <StyledH1>Uh oh!</StyledH1>

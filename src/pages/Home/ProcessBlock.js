@@ -78,20 +78,22 @@ import { device } from '../../utils/devices';
     }
   `;
     
-const Img = styled.img`
-  display: block;
-  margin: 0 auto;
-  /* handle width for images that are landscape */
-  width: ${props => props.fullWidth ? "100%" : "60%"};
-  height: auto;
+const StyledPicture = styled.picture`
+  img {
+    display: block;
+    margin: 0 auto;
+    /* handle width for images that are landscape */
+    width: 100%;
+    height: auto;
+  }
 `;
   
 const ProcessBlock = ({
   process: {
-    fullWidth,
     processTitle,
     description,
     img,
+    webp,
     width,
     height,
     alt,
@@ -99,14 +101,17 @@ const ProcessBlock = ({
 }) => {
 return (
   <ProcessContainer>
-    <Img
-      src={`${img}`}
-      width={`${width}`}
-      height={`${height}`}
-      alt={`${alt}`}
-      fullWidth={fullWidth}
-    />
-    <Info fullWidth={fullWidth}>
+    <StyledPicture>
+      <source srcSet={`${webp}`} type="image/webp" />
+      <source srcSet={`${img}`} type="image/jpeg" />
+      <img
+        src={`${img}`}
+        width={`${width}`}
+        height={`${height}`}
+        alt={`${alt}`}
+      />
+    </StyledPicture>
+    <Info>
       <h6 className="title">{processTitle}</h6>
       <p className="description">{description}</p>
     </Info>

@@ -1,18 +1,21 @@
 import React from 'react';
 import styled from "styled-components";
 import farmers from './images/farmers.jpg';
+import farmersWebp from './images/farmers.webp';
 import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
 import StyledH2 from "../../SharedComponents/StyledH2";
 import { device } from "../../utils/devices";
 
-const FarmerIllustration = styled.img`
-  display: block;
-  height: auto;
-  width: 87%;
-  max-width: 400px;
-  margin: 0 auto;
-  @media (min-width: 1281px) {
-    max-width: 800px;
+const FarmerIllustration = styled.picture`
+  img {
+    display: block;
+    height: auto;
+    width: 87%;
+    max-width: 400px;
+    margin: 0 auto;
+    @media (min-width: 1281px) {
+      max-width: 800px;
+    }
   }
 `;
 
@@ -41,12 +44,14 @@ const About = () => {
       <StyledH2 >
         The Farmers
       </StyledH2>
-      <FarmerIllustration
-        src={`${farmers}`}
-        width="1200"
-        height="1121"
+      <FarmerIllustration>
+        <source srcSet={`${farmersWebp}`} type='image/webp' />
+        <source srcSet={`${farmers}`} type='image/jpeg' />
+        <img src={`${farmers}`}
         alt="Watercolor image of Sam and Caitlin, the farmers of Whidbey Herbal"
-      />
+        />
+      </FarmerIllustration>
+        
       <AboutText>
         We’re Caitlin and Sam Stanton, and we’re fifth and third generation
         Northwesterners, respectively. We love our community for its

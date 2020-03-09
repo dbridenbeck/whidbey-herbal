@@ -70,3 +70,8 @@ export const setGoogleMapInfoWindow = (selectedStoreName) => ({
   type: CartActionTypes.SET_GOOGLE_MAP_INFO_WINDOW,
   selectedStoreName
 });
+
+export const updateShopifyFetchTimestamp = () => ({
+         type: CartActionTypes.UPDATE_SHOPIFY_FETCH_TIMESTAMP,
+         timestamp: Date.now()
+       });

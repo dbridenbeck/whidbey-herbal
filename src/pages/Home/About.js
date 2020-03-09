@@ -48,7 +48,7 @@ const About = () => {
         <source srcSet={`${farmersWebp}`} type='image/webp' />
         <source srcSet={`${farmers}`} type='image/jpeg' />
         <img src={`${farmers}`}
-        alt="Watercolor image of Sam and Caitlin, the farmers of Whidbey Herbal"
+        alt="Watercolor of Sam and Caitlin, the farmers of Whidbey Herbal"
         />
       </FarmerIllustration>
         

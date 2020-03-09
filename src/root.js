@@ -1,5 +1,7 @@
 import React from 'react';
-import  { BrowserRouter as Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import ReactGA from 'react-ga';
+import  { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import ScrollToTop from './utils/ScrollToTop';
@@ -9,6 +11,14 @@ import App from './App';
 import { saveToLocalStorage, getFromLocalStorage } from "../src/state/localStorage";
 import thunk from "redux-thunk";
 import "./index.css";
+
+// google analytics config
+const history = createBrowserHistory();
+const trackingId = "UA-151317774-1";
+ReactGA.initialize(trackingId);
+history.listen((location, action) => {
+  ReactGA.pageview(location.pathname + location.search);
+});
 
 const Root = () => {
 
@@ -33,7 +43,7 @@ const Root = () => {
     
   return (
     <Provider store={store}>
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router basename={process.env.PUBLIC_URL} history={history}>
         <ScrollToTop />
         <App />
       </Router>

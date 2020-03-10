@@ -5,17 +5,15 @@ import { device } from "../utils/devices";
 const H5Component = styled.h5`
   margin-bottom: 5px;
   padding: 0;
-  font-size: .925rem;
+  font-size: .825rem;
   font-weight: bold;
   color: #2e2e2e;
   text-align: center;
   @media ${device.tablet} {
-  font-size: 1.125rem;
-    
+    font-size: 1rem;
   }
   @media ${device.laptop} {
-  font-size: 1.313rem;
-
+    font-size: 1.313rem;
   }
 `;
 

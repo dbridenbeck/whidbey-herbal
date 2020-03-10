@@ -57,11 +57,11 @@ const ProductContainer = styled.div`
       `
         : null}
   @media ${device.tablet} {
-    width: 25%;
+    width: 22.5%;
     margin-bottom: 20px;
   }
   @media ${device.laptop} {
-    width: 20%;
+    width: 17.5%;
   }
 `;
 

@@ -50,6 +50,7 @@ const ProductTitleLink = styled(Link)`
   color: #e3be42;
   text-decoration: none;
   line-height: 1.125em;
+  padding: 0 5px;
   :hover {
     color: #787878;
   }

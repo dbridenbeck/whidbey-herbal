@@ -137,7 +137,7 @@ const sortKey = client.graphQLClient.variable(
 );
 
 // query to GET collection with handle === "featured-products"
-export const queryCollection = (handle) => client.graphQLClient.query(
+export const queryCollection = (handle, numOfItems) => client.graphQLClient.query(
   [sortKey],
   root => {
     root.add(
@@ -147,7 +147,7 @@ export const queryCollection = (handle) => client.graphQLClient.query(
         collection.add("id");
         collection.addConnection(
           "products",
-          { args: { sortKey: sortKey, first: 5 } },
+          { args: { sortKey: sortKey, first: numOfItems } },
           product => {
             product.add("title");
             product.add("descriptionHtml");
@@ -196,14 +196,23 @@ export const handleDispatchingFeaturedProducts = (data, dispatch) => {
     dispatch(updateShopifyFetchTimestamp());
 }
 
+export const handleUpdatingFeaturedProducts = (data, dispatch, featuredProductsFromRedux) => {
+  const featuredProducts = data.collectionByHandle.products.edges;
+  // check to see if featuredProducts in redux is the same as products from shopify
+  // if not, add the featuredProducts to redux
+  return featuredProductsFromRedux === featuredProducts
+    ? null
+    : dispatch(fetchSuccess("featuredProducts", featuredProducts));
+}
+
 // GET Featured-Products collection on initial page load
-export const fetchProductCollectionAction = (collectionQuery, collectionHandle, handleReduxDispatch) => {
+export const fetchProductCollectionAction = (collectionHandle, numOfItems, handleReduxDispatch, collectionFromRedux) => {
   return dispatch => {
     dispatch(fetchPending());
     client.graphQLClient
-      .send(collectionQuery(collectionHandle))
+      .send(queryCollection(collectionHandle, numOfItems))
       .then(({ model, data }) => {
-        handleReduxDispatch(data, dispatch);
+        handleReduxDispatch(data, dispatch, collectionFromRedux);
       })
       .catch((error) => {
         dispatch(fetchError(error));
@@ -212,22 +221,38 @@ export const fetchProductCollectionAction = (collectionQuery, collectionHandle, 
 };
 
 // UPDATE featured-products
-export const updateFeaturedProductsAction = featuredProductsFromRedux => {
-  // return dispatch => {
-  //   dispatch(fetchPending());
-  //   // Call the send method with the custom products query
-  //   client.graphQLClient
-  //     .send(queryFeaturedProductsCollection)
-  //     .then(({ model, data }) => {
-  //       const featuredProducts = data.collectionByHandle.products.edges;
-  //       // check to see if featuredProducts in redux is the same as products from shopify
-  //       // if not, add the featuredProducts to redux
-  //       return featuredProductsFromRedux === featuredProducts
-  //         ? null
-  //         : dispatch(fetchSuccess("featuredProducts", featuredProducts));
-  //     })
-  //     .catch(error => {
-  //       dispatch(fetchError(error));
-  //     });
-  // };
-};
+// export const updateCollectionAction = (, collectionHandle, numOfItems, handleReduxUpdate) => {
+//   return dispatch => {
+//     dispatch(fetchPending());
+//     // Call the send method with the custom products query
+//     client.graphQLClient
+//       .send(queryCollection(collectionHandle, numOfItems))
+//       .then(({ model, data }) => {
+//         handleReduxUpdate(data, dispatch, collectionFromRedux);
+//       })
+//       .catch(error => {
+//         dispatch(fetchError(error));
+//       });
+//   };
+// };
+
+// UPDATE featured-products
+// export const updateFeaturedProductsAction = featuredProductsFromRedux => {
+//   return dispatch => {
+//     dispatch(fetchPending());
+//     // Call the send method with the custom products query
+//     client.graphQLClient
+//       .send(queryFeaturedProductsCollection)
+//       .then(({ model, data }) => {
+//         const featuredProducts = data.collectionByHandle.products.edges;
+//         // check to see if featuredProducts in redux is the same as products from shopify
+//         // if not, add the featuredProducts to redux
+//         return featuredProductsFromRedux === featuredProducts
+//           ? null
+//           : dispatch(fetchSuccess("featuredProducts", featuredProducts));
+//       })
+//       .catch(error => {
+//         dispatch(fetchError(error));
+//       });
+//   };
+// };

@@ -10,9 +10,9 @@ import {
   fetchShopifyArticlesAction,
   fetchProductCollectionAction,
   handleDispatchingFeaturedProducts,
-  queryCollection,
+  handleUpdatingFeaturedProducts,
   updateShopifyProductsAction,
-  updateFeaturedProductsAction,
+  updateCollectionAction,
   updateShopifyArticlesAction,
 } from "../state/fetchShopifyData";
 import styled from "styled-components";
@@ -118,8 +118,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchFeaturedProducts: () =>
     dispatch(
       fetchProductCollectionAction(
-        queryCollection,
         "featured-products",
+        5,
         handleDispatchingFeaturedProducts
       )
     ),
@@ -128,7 +128,14 @@ const mapDispatchToProps = (dispatch) => ({
   updateShopifyProducts: (productsFromRedux) =>
     dispatch(updateShopifyProductsAction(productsFromRedux)),
   updateFeaturedProducts: (featuredProductsFromRedux) =>
-    dispatch(updateFeaturedProductsAction(featuredProductsFromRedux)),
+    dispatch(
+      fetchProductCollectionAction(
+        "featured-products",
+        5,
+        handleUpdatingFeaturedProducts,
+        featuredProductsFromRedux
+      )
+    ),
   updateShopifyArticles: (articlesFromRedux) =>
     dispatch(updateShopifyArticlesAction(articlesFromRedux)),
 });

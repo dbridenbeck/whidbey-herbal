@@ -13,11 +13,11 @@ export const removeLineItem = (productId, index) => ({
 });
 
 export const updateItemQuantity = (quantityToUpdate, shouldAddQuantities, product) => ({
-         type: CartActionTypes.UPDATE_ITEM_QUANTITY,
-         quantityToUpdate,
-         shouldAddQuantities,
-         product
-       });
+  type: CartActionTypes.UPDATE_ITEM_QUANTITY,
+  quantityToUpdate,
+  shouldAddQuantities,
+  product
+});
 
 export const updateCheckoutId = (id) => ({
   type: CartActionTypes.UPDATE_CHECKOUT_ID,
@@ -72,6 +72,6 @@ export const setGoogleMapInfoWindow = (selectedStoreName) => ({
 });
 
 export const updateShopifyFetchTimestamp = () => ({
-         type: CartActionTypes.UPDATE_SHOPIFY_FETCH_TIMESTAMP,
-         timestamp: Date.now()
-       });
+  type: CartActionTypes.UPDATE_SHOPIFY_FETCH_TIMESTAMP,
+  timestamp: Date.now()
+});

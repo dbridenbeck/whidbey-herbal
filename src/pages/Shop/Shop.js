@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import styled from "styled-components";
 import PageWrapper from "../../SharedComponents/PageWrapper";
 import ShopProduct from "./ShopProduct";
@@ -14,6 +15,7 @@ const ProductsContainer = styled.div`
   position: relative;
   margin: 70px 0;
 `;
+
 
 const Shop = ({products}) => {
 

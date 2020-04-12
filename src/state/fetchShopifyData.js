@@ -137,12 +137,12 @@ const sortKey = client.graphQLClient.variable(
 );
 
 // query to GET collection with handle === "featured-products"
-const queryFeaturedProductsCollection = client.graphQLClient.query(
+export const queryCollection = (handle) => client.graphQLClient.query(
   [sortKey],
   root => {
     root.add(
       "collectionByHandle",
-      { args: { handle: "featured-products" } },
+      { args: { handle: `${handle}` } },
       collection => {
         collection.add("id");
         collection.addConnection(
@@ -188,20 +188,24 @@ const queryFeaturedProductsCollection = client.graphQLClient.query(
   }
 );
 
+export const handleDispatchingFeaturedProducts = (data, dispatch) => {
+  const featuredProducts = data.collectionByHandle.products.edges;
+    // add products from collection to redux
+    dispatch(fetchSuccess("featuredProducts", featuredProducts));
+    // set timestamp in redux to show shopify data was fetched
+    dispatch(updateShopifyFetchTimestamp());
+}
+
 // GET Featured-Products collection on initial page load
-export const fetchFeaturedProductsAction = () => {
+export const fetchProductCollectionAction = (collectionQuery, collectionHandle, handleReduxDispatch) => {
   return dispatch => {
     dispatch(fetchPending());
     client.graphQLClient
-      .send(queryFeaturedProductsCollection)
+      .send(collectionQuery(collectionHandle))
       .then(({ model, data }) => {
-        const featuredProducts = data.collectionByHandle.products.edges;
-        // add products from collection to redux
-        dispatch(fetchSuccess("featuredProducts", featuredProducts));
-        // set timestamp in redux to show shopify data was fetched
-        dispatch(updateShopifyFetchTimestamp());
+        handleReduxDispatch(data, dispatch);
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch(fetchError(error));
       });
   };
@@ -209,21 +213,21 @@ export const fetchFeaturedProductsAction = () => {
 
 // UPDATE featured-products
 export const updateFeaturedProductsAction = featuredProductsFromRedux => {
-  return dispatch => {
-    dispatch(fetchPending());
-    // Call the send method with the custom products query
-    client.graphQLClient
-      .send(queryFeaturedProductsCollection)
-      .then(({ model, data }) => {
-        const featuredProducts = data.collectionByHandle.products.edges;
-        // check to see if featuredProducts in redux is the same as products from shopify
-        // if not, add the featuredProducts to redux
-        return featuredProductsFromRedux === featuredProducts
-          ? null
-          : dispatch(fetchSuccess("featuredProducts", featuredProducts));
-      })
-      .catch(error => {
-        dispatch(fetchError(error));
-      });
-  };
+  // return dispatch => {
+  //   dispatch(fetchPending());
+  //   // Call the send method with the custom products query
+  //   client.graphQLClient
+  //     .send(queryFeaturedProductsCollection)
+  //     .then(({ model, data }) => {
+  //       const featuredProducts = data.collectionByHandle.products.edges;
+  //       // check to see if featuredProducts in redux is the same as products from shopify
+  //       // if not, add the featuredProducts to redux
+  //       return featuredProductsFromRedux === featuredProducts
+  //         ? null
+  //         : dispatch(fetchSuccess("featuredProducts", featuredProducts));
+  //     })
+  //     .catch(error => {
+  //       dispatch(fetchError(error));
+  //     });
+  // };
 };

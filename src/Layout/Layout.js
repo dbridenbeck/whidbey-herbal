@@ -8,10 +8,12 @@ import * as CartActionCreators from "../state/actions/cart";
 import {
   fetchShopifyProductsAction,
   fetchShopifyArticlesAction,
-  fetchFeaturedProductsAction,
+  fetchProductCollectionAction,
+  handleDispatchingFeaturedProducts,
+  queryCollection,
   updateShopifyProductsAction,
   updateFeaturedProductsAction,
-  updateShopifyArticlesAction
+  updateShopifyArticlesAction,
 } from "../state/fetchShopifyData";
 import styled from "styled-components";
 import Header from "./Header";
@@ -108,20 +110,27 @@ const mapStateToProps = ({
   lastShopifyFetchTimestamp
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   clearCheckoutInState: () =>
     dispatch(CartActionCreators.clearCheckoutInState()),
   fetchShopifyProducts: () => dispatch(fetchShopifyProductsAction()),
   fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
-  fetchFeaturedProducts: () => dispatch(fetchFeaturedProductsAction()),
+  fetchFeaturedProducts: () =>
+    dispatch(
+      fetchProductCollectionAction(
+        queryCollection,
+        "featured-products",
+        handleDispatchingFeaturedProducts
+      )
+    ),
   updateShopifyFetchTimestamp: () =>
     dispatch(CartActionCreators.updateShopifyFetchTimestamp()),
-  updateShopifyProducts: productsFromRedux =>
+  updateShopifyProducts: (productsFromRedux) =>
     dispatch(updateShopifyProductsAction(productsFromRedux)),
-  updateFeaturedProducts: featuredProductsFromRedux =>
+  updateFeaturedProducts: (featuredProductsFromRedux) =>
     dispatch(updateFeaturedProductsAction(featuredProductsFromRedux)),
-  updateShopifyArticles: articlesFromRedux =>
-    dispatch(updateShopifyArticlesAction(articlesFromRedux))
+  updateShopifyArticles: (articlesFromRedux) =>
+    dispatch(updateShopifyArticlesAction(articlesFromRedux)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Layout));

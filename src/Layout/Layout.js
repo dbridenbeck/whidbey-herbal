@@ -64,11 +64,14 @@ const Layout = ({
 
   // if products or articles haven't been fetched, fetch them
   if (
+      !wholesaleProducts ||
+      !onlineStore ||
+      !featuredProducts ||
+      !articles ||
       !onlineStore.length || 
       !featuredProducts.length || 
       !wholesaleProducts.length || 
-      !articles.length ||
-      !wholesaleProducts
+      !articles.length
     ) {
       fetchOnlineStoreCollection();
       fetchFeaturedProducts();

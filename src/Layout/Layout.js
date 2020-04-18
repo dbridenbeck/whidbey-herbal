@@ -63,12 +63,17 @@ const Layout = ({
   }
 
   // if products haven't been fetched, fetch them
-  if (!onlineStore.length) {
+  if (
+      !onlineStore.length || 
+      !featuredProducts.length || 
+      !wholesaleProducts.length || 
+      !articles.length
+    ) {
     // populate state with products and articles from shopify
-    fetchOnlineStoreCollection();
-    fetchFeaturedProducts();
-    fetchWholesaleStoreCollection();
-    fetchShopifyArticles();
+      fetchOnlineStoreCollection();
+      fetchFeaturedProducts();
+      fetchWholesaleStoreCollection();
+      fetchShopifyArticles();
   }
 
   // if 5 minutes passed and it's not the initial page load,
@@ -113,6 +118,7 @@ const mapStateToProps = ({
   checkoutId,
   onlineStore,
   featuredProducts,
+  wholesaleProducts,
   articles,
   lastShopifyFetchTimestamp
 });

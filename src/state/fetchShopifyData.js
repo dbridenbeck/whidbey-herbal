@@ -124,6 +124,7 @@ export const queryCollection = (collectionHandle, numOfItems) => client.graphQLC
 );
 
 export const handleDispatchingProducts = (reduxKey, products, dispatch) => {
+    console.log(reduxKey, ":", products);
     // add products from collection to redux
     dispatch(fetchSuccess(reduxKey, products));
     // set timestamp in redux to show shopify data was fetched

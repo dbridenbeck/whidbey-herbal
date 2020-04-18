@@ -6,6 +6,7 @@ export const initialState = {
     checkoutId: '',
   },
   onlineStore: [],
+  wholesaleProducts: [],
   featuredProducts: [],
   articles: [],
   pending: true,

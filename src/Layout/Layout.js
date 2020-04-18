@@ -34,6 +34,7 @@ const Layout = ({
   fetchOnlineStoreCollection,
   fetchShopifyArticles,
   fetchFeaturedProducts,
+  fetchWholesaleStoreCollection,
   updateOnlineStoreCollection,
   updateFeaturedProducts,
   updateShopifyArticles,
@@ -64,6 +65,7 @@ const Layout = ({
     // populate state with products and articles from shopify
     fetchOnlineStoreCollection();
     fetchFeaturedProducts();
+    fetchWholesaleStoreCollection();
     fetchShopifyArticles();
   }
 
@@ -127,6 +129,8 @@ const mapDispatchToProps = (dispatch) => ({
         handleDispatchingProducts
       )
     ),
+  fetchWholesaleStoreCollection: () => 
+    dispatch(fetchProductCollectionAction("wholesale-products", 4, handleDispatchingProducts)),
   updateShopifyFetchTimestamp: () =>
     dispatch(CartActionCreators.updateShopifyFetchTimestamp()),
   updateOnlineStoreCollection: (onlineStore) =>

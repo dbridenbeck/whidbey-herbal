@@ -16,30 +16,13 @@ const ProductsContainer = styled.div`
   margin: 70px 0;
 `;
 
-
 const Shop = ({onlineStore}) => {
-
-  // copy prodcuts and sort diffuser to end of array
-  const sortDiffuserToEnd = [...onlineStore].sort((a,b) => 
-    a.title.includes("&") 
-      ? 0
-      : -1
-  );
-
-  // then sort unavailable onlineStore to very end of array
-  const sortedAvailableOnlineStore = [...sortDiffuserToEnd].sort((a, b) =>
-    a.availableForSale === b.availableForSale
-      ? 0
-      : a.availableForSale
-      ? -1
-      : 1
-  );
 
   return (
     <PageWrapper>
       <StyledH1>Shop</StyledH1>
       <ProductsContainer>
-        {sortedAvailableOnlineStore.map((product) => (
+        {onlineStore.map((product) => (
           <ShopProduct key={product.id} product={product} />
         ))}
       </ProductsContainer>
@@ -50,6 +33,6 @@ const Shop = ({onlineStore}) => {
 
 const mapStatetoProps = ({onlineStore}) => ({
   onlineStore
-})
+});
 
 export default connect(mapStatetoProps)(Shop);

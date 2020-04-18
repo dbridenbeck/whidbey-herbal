@@ -191,11 +191,7 @@ export const queryCollection = (collectionHandle, numOfItems) => client.graphQLC
 // !!!!!!!!!
 // make both of these "handle" functions extensible by adding collectionHandle to params, 
 // then use conditional to use different dispatch based on if collectionHandle is "featured-products" or "wholesale-products"
-export const handleDispatchingFeaturedProducts = (collectionHandle, data, dispatch) => {
-  // take collectionHandle and format it as "featuredProducts" instead of something like "featured-products" for redux
-  const splitHandle = collectionHandle.split("-");
-  const reduxKey = splitHandle[0] + splitHandle[1][0].toUpperCase() + splitHandle[1].slice(1);
-
+export const handleDispatchingFeaturedProducts = (reduxKey, data, dispatch) => {
   const products = data.collectionByHandle.products.edges;
     // add products from collection to redux
     dispatch(fetchSuccess(reduxKey, products));
@@ -203,13 +199,13 @@ export const handleDispatchingFeaturedProducts = (collectionHandle, data, dispat
     dispatch(updateShopifyFetchTimestamp());
 };
 
-export const handleUpdatingFeaturedProducts = (collectionHandle, data, dispatch, featuredProductsFromRedux) => {
-  const featuredProducts = data.collectionByHandle.products.edges;
+export const handleUpdatingFeaturedProducts = (reduxKey, data, dispatch, featuredProductsFromRedux) => {
+  const products = data.collectionByHandle.products.edges;
   // check to see if featuredProducts in redux is the same as products from shopify
   // if not, add the featuredProducts to redux
-  return featuredProductsFromRedux === featuredProducts
+  return featuredProductsFromRedux === products
     ? null
-    : dispatch(fetchSuccess("featuredProducts", featuredProducts));
+    : dispatch(fetchSuccess(reduxKey, products));
 };
 
 // GET Featured-Products collection on initial page load
@@ -219,7 +215,11 @@ export const fetchProductCollectionAction = (collectionHandle, numOfItems, handl
     client.graphQLClient
       .send(queryCollection(collectionHandle, numOfItems))
       .then(({ model, data }) => {
-        handleReduxDispatch(collectionHandle, data, dispatch, collectionFromRedux);
+        // take collectionHandle and format it as "featuredProducts" instead of something like "featured-products" for redux
+        const splitHandle = collectionHandle.split("-");
+        const reduxKey = splitHandle[0] + splitHandle[1][0].toUpperCase() + splitHandle[1].slice(1);
+
+        handleReduxDispatch(reduxKey, data, dispatch, collectionFromRedux);
       })
       .catch((error) => {
         dispatch(fetchError(error));

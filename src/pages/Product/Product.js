@@ -19,8 +19,6 @@ const Product = ({
 
   const products = handle.includes("wholesale") ? wholesaleProducts : onlineStore;
 
-  console.log(handle.includes("wholesale"));
-
   // select the current product
   const selectProduct = products.filter((product) => handle === product.handle);
   const selectedProduct = selectProduct[0];
@@ -43,7 +41,10 @@ const Product = ({
           doesItemExist={handleIfItemExists}
         />
         <Reviews />
-        <FeaturedProducts title={"More Products"} />
+        <FeaturedProducts title={products === wholesaleProducts ? 
+          "More Wholesale Products" : 
+          "More Products"
+        } />
       </div>
     ) : null
   }

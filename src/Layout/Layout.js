@@ -82,7 +82,6 @@ const Layout = ({
     Date.now() > lastShopifyFetchTimestamp + 300000 &&
     lastShopifyFetchTimestamp !== 0
   ) {
-      console.log("trying to update!");
       updateOnlineStoreCollection(onlineStore);
       updateFeaturedProducts(featuredProducts);
       updateWholesaleProducts(wholesaleProducts);

@@ -16,9 +16,10 @@ const ProductsContainer = styled.div`
   margin: 70px 0;
 `;
 
-const Shop = ({onlineStore, wholesaleStore}) => {
+const Shop = ({onlineStore, wholesaleProducts}) => {
   const location = useLocation();
-  const products = location.pathname === '/shop' ? onlineStore : wholesaleStore;
+  const products =
+    location.pathname === "/shop" ? onlineStore : wholesaleProducts;
 
   return (
     <PageWrapper>
@@ -33,9 +34,9 @@ const Shop = ({onlineStore, wholesaleStore}) => {
   );
 };
 
-const mapStatetoProps = ({onlineStore, wholesaleStore}) => ({
+const mapStatetoProps = ({onlineStore, wholesaleProducts}) => ({
   onlineStore,
-  wholesaleStore
+  wholesaleProducts
 });
 
 export default connect(mapStatetoProps)(Shop);

@@ -10,16 +10,19 @@ import Footer from "../../SharedComponents/Footer";
 // begin component
 const Product = ({
   onlineStore,
+  wholesaleProducts,
   match,
   checkout,
 }) => {
 
   const { handle } = match.params;
 
+  const products = handle.includes("wholesale") ? wholesaleProducts : onlineStore;
+
+  console.log(handle.includes("wholesale"));
+
   // select the current product
-  const selectProduct = onlineStore.filter(
-    product => handle === product.handle
-  );
+  const selectProduct = products.filter((product) => handle === product.handle);
   const selectedProduct = selectProduct[0];
 
   // check if item exists in checkout already
@@ -45,6 +48,8 @@ const Product = ({
     ) : null
   }
   
+  console.log(match);
+
   // begin component's return
   return (
     <PageWrapper>
@@ -59,8 +64,9 @@ Product.propTypes = {
   checkout: PropTypes.object,
 };
 
-const mapStateToProps = ({onlineStore, checkout}) => ({
+const mapStateToProps = ({onlineStore, wholesaleProducts, checkout}) => ({
   onlineStore,
+  wholesaleProducts,
   checkout,
 });
 

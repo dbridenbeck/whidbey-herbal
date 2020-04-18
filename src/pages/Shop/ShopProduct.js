@@ -101,6 +101,7 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
 
 // begin component
 const ShopProduct = ({location: {pathname}, product, clearHeroImg, updateQuantityButton}) => {
+  
   return (
     <ProductContainer pathname={pathname}>
       {createProduct(product, clearHeroImg, updateQuantityButton)}

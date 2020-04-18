@@ -61,7 +61,6 @@ const Layout = ({
 
   // if products haven't been fetched, fetch them
   if (!onlineStore.length) {
-    console.log("fetching stuff");
     // populate state with products and articles from shopify
     fetchOnlineStoreCollection();
     fetchFeaturedProducts();

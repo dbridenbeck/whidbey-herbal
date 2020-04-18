@@ -37,13 +37,15 @@ const Layout = ({
   fetchWholesaleStoreCollection,
   updateOnlineStoreCollection,
   updateFeaturedProducts,
+  updateWholesaleProducts,
   updateShopifyArticles,
   updateShopifyFetchTimestamp,
   lastShopifyFetchTimestamp,
   checkoutId,
   onlineStore,
-  articles,
   featuredProducts,
+  wholesaleProducts,
+  articles,
 }) => {
   const clearCheckoutIfCompleted = () => {
     checkoutId
@@ -78,6 +80,7 @@ const Layout = ({
       console.log("trying to update!");
       updateOnlineStoreCollection(onlineStore);
       updateFeaturedProducts(featuredProducts);
+      updateWholesaleProducts(wholesaleProducts);
       updateShopifyArticles(articles);
       updateShopifyFetchTimestamp();
     }
@@ -101,8 +104,9 @@ Layout.propTypes = {
 
 const mapStateToProps = ({
   onlineStore,
-  articles,
   featuredProducts,
+  wholesaleProducts,
+  articles,
   checkout: { checkoutId },
   lastShopifyFetchTimestamp
 }) => ({
@@ -129,8 +133,14 @@ const mapDispatchToProps = (dispatch) => ({
         handleDispatchingProducts
       )
     ),
-  fetchWholesaleStoreCollection: () => 
-    dispatch(fetchProductCollectionAction("wholesale-products", 4, handleDispatchingProducts)),
+  fetchWholesaleStoreCollection: () =>
+    dispatch(
+      fetchProductCollectionAction(
+        "wholesale-products",
+        4,
+        handleDispatchingProducts
+      )
+    ),
   updateShopifyFetchTimestamp: () =>
     dispatch(CartActionCreators.updateShopifyFetchTimestamp()),
   updateOnlineStoreCollection: (onlineStore) =>
@@ -149,6 +159,15 @@ const mapDispatchToProps = (dispatch) => ({
         5,
         handleUpdatingProducts,
         featuredProductsFromRedux
+      )
+    ),
+  updateWholesaleProducts: (wholesaleProducts) =>
+    dispatch(
+      fetchProductCollectionAction(
+        "wholesale-products",
+        4,
+        handleUpdatingProducts,
+        wholesaleProducts
       )
     ),
   updateShopifyArticles: (articlesFromRedux) =>

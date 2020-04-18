@@ -6,7 +6,7 @@ import {
 } from "./actions/cart";
 import { client } from "../plugins/shopify.js";
 
-// Below are three sections: articles, products, and collections
+// Below are two sections: articles, and collections
 // In each section there are three peices: a query, the method to fetch data on initial load, 
 // and the method to update data if it is different than what's in redux
 
@@ -64,71 +64,6 @@ export const updateShopifyArticlesAction = (articlesFromRedux) => {
   };
 };
 
-// PRODUCTS SECTION
-const productsQuery = client.graphQLClient.query(root => {
-  root.addConnection("products", { args: { first: 20 } }, product => {
-    product.add("title");
-    product.add("descriptionHtml");
-    product.add("handle");
-    product.add("availableForSale");
-    product.addConnection("metafields", { args: { first: 2 } }, metafield => {
-      metafield.add("key");
-      metafield.add("value");
-    });
-    product.addConnection("images", { args: { first: 10 } }, image => {
-      image.add("id");
-      image.add("src");
-      image.add("altText");
-    });
-    product.addConnection("variants", { args: { first: 1 } }, variant => {
-      variant.add("id");
-      variant.add("price");
-    });
-  });
-});
-
-// GET products on initial page load
-export const fetchShopifyProductsAction = () => {
-  return dispatch => {
-    dispatch(fetchPending());
-    // Call the send method with the custom products query
-    client.graphQLClient
-      .send(productsQuery)
-      .then(({ model, data }) => {
-        const products = data.products.edges.map(product => product.node);
-        // add products from shopify to redux
-        dispatch(fetchSuccess("products", products));
-        // set timestamp in redux to show shopify data was fetched
-        dispatch(updateShopifyFetchTimestamp());
-        return products;
-      })
-      .catch(error => {
-        dispatch(fetchError(error));
-      });
-  };
-};
-
-// UPDATE products
-export const updateShopifyProductsAction = productsFromRedux => {
-  return dispatch => {
-    dispatch(fetchPending());
-    // Call the send method with the custom products query
-    client.graphQLClient
-      .send(productsQuery)
-      .then(({ model, data }) => {
-        const products = data.products.edges.map(product => product.node);
-        // check to see if products in redux is the same as products from shopify
-        // if not, add the products to redux
-        return productsFromRedux === products
-          ? null
-          : dispatch(fetchSuccess("products", products));
-      })
-      .catch(error => {
-        dispatch(fetchError(error));
-      });
-  };
-};
-
 // "featured-products" COLLECTION SECTION
 // create variable to use sortKey
 const sortKey = client.graphQLClient.variable(
@@ -136,18 +71,17 @@ const sortKey = client.graphQLClient.variable(
   "ProductCollectionSortKeys"
 );
 
-// query to GET collection with handle === "featured-products"
-const queryFeaturedProductsCollection = client.graphQLClient.query(
+export const queryCollection = (collectionHandle, numOfItems) => client.graphQLClient.query(
   [sortKey],
   root => {
     root.add(
       "collectionByHandle",
-      { args: { handle: "featured-products" } },
+      { args: { handle: `${collectionHandle}` } },
       collection => {
         collection.add("id");
         collection.addConnection(
           "products",
-          { args: { sortKey: sortKey, first: 5 } },
+          { args: { sortKey: sortKey, first: numOfItems } },
           product => {
             product.add("title");
             product.add("descriptionHtml");
@@ -188,41 +122,37 @@ const queryFeaturedProductsCollection = client.graphQLClient.query(
   }
 );
 
-// GET Featured-Products collection on initial page load
-export const fetchFeaturedProductsAction = () => {
-  return dispatch => {
-    dispatch(fetchPending());
-    client.graphQLClient
-      .send(queryFeaturedProductsCollection)
-      .then(({ model, data }) => {
-        const featuredProducts = data.collectionByHandle.products.edges;
-        // add products from collection to redux
-        dispatch(fetchSuccess("featuredProducts", featuredProducts));
-        // set timestamp in redux to show shopify data was fetched
-        dispatch(updateShopifyFetchTimestamp());
-      })
-      .catch(error => {
-        dispatch(fetchError(error));
-      });
-  };
+export const handleDispatchingProducts = (reduxKey, products, dispatch) => {
+    // add products from collection to redux
+    dispatch(fetchSuccess(reduxKey, products));
+    // set timestamp in redux to show shopify data was fetched
+    dispatch(updateShopifyFetchTimestamp());
 };
 
-// UPDATE featured-products
-export const updateFeaturedProductsAction = featuredProductsFromRedux => {
+export const handleUpdatingProducts = (reduxKey, products, dispatch, productsFromRedux) => {
+  // check to see if products in redux is the same as products from shopify
+  // if not, add the products to redux
+  return productsFromRedux === products
+    ? null
+    : dispatch(fetchSuccess(reduxKey, products));
+};
+
+// GET a product collection on initial page load
+export const fetchProductCollectionAction = (collectionHandle, numOfItems, handleReduxDispatch, collectionFromRedux) => {
   return dispatch => {
-    dispatch(fetchPending());
-    // Call the send method with the custom products query
+    dispatch(fetchPending()); 
     client.graphQLClient
-      .send(queryFeaturedProductsCollection)
+      .send(queryCollection(collectionHandle, numOfItems))
       .then(({ model, data }) => {
-        const featuredProducts = data.collectionByHandle.products.edges;
-        // check to see if featuredProducts in redux is the same as products from shopify
-        // if not, add the featuredProducts to redux
-        return featuredProductsFromRedux === featuredProducts
-          ? null
-          : dispatch(fetchSuccess("featuredProducts", featuredProducts));
+        // get product nodes
+        const products = data.collectionByHandle.products.edges.map(product => product.node);
+        // take collectionHandle and format it as "featuredProducts" instead of something like "featured-products" for redux
+        const splitHandle = collectionHandle.split("-");
+        const reduxKey = splitHandle[0] + splitHandle[1][0].toUpperCase() + splitHandle[1].slice(1);
+
+        handleReduxDispatch(reduxKey, products, dispatch, collectionFromRedux);
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch(fetchError(error));
       });
   };

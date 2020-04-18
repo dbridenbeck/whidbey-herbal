@@ -20,6 +20,7 @@ const App = () => {
         <Route exact path="/whidbey-herbal" component={Home} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/shop" component={Shop} />
+        <Route path="/wholesale" component={Shop} />
         <Route path="/product/:handle" component={Product} />
         <Redirect from="/product/" to="/shop" />
         <Route path="/recipe/:handle" component={Recipe} />

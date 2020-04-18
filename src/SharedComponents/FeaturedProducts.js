@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import ComponentWrapper from "./ComponentWrapper";
@@ -36,25 +36,29 @@ const ExploreShopLink = styled(Link)`
   }
 `;
 
-const Products = ({featuredProducts, title, hasTopBottomBorders}) => {
+const Products = ({featuredProducts, wholesaleProducts, title, hasTopBottomBorders}) => {
+
+  const location = useLocation();
+  const products = location.pathname.includes("wholesale") ? wholesaleProducts : featuredProducts;
 
   return (
     <ComponentWrapper hasTopBottomBorders={hasTopBottomBorders}>
       <StyledH2> {title} </StyledH2>
       <ProductsContainer>
-        {featuredProducts ? 
-          featuredProducts
-            .map(product => (
-              <Product key={product.node.id} product={product.node} />
-            )) : null}
+        {featuredProducts
+          ? products.map((product) => (
+              <Product key={product.id} product={product} />
+            ))
+          : null}
       </ProductsContainer>
       <ExploreShopLink to="/shop">Explore the Shop</ExploreShopLink>
     </ComponentWrapper>
   );
 };
 
-const mapStateToProps = ( {featuredProducts} ) => ({
-  featuredProducts
+const mapStateToProps = ( {featuredProducts, wholesaleProducts} ) => ({
+  featuredProducts,
+  wholesaleProducts
 });
 
 Products.propTypes = {

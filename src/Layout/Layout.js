@@ -6,12 +6,11 @@ import { device } from "../utils/devices";
 
 import * as CartActionCreators from "../state/actions/cart";
 import {
-  fetchShopifyProductsAction,
   fetchShopifyArticlesAction,
-  fetchFeaturedProductsAction,
-  updateShopifyProductsAction,
-  updateFeaturedProductsAction,
-  updateShopifyArticlesAction
+  fetchProductCollectionAction,
+  handleDispatchingProducts,
+  handleUpdatingProducts,
+  updateShopifyArticlesAction,
 } from "../state/fetchShopifyData";
 import styled from "styled-components";
 import Header from "./Header";
@@ -32,22 +31,25 @@ const MasterWrapper = styled.div`
 const Layout = ({
   children,
   clearCheckoutInState,
-  fetchShopifyProducts,
+  fetchOnlineStoreCollection,
   fetchShopifyArticles,
   fetchFeaturedProducts,
-  updateShopifyProducts,
+  fetchWholesaleStoreCollection,
+  updateOnlineStoreCollection,
   updateFeaturedProducts,
+  updateWholesaleProducts,
   updateShopifyArticles,
   updateShopifyFetchTimestamp,
   lastShopifyFetchTimestamp,
   checkoutId,
-  products,
+  onlineStore,
+  featuredProducts,
+  wholesaleProducts,
   articles,
-  featuredProducts
 }) => {
   const clearCheckoutIfCompleted = () => {
     checkoutId
-      ? client.checkout.fetch(checkoutId).then(checkout => {
+      ? client.checkout.fetch(checkoutId).then((checkout) => {
           if (checkout.completedAt) {
             clearCheckoutInState();
           }
@@ -60,22 +62,31 @@ const Layout = ({
     clearCheckoutIfCompleted();
   }
 
-  // if products haven't been fetched, fetch them
-  if (!products.length) {
-    // populate state with products and articles from shopify
-    fetchShopifyProducts();
-    fetchFeaturedProducts();
-    fetchShopifyArticles();
+  // if products or articles haven't been fetched, fetch them
+  if (
+      !onlineStore.length || 
+      !featuredProducts.length || 
+      !wholesaleProducts.length || 
+      !articles.length
+    ) {
+      fetchOnlineStoreCollection();
+      fetchFeaturedProducts();
+      fetchWholesaleStoreCollection();
+      fetchShopifyArticles();
   }
 
   // if 5 minutes passed and it's not the initial page load,
   // check for updates on products, articles, featured products collection, and update timestamp
-  if ((Date.now() > lastShopifyFetchTimestamp + 300000) && (lastShopifyFetchTimestamp !== 0)) {
-    updateShopifyProducts(products);
-    updateShopifyArticles(articles);
-    updateFeaturedProducts(featuredProducts);
-    updateShopifyFetchTimestamp();
-  }
+  if (
+    Date.now() > lastShopifyFetchTimestamp + 300000 &&
+    lastShopifyFetchTimestamp !== 0
+  ) {
+      updateOnlineStoreCollection(onlineStore);
+      updateFeaturedProducts(featuredProducts);
+      updateWholesaleProducts(wholesaleProducts);
+      updateShopifyArticles(articles);
+      updateShopifyFetchTimestamp();
+    }
 
   return (
     <>
@@ -95,33 +106,76 @@ Layout.propTypes = {
 };
 
 const mapStateToProps = ({
-  products,
-  articles,
+  onlineStore,
   featuredProducts,
+  wholesaleProducts,
+  articles,
   checkout: { checkoutId },
   lastShopifyFetchTimestamp
 }) => ({
   checkoutId,
-  products,
+  onlineStore,
   featuredProducts,
+  wholesaleProducts,
   articles,
   lastShopifyFetchTimestamp
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   clearCheckoutInState: () =>
     dispatch(CartActionCreators.clearCheckoutInState()),
-  fetchShopifyProducts: () => dispatch(fetchShopifyProductsAction()),
+  fetchOnlineStoreCollection: () =>
+    dispatch(
+      fetchProductCollectionAction("online-store", 7, handleDispatchingProducts)
+    ),
   fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
-  fetchFeaturedProducts: () => dispatch(fetchFeaturedProductsAction()),
+  fetchFeaturedProducts: () =>
+    dispatch(
+      fetchProductCollectionAction(
+        "featured-products",
+        5,
+        handleDispatchingProducts
+      )
+    ),
+  fetchWholesaleStoreCollection: () =>
+    dispatch(
+      fetchProductCollectionAction(
+        "wholesale-products",
+        4,
+        handleDispatchingProducts
+      )
+    ),
   updateShopifyFetchTimestamp: () =>
     dispatch(CartActionCreators.updateShopifyFetchTimestamp()),
-  updateShopifyProducts: productsFromRedux =>
-    dispatch(updateShopifyProductsAction(productsFromRedux)),
-  updateFeaturedProducts: featuredProductsFromRedux =>
-    dispatch(updateFeaturedProductsAction(featuredProductsFromRedux)),
-  updateShopifyArticles: articlesFromRedux =>
-    dispatch(updateShopifyArticlesAction(articlesFromRedux))
+  updateOnlineStoreCollection: (onlineStore) =>
+    dispatch(
+      fetchProductCollectionAction(
+        "online-store",
+        7,
+        handleUpdatingProducts,
+        onlineStore
+      )
+    ),
+  updateFeaturedProducts: (featuredProductsFromRedux) =>
+    dispatch(
+      fetchProductCollectionAction(
+        "featured-products",
+        5,
+        handleUpdatingProducts,
+        featuredProductsFromRedux
+      )
+    ),
+  updateWholesaleProducts: (wholesaleProducts) =>
+    dispatch(
+      fetchProductCollectionAction(
+        "wholesale-products",
+        4,
+        handleUpdatingProducts,
+        wholesaleProducts
+      )
+    ),
+  updateShopifyArticles: (articlesFromRedux) =>
+    dispatch(updateShopifyArticlesAction(articlesFromRedux)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Layout));

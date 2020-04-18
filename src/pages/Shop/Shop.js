@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import styled from "styled-components";
 import PageWrapper from "../../SharedComponents/PageWrapper";
 import ShopProduct from "./ShopProduct";
@@ -15,42 +16,29 @@ const ProductsContainer = styled.div`
   margin: 70px 0;
 `;
 
-const Shop = ({products}) => {
-
-  // copy prodcuts and sort diffuser to end of array
-  const sortDiffuserToEnd = [...products].sort((a,b) => 
-    a.title.includes("&") 
-      ? 0
-      : -1
-  );
-
-  // then sort unavailable products to very end of array
-  const sortedAvailableProducts = [...sortDiffuserToEnd].sort((a, b) =>
-    a.availableForSale === b.availableForSale
-      ? 0
-      : a.availableForSale
-      ? -1
-      : 1
-  );
+const Shop = ({onlineStore, wholesaleProducts}) => {
+  const location = useLocation();
+  
+  // determine if onlineStore or wholesaleProducts should be loaded;
+  const products =
+    location.pathname === "/shop" ? onlineStore : wholesaleProducts;
 
   return (
     <PageWrapper>
-      <StyledH1>
-        Shop
-      </StyledH1>
+      <StyledH1>{location.pathname === '/shop' ? "Shop" : "Wholesale Shop" }</StyledH1>
       <ProductsContainer>
-        {sortedAvailableProducts
-          .map(product => (
-            <ShopProduct key={product.id} product={product} />
-          ))}
+        {products.map((product) => (
+          <ShopProduct key={product.id} product={product} />
+        ))}
       </ProductsContainer>
       <Footer />
     </PageWrapper>
   );
 };
 
-const mapStatetoProps = ({products}) => ({
-  products
-})
+const mapStatetoProps = ({onlineStore, wholesaleProducts}) => ({
+  onlineStore,
+  wholesaleProducts
+});
 
 export default connect(mapStatetoProps)(Shop);

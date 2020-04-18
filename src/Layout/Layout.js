@@ -67,7 +67,8 @@ const Layout = ({
       !onlineStore.length || 
       !featuredProducts.length || 
       !wholesaleProducts.length || 
-      !articles.length
+      !articles.length ||
+      !wholesaleProducts
     ) {
       fetchOnlineStoreCollection();
       fetchFeaturedProducts();

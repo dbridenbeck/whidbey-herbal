@@ -17,6 +17,7 @@ const Product = ({
 
   const { handle } = match.params;
 
+  // determine if wholesaleProducts or onlineProducts should be loaded
   const products = handle.includes("wholesale") ? wholesaleProducts : onlineStore;
 
   // select the current product

@@ -18,6 +18,8 @@ const ProductsContainer = styled.div`
 
 const Shop = ({onlineStore, wholesaleProducts}) => {
   const location = useLocation();
+  
+  // determine if onlineStore or wholesaleProducts should be loaded;
   const products =
     location.pathname === "/shop" ? onlineStore : wholesaleProducts;
 

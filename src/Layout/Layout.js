@@ -62,14 +62,13 @@ const Layout = ({
     clearCheckoutIfCompleted();
   }
 
-  // if products haven't been fetched, fetch them
+  // if products or articles haven't been fetched, fetch them
   if (
       !onlineStore.length || 
       !featuredProducts.length || 
       !wholesaleProducts.length || 
       !articles.length
     ) {
-    // populate state with products and articles from shopify
       fetchOnlineStoreCollection();
       fetchFeaturedProducts();
       fetchWholesaleStoreCollection();

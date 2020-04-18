@@ -6,7 +6,7 @@ import {
 } from "./actions/cart";
 import { client } from "../plugins/shopify.js";
 
-// Below are three sections: articles, products, and collections
+// Below are two sections: articles, and collections
 // In each section there are three peices: a query, the method to fetch data on initial load, 
 // and the method to update data if it is different than what's in redux
 
@@ -71,7 +71,6 @@ const sortKey = client.graphQLClient.variable(
   "ProductCollectionSortKeys"
 );
 
-
 export const queryCollection = (collectionHandle, numOfItems) => client.graphQLClient.query(
   [sortKey],
   root => {
@@ -124,22 +123,21 @@ export const queryCollection = (collectionHandle, numOfItems) => client.graphQLC
 );
 
 export const handleDispatchingProducts = (reduxKey, products, dispatch) => {
-    console.log(reduxKey, ":", products);
     // add products from collection to redux
     dispatch(fetchSuccess(reduxKey, products));
     // set timestamp in redux to show shopify data was fetched
     dispatch(updateShopifyFetchTimestamp());
 };
 
-export const handleUpdatingProducts = (reduxKey, products, dispatch, featuredProductsFromRedux) => {
-  // check to see if featuredProducts in redux is the same as products from shopify
-  // if not, add the featuredProducts to redux
-  return featuredProductsFromRedux === products
+export const handleUpdatingProducts = (reduxKey, products, dispatch, productsFromRedux) => {
+  // check to see if products in redux is the same as products from shopify
+  // if not, add the products to redux
+  return productsFromRedux === products
     ? null
     : dispatch(fetchSuccess(reduxKey, products));
 };
 
-// GET Featured-Products collection on initial page load
+// GET a product collection on initial page load
 export const fetchProductCollectionAction = (collectionHandle, numOfItems, handleReduxDispatch, collectionFromRedux) => {
   return dispatch => {
     dispatch(fetchPending()); 

@@ -6,13 +6,10 @@ import { device } from "../utils/devices";
 
 import * as CartActionCreators from "../state/actions/cart";
 import {
-  fetchShopifyProductsAction,
   fetchShopifyArticlesAction,
   fetchProductCollectionAction,
   handleDispatchingProducts,
   handleUpdatingProducts,
-  updateShopifyProductsAction,
-  updateCollectionAction,
   updateShopifyArticlesAction,
 } from "../state/fetchShopifyData";
 import styled from "styled-components";
@@ -37,7 +34,7 @@ const Layout = ({
   fetchOnlineStoreCollection,
   fetchShopifyArticles,
   fetchFeaturedProducts,
-  updateShopifyProducts,
+  updateOnlineStoreCollection,
   updateFeaturedProducts,
   updateShopifyArticles,
   updateShopifyFetchTimestamp,
@@ -77,12 +74,12 @@ const Layout = ({
     Date.now() > lastShopifyFetchTimestamp + 300000 &&
     lastShopifyFetchTimestamp !== 0
   ) {
-    console.log("trying to update!");
-    // updateShopifyProducts(products);
-    // updateShopifyArticles(articles);
-    // updateFeaturedProducts(featuredProducts);
-    // updateShopifyFetchTimestamp();
-  }
+      console.log("trying to update!");
+      updateOnlineStoreCollection(onlineStore);
+      updateFeaturedProducts(featuredProducts);
+      updateShopifyArticles(articles);
+      updateShopifyFetchTimestamp();
+    }
 
   return (
     <>
@@ -118,7 +115,10 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) => ({
   clearCheckoutInState: () =>
     dispatch(CartActionCreators.clearCheckoutInState()),
-  fetchOnlineStoreCollection: () => dispatch(fetchProductCollectionAction("online-store", 7, handleDispatchingProducts)),
+  fetchOnlineStoreCollection: () =>
+    dispatch(
+      fetchProductCollectionAction("online-store", 7, handleDispatchingProducts)
+    ),
   fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
   fetchFeaturedProducts: () =>
     dispatch(
@@ -130,8 +130,15 @@ const mapDispatchToProps = (dispatch) => ({
     ),
   updateShopifyFetchTimestamp: () =>
     dispatch(CartActionCreators.updateShopifyFetchTimestamp()),
-  updateShopifyProducts: (productsFromRedux) =>
-    dispatch(updateShopifyProductsAction(productsFromRedux)),
+  updateOnlineStoreCollection: (onlineStore) =>
+    dispatch(
+      fetchProductCollectionAction(
+        "online-store",
+        7,
+        handleUpdatingProducts,
+        onlineStore
+      )
+    ),
   updateFeaturedProducts: (featuredProductsFromRedux) =>
     dispatch(
       fetchProductCollectionAction(

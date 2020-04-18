@@ -9,7 +9,7 @@ import Footer from "../../SharedComponents/Footer";
 
 // begin component
 const Product = ({
-  products,
+  onlineStore,
   match,
   checkout,
 }) => {
@@ -17,7 +17,7 @@ const Product = ({
   const { handle } = match.params;
 
   // select the current product
-  const selectProduct = products.filter(
+  const selectProduct = onlineStore.filter(
     product => handle === product.handle
   );
   const selectedProduct = selectProduct[0];
@@ -59,8 +59,8 @@ Product.propTypes = {
   checkout: PropTypes.object,
 };
 
-const mapStateToProps = ({products, checkout}) => ({
-  products,
+const mapStateToProps = ({onlineStore, checkout}) => ({
+  onlineStore,
   checkout,
 });
 

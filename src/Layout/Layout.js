@@ -9,8 +9,8 @@ import {
   fetchShopifyProductsAction,
   fetchShopifyArticlesAction,
   fetchProductCollectionAction,
-  handleDispatchingFeaturedProducts,
-  handleUpdatingFeaturedProducts,
+  handleDispatchingProducts,
+  handleUpdatingProducts,
   updateShopifyProductsAction,
   updateCollectionAction,
   updateShopifyArticlesAction,
@@ -34,7 +34,7 @@ const MasterWrapper = styled.div`
 const Layout = ({
   children,
   clearCheckoutInState,
-  fetchShopifyProducts,
+  fetchOnlineStoreCollection,
   fetchShopifyArticles,
   fetchFeaturedProducts,
   updateShopifyProducts,
@@ -43,13 +43,13 @@ const Layout = ({
   updateShopifyFetchTimestamp,
   lastShopifyFetchTimestamp,
   checkoutId,
-  products,
+  onlineStore,
   articles,
-  featuredProducts
+  featuredProducts,
 }) => {
   const clearCheckoutIfCompleted = () => {
     checkoutId
-      ? client.checkout.fetch(checkoutId).then(checkout => {
+      ? client.checkout.fetch(checkoutId).then((checkout) => {
           if (checkout.completedAt) {
             clearCheckoutInState();
           }
@@ -63,20 +63,25 @@ const Layout = ({
   }
 
   // if products haven't been fetched, fetch them
-  if (!products.length) {
+  if (!onlineStore.length) {
+    console.log("fetching stuff");
     // populate state with products and articles from shopify
-    fetchShopifyProducts();
+    fetchOnlineStoreCollection();
     fetchFeaturedProducts();
     fetchShopifyArticles();
   }
 
   // if 5 minutes passed and it's not the initial page load,
   // check for updates on products, articles, featured products collection, and update timestamp
-  if ((Date.now() > lastShopifyFetchTimestamp + 300000) && (lastShopifyFetchTimestamp !== 0)) {
-    updateShopifyProducts(products);
-    updateShopifyArticles(articles);
-    updateFeaturedProducts(featuredProducts);
-    updateShopifyFetchTimestamp();
+  if (
+    Date.now() > lastShopifyFetchTimestamp + 300000 &&
+    lastShopifyFetchTimestamp !== 0
+  ) {
+    console.log("trying to update!");
+    // updateShopifyProducts(products);
+    // updateShopifyArticles(articles);
+    // updateFeaturedProducts(featuredProducts);
+    // updateShopifyFetchTimestamp();
   }
 
   return (
@@ -97,14 +102,14 @@ Layout.propTypes = {
 };
 
 const mapStateToProps = ({
-  products,
+  onlineStore,
   articles,
   featuredProducts,
   checkout: { checkoutId },
   lastShopifyFetchTimestamp
 }) => ({
   checkoutId,
-  products,
+  onlineStore,
   featuredProducts,
   articles,
   lastShopifyFetchTimestamp
@@ -113,14 +118,14 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) => ({
   clearCheckoutInState: () =>
     dispatch(CartActionCreators.clearCheckoutInState()),
-  fetchShopifyProducts: () => dispatch(fetchShopifyProductsAction()),
+  fetchOnlineStoreCollection: () => dispatch(fetchProductCollectionAction("online-store", 7, handleDispatchingProducts)),
   fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
   fetchFeaturedProducts: () =>
     dispatch(
       fetchProductCollectionAction(
         "featured-products",
         5,
-        handleDispatchingFeaturedProducts
+        handleDispatchingProducts
       )
     ),
   updateShopifyFetchTimestamp: () =>
@@ -132,7 +137,7 @@ const mapDispatchToProps = (dispatch) => ({
       fetchProductCollectionAction(
         "featured-products",
         5,
-        handleUpdatingFeaturedProducts,
+        handleUpdatingProducts,
         featuredProductsFromRedux
       )
     ),

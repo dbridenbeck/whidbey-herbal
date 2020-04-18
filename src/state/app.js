@@ -5,7 +5,7 @@ export const initialState = {
     lineItems: [],
     checkoutId: '',
   },
-  products: [],
+  onlineStore: [],
   featuredProducts: [],
   articles: [],
   pending: true,

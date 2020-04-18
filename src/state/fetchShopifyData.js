@@ -191,16 +191,15 @@ export const queryCollection = (collectionHandle, numOfItems) => client.graphQLC
 // !!!!!!!!!
 // make both of these "handle" functions extensible by adding collectionHandle to params, 
 // then use conditional to use different dispatch based on if collectionHandle is "featured-products" or "wholesale-products"
-export const handleDispatchingFeaturedProducts = (reduxKey, data, dispatch) => {
-  const products = data.collectionByHandle.products.edges;
+export const handleDispatchingProducts = (reduxKey, products, dispatch) => {
+  console.log(products);
     // add products from collection to redux
     dispatch(fetchSuccess(reduxKey, products));
     // set timestamp in redux to show shopify data was fetched
     dispatch(updateShopifyFetchTimestamp());
 };
 
-export const handleUpdatingFeaturedProducts = (reduxKey, data, dispatch, featuredProductsFromRedux) => {
-  const products = data.collectionByHandle.products.edges;
+export const handleUpdatingProducts = (reduxKey, products, dispatch, featuredProductsFromRedux) => {
   // check to see if featuredProducts in redux is the same as products from shopify
   // if not, add the featuredProducts to redux
   return featuredProductsFromRedux === products
@@ -215,11 +214,13 @@ export const fetchProductCollectionAction = (collectionHandle, numOfItems, handl
     client.graphQLClient
       .send(queryCollection(collectionHandle, numOfItems))
       .then(({ model, data }) => {
+        // get product nodes
+        const products = data.collectionByHandle.products.edges.map(product => product.node);
         // take collectionHandle and format it as "featuredProducts" instead of something like "featured-products" for redux
         const splitHandle = collectionHandle.split("-");
         const reduxKey = splitHandle[0] + splitHandle[1][0].toUpperCase() + splitHandle[1].slice(1);
 
-        handleReduxDispatch(reduxKey, data, dispatch, collectionFromRedux);
+        handleReduxDispatch(reduxKey, products, dispatch, collectionFromRedux);
       })
       .catch((error) => {
         dispatch(fetchError(error));

@@ -50,8 +50,6 @@ const Product = ({
     ) : null
   }
   
-  console.log(match);
-
   // begin component's return
   return (
     <PageWrapper>

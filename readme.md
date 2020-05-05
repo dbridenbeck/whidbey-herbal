@@ -63,7 +63,7 @@ This file contains the Redux actions for fetching shopify data and storing it in
 Contains the following:
 - WelcomeSection: Large watercolor of farm and main tagline text "Small batch handcrafted seed-to-bottle"
 - FeaturedPhotos: colorblock SVG with additional info on farm and two photos
-- FeaturedProducts: FeaturedProducts shared component
+- FeaturedProducts: FeaturedProducts shared component, see "SharedComponents" below
 - About: watercolor of Sam and Caitlin and description about them
 - PhotoSection: two photos meant to create a "color block" effect but with photos
 - Process: Watercolor image and description of each step in their process, and a photo at the bottom

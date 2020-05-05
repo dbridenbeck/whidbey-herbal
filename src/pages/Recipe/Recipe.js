@@ -45,7 +45,6 @@ const Recipe = ({
   articles,
   match,
 }) => {
-  console.log("articles: ", articles)
   
   const createRecipe = () => {
     const { handle } = match.params;

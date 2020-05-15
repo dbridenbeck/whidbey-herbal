@@ -43,7 +43,7 @@ const Tagline = styled.div`
     position: relative;
     padding: 0 0 10px 0;
     margin: 0;
-    font-size: 1.75rem;
+    font-size: 1.625rem;
     font-weight: bold;
     z-index: 5;
     @media ${device.tablet} {
@@ -57,18 +57,18 @@ const Tagline = styled.div`
     position: absolute;
     background-color: #e6c564;
     top: 20%;
-    left: 168px;
+    left: 163px;
     height: 1.225rem;
-    width: 175px;
+    width: 167px;
     @media ${device.tablet} {
-      left: 285px;
+      left: 300px;
       height: 2.15rem;
-      width: 305px;
+      width: 308px;
     }
     @media ${device.laptop} {
-      left: 432px;
+      left: 452px;
       height: 3.25rem;
-      width: 450px;
+      width: 460px;
     }
   }
 `;

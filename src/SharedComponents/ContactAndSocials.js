@@ -55,7 +55,12 @@ const ContactAndSocials = () => {
     <ContactAndSocialsWrapper>
       <a href="mailto:hello@whidbeyherbal.com">hello@whidbeyherbal.com</a>
       <p>(360) 386-5831</p>
-      <p className="member-text">Proud member of the Whidbey Island Grown cooperative.</p>
+      <p className="member-text">
+        Proud member of the Whidbey Island Grown cooperative.
+      </p>
+      <p>
+        Website built by <a href="htt://darren.fun">Darren Bridenbeck</a>
+      </p>
       <SocialIconContainer>
         <a href="https://www.instagram.com/whidbeyherbal/">
           <SocialIcon

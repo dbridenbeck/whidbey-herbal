@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 import { device } from "../../utils/devices";
 import farmWebp from "./images/farm-with-lines.webp";
@@ -79,11 +79,14 @@ const WelcomeSection = () => {
       <StyledPicture>
         <source srcSet={`${farmWebp}`} type="image/webp" />
         <source srcSet={`${farm}`} type="image/jpeg" />
-        <img src={`${farm}`} alt="A watercolor of Whidbey Herbal farms showing a barn, a house, lavender fields, a dog in a pasture, and a forest in the background"/>
+        <img
+          src={`${farm}`}
+          alt="A watercolor of Whidbey Herbal farms showing a barn, a house, lavender fields, a dog in a pasture, and a forest in the background"
+        />
       </StyledPicture>
       <Tagline>
         <h1>
-          Small batch handcrafted. <br/> Seed-to-bottle.
+          Small batch. Handcrafted. <br /> Potions made from plants.
         </h1>
         <div className="highlight" />
       </Tagline>

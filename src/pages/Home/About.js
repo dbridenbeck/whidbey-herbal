@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import farmers from './images/farmers.jpg';
-import farmersWebp from './images/farmers.webp';
+import farmers from "./images/farmers.jpg";
+import farmersWebp from "./images/farmers.webp";
 import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
 import StyledH2 from "../../SharedComponents/StyledH2";
 import { device } from "../../utils/devices";
@@ -41,26 +41,25 @@ const AboutText = styled.p`
 const About = () => {
   return (
     <ComponentWrapper id="about">
-      <StyledH2 >
-        The Farmers
-      </StyledH2>
+      <StyledH2>The Farmers</StyledH2>
       <FarmerIllustration>
-        <source srcSet={`${farmersWebp}`} type='image/webp' />
-        <source srcSet={`${farmers}`} type='image/jpeg' />
-        <img src={`${farmers}`}
-        alt="Watercolor of Sam and Caitlin, the farmers of Whidbey Herbal"
+        <source srcSet={`${farmersWebp}`} type="image/webp" />
+        <source srcSet={`${farmers}`} type="image/jpeg" />
+        <img
+          src={`${farmers}`}
+          alt="Watercolor of Sam and Caitlin, the farmers of Whidbey Herbal"
         />
       </FarmerIllustration>
-        
+
       <AboutText>
-        We’re Caitlin and Sam Stanton, and we’re fifth and third generation
-        Northwesterners, respectively. We love our community for its
-        independence, and support of small farms. Our hobbies are backpacking,
-        boats, knitting, and gardening. We live on the farm with our son Forrest
-        and our dogs Bonnie and Merlin.
+        Hi! We’re Caitlin and Sam Stanton, the farmers behind Whidbey Herbal. We
+        grew up in the Pacific Northwest and are on a mission to capture this
+        place in a bottle. A real estate ad for a 1914 abandoned farm brought us
+        to Whidbey Island. We’re currently restoring the old farm into an
+        ultra-eco organic homestead for growing and distilling healing plants.
       </AboutText>
     </ComponentWrapper>
   );
-}
+};
 
 export default About;

@@ -81,8 +81,7 @@ const FeaturedPhotos = () => {
       <PhotoContainer>
         <FeaturedText>
           We’re a family farm that grows and distills each of our essential
-          oils, fresh from the heart of beautiful Whidbey Island in the Salish
-          Sea.
+          oils, fresh from the heart of Whidbey Island in the Salish Sea.
         </FeaturedText>
         <StyledPicture>
           <source srcSet={`${stillOnStumpWebp}`} type="image/webp" />

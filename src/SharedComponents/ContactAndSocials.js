@@ -17,7 +17,7 @@ import facebook from './images/facebook.png';
       color: #2e2e2e;
       margin: 20px 0;
     }
-    .member-text {
+    .info-text {
       font-size: 0.825em;
     }
     a {
@@ -55,7 +55,14 @@ const ContactAndSocials = () => {
     <ContactAndSocialsWrapper>
       <a href="mailto:hello@whidbeyherbal.com">hello@whidbeyherbal.com</a>
       <p>(360) 386-5831</p>
-      <p className="member-text">Proud member of the Whidbey Island Grown cooperative.</p>
+      <div  className="info-text">
+        <p>
+          Proud member of the Whidbey Island Grown cooperative.
+        </p>
+        <p>
+          Website built by <a href="htt://darren.fun">Darren Bridenbeck</a>
+        </p>
+      </div>
       <SocialIconContainer>
         <a href="https://www.instagram.com/whidbeyherbal/">
           <SocialIcon

@@ -19,7 +19,7 @@ const FarmerIllustration = styled.picture`
   }
 `;
 
-const AboutText = styled.p`
+const AboutText = styled.div`
   padding: 0 20px;
   font-size: 0.875rem;
   line-height: 1.5em;
@@ -52,11 +52,16 @@ const About = () => {
       </FarmerIllustration>
 
       <AboutText>
-        Hi! We’re Caitlin and Sam Stanton, the farmers behind Whidbey Herbal. We
-        grew up in the Pacific Northwest and are on a mission to capture this
-        place in a bottle. A real estate ad for a 1914 abandoned farm brought us
-        to Whidbey Island. We’re currently restoring the old farm into an
-        ultra-eco organic homestead for growing and distilling healing plants.
+        <p>
+          Hi! We’re Caitlin and Sam Stanton, the farmers behind Whidbey Herbal.
+          We grew up in the Pacific Northwest and are on a mission to capture
+          this place in a bottle.
+        </p>{" "}
+        <p>
+          A real estate ad for a 1914 abandoned farm brought us to Whidbey
+          Island. We’re currently restoring the old farm into an eco
+          organic homestead for growing and distilling healing plants.
+        </p>
       </AboutText>
     </ComponentWrapper>
   );

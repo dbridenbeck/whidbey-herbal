@@ -13,8 +13,8 @@ import { device } from '../../utils/devices';
     width: 60%;
     /* use margins to stagger process containers vertically 
     and horizontally center the two columns */
-      margin: 0% 5% 0 5%;
-    /* set first child to have no negative top margin */
+      margin: 20% 5% 0 5%;
+    /* set first child to have no top margin */
     :first-child {
       margin-top: 0;
     }
@@ -25,7 +25,7 @@ import { device } from '../../utils/devices';
     @media ${device.tablet} {
       width: 40%;
       height: 500px;
-      margin: -20% 5% 0 5%;
+      margin: -5% 5% 0 5%;
     }
     @media ${device.laptop} {
       height: 500px;

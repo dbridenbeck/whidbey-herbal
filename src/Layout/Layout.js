@@ -155,7 +155,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(
       fetchProductCollectionAction(
         "online-store",
-        7,
+        10,
         handleUpdatingProducts,
         onlineStore
       )

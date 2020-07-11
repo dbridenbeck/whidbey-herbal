@@ -130,7 +130,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(CartActionCreators.clearCheckoutInState()),
   fetchOnlineStoreCollection: () =>
     dispatch(
-      fetchProductCollectionAction("online-store", 7, handleDispatchingProducts)
+      fetchProductCollectionAction("online-store", 10, handleDispatchingProducts)
     ),
   fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
   fetchFeaturedProducts: () =>

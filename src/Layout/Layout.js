@@ -1,5 +1,5 @@
 import React from "react";
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery } from "@apollo/client";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { client } from "../plugins/shopify.js";
@@ -30,18 +30,57 @@ const MasterWrapper = styled.div`
 `;
 
 const GET_PRODUCTS = gql`
-  query GetProducts {
-    products(first: 10) {
+  query GetProductsAndArticles {
+    collections(first: 5) {
       edges {
         node {
           title
-          totalInventory
+          products(first: 50) {
+            edges {
+              node {
+                id
+                title
+                descriptionHtml
+                availableForSale
+                totalInventory
+                variants(first: 1) {
+                  edges {
+                    node {
+                      id
+                      price
+                    }
+                  }
+                }
+                images(first: 6) {
+                  edges {
+                    node {
+                      id
+                      originalSrc
+                      altText
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    articles(first: 20) {
+      edges {
+        node {
+          title
+          contentHtml
+          excerpt
+          image {
+            id
+            originalSrc
+          }
         }
       }
     }
   }
 `;
-
 
 const Layout = ({
   children,
@@ -63,7 +102,7 @@ const Layout = ({
   articles,
 }) => {
   const { loading, error, data } = useQuery(GET_PRODUCTS);
-  if (loading) return 'Loading...';
+  if (loading) return "Loading...";
   if (error) return `ERROR!: ${error.message}`;
 
   const clearCheckoutIfCompleted = () => {
@@ -83,19 +122,19 @@ const Layout = ({
 
   // if products or articles haven't been fetched, fetch them
   if (
-      !wholesaleProducts ||
-      !onlineStore ||
-      !featuredProducts ||
-      !articles ||
-      !onlineStore.length || 
-      !featuredProducts.length || 
-      !wholesaleProducts.length || 
-      !articles.length
-    ) {
-      fetchOnlineStoreCollection();
-      fetchFeaturedProducts();
-      fetchWholesaleStoreCollection();
-      fetchShopifyArticles();
+    !wholesaleProducts ||
+    !onlineStore ||
+    !featuredProducts ||
+    !articles ||
+    !onlineStore.length ||
+    !featuredProducts.length ||
+    !wholesaleProducts.length ||
+    !articles.length
+  ) {
+    fetchOnlineStoreCollection();
+    fetchFeaturedProducts();
+    fetchWholesaleStoreCollection();
+    fetchShopifyArticles();
   }
 
   // if 5 minutes passed and it's not the initial page load,
@@ -104,12 +143,12 @@ const Layout = ({
     Date.now() > lastShopifyFetchTimestamp + 300000 &&
     lastShopifyFetchTimestamp !== 0
   ) {
-      updateOnlineStoreCollection(onlineStore);
-      updateFeaturedProducts(featuredProducts);
-      updateWholesaleProducts(wholesaleProducts);
-      updateShopifyArticles(articles);
-      updateShopifyFetchTimestamp();
-    }
+    updateOnlineStoreCollection(onlineStore);
+    updateFeaturedProducts(featuredProducts);
+    updateWholesaleProducts(wholesaleProducts);
+    updateShopifyArticles(articles);
+    updateShopifyFetchTimestamp();
+  }
 
   return (
     <>
@@ -125,7 +164,7 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   checkoutId: PropTypes.string,
   clearCheckoutInState: PropTypes.func,
-  fetchProducts: PropTypes.func
+  fetchProducts: PropTypes.func,
 };
 
 const mapStateToProps = ({
@@ -134,14 +173,14 @@ const mapStateToProps = ({
   wholesaleProducts,
   articles,
   checkout: { checkoutId },
-  lastShopifyFetchTimestamp
+  lastShopifyFetchTimestamp,
 }) => ({
   checkoutId,
   onlineStore,
   featuredProducts,
   wholesaleProducts,
   articles,
-  lastShopifyFetchTimestamp
+  lastShopifyFetchTimestamp,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -149,7 +188,11 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(CartActionCreators.clearCheckoutInState()),
   fetchOnlineStoreCollection: () =>
     dispatch(
-      fetchProductCollectionAction("online-store", 10, handleDispatchingProducts)
+      fetchProductCollectionAction(
+        "online-store",
+        10,
+        handleDispatchingProducts
+      )
     ),
   fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
   fetchFeaturedProducts: () =>

@@ -1,4 +1,5 @@
 import React from "react";
+import { gql, useQuery } from '@apollo/client';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { client } from "../plugins/shopify.js";
@@ -28,6 +29,20 @@ const MasterWrapper = styled.div`
   }
 `;
 
+const GET_PRODUCTS = gql`
+  query GetProducts {
+    products(first: 10) {
+      edges {
+        node {
+          title
+          totalInventory
+        }
+      }
+    }
+  }
+`;
+
+
 const Layout = ({
   children,
   clearCheckoutInState,
@@ -47,6 +62,10 @@ const Layout = ({
   wholesaleProducts,
   articles,
 }) => {
+  const { loading, error, data } = useQuery(GET_PRODUCTS);
+  if (loading) return 'Loading...';
+  if (error) return `ERROR!: ${error.message}`;
+
   const clearCheckoutIfCompleted = () => {
     checkoutId
       ? client.checkout.fetch(checkoutId).then((checkout) => {

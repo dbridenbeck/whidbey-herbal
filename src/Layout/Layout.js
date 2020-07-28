@@ -29,7 +29,7 @@ const MasterWrapper = styled.div`
   }
 `;
 
-const GET_PRODUCTS = gql`
+const GET_FEATURED_PRODUCTS_AND_ARTICLES = gql`
   query GetProductsAndArticles {
     collections(
       query: "title:'Wholesale Products' OR title:'Featured Products'"
@@ -95,7 +95,7 @@ const Layout = ({
   onlineStore,
   articles,
 }) => {
-  const { loading, error, data } = useQuery(GET_PRODUCTS);
+  const { loading, error, data } = useQuery(GET_FEATURED_PRODUCTS_AND_ARTICLES);
   if (loading) return "Loading...";
   if (error) return `ERROR!: ${error.message}`;
 

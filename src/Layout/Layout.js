@@ -6,13 +6,6 @@ import { client } from "../plugins/shopify.js";
 import { device } from "../utils/devices";
 
 import * as CartActionCreators from "../state/actions/cart";
-import {
-  fetchShopifyArticlesAction,
-  fetchProductCollectionAction,
-  handleDispatchingProducts,
-  handleUpdatingProducts,
-  updateShopifyArticlesAction,
-} from "../state/fetchShopifyData";
 import styled from "styled-components";
 import Header from "./Header";
 
@@ -72,6 +65,7 @@ const GET_FEATURED_PRODUCTS_AND_ARTICLES = gql`
           title
           contentHtml
           excerpt
+          handle
           image {
             id
             originalSrc
@@ -85,17 +79,9 @@ const GET_FEATURED_PRODUCTS_AND_ARTICLES = gql`
 const Layout = ({
   children,
   clearCheckoutInState,
-  fetchOnlineStoreCollection,
-  fetchShopifyArticles,
-  updateOnlineStoreCollection,
-  updateShopifyArticles,
-  updateShopifyFetchTimestamp,
-  lastShopifyFetchTimestamp,
   checkoutId,
-  onlineStore,
-  articles,
 }) => {
-  const { loading, error, data } = useQuery(GET_FEATURED_PRODUCTS_AND_ARTICLES);
+  const { loading, error } = useQuery(GET_FEATURED_PRODUCTS_AND_ARTICLES);
   if (loading) return "Loading...";
   if (error) return `ERROR!: ${error.message}`;
 
@@ -112,28 +98,6 @@ const Layout = ({
   // if checkout exists, clear checkout in state if checkout was completed
   if (checkoutId) {
     clearCheckoutIfCompleted();
-  }
-
-  // if products or articles haven't been fetched, fetch them
-  if (
-    !onlineStore ||
-    !articles ||
-    !onlineStore.length ||
-    !articles.length
-  ) {
-    fetchOnlineStoreCollection();
-    fetchShopifyArticles();
-  }
-
-  // if 5 minutes passed and it's not the initial page load,
-  // check for updates on products, articles, featured products collection, and update timestamp
-  if (
-    Date.now() > lastShopifyFetchTimestamp + 300000 &&
-    lastShopifyFetchTimestamp !== 0
-  ) {
-    updateOnlineStoreCollection(onlineStore);
-    updateShopifyArticles(articles);
-    updateShopifyFetchTimestamp();
   }
 
   return (
@@ -154,42 +118,14 @@ Layout.propTypes = {
 };
 
 const mapStateToProps = ({
-  onlineStore,
-  articles,
   checkout: { checkoutId },
-  lastShopifyFetchTimestamp,
 }) => ({
   checkoutId,
-  onlineStore,
-  articles,
-  lastShopifyFetchTimestamp,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   clearCheckoutInState: () =>
     dispatch(CartActionCreators.clearCheckoutInState()),
-  fetchOnlineStoreCollection: () =>
-    dispatch(
-      fetchProductCollectionAction(
-        "online-store",
-        10,
-        handleDispatchingProducts
-      )
-    ),
-  fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
-  updateShopifyFetchTimestamp: () =>
-    dispatch(CartActionCreators.updateShopifyFetchTimestamp()),
-  updateOnlineStoreCollection: (onlineStore) =>
-    dispatch(
-      fetchProductCollectionAction(
-        "online-store",
-        10,
-        handleUpdatingProducts,
-        onlineStore
-      )
-    ),
-  updateShopifyArticles: (articlesFromRedux) =>
-    dispatch(updateShopifyArticlesAction(articlesFromRedux)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Layout));

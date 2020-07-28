@@ -1,11 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import { ApolloConsumer, gql } from "@apollo/client";
 import styled from "styled-components";
 import { device } from "../../utils/devices";
-import PageWrapper from '../../SharedComponents/PageWrapper';
-import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
-import StyledH1 from '../../SharedComponents/StyledH1';
+import PageWrapper from "../../SharedComponents/PageWrapper";
+import FeaturedProducts from "../../SharedComponents/FeaturedProducts";
+import StyledH1 from "../../SharedComponents/StyledH1";
 import Footer from "../../SharedComponents/Footer";
 
 // Begin Styled Components
@@ -40,18 +39,33 @@ const ShopifyHTML = styled.div`
   }
 `;
 
+const GET_ARTICLES = gql`
+  {
+    articles(first: 20) {
+      edges {
+        node {
+          title
+          contentHtml
+          excerpt
+          handle
+          image {
+            id
+            originalSrc
+          }
+        }
+      }
+    }
+  }
+`;
+
 // begin component
-const Recipe = ({
-  articles,
-  match,
-}) => {
-  
-  const createRecipe = () => {
+const Recipe = ({ match }) => {
+  const createRecipe = (articles) => {
     const { handle } = match.params;
   
     // select the current product
     const selectRecipe = articles.filter(
-      recipe => handle === recipe.node.handle
+      (recipe) => handle === recipe.node.handle
     );
 
     const selectedRecipe = selectRecipe[0];
@@ -61,45 +75,46 @@ const Recipe = ({
       const {
         node: {
           title,
-          image: {originalSrc},
-          contentHtml
-        }
+          image: { originalSrc },
+          contentHtml,
+        },
       } = selectedRecipe;
-  
+
       return (
         <>
-          <StyledH1  >{title}</StyledH1>
+          <StyledH1>{title}</StyledH1>
           <RecipeContainer>
             <RecipeImage src={originalSrc} />
-            <ShopifyHTML dangerouslySetInnerHTML=
-            {{
-              __html: contentHtml
-            }}
+            <ShopifyHTML
+              dangerouslySetInnerHTML={{
+                __html: contentHtml,
+              }}
             />
           </RecipeContainer>
         </>
-      )
+      );
     } else {
-      return null
+      return null;
     }
-  }
+  };
 
   // begin component's return
   return (
-    <PageWrapper>
-      {createRecipe()}
-      <FeaturedProducts title={"Explore the Shop"} />
-      <Footer />
-    </PageWrapper>
+    <ApolloConsumer>
+      {(client) => {
+        const {
+          articles: { edges: queriedArticles },
+        } = client.readQuery({ query: GET_ARTICLES });
+        return (
+          <PageWrapper>
+            {createRecipe(queriedArticles)}
+            <FeaturedProducts title={"Explore the Shop"} />
+            <Footer />
+          </PageWrapper>
+        );
+      }}
+    </ApolloConsumer>
   );
 };
 
-Recipe.propTypes = {
-  articles: PropTypes.array,
-};
-
-const mapStateToProps = ({articles}) => ({
-  articles,
-});
-
-export default connect(mapStateToProps, null)(Recipe);
+export default Recipe;

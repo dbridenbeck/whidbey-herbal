@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { ApolloConsumer, gql } from "@apollo/client";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import ComponentWrapper from "./ComponentWrapper";
 import StyledH2 from "./StyledH2";
 
-import Product from './Product';
-import { connect } from "react-redux";
+import Product from "./Product";
 
 const ProductsContainer = styled.div`
   display: flex;
@@ -36,34 +36,81 @@ const ExploreShopLink = styled(Link)`
   }
 `;
 
-const Products = ({featuredProducts, wholesaleProducts, title, hasTopBottomBorders}) => {
+const GET_FEATURED_PRODUCTS = gql`
+  {
+    collections(
+      query: "title:'Wholesale Products' OR title:'Featured Products'"
+      first: 2
+    ) {
+      edges {
+        node {
+          title
+          products(first: 5) {
+            edges {
+              node {
+                id
+                title
+                availableForSale
+                handle
+                variants(first: 1) {
+                  edges {
+                    node {
+                      price
+                    }
+                  }
+                }
+                images(first: 1) {
+                  edges {
+                    node {
+                      originalSrc
+                      altText
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
+const Products = ({ title }) => {
   const location = useLocation();
-  const products = location.pathname.includes("wholesale") ? wholesaleProducts : featuredProducts;
-
   return (
-    <ComponentWrapper hasTopBottomBorders={hasTopBottomBorders}>
-      <StyledH2> {title} </StyledH2>
-      <ProductsContainer>
-        {featuredProducts
-          ? products.map((product) => (
-              <Product key={product.id} product={product} />
-            ))
-          : null}
-      </ProductsContainer>
-      <ExploreShopLink to="/shop">Explore the Shop</ExploreShopLink>
-    </ComponentWrapper>
+    <ApolloConsumer>
+      {(client) => {
+        const { collections } = client.readQuery({
+          query: GET_FEATURED_PRODUCTS,
+        });
+        console.log(collections.edges);
+        const queriedProducts = location.pathname.includes("wholesale")
+          ? collections.edges.find(
+              (collection) => collection.node.title === "Wholesale Products"
+            )
+          : collections.edges.find(
+              (collection) => collection.node.title === "Featured Products"
+            );
+        const products = queriedProducts.node.products.edges;
+        return (
+          <ComponentWrapper>
+            <StyledH2> {title} </StyledH2>
+            <ProductsContainer>
+              {products.map((product) => (
+                <Product key={product.node.handle} product={product.node} />
+              ))}
+            </ProductsContainer>
+            <ExploreShopLink to="/shop">Explore the Shop</ExploreShopLink>
+          </ComponentWrapper>
+        );
+      }}
+    </ApolloConsumer>
   );
 };
 
-const mapStateToProps = ( {featuredProducts, wholesaleProducts} ) => ({
-  featuredProducts,
-  wholesaleProducts
-});
-
 Products.propTypes = {
-  products: PropTypes.array,
-  title: PropTypes.string
-}
+  title: PropTypes.string,
+};
 
-export default connect(mapStateToProps)(Products);
+export default Products;

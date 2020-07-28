@@ -31,30 +31,30 @@ const MasterWrapper = styled.div`
 
 const GET_PRODUCTS = gql`
   query GetProductsAndArticles {
-    collections(first: 5) {
+    collections(
+      query: "title:'Wholesale Products' OR title:'Featured Products'"
+      first: 2
+    ) {
       edges {
         node {
           title
-          products(first: 50) {
+          products(first: 5) {
             edges {
               node {
                 id
                 title
-                descriptionHtml
+                handle
                 availableForSale
-                totalInventory
                 variants(first: 1) {
                   edges {
                     node {
-                      id
                       price
                     }
                   }
                 }
-                images(first: 6) {
+                images(first: 1) {
                   edges {
                     node {
-                      id
                       originalSrc
                       altText
                     }
@@ -87,18 +87,12 @@ const Layout = ({
   clearCheckoutInState,
   fetchOnlineStoreCollection,
   fetchShopifyArticles,
-  fetchFeaturedProducts,
-  fetchWholesaleStoreCollection,
   updateOnlineStoreCollection,
-  updateFeaturedProducts,
-  updateWholesaleProducts,
   updateShopifyArticles,
   updateShopifyFetchTimestamp,
   lastShopifyFetchTimestamp,
   checkoutId,
   onlineStore,
-  featuredProducts,
-  wholesaleProducts,
   articles,
 }) => {
   const { loading, error, data } = useQuery(GET_PRODUCTS);
@@ -122,18 +116,12 @@ const Layout = ({
 
   // if products or articles haven't been fetched, fetch them
   if (
-    !wholesaleProducts ||
     !onlineStore ||
-    !featuredProducts ||
     !articles ||
     !onlineStore.length ||
-    !featuredProducts.length ||
-    !wholesaleProducts.length ||
     !articles.length
   ) {
     fetchOnlineStoreCollection();
-    fetchFeaturedProducts();
-    fetchWholesaleStoreCollection();
     fetchShopifyArticles();
   }
 
@@ -144,8 +132,6 @@ const Layout = ({
     lastShopifyFetchTimestamp !== 0
   ) {
     updateOnlineStoreCollection(onlineStore);
-    updateFeaturedProducts(featuredProducts);
-    updateWholesaleProducts(wholesaleProducts);
     updateShopifyArticles(articles);
     updateShopifyFetchTimestamp();
   }
@@ -169,16 +155,12 @@ Layout.propTypes = {
 
 const mapStateToProps = ({
   onlineStore,
-  featuredProducts,
-  wholesaleProducts,
   articles,
   checkout: { checkoutId },
   lastShopifyFetchTimestamp,
 }) => ({
   checkoutId,
   onlineStore,
-  featuredProducts,
-  wholesaleProducts,
   articles,
   lastShopifyFetchTimestamp,
 });
@@ -195,22 +177,6 @@ const mapDispatchToProps = (dispatch) => ({
       )
     ),
   fetchShopifyArticles: () => dispatch(fetchShopifyArticlesAction()),
-  fetchFeaturedProducts: () =>
-    dispatch(
-      fetchProductCollectionAction(
-        "featured-products",
-        5,
-        handleDispatchingProducts
-      )
-    ),
-  fetchWholesaleStoreCollection: () =>
-    dispatch(
-      fetchProductCollectionAction(
-        "wholesale-products",
-        4,
-        handleDispatchingProducts
-      )
-    ),
   updateShopifyFetchTimestamp: () =>
     dispatch(CartActionCreators.updateShopifyFetchTimestamp()),
   updateOnlineStoreCollection: (onlineStore) =>
@@ -220,24 +186,6 @@ const mapDispatchToProps = (dispatch) => ({
         10,
         handleUpdatingProducts,
         onlineStore
-      )
-    ),
-  updateFeaturedProducts: (featuredProductsFromRedux) =>
-    dispatch(
-      fetchProductCollectionAction(
-        "featured-products",
-        5,
-        handleUpdatingProducts,
-        featuredProductsFromRedux
-      )
-    ),
-  updateWholesaleProducts: (wholesaleProducts) =>
-    dispatch(
-      fetchProductCollectionAction(
-        "wholesale-products",
-        4,
-        handleUpdatingProducts,
-        wholesaleProducts
       )
     ),
   updateShopifyArticles: (articlesFromRedux) =>

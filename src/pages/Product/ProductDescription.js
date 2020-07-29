@@ -94,41 +94,52 @@ const createCTABlock = (selectedProduct, doesItemExist, updateQuantityButton, qu
   const { 
     variants, 
     metafields,
-    availableForSale
+    priceRange,
+    availableForSale,
+    totalInventory
   } = selectedProduct;
 
+  console.log(variants);
   // handle null values for quantityButtonAmount
   const quantity = quantityButtonAmount === "" ? 0 : quantityButtonAmount;
 
-  return (
-    availableForSale ? (
-      <CTABlock>
-        <span className="price">${variants.edges[0].node.price}</span>
-        <QuantityButton
-          selectedProduct={selectedProduct}
-          labelTitle={"Quantity: "}
-          quantity={quantityButtonAmount}
-          shouldAddQuantities={true}
-          onChangeFunction={updateQuantityButton}
-          maxQuantity={parseInt(metafields.edges[1].node.value)}
-        />
-        <BuyButton
-          selectedProduct={selectedProduct}
-          quantity={quantity}
-          doesItemExist={doesItemExist}
-          maxQuantity={parseInt(metafields.edges[1].node.value)}
-        />
-      </CTABlock>
-    ) : (
-      <CTABlock>
-        <span className="price">${variants.edges[0].node.price}</span>
-        <div className="soldOutWarning">
-          {" "}
-          <span>SOLD OUT</span>{" "}
-        </div>
-      </CTABlock>
-    )
-  )
+  return availableForSale ? (
+    <CTABlock>
+      <span className="price">
+        {new Intl.NumberFormat("en-EN", {
+          style: "currency",
+          currency: variants.edges[0].node.priceV2.currencyCode,
+        }).format(variants.edges[0].node.priceV2.amount)}
+      </span>
+      <QuantityButton
+        selectedProduct={selectedProduct}
+        labelTitle={"Quantity: "}
+        quantity={quantityButtonAmount}
+        shouldAddQuantities={true}
+        onChangeFunction={updateQuantityButton}
+        maxQuantity={parseInt(totalInventory)}
+      />
+      <BuyButton
+        selectedProduct={selectedProduct}
+        quantity={quantity}
+        doesItemExist={doesItemExist}
+        maxQuantity={parseInt(totalInventory)}
+      />
+    </CTABlock>
+  ) : (
+    <CTABlock>
+      <span className="price">
+        {new Intl.NumberFormat("en-EN", {
+          style: "currency",
+          currency: variants.edges[0].node.priceV2.currencyCode,
+        }).format(variants.edges[0].node.priceV2.amount)}
+      </span>
+      <div className="soldOutWarning">
+        {" "}
+        <span>SOLD OUT</span>{" "}
+      </div>
+    </CTABlock>
+  );
 }
 
 // begin component
@@ -137,7 +148,7 @@ const ProductDetails = ({
   selectedProduct: {
     title, 
     descriptionHtml,
-    metafields
+    metafield
   },
   doesItemExist,
   quantityButtonAmount,
@@ -153,7 +164,7 @@ const ProductDetails = ({
       {/* below HTML is for "about" section */}
       <ShopifyHTML
         dangerouslySetInnerHTML={{
-          __html: metafields.edges[0].node.value
+          __html: metafield.value
         }}
       />
       {/* CTA block is conditionally rendered depending on availableForSale */}

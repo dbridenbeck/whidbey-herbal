@@ -60,7 +60,6 @@ const ProductImages = ({
   heroImgSrc,
   heroImgId,
   handleHeroImg,
-  selectedProduct: {availableForSale}
 }) => {
 
   // when clicked, AltImage updates state and sets heroImg's src to AltImage
@@ -68,16 +67,16 @@ const ProductImages = ({
     const {
       node: {
         id, 
-        src, 
+        originalSrc, 
         altText
       }
     } = image;
-    const setHeroImg = () => handleHeroImg(src, id);
+    const setHeroImg = () => handleHeroImg(originalSrc, id);
     const isSelected = id === heroImgId;
     return (
       <AltImage
         key={id}
-        src={src}
+        src={originalSrc}
         alt={altText}
         isSelected={isSelected}
         onClick={setHeroImg}
@@ -89,7 +88,7 @@ const ProductImages = ({
   return (
     <ProductImagesWrapper>
       <HeroImage
-        src={heroImgSrc ? heroImgSrc : images.edges[0].node.src}
+        src={heroImgSrc ? heroImgSrc : images.edges[0].node.originalSrc}
         alt="Product Photo"
       />
       <AltImages>{images.edges.map(image => createAltImage(image))}</AltImages>

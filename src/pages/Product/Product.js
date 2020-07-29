@@ -37,8 +37,8 @@ const Product = ({ onlineStore, wholesaleProducts, match, checkout }) => {
         images(first: 6) {
           edges {
             node {
-              id
-              originalSrc
+              altText
+              transformedSrc(maxWidth: 400, maxHeight: 450)
             }
           }
         }

@@ -49,8 +49,8 @@ const GET_ARTICLES = gql`
           excerpt
           handle
           image {
-            id
-            originalSrc
+            transformedSrc(maxWidth: 750, maxHeight: 750)
+            altText
           }
         }
       }
@@ -75,7 +75,7 @@ const Recipe = ({ match }) => {
       const {
         node: {
           title,
-          image: { originalSrc },
+          image: { transformedSrc },
           contentHtml,
         },
       } = selectedRecipe;
@@ -84,7 +84,7 @@ const Recipe = ({ match }) => {
         <>
           <StyledH1>{title}</StyledH1>
           <RecipeContainer>
-            <RecipeImage src={originalSrc} />
+            <RecipeImage src={transformedSrc} />
             <ShopifyHTML
               dangerouslySetInnerHTML={{
                 __html: contentHtml,

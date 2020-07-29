@@ -67,16 +67,17 @@ const ProductImages = ({
     const {
       node: {
         id, 
-        originalSrc, 
+        transformedSrc, 
         altText
       }
     } = image;
-    const setHeroImg = () => handleHeroImg(originalSrc, id);
+    console.log("image", image);
+    const setHeroImg = () => handleHeroImg(transformedSrc, id);
     const isSelected = id === heroImgId;
     return (
       <AltImage
         key={id}
-        src={originalSrc}
+        src={transformedSrc}
         alt={altText}
         isSelected={isSelected}
         onClick={setHeroImg}
@@ -88,7 +89,7 @@ const ProductImages = ({
   return (
     <ProductImagesWrapper>
       <HeroImage
-        src={heroImgSrc ? heroImgSrc : images.edges[0].node.originalSrc}
+        src={heroImgSrc ? heroImgSrc : images.edges[0].node.transformedSrc}
         alt="Product Photo"
       />
       <AltImages>{images.edges.map(image => createAltImage(image))}</AltImages>

@@ -45,10 +45,10 @@ const GET_FEATURED_PRODUCTS_AND_ARTICLES = gql`
                     }
                   }
                 }
-                images(first: 1) {
+                images(first: 6) {
                   edges {
                     node {
-                      originalSrc
+                      transformedSrc(maxWidth: 400, maxHeight: 450)
                       altText
                     }
                   }
@@ -67,8 +67,8 @@ const GET_FEATURED_PRODUCTS_AND_ARTICLES = gql`
           excerpt
           handle
           image {
-            id
-            originalSrc
+            transformedSrc(maxWidth: 750, maxHeight: 750)
+            altText
           }
         }
       }

@@ -37,11 +37,11 @@ const Shop = () => {
                       }
                     }
                   }
-                  images(first: 1) {
+                  images(first: 6) {
                     edges {
                       node {
-                        originalSrc
                         altText
+                        transformedSrc(maxWidth: 400, maxHeight: 450)
                       }
                     }
                   }

@@ -59,10 +59,10 @@ const GET_FEATURED_PRODUCTS = gql`
                     }
                   }
                 }
-                images(first: 1) {
+                images(first: 6) {
                   edges {
                     node {
-                      originalSrc
+                      transformedSrc(maxWidth: 400, maxHeight: 450)
                       altText
                     }
                   }

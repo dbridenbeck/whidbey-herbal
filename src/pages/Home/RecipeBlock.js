@@ -88,7 +88,7 @@ const RecipeBlock = ({
       handle,
       excerpt,
       image: {
-        originalSrc
+        transformedSrc
       }
     }
   }
@@ -97,7 +97,7 @@ const RecipeBlock = ({
   return (
     <RecipeLink to={`/recipe/${handle}`}>
       <RecipeContainer recipeName={title}>
-        <RecipeImage src={`${originalSrc}`} />
+        <RecipeImage src={`${transformedSrc}`} />
         <RecipeInfo>
           <h5>{title}</h5>
           {/* SVG for right arrow icon */}

@@ -1,7 +1,7 @@
 export const ADD_LINE_ITEM = 'cart/ADD_LINE_ITEM';
 export const REMOVE_LINE_ITEM = 'cart/REMOVE_LINE_ITEM';
 export const UPDATE_ITEM_QUANTITY = 'cart/UPDATE_ITEM_QUANTITY';
-export const UPDATE_CHECKOUT_ID = 'cart/UPDATE_CHECKOUT_ID';
+export const STORE_CHECKOUT_DETAILS = 'cart/STORE_CHECKOUT_DETAILS';
 export const CLEAR_CHECKOUT_IN_STATE = 'cart/CLEAR_CHECKOUT_IN_STATE';
 export const FETCH_PENDING = 'cart/FETCH_PENDING';
 export const FETCH_SUCCESS = 'cart/FETCH_SUCCESS';

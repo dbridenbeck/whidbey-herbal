@@ -1,7 +1,8 @@
-import React from "react";
-import { gql, useQuery } from "@apollo/client";
+import React, { useEffect } from "react";
+import { gql, useQuery, useMutation } from "@apollo/client";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { createCheckout } from "../queries/checkout";
 import { client } from "../plugins/shopify.js";
 import { device } from "../utils/devices";
 
@@ -76,11 +77,24 @@ const GET_FEATURED_PRODUCTS_AND_ARTICLES = gql`
   }
 `;
 
-const Layout = ({
-  children,
-  clearCheckoutInState,
-  checkoutId,
-}) => {
+const GET_CHECKOUT = gql`
+  query getCheckout($id: String!) {
+    node(id: $id) {
+      id
+      webUrl
+    }
+  }
+`;
+
+const Layout = ({ children, clearCheckoutInState, checkoutId, storeCheckoutID }) => {
+  const [createNewCheckout] = useMutation(createCheckout);
+
+  useEffect(() => {
+    createNewCheckout({ variables: { input: {} }, update: (cache, { data: { checkoutCreate } }) => {
+      storeCheckoutID(checkoutCreate.checkout.id);
+    } })
+  }, []);
+
   const { loading, error } = useQuery(GET_FEATURED_PRODUCTS_AND_ARTICLES);
   if (loading) return "Loading...";
   if (error) return `ERROR!: ${error.message}`;
@@ -117,15 +131,15 @@ Layout.propTypes = {
   fetchProducts: PropTypes.func,
 };
 
-const mapStateToProps = ({
-  checkout: { checkoutId },
-}) => ({
+const mapStateToProps = ({ checkout: { checkoutId } }) => ({
   checkoutId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   clearCheckoutInState: () =>
     dispatch(CartActionCreators.clearCheckoutInState()),
+  storeCheckoutID: (id) =>
+    dispatch(CartActionCreators.updateCheckoutId(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Layout));

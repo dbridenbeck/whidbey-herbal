@@ -48,7 +48,6 @@ const QuantityButton =
             type="number"
             value={parseInt(quantity)}
             min="1"
-            max="20"
             onChange={event => {
               onChangeFunction(
                 maxInput(event, maxQuantity),

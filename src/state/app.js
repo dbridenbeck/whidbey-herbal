@@ -57,7 +57,7 @@ export const Reducer1 = (state = initialState, action) => {
         checkout: {
           ...state.checkout,
           lineItems: state.checkout.lineItems.map(lineItem => {
-            if (lineItem.id === action.product.id) {
+            if (lineItem.handle === action.product.handle) {
               return {
                 ...action.product,
                 quantity: action.shouldAddQuantities

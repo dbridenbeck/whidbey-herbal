@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { createCurrencyFormat } from "../../utils/createCurrencyFormat";
 import QuantityButton from "../../SharedComponents/QuantityButton";
 import BuyButton from "./BuyButton";
 import StyledH1 from "../../SharedComponents/StyledH1";
@@ -93,8 +94,6 @@ const ShopifyHTML = styled.div`
 const createCTABlock = (selectedProduct, doesItemExist, updateQuantityButton, quantityButtonAmount) => {
   const { 
     variants, 
-    metafields,
-    priceRange,
     availableForSale,
     totalInventory
   } = selectedProduct;
@@ -102,15 +101,11 @@ const createCTABlock = (selectedProduct, doesItemExist, updateQuantityButton, qu
   console.log(variants);
   // handle null values for quantityButtonAmount
   const quantity = quantityButtonAmount === "" ? 0 : quantityButtonAmount;
+  const price = createCurrencyFormat(variants.edges[0].node.priceV2.amount);
 
   return availableForSale ? (
     <CTABlock>
-      <span className="price">
-        {new Intl.NumberFormat("en-EN", {
-          style: "currency",
-          currency: variants.edges[0].node.priceV2.currencyCode,
-        }).format(variants.edges[0].node.priceV2.amount)}
-      </span>
+      <span className="price">{price}</span>
       <QuantityButton
         selectedProduct={selectedProduct}
         labelTitle={"Quantity: "}
@@ -128,12 +123,7 @@ const createCTABlock = (selectedProduct, doesItemExist, updateQuantityButton, qu
     </CTABlock>
   ) : (
     <CTABlock>
-      <span className="price">
-        {new Intl.NumberFormat("en-EN", {
-          style: "currency",
-          currency: variants.edges[0].node.priceV2.currencyCode,
-        }).format(variants.edges[0].node.priceV2.amount)}
-      </span>
+      <span className="price">{price}</span>
       <div className="soldOutWarning">
         {" "}
         <span>SOLD OUT</span>{" "}

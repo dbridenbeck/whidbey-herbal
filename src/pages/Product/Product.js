@@ -62,7 +62,7 @@ const Product = ({ onlineStore, wholesaleProducts, match, checkout }) => {
   // check if item exists in checkout already
   const doesItemExist = () => {
     const filterItems = checkout.lineItems.filter(
-      (lineItem) => lineItem.id === selectedProduct.id
+      (lineItem) => lineItem.handle === selectedProduct.handle
     );
     return filterItems.length > 0 ? true : false;
   };

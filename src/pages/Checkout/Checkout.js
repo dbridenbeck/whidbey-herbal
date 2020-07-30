@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useMutation } from "@apollo/client";
-import { checkoutLineItemsAdd } from "../../queries/checkout";
+import { checkoutLineItemsAdd, createCheckout } from "../../queries/checkout";
 import PageWrapper from "../../SharedComponents/PageWrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
 import { device } from "../../utils/devices";
@@ -81,11 +81,9 @@ const StyledH2 = styled.h2`
   font-weight: normal;
 `;
 
-const Checkout = ({
-  lineItems,
-  removeLineItem,
-  checkoutId,
-}) => {
+const Checkout = ({ lineItems, removeLineItem, storeCheckoutDetails }) => {
+  const [createNewCheckout] = useMutation(createCheckout);
+
   const [addCheckoutItems] = useMutation(checkoutLineItemsAdd);
 
   const [checkoutButtonText, changeCheckoutButtonText] = useState(
@@ -113,23 +111,38 @@ const Checkout = ({
     ];
     changeCheckoutButtonText("Loading Checkout");
     let i = 0;
-    setInterval(() => {
-      const text = loadingCheckoutTextProgress[i];
-      changeCheckoutButtonText(text);
-      i++;
-      return i === 4 ? (i = 0) : null;
-    }, 250);
+    // setInterval(() => {
+    //   const text = loadingCheckoutTextProgress[i];
+    //   changeCheckoutButtonText(text);
+    //   i++;
+    //   return i === 4 ? (i = 0) : null;
+    // }, 250);
   };
 
-  const createCheckout = (lineItemsToAdd) => async () => {
+  const goToCheckout = (lineItemsToAdd) => async () => {
     showCheckoutLoading();
     setLoadingCheckoutTrue(true);
     try {
-      const checkout = await client.checkout.create();
-      await addCheckoutItems({
-        variables: { checkoutId, lineItems: lineItemsToAdd },
-      });
-      // window.location.assign(`${checkout.webUrl}`)
+      // const checkout = await client.checkout.create();
+      createNewCheckout({
+        variables: { input: {} },
+      })
+        .then((response) => {
+          const {
+            data: {
+              checkoutCreate: {
+                checkout: { id, webUrl },
+              },
+            },
+          } = response;
+          storeCheckoutDetails(id);
+          return addCheckoutItems({
+            variables: { checkoutId: id, lineItems: lineItemsToAdd },
+          });
+        })
+        .then((response) => {
+          window.location.assign(response.data.checkoutLineItemsAdd.checkout.webUrl)
+        });
     } catch (error) {
       console.log("Error creating checkout: ", error);
     }
@@ -141,7 +154,7 @@ const Checkout = ({
       quantity: item.quantity,
     });
     const lineItemsToAdd = lineItems.map(createLineItemObject);
-    const checkout = createCheckout(lineItemsToAdd);
+    const checkout = goToCheckout(lineItemsToAdd);
 
     return (
       <CheckoutButton loadingCheckout={loadingCheckout} onClick={checkout}>
@@ -202,9 +215,10 @@ Checkout.propTypes = {
   updateItemQuantity: PropTypes.func,
 };
 
-const mapStateToProps = ({ checkout: { lineItems, checkoutId } }) => ({
+const mapStateToProps = ({ checkout: { lineItems, checkoutId, webUrl } }) => ({
   lineItems,
   checkoutId,
+  webUrl,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -218,6 +232,8 @@ const mapDispatchToProps = (dispatch) => ({
         product
       )
     ),
+  storeCheckoutDetails: (id) =>
+    dispatch(CartActionCreators.storeCheckoutDetails(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

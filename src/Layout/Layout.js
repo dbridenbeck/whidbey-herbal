@@ -24,7 +24,7 @@ const MasterWrapper = styled.div`
 `;
 
 const GET_FEATURED_PRODUCTS_AND_ARTICLES = gql`
-  query GetProductsAndArticles($id: ID!) {
+  query GetProductsAndArticles {
     collections(
       query: "title:'Wholesale Products' OR title:'Featured Products'"
       first: 2
@@ -60,13 +60,6 @@ const GET_FEATURED_PRODUCTS_AND_ARTICLES = gql`
         }
       }
     }
-    node(id: $id) {
-      ... on Checkout {
-        id
-        webUrl
-        completedAt
-      }
-    }
     articles(first: 20) {
       edges {
         node {
@@ -93,31 +86,9 @@ const Layout = ({
 }) => {
   const [createNewCheckout] = useMutation(createCheckout);
 
-  useEffect(() => {
-    if (completedAt || completedAt === "") {
-      createNewCheckout({
-        variables: { input: {} },
-        update: (cache, { data: { checkoutCreate } }) => {
-          storeCheckoutDetails(checkoutCreate.checkout.id);
-          console.log("creating checkout");
-        },
-      });
-    } else {
-      console.log("Checkout already exists!")
-    }
-  }, []);
-
-  const { loading, error, data } = useQuery(
-    GET_FEATURED_PRODUCTS_AND_ARTICLES,
-    { variables: { id: checkoutId } }
-  );
+  const { loading, error, data } = useQuery(GET_FEATURED_PRODUCTS_AND_ARTICLES);
   if (loading) return "Loading...";
   if (error) return `ERROR!: ${error.message}`;
-  const {
-    node: { webUrl, completedAtFromQuery },
-  } = data;
-  
-  storeCheckoutDetails(checkoutId, completedAtFromQuery, webUrl);
 
   const clearCheckoutIfCompleted = () => {
     checkoutId
@@ -160,7 +131,9 @@ const mapDispatchToProps = (dispatch) => ({
   clearCheckoutInState: () =>
     dispatch(CartActionCreators.clearCheckoutInState()),
   storeCheckoutDetails: (id, checkoutCompleted, webUrl) =>
-    dispatch(CartActionCreators.storeCheckoutDetails(id, checkoutCompleted, webUrl)),
+    dispatch(
+      CartActionCreators.storeCheckoutDetails(id, checkoutCompleted, webUrl)
+    ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Layout));

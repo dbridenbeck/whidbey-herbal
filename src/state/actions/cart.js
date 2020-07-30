@@ -23,11 +23,9 @@ export const updateItemQuantity = (
   product,
 });
 
-export const storeCheckoutDetails = (id, completedAt, webUrl) => ({
+export const storeCheckoutDetails = (id) => ({
   type: CartActionTypes.STORE_CHECKOUT_DETAILS,
-  id,
-  completedAt,
-  webUrl
+  id
 });
 
 export const clearCheckoutInState = () => ({

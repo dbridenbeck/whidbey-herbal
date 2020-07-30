@@ -4,8 +4,6 @@ export const initialState = {
   checkout: {
     lineItems: [],
     checkoutId: "",
-    completedAt: "",
-    webUrl: "",
   },
   onlineStore: [],
   wholesaleProducts: [],
@@ -79,8 +77,6 @@ export const Reducer1 = (state = initialState, action) => {
         checkout: {
           ...state.checkout,
           checkoutId: action.id,
-          completedAt: action.completedAt,
-          webUrl: action.webUrl,
         },
       };
     case CartActionTypes.CLEAR_CHECKOUT_IN_STATE:

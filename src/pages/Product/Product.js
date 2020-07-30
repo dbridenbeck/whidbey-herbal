@@ -59,10 +59,6 @@ const Product = ({ onlineStore, wholesaleProducts, match, checkout }) => {
     ? wholesaleProducts
     : onlineStore;
 
-  // select the current product
-  // const selectProduct = products.filter((product) => handle === product.handle);
-  // const selectedProduct = selectProduct[0];
-
   // check if item exists in checkout already
   const doesItemExist = () => {
     const filterItems = checkout.lineItems.filter(

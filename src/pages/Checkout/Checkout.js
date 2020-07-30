@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { useMutation } from "@apollo/client";
+import { checkoutLineItemsAdd } from "../../queries/checkout";
 import PageWrapper from "../../SharedComponents/PageWrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
 import { device } from "../../utils/devices";
-
+import { createCurrencyFormat } from "../../utils/createCurrencyFormat";
 import { client } from "../../plugins/shopify.js";
 import * as CartActionCreators from '../../state/actions/cart';
 import LineItems from './LineItems';
@@ -79,7 +81,8 @@ const StyledH2 = styled.h2`
   font-weight: normal;
 `;
 
-const Checkout = ({lineItems, removeLineItem, updateCheckoutId }) => {
+const Checkout = ({lineItems, removeLineItem, updateCheckoutId, checkoutId }) => {
+  const [addCheckoutItems] = useMutation(checkoutLineItemsAdd);
 
   const [checkoutButtonText, changeCheckoutButtonText] = useState("Proceed to Checkout");
   const [loadingCheckout, setLoadingCheckoutTrue] = useState(false) 
@@ -119,8 +122,11 @@ const Checkout = ({lineItems, removeLineItem, updateCheckoutId }) => {
     try {
       const checkout = await client.checkout.create();
       await updateCheckoutId(checkout.id);
-      await client.checkout.addLineItems(checkout.id, lineItemsToAdd);
-      window.location.assign(`${checkout.webUrl}`)
+      // COME BACK TO THIS ONCE I FIX LINEITEMS STUFF
+      await addCheckoutItems({variables: {checkoutId, lineItems: lineItemsToAdd}, update: (cache, { data }) => {
+        console.log(data);
+      }});
+      // window.location.assign(`${checkout.webUrl}`)
     } catch (error) {
       console.log("Error creating checkout: ", error);
     }
@@ -143,34 +149,29 @@ const Checkout = ({lineItems, removeLineItem, updateCheckoutId }) => {
   
   const createCheckoutContainer = () => {
     const hasItems = (lineItems.length && lineItems.length > 0);
-    const calculatedCartSubtotal = 
-      lineItems.map(lineItem => lineItem.quantity * lineItem.variants.edges[0].node.price)
+    const roughCalculatedCartSubtotal = 
+      lineItems.map(lineItem => lineItem.quantity * lineItem.variants.edges[0].node.priceV2.amount)
         .filter(Boolean)
         .reduce((cartSubtotal, currentItemSubtotal) => (currentItemSubtotal + cartSubtotal), 0)
         .toFixed(2);
-    
-    return (
-      hasItems ? 
-      (
-        <CheckoutContainer>
-          <LineItemHeaders />
-          <LineItems
-            items={lineItems}
-            createRemoveButton={createRemoveButton}
-          />
-          <SubtotalSection
-            calculatedCartSubtotal={calculatedCartSubtotal}
-            createCheckoutButton={createCheckoutButton}
-          />
-          <FeaturedProducts title={"Continue Shopping"} />
-        </CheckoutContainer>
-      ) : (
-        <CheckoutContainer>
-          <StyledH2>Your Shopping Cart is empty.</StyledH2>
-          <FeaturedProducts title={"Explore the Shop"} />
-        </CheckoutContainer>
-      )
-    )
+    const currencyCalculatedCartSubtotal = createCurrencyFormat(roughCalculatedCartSubtotal);
+
+    return hasItems ? (
+      <CheckoutContainer>
+        <LineItemHeaders />
+        <LineItems items={lineItems} createRemoveButton={createRemoveButton} />
+        <SubtotalSection
+          calculatedCartSubtotal={currencyCalculatedCartSubtotal}
+          createCheckoutButton={createCheckoutButton}
+        />
+        <FeaturedProducts title={"Continue Shopping"} />
+      </CheckoutContainer>
+    ) : (
+      <CheckoutContainer>
+        <StyledH2>Your Shopping Cart is empty.</StyledH2>
+        <FeaturedProducts title={"Explore the Shop"} />
+      </CheckoutContainer>
+    );
   }
 
     return (

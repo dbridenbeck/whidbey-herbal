@@ -58,7 +58,6 @@ const AltImage = styled.img`
 const ProductImages = ({
   images,
   heroImgSrc,
-  heroImgId,
   handleHeroImg,
 }) => {
 
@@ -66,17 +65,16 @@ const ProductImages = ({
   const createAltImage = image => {
     const {
       node: {
-        id, 
         transformedSrc, 
         altText
       }
     } = image;
     console.log("image", image);
-    const setHeroImg = () => handleHeroImg(transformedSrc, id);
-    const isSelected = id === heroImgId;
+    const setHeroImg = () => handleHeroImg(transformedSrc);
+    const isSelected = transformedSrc === heroImgSrc;
     return (
       <AltImage
-        key={id}
+        key={transformedSrc}
         src={transformedSrc}
         alt={altText}
         isSelected={isSelected}
@@ -106,10 +104,8 @@ ProductImages.propTypes = {
 
 const mapStateToProps = ({
   heroImgSrc,
-  heroImgId,
 }) => ({
   heroImgSrc,
-  heroImgId,
 });
 
 const mapDispatchToProps = dispatch => ({

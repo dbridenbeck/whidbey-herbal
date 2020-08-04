@@ -8,7 +8,6 @@ export const initialState = {
   burgerToggled: false,
   burgerClickedOnce: false,
   heroImgSrc: "",
-  heroImgId: "",
   quantityButtonAmount: 1,
   googleMapInfoWindow: {
     selectedStoreName: "",
@@ -96,13 +95,11 @@ export const Reducer1 = (state = initialState, action) => {
       return {
         ...state,
         heroImgSrc: action.imageSrc,
-        heroImgId: action.imageId,
       };
     case CartActionTypes.CLEAR_HERO_IMG:
       return {
         ...state,
         heroImgSrc: "",
-        heroImgId: "",
       };
     case CartActionTypes.UPDATE_QUANTITY_BUTTON:
       return {

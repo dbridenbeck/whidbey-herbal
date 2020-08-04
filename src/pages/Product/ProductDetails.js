@@ -24,7 +24,6 @@ const ProductDetails = ({
   selectedProduct,
   doesItemExist,
 }) => {
-  console.log("selectedProduct.images", selectedProduct.images);
   return (
     <ProductInfoWrapper>
       <ProductImages 

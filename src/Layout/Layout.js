@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { gql, useQuery, useMutation } from "@apollo/client";
+import React from "react";
+import { gql, useQuery, ApolloConsumer } from "@apollo/client";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { createCheckout } from "../queries/checkout";
-import { client } from "../plugins/shopify.js";
 import { device } from "../utils/devices";
 
 import * as CartActionCreators from "../state/actions/cart";
@@ -77,41 +75,42 @@ const GET_FEATURED_PRODUCTS_AND_ARTICLES = gql`
   }
 `;
 
-const Layout = ({
-  children,
-  clearCheckoutInState,
-  checkoutId,
-  completedAt,
-  storeCheckoutDetails,
-}) => {
-  const [createNewCheckout] = useMutation(createCheckout);
+const GET_CHECKOUT = gql`
+  query getCheckout($id: ID!) {
+    node(id: $id) {
+      ... on Checkout {
+        completedAt
+        id
+      }
+    }
+  }
+`;
 
-  const { loading, error, data } = useQuery(GET_FEATURED_PRODUCTS_AND_ARTICLES);
+const Layout = ({ children, clearCheckoutInState, checkoutId }) => {
+  const { data: checkoutData } = useQuery(GET_CHECKOUT, {
+    variables: { id: checkoutId },
+  });
+
+  const { loading, error } = useQuery(GET_FEATURED_PRODUCTS_AND_ARTICLES);
   if (loading) return "Loading...";
   if (error) return `ERROR!: ${error.message}`;
 
-  const clearCheckoutIfCompleted = () => {
-    checkoutId
-      ? client.checkout.fetch(checkoutId).then((checkout) => {
-          if (checkout.completedAt) {
-            clearCheckoutInState();
-          }
-        })
-      : console.log("checkout doesn't exist");
-  };
-
-  // if checkout exists, clear checkout in state if checkout was completed
-  if (checkoutId) {
-    clearCheckoutIfCompleted();
-  }
-
   return (
-    <>
-      <MasterWrapper id="MasterWrapper">
-        <Header />
-        {children}
-      </MasterWrapper>
-    </>
+    <ApolloConsumer>
+      {(client) => {
+        // if checkout exists, clear checkout in state if checkout was completed
+        if (checkoutData?.node?.completedAt) {
+          clearCheckoutInState();
+        }
+
+        return (
+          <MasterWrapper id="MasterWrapper">
+            <Header />
+            {children}
+          </MasterWrapper>
+        );
+      }}
+    </ApolloConsumer>
   );
 };
 
@@ -119,21 +118,15 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   checkoutId: PropTypes.string,
   clearCheckoutInState: PropTypes.func,
-  fetchProducts: PropTypes.func,
 };
 
-const mapStateToProps = ({ checkout: { checkoutId, completedAt } }) => ({
+const mapStateToProps = ({ checkout: { checkoutId } }) => ({
   checkoutId,
-  completedAt,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   clearCheckoutInState: () =>
     dispatch(CartActionCreators.clearCheckoutInState()),
-  storeCheckoutDetails: (id, checkoutCompleted, webUrl) =>
-    dispatch(
-      CartActionCreators.storeCheckoutDetails(id, checkoutCompleted, webUrl)
-    ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Layout));

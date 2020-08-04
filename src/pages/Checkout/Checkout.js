@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styled from "styled-components";
@@ -8,7 +8,6 @@ import PageWrapper from "../../SharedComponents/PageWrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
 import { device } from "../../utils/devices";
 import { createCurrencyFormat } from "../../utils/createCurrencyFormat";
-import { client } from "../../plugins/shopify.js";
 import * as CartActionCreators from "../../state/actions/cart";
 import LineItems from "./LineItems";
 import LineItemHeaders from "./LineItemHeaders";
@@ -111,19 +110,18 @@ const Checkout = ({ lineItems, removeLineItem, storeCheckoutDetails }) => {
     ];
     changeCheckoutButtonText("Loading Checkout");
     let i = 0;
-    // setInterval(() => {
-    //   const text = loadingCheckoutTextProgress[i];
-    //   changeCheckoutButtonText(text);
-    //   i++;
-    //   return i === 4 ? (i = 0) : null;
-    // }, 250);
+    setInterval(() => {
+      const text = loadingCheckoutTextProgress[i];
+      changeCheckoutButtonText(text);
+      i++;
+      return i === 4 ? (i = 0) : null;
+    }, 250);
   };
 
   const goToCheckout = (lineItemsToAdd) => async () => {
     showCheckoutLoading();
     setLoadingCheckoutTrue(true);
     try {
-      // const checkout = await client.checkout.create();
       createNewCheckout({
         variables: { input: {} },
       })
@@ -131,7 +129,7 @@ const Checkout = ({ lineItems, removeLineItem, storeCheckoutDetails }) => {
           const {
             data: {
               checkoutCreate: {
-                checkout: { id, webUrl },
+                checkout: { id },
               },
             },
           } = response;
@@ -210,28 +208,17 @@ const Checkout = ({ lineItems, removeLineItem, storeCheckoutDetails }) => {
 
 Checkout.propTypes = {
   lineItems: PropTypes.array,
-  checkoutId: PropTypes.string,
   removeLineItem: PropTypes.func,
-  updateItemQuantity: PropTypes.func,
+  storeCheckoutDetails: PropTypes.func,
 };
 
-const mapStateToProps = ({ checkout: { lineItems, checkoutId, webUrl } }) => ({
-  lineItems,
-  checkoutId,
-  webUrl,
+const mapStateToProps = ({ checkout: { lineItems } }) => ({
+  lineItems
 });
 
 const mapDispatchToProps = (dispatch) => ({
   removeLineItem: (id, index) =>
     dispatch(CartActionCreators.removeLineItem(id, index)),
-  updateItemQuantity: (quantityToUpdate, shouldAddQuantities, product) =>
-    dispatch(
-      CartActionCreators.updateItemQuantity(
-        quantityToUpdate,
-        shouldAddQuantities,
-        product
-      )
-    ),
   storeCheckoutDetails: (id) =>
     dispatch(CartActionCreators.storeCheckoutDetails(id)),
 });

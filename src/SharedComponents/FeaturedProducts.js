@@ -84,7 +84,6 @@ const Products = ({ title }) => {
         const { collections } = client.readQuery({
           query: GET_FEATURED_PRODUCTS,
         });
-        console.log(collections.edges);
         const queriedProducts = location.pathname.includes("wholesale")
           ? collections.edges.find(
               (collection) => collection.node.title === "Wholesale Products"

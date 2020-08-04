@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ApolloConsumer, gql } from "@apollo/client";
+import { ApolloConsumer } from "@apollo/client";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import ComponentWrapper from "./ComponentWrapper";
 import StyledH2 from "./StyledH2";
-
+import { GET_FEATURED_PRODUCTS } from "../queries";
 import Product from "./Product";
 
 const ProductsContainer = styled.div`
@@ -33,46 +33,6 @@ const ExploreShopLink = styled(Link)`
   &:hover {
     background-color: #e3be42;
     color: white;
-  }
-`;
-
-const GET_FEATURED_PRODUCTS = gql`
-  {
-    collections(
-      query: "title:'Wholesale Products' OR title:'Featured Products'"
-      first: 2
-    ) {
-      edges {
-        node {
-          title
-          products(first: 5) {
-            edges {
-              node {
-                id
-                title
-                availableForSale
-                handle
-                variants(first: 1) {
-                  edges {
-                    node {
-                      price
-                    }
-                  }
-                }
-                images(first: 6) {
-                  edges {
-                    node {
-                      transformedSrc(maxWidth: 400, maxHeight: 450)
-                      altText
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
   }
 `;
 

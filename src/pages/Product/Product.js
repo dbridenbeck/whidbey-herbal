@@ -1,46 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import PropTypes from "prop-types";
 import FeaturedProducts from "../../SharedComponents/FeaturedProducts";
 import PageWrapper from "../../SharedComponents/PageWrapper";
 import Reviews from "./Reviews";
 import ProductDetails from "./ProductDetails";
 import Footer from "../../SharedComponents/Footer";
-
-const GET_PRODUCT = gql`
-  query getProduct($productHandle: String!) {
-    productByHandle(handle: $productHandle) {
-      title
-      handle
-      availableForSale
-      totalInventory
-      descriptionHtml
-      metafield(namespace: "about", key: "about") {
-        value
-      }
-      variants(first: 1) {
-        edges {
-          node {
-            id
-            priceV2 {
-              amount
-              currencyCode
-            }
-          }
-        }
-      }
-      images(first: 6) {
-        edges {
-          node {
-            altText
-            transformedSrc(maxWidth: 400, maxHeight: 450)
-          }
-        }
-      }
-    }
-  }
-`;
+import { GET_PRODUCT } from "../../queries";
 
 // begin component
 const Product = ({ match, checkout }) => {

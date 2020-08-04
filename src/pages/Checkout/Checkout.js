@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useMutation } from "@apollo/client";
-import { checkoutLineItemsAdd, createCheckout } from "../../queries/checkout";
+import { CHECKOUT_LINEITEMS_ADD, CREATE_CHECKOUT } from "../../queries";
 import PageWrapper from "../../SharedComponents/PageWrapper";
 import StyledH1 from "../../SharedComponents/StyledH1";
 import { device } from "../../utils/devices";
@@ -81,9 +81,9 @@ const StyledH2 = styled.h2`
 `;
 
 const Checkout = ({ lineItems, removeLineItem, storeCheckoutDetails }) => {
-  const [createNewCheckout] = useMutation(createCheckout);
+  const [createNewCheckout] = useMutation(CREATE_CHECKOUT);
 
-  const [addCheckoutItems] = useMutation(checkoutLineItemsAdd);
+  const [addCheckoutItems] = useMutation(CHECKOUT_LINEITEMS_ADD);
 
   const [checkoutButtonText, changeCheckoutButtonText] = useState(
     "Proceed to Checkout"

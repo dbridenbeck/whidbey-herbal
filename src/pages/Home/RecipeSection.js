@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { ApolloConsumer, gql } from "@apollo/client";
+import { ApolloConsumer } from "@apollo/client";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
+import { GET_ARTICLES } from "../../queries";
 import StyledH2 from "../../SharedComponents/StyledH2";
 
 import RecipeBlock from "./RecipeBlock";
@@ -15,25 +16,6 @@ const RecipeContainer = styled.div`
   justify-content: space-evenly;
   width: 100%;
   margin: 20px auto 0;
-`;
-
-const GET_ARTICLES = gql`
-  query getArticles {
-    articles(first: 20) {
-      edges {
-        node {
-          title
-          contentHtml
-          excerpt
-          handle
-          image {
-            transformedSrc(maxWidth: 750, maxHeight: 750)
-            altText
-          }
-        }
-      }
-    }
-  }
 `;
 
 const RecipeSection = () => {

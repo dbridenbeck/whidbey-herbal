@@ -1,11 +1,12 @@
 import React from "react";
-import { ApolloConsumer, gql } from "@apollo/client";
+import { ApolloConsumer } from "@apollo/client";
 import styled from "styled-components";
 import { device } from "../../utils/devices";
 import PageWrapper from "../../SharedComponents/PageWrapper";
 import FeaturedProducts from "../../SharedComponents/FeaturedProducts";
 import StyledH1 from "../../SharedComponents/StyledH1";
 import Footer from "../../SharedComponents/Footer";
+import { GET_ARTICLES } from "../../queries";
 
 // Begin Styled Components
 const RecipeContainer = styled.div`
@@ -36,25 +37,6 @@ const ShopifyHTML = styled.div`
   @media ${device.tablet} {
     width: 60%;
     padding: 0 70px 0 50px;
-  }
-`;
-
-const GET_ARTICLES = gql`
-  {
-    articles(first: 20) {
-      edges {
-        node {
-          title
-          contentHtml
-          excerpt
-          handle
-          image {
-            transformedSrc(maxWidth: 750, maxHeight: 750)
-            altText
-          }
-        }
-      }
-    }
   }
 `;
 

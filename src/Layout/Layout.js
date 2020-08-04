@@ -15,6 +15,9 @@ const MasterWrapper = styled.div`
   max-width: 1200px;
   margin: 0px auto 0px auto;
   overflow: hidden;
+  opacity: ${(props) => props.isLoading ? "0" : "1"};
+  transition: opacity 500ms ease-in-out;
+  transition-delay: 200ms;
   /* Media screen keeps WelcomeSection's img 100% height on bigger screens */
   @media ${device.laptop} {
     max-width: 100vw;
@@ -92,7 +95,8 @@ const Layout = ({ children, clearCheckoutInState, checkoutId }) => {
   });
 
   const { loading, error } = useQuery(GET_FEATURED_PRODUCTS_AND_ARTICLES);
-  if (loading) return "Loading...";
+  // if (loading) return "Loading...";
+  console.log(typeof loading);
   if (error) return `ERROR!: ${error.message}`;
 
   return (
@@ -104,9 +108,9 @@ const Layout = ({ children, clearCheckoutInState, checkoutId }) => {
         }
 
         return (
-          <MasterWrapper id="MasterWrapper">
+          <MasterWrapper id="MasterWrapper" isLoading={loading}>
             <Header />
-            {children}
+            {!loading && children}
           </MasterWrapper>
         );
       }}

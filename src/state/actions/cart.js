@@ -32,21 +32,6 @@ export const clearCheckoutInState = () => ({
   type: CartActionTypes.CLEAR_CHECKOUT_IN_STATE,
 });
 
-export const fetchPending = () => ({
-  type: CartActionTypes.FETCH_PENDING,
-});
-
-export const fetchSuccess = (dataType, data) => ({
-  type: CartActionTypes.FETCH_SUCCESS,
-  data,
-  dataType,
-});
-
-export const fetchError = (error) => ({
-  type: CartActionTypes.FETCH_ERROR,
-  error: error,
-});
-
 export const toggleBurger = () => ({
   type: CartActionTypes.TOGGLE_BURGER,
 });
@@ -73,9 +58,4 @@ export const updateQuantityButton = (quantity) => ({
 export const setGoogleMapInfoWindow = (selectedStoreName) => ({
   type: CartActionTypes.SET_GOOGLE_MAP_INFO_WINDOW,
   selectedStoreName,
-});
-
-export const updateShopifyFetchTimestamp = () => ({
-  type: CartActionTypes.UPDATE_SHOPIFY_FETCH_TIMESTAMP,
-  timestamp: Date.now(),
 });

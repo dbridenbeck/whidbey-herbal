@@ -8,56 +8,56 @@ import Reviews from "./Reviews";
 import ProductDetails from "./ProductDetails";
 import Footer from "../../SharedComponents/Footer";
 
-// begin component
-const Product = ({ onlineStore, wholesaleProducts, match, checkout }) => {
-  const { handle } = match.params;
-
-  const GET_PRODUCT = gql`
-    query getProduct($productHandle: String!) {
-      productByHandle(handle: $productHandle) {
-        title
-        handle
-        availableForSale
-        totalInventory
-        descriptionHtml
-        metafield(namespace: "about", key: "about") {
-          value
-        }
-        variants(first: 1) {
-          edges {
-            node {
-              id
-              priceV2 {
-                amount
-                currencyCode
-              }
-            }
-          }
-        }
-        images(first: 6) {
-          edges {
-            node {
-              altText
-              transformedSrc(maxWidth: 400, maxHeight: 450)
+const GET_PRODUCT = gql`
+  query getProduct($productHandle: String!) {
+    productByHandle(handle: $productHandle) {
+      title
+      handle
+      availableForSale
+      totalInventory
+      descriptionHtml
+      metafield(namespace: "about", key: "about") {
+        value
+      }
+      variants(first: 1) {
+        edges {
+          node {
+            id
+            priceV2 {
+              amount
+              currencyCode
             }
           }
         }
       }
+      images(first: 6) {
+        edges {
+          node {
+            altText
+            transformedSrc(maxWidth: 400, maxHeight: 450)
+          }
+        }
+      }
     }
-  `;
+  }
+`;
+
+// begin component
+const Product = ({ match, checkout }) => {
+  const { handle } = match.params;
 
   const { loading, error, data } = useQuery(GET_PRODUCT, {
     variables: { productHandle: handle },
   });
   if (loading) return null;
   if (error) return `Error! ${error}`;
-  
+
   const selectedProduct = data.productByHandle;
 
   // determine if wholesaleProducts or onlineProducts should be loaded
-  const products = handle.includes("wholesale")
-    ? wholesaleProducts
-    : onlineStore;
+  const featuredProductsTitle = handle.includes("wholesale")
+    ? "More Wholesale Products"
+    : "More Products";
 
   // check if item exists in checkout already
   const doesItemExist = () => {
@@ -76,13 +76,7 @@ const Product = ({ onlineStore, wholesaleProducts, match, checkout }) => {
           doesItemExist={handleIfItemExists}
         />
         <Reviews />
-        <FeaturedProducts
-          title={
-            products === wholesaleProducts
-              ? "More Wholesale Products"
-              : "More Products"
-          }
-        />
+        <FeaturedProducts title={featuredProductsTitle} />
       </div>
     ) : null;
   };
@@ -97,13 +91,10 @@ const Product = ({ onlineStore, wholesaleProducts, match, checkout }) => {
 };
 
 Product.propTypes = {
-  products: PropTypes.array,
   checkout: PropTypes.object,
 };
 
-const mapStateToProps = ({ onlineStore, wholesaleProducts, checkout }) => ({
-  onlineStore,
-  wholesaleProducts,
+const mapStateToProps = ({ checkout }) => ({
   checkout,
 });
 

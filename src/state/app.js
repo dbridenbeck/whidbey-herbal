@@ -87,24 +87,6 @@ export const Reducer1 = (state = initialState, action) => {
           checkoutId: "",
         },
       };
-
-    case CartActionTypes.FETCH_PENDING:
-      return {
-        ...state,
-        pending: true,
-      };
-    case CartActionTypes.FETCH_SUCCESS:
-      return {
-        ...state,
-        pending: false,
-        [action.dataType]: action.data,
-      };
-    case CartActionTypes.FETCH_ERROR:
-      return {
-        ...state,
-        pending: false,
-        error: action.error,
-      };
     case CartActionTypes.TOGGLE_BURGER:
       return {
         ...state,
@@ -140,11 +122,6 @@ export const Reducer1 = (state = initialState, action) => {
         googleMapInfoWindow: {
           selectedStoreName: action.selectedStoreName,
         },
-      };
-    case CartActionTypes.UPDATE_SHOPIFY_FETCH_TIMESTAMP:
-      return {
-        ...state,
-        lastShopifyFetchTimestamp: action.timestamp,
       };
     default:
       return state;

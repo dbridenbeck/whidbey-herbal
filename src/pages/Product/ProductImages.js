@@ -45,31 +45,22 @@ const AltImage = styled.img`
   width: 25%;
   align-self: center;
   margin: 10px;
-  border: ${props =>
+  border: ${(props) =>
     props.isSelected ? "2px solid #e3be42" : "2px solid #DADADA"};
   border-radius: 10px;
   :hover {
-    border: ${props =>
+    border: ${(props) =>
       props.isSelected ? "2px solid #e3be42" : "2px solid #787878"};
   }
 `;
 
 // begin component
-const ProductImages = ({
-  images,
-  heroImgSrc,
-  handleHeroImg,
-}) => {
-
+const ProductImages = ({ images, heroImgSrc, handleHeroImg }) => {
   // when clicked, AltImage updates state and sets heroImg's src to AltImage
-  const createAltImage = image => {
+  const createAltImage = (image) => {
     const {
-      node: {
-        transformedSrc, 
-        altText
-      }
+      node: { transformedSrc, altText },
     } = image;
-    console.log("image", image);
     const setHeroImg = () => handleHeroImg(transformedSrc);
     const isSelected = transformedSrc === heroImgSrc;
     return (
@@ -82,7 +73,7 @@ const ProductImages = ({
       />
     );
   };
-  
+
   // begin component's return
   return (
     <ProductImagesWrapper>
@@ -90,7 +81,9 @@ const ProductImages = ({
         src={heroImgSrc ? heroImgSrc : images.edges[0].node.transformedSrc}
         alt="Product Photo"
       />
-      <AltImages>{images.edges.map(image => createAltImage(image))}</AltImages>
+      <AltImages>
+        {images.edges.map((image) => createAltImage(image))}
+      </AltImages>
     </ProductImagesWrapper>
   );
 };
@@ -99,16 +92,14 @@ ProductImages.propTypes = {
   images: PropTypes.object,
   heroImgSrc: PropTypes.string,
   heroImgId: PropTypes.string,
-  handleHeroImg: PropTypes.func
+  handleHeroImg: PropTypes.func,
 };
 
-const mapStateToProps = ({
-  heroImgSrc,
-}) => ({
+const mapStateToProps = ({ heroImgSrc }) => ({
   heroImgSrc,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   handleHeroImg: (imageSrc, imageId) =>
     dispatch(CartActionCreators.handleHeroImg(imageSrc, imageId)),
 });

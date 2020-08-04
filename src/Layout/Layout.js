@@ -34,8 +34,6 @@ const Layout = ({ children, clearCheckoutInState, checkoutId }) => {
   });
 
   const { loading, error } = useQuery(GET_FEATURED_PRODUCTS_AND_ARTICLES);
-  // if (loading) return "Loading...";
-  console.log(typeof loading);
   if (error) return `ERROR!: ${error.message}`;
 
   return (

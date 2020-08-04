@@ -100,7 +100,6 @@ const createCTABlock = (
 ) => {
   const { variants, availableForSale, totalInventory } = selectedProduct;
 
-  console.log(variants);
   // handle null values for quantityButtonAmount
   const quantity = quantityButtonAmount === "" ? 0 : quantityButtonAmount;
   const price = createCurrencyFormat(variants.edges[0].node.priceV2.amount);
@@ -148,7 +147,6 @@ const ProductDetails = ({
   quantityButtonAmount,
   updateQuantityButton,
 }) => {
-  console.log("lineItems", lineItems);
   const getLineItemQuantity = () => {
     if (lineItems.length > 0) {
       return lineItems

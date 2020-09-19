@@ -96,7 +96,7 @@ const BuyButton = ({
       return (
         <BuyButtonWrapper buyButtonClicked={buyButtonClicked}>
           <span className="addedToCartAlert">Added!</span>
-          <BuyButtonContainer exceededMaxQuantity={!exceededMaxQuantity}>
+          <BuyButtonContainer exceededMaxQuantity={!exceededMaxQuantity} disabled={true}>
             Met Item Limit
           </BuyButtonContainer>
           <ExceededMaxQuantityWarning

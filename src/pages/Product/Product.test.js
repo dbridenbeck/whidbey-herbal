@@ -6,6 +6,7 @@ import { MockedProvider } from "@apollo/client/testing";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Product from "./Product";
+import Header from "../../Layout/Header";
 import { GET_PRODUCT, GET_FEATURED_PRODUCTS } from "../../queries";
 
 const history = createBrowserHistory();
@@ -26,7 +27,7 @@ const mocks = [
           title: "Western Red Cedar Essential Oil",
           handle: "cedar-oil",
           availableForSale: true,
-          totalInventory: 9,
+          totalInventory: 5,
           descriptionHtml:
             "<h3>Characteristics</h3>↵<p>Cedar oil is characterized </h3>",
           metafield: {
@@ -136,18 +137,57 @@ const mocks = [
 describe("Product View", () => {
   let view = null;
 
-  beforeEach(async () => {});
+  beforeEach(async () => {
+    view = await render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Router basename={process.env.PUBLIC_URL} history={history}>
+          <Header />
+          <Product match={{ params: { handle: "cedar-oil" } }} />
+        </Router>
+      </MockedProvider>
+    );
+  });
 
   it("should render without errors", async () => {
-    await act(async () => {
-      view = await render(
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <Router basename={process.env.PUBLIC_URL} history={history}>
-            <Product match={{ params: { handle: "cedar-oil" } }} />
-          </Router>
-        </MockedProvider>
-      );
-    });
-    await view.findByText("Western Red Cedar Essential Oil");
+    const title = await view.findByText("Western Red Cedar Essential Oil");
+
+    expect(title).toBeInTheDocument();
+  });
+
+  it("should add item to the cart when 'Add to Cart' button clicked", async () => {
+    const buyButton = await view.findByText("Add to Cart");
+    fireEvent.click(buyButton);
+    fireEvent.click(buyButton);
+    const checkoutCart = await view.getByText("2");
+
+    expect(checkoutCart).toBeInTheDocument();
+  });
+  
+  it("should show warning when when maxValue is met on input", async () => {
+    const input = await view.findByLabelText("Quantity:");
+    fireEvent.change(input, { target: { value: "5" } });
+    const warning = await view.findByText("Limit 5 per order.");
+
+    expect(warning).toBeInTheDocument();
+  });
+  
+  it("should disable 'Add to Cart' button when maxValue is exceeded ", async () => {
+    const input = await view.findByLabelText("Quantity:");
+    const buyButton = await view.findByText("Add to Cart");
+    
+    fireEvent.change(input, { target: { value: "5" } });
+    fireEvent.click(buyButton);
+    
+    expect(buyButton).toBeDisabled();
+  });
+  
+  it("should disable 'Add to Cart' button when line item exists and maxValue is exceeded", async () => {
+    const input = await view.findByLabelText("Quantity:");
+    const buyButton = await view.findByText("Add to Cart");
+    
+    fireEvent.click(buyButton);
+    fireEvent.change(input, { target: { value: "5" } });
+
+    expect(buyButton).toBeDisabled();
   });
 });

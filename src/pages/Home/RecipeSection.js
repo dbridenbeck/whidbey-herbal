@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ApolloConsumer } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
@@ -19,23 +19,17 @@ const RecipeContainer = styled.div`
 `;
 
 const RecipeSection = () => {
+  const { loading, error, data } = useQuery(GET_ARTICLES);
+  const articles = data.articles.edges;
   return (
-    <ApolloConsumer>
-      {(client) => {
-        const data = client.readQuery({ query: GET_ARTICLES });
-        const articles = data.articles.edges;
-        return (
-          <ComponentWrapper id="recipes" maxWidth={""}>
-            <StyledH2>Recipes</StyledH2>
-            <RecipeContainer>
-              {articles.map((article) => (
-                <RecipeBlock recipe={article} key={article.node.handle} />
-              ))}
-            </RecipeContainer>
-          </ComponentWrapper>
-        );
-      }}
-    </ApolloConsumer>
+    <ComponentWrapper id="recipes" maxWidth={""}>
+      <StyledH2>Recipes</StyledH2>
+      <RecipeContainer>
+        {articles.map((article) => (
+          <RecipeBlock recipe={article} key={article.node.handle} />
+        ))}
+      </RecipeContainer>
+    </ComponentWrapper>
   );
 };
 

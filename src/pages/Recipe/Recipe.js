@@ -1,5 +1,5 @@
 import React from "react";
-import { ApolloConsumer } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import { device } from "../../utils/devices";
 import PageWrapper from "../../SharedComponents/PageWrapper";
@@ -44,7 +44,7 @@ const ShopifyHTML = styled.div`
 const Recipe = ({ match }) => {
   const createRecipe = (articles) => {
     const { handle } = match.params;
-  
+
     // select the current product
     const selectRecipe = articles.filter(
       (recipe) => handle === recipe.node.handle
@@ -80,22 +80,18 @@ const Recipe = ({ match }) => {
     }
   };
 
-  // begin component's return
+  const {
+    loading,
+    data: {
+      articles: { edges: queriedArticles },
+    },
+  } = useQuery(GET_ARTICLES);
   return (
-    <ApolloConsumer>
-      {(client) => {
-        const {
-          articles: { edges: queriedArticles },
-        } = client.readQuery({ query: GET_ARTICLES });
-        return (
-          <PageWrapper>
-            {createRecipe(queriedArticles)}
-            <FeaturedProducts title={"Explore the Shop"} />
-            <Footer />
-          </PageWrapper>
-        );
-      }}
-    </ApolloConsumer>
+    <PageWrapper>
+      {createRecipe(queriedArticles)}
+      <FeaturedProducts title={"Explore the Shop"} />
+      <Footer />
+    </PageWrapper>
   );
 };
 

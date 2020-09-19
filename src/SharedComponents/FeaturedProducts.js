@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ApolloConsumer } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import ComponentWrapper from "./ComponentWrapper";
@@ -38,33 +38,29 @@ const ExploreShopLink = styled(Link)`
 
 const Products = ({ title }) => {
   const location = useLocation();
+  const { loading, error, data } = useQuery(GET_FEATURED_PRODUCTS);
+  if (loading) return null;
+  if (error) return `Error! ${error}`;
+  
+  const queriedProducts = location.pathname.includes("wholesale")
+    ? data.collections.edges.find(
+        (collection) => collection.node.title === "Wholesale Products"
+      )
+    : data.collections.edges.find(
+        (collection) => collection.node.title === "Featured Products"
+      );
+  const products = queriedProducts.node.products.edges;
+
   return (
-    <ApolloConsumer>
-      {(client) => {
-        const { collections } = client.readQuery({
-          query: GET_FEATURED_PRODUCTS,
-        });
-        const queriedProducts = location.pathname.includes("wholesale")
-          ? collections.edges.find(
-              (collection) => collection.node.title === "Wholesale Products"
-            )
-          : collections.edges.find(
-              (collection) => collection.node.title === "Featured Products"
-            );
-        const products = queriedProducts.node.products.edges;
-        return (
-          <ComponentWrapper>
-            <StyledH2> {title} </StyledH2>
-            <ProductsContainer>
-              {products.map((product) => (
-                <Product key={product.node.handle} product={product.node} />
-              ))}
-            </ProductsContainer>
-            <ExploreShopLink to="/shop">Explore the Shop</ExploreShopLink>
-          </ComponentWrapper>
-        );
-      }}
-    </ApolloConsumer>
+    <ComponentWrapper>
+      <StyledH2> {title} </StyledH2>
+      <ProductsContainer>
+        {products.map((product) => (
+          <Product key={product.node.handle} product={product.node} />
+        ))}
+      </ProductsContainer>
+      <ExploreShopLink to="/shop">Explore the Shop</ExploreShopLink>
+    </ComponentWrapper>
   );
 };
 

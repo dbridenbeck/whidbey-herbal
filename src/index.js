@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
-
-import Root from './root';
+import Root from "./root"
 
 const rootElement = document.getElementById('root');
 

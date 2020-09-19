@@ -18,7 +18,6 @@ const Product = ({ match, checkout }) => {
   });
   if (loading) return null;
   if (error) return `Error! ${error}`;
-
   const selectedProduct = data.productByHandle;
 
   // determine if wholesaleProducts or onlineProducts should be loaded
@@ -28,10 +27,12 @@ const Product = ({ match, checkout }) => {
 
   // check if item exists in checkout already
   const doesItemExist = () => {
-    const filterItems = checkout.lineItems.filter(
-      (lineItem) => lineItem.handle === selectedProduct.handle
-    );
-    return filterItems.length > 0 ? true : false;
+    if (selectedProduct) {
+      const filterItems = checkout.lineItems.filter(
+        (lineItem) => lineItem.handle === selectedProduct.handle
+      );
+      return filterItems.length > 0 ? true : false;
+    }
   };
 
   const createProductDetails = () => {
@@ -51,7 +52,7 @@ const Product = ({ match, checkout }) => {
   // begin component's return
   return (
     <PageWrapper>
-      {createProductDetails()}
+      {selectedProduct && createProductDetails()}
       <Footer />
     </PageWrapper>
   );

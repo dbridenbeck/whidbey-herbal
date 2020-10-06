@@ -71,7 +71,7 @@ const CheckoutButton = styled.button`
   :hover {
     color: ${(props) => (props.loadingCheckout ? `#787878` : `white`)};
     background-color: ${(props) =>
-      props.loadingCheckout ? `white` : `#E3BE42`};
+    props.loadingCheckout ? `white` : `#E3BE42`};
   }
 `;
 
@@ -190,11 +190,11 @@ const Checkout = ({ lineItems, removeLineItem, storeCheckoutDetails }) => {
         <FeaturedProducts title={"Continue Shopping"} />
       </CheckoutContainer>
     ) : (
-      <CheckoutContainer>
-        <StyledH2>Your Shopping Cart is empty.</StyledH2>
-        <FeaturedProducts title={"Explore the Shop"} />
-      </CheckoutContainer>
-    );
+        <CheckoutContainer>
+          <StyledH2>Your Shopping Cart is empty.</StyledH2>
+          <FeaturedProducts title={"Explore the Shop"} />
+        </CheckoutContainer>
+      );
   };
 
   return (

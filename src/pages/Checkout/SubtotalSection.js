@@ -29,8 +29,7 @@ const SubtotalSection = ({ calculatedCartSubtotal, createCheckoutButton }) => (
   <SubtotalWrapper>
     <div className="subtotalContainer">
       <p className="subtotal">
-        {" "}
-        <strong>Subtotal:</strong> {calculatedCartSubtotal}{" "}
+        <strong>Subtotal:</strong> {calculatedCartSubtotal}
       </p>
       <p className="shippingInfo">Shipping & taxes calculated at checkout</p>
       {createCheckoutButton()}

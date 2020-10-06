@@ -1,6 +1,5 @@
 import React from "react";
-import { createStore } from "redux";
-import { fireEvent, render, screen, wait, act } from "../../utils/test-utils";
+import { fireEvent, render } from "../../utils/test-utils";
 import "@testing-library/jest-dom/extend-expect";
 import { MockedProvider } from "@apollo/client/testing";
 import { Router } from "react-router-dom";
@@ -10,7 +9,6 @@ import Header from "../../Layout/Header";
 import { GET_PRODUCT, GET_FEATURED_PRODUCTS } from "../../queries";
 
 const history = createBrowserHistory();
-const mockHistory = { push: jest.fn() };
 
 const mocks = [
   {

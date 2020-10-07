@@ -19,7 +19,7 @@ const RecipeContainer = styled.div`
 `;
 
 const RecipeSection = () => {
-  const { loading, error, data } = useQuery(GET_ARTICLES);
+  const { data } = useQuery(GET_ARTICLES);
   const articles = data.articles.edges;
   return (
     <ComponentWrapper id="recipes" maxWidth={""}>

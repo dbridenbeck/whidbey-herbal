@@ -81,7 +81,6 @@ const Recipe = ({ match }) => {
   };
 
   const {
-    loading,
     data: {
       articles: { edges: queriedArticles },
     },

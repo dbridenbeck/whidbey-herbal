@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import ComponentWrapper from "./ComponentWrapper";
 import StyledH2 from "./StyledH2";
-
-import Product from './Product';
-import { connect } from "react-redux";
+import { GET_FEATURED_PRODUCTS } from "../queries";
+import Product from "./Product";
 
 const ProductsContainer = styled.div`
   display: flex;
@@ -36,34 +36,36 @@ const ExploreShopLink = styled(Link)`
   }
 `;
 
-const Products = ({featuredProducts, wholesaleProducts, title, hasTopBottomBorders}) => {
-
+const Products = ({ title }) => {
   const location = useLocation();
-  const products = location.pathname.includes("wholesale") ? wholesaleProducts : featuredProducts;
+  const { loading, error, data } = useQuery(GET_FEATURED_PRODUCTS);
+  if (loading) return null;
+  if (error) return `Error! ${error}`;
+  
+  const queriedProducts = location.pathname.includes("wholesale")
+    ? data.collections.edges.find(
+        (collection) => collection.node.title === "Wholesale Products"
+      )
+    : data.collections.edges.find(
+        (collection) => collection.node.title === "Featured Products"
+      );
+  const products = queriedProducts.node.products.edges;
 
   return (
-    <ComponentWrapper hasTopBottomBorders={hasTopBottomBorders}>
+    <ComponentWrapper>
       <StyledH2> {title} </StyledH2>
       <ProductsContainer>
-        {featuredProducts
-          ? products.map((product) => (
-              <Product key={product.id} product={product} />
-            ))
-          : null}
+        {products.map((product) => (
+          <Product key={product.node.handle} product={product.node} />
+        ))}
       </ProductsContainer>
       <ExploreShopLink to="/shop">Explore the Shop</ExploreShopLink>
     </ComponentWrapper>
   );
 };
 
-const mapStateToProps = ( {featuredProducts, wholesaleProducts} ) => ({
-  featuredProducts,
-  wholesaleProducts
-});
-
 Products.propTypes = {
-  products: PropTypes.array,
-  title: PropTypes.string
-}
+  title: PropTypes.string,
+};
 
-export default connect(mapStateToProps)(Products);
+export default Products;

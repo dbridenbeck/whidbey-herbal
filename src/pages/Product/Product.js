@@ -1,37 +1,39 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useQuery } from "@apollo/client";
 import PropTypes from "prop-types";
-import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
-import PageWrapper from '../../SharedComponents/PageWrapper';
-import Reviews from './Reviews';
-import ProductDetails from './ProductDetails';
+import FeaturedProducts from "../../SharedComponents/FeaturedProducts";
+import PageWrapper from "../../SharedComponents/PageWrapper";
+import Reviews from "./Reviews";
+import ProductDetails from "./ProductDetails";
 import Footer from "../../SharedComponents/Footer";
+import { GET_PRODUCT } from "../../queries";
 
 // begin component
-const Product = ({
-  onlineStore,
-  wholesaleProducts,
-  match,
-  checkout,
-}) => {
-
+const Product = ({ match, checkout }) => {
   const { handle } = match.params;
 
-  // determine if wholesaleProducts or onlineProducts should be loaded
-  const products = handle.includes("wholesale") ? wholesaleProducts : onlineStore;
+  const { loading, error, data } = useQuery(GET_PRODUCT, {
+    variables: { productHandle: handle },
+  });
+  if (loading) return null;
+  if (error) return `Error! ${error}`;
+  const selectedProduct = data.productByHandle;
 
-  // select the current product
-  const selectProduct = products.filter((product) => handle === product.handle);
-  const selectedProduct = selectProduct[0];
+  // determine if wholesaleProducts or onlineProducts should be loaded
+  const featuredProductsTitle = handle.includes("wholesale")
+    ? "More Wholesale Products"
+    : "More Products";
 
   // check if item exists in checkout already
   const doesItemExist = () => {
-    const filterItems = checkout.lineItems
-      .filter(lineItem => lineItem.id === selectedProduct.id);
-    return (
-      filterItems.length > 0 ? true : false
-    )
-  }
+    if (selectedProduct) {
+      const filterItems = checkout.lineItems.filter(
+        (lineItem) => lineItem.handle === selectedProduct.handle
+      );
+      return filterItems.length > 0 ? true : false;
+    }
+  };
 
   const createProductDetails = () => {
     const handleIfItemExists = doesItemExist();
@@ -42,31 +44,25 @@ const Product = ({
           doesItemExist={handleIfItemExists}
         />
         <Reviews />
-        <FeaturedProducts title={products === wholesaleProducts ? 
-          "More Wholesale Products" : 
-          "More Products"
-        } />
+        <FeaturedProducts title={featuredProductsTitle} />
       </div>
-    ) : null
-  }
-  
+    ) : null;
+  };
+
   // begin component's return
   return (
     <PageWrapper>
-      {createProductDetails()}
+      {selectedProduct && createProductDetails()}
       <Footer />
     </PageWrapper>
   );
 };
 
 Product.propTypes = {
-  products: PropTypes.array,
   checkout: PropTypes.object,
 };
 
-const mapStateToProps = ({onlineStore, wholesaleProducts, checkout}) => ({
-  onlineStore,
-  wholesaleProducts,
+const mapStateToProps = ({ checkout }) => ({
   checkout,
 });
 

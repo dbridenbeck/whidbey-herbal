@@ -4,13 +4,21 @@
   "private": true,
   "homepage": "/",
   "dependencies": {
+    "@apollo/client": "^3.0.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
+    "apollo-boost": "^0.4.9",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-link-context": "^1.0.20",
+    "apollo-link-http": "^1.5.17",
+    "graphql": "^15.3.0",
+    "graphql-tag": "^2.10.4",
     "imagemin": "^7.0.1",
     "imagemin-webp": "^5.1.0",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
+    "react-apollo": "^3.1.5",
     "react-dom": "^16.12.0",
     "react-ga": "^2.7.0",
     "react-google-maps": "^9.4.5",
@@ -47,6 +55,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0"
+    "gh-pages": "^2.2.0",
+    "react-test-renderer": "^16.13.1"
   }
 }

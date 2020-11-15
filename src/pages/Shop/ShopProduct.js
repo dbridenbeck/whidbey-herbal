@@ -88,7 +88,7 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
           </div>
         ) : null}
         <Image
-          src={`${product.images.edges[0].node.src}`}
+          src={`${product.images.edges[0].node.transformedSrc}`}
           alt={`${product.description}`}
           isAvailable={product.availableForSale}
         />

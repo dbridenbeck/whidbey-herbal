@@ -1,4 +1,4 @@
-import * as CartActionTypes from '../actiontypes/cart';
+import * as CartActionTypes from "../actiontypes/cart";
 
 export const addLineItem = (product, quantity) => ({
   type: CartActionTypes.ADD_LINE_ITEM,
@@ -12,49 +12,37 @@ export const removeLineItem = (productId, index) => ({
   index,
 });
 
-export const updateItemQuantity = (quantityToUpdate, shouldAddQuantities, product) => ({
-  type: CartActionTypes.UPDATE_ITEM_QUANTITY,
+export const updateItemQuantity = (
   quantityToUpdate,
   shouldAddQuantities,
   product
+) => ({
+  type: CartActionTypes.UPDATE_ITEM_QUANTITY,
+  quantityToUpdate,
+  shouldAddQuantities,
+  product,
 });
 
-export const updateCheckoutId = (id) => ({
-  type: CartActionTypes.UPDATE_CHECKOUT_ID,
-  id,
+export const storeCheckoutDetails = (id) => ({
+  type: CartActionTypes.STORE_CHECKOUT_DETAILS,
+  id
 });
 
 export const clearCheckoutInState = () => ({
-  type: CartActionTypes.CLEAR_CHECKOUT_IN_STATE
-});
-
-export const fetchPending = () => ({
-  type: CartActionTypes.FETCH_PENDING
-});
-
-export const fetchSuccess = (dataType, data) => ({
-  type: CartActionTypes.FETCH_SUCCESS,
-  data,
-  dataType,
-});
-
-export const fetchError = error => ({
-  type: CartActionTypes.FETCH_ERROR,
-  error: error
+  type: CartActionTypes.CLEAR_CHECKOUT_IN_STATE,
 });
 
 export const toggleBurger = () => ({
-  type: CartActionTypes.TOGGLE_BURGER
+  type: CartActionTypes.TOGGLE_BURGER,
 });
 
 export const clearBurger = () => ({
-  type: CartActionTypes.CLEAR_BURGER
+  type: CartActionTypes.CLEAR_BURGER,
 });
 
-export const handleHeroImg = (imageSrc, imageId) => ({
+export const handleHeroImg = (imageSrc) => ({
   type: CartActionTypes.HANDLE_HERO_IMG,
   imageSrc,
-  imageId
 });
 
 export const clearHeroImg = () => ({
@@ -63,15 +51,10 @@ export const clearHeroImg = () => ({
 
 export const updateQuantityButton = (quantity) => ({
   type: CartActionTypes.UPDATE_QUANTITY_BUTTON,
-  quantity
+  quantity,
 });
 
 export const setGoogleMapInfoWindow = (selectedStoreName) => ({
   type: CartActionTypes.SET_GOOGLE_MAP_INFO_WINDOW,
-  selectedStoreName
-});
-
-export const updateShopifyFetchTimestamp = () => ({
-  type: CartActionTypes.UPDATE_SHOPIFY_FETCH_TIMESTAMP,
-  timestamp: Date.now()
+  selectedStoreName,
 });

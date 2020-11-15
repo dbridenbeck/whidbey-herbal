@@ -1,11 +1,12 @@
 import React from "react";
-import { connect } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { useQuery } from "@apollo/client";
 import PageWrapper from "../../SharedComponents/PageWrapper";
 import ShopProduct from "./ShopProduct";
 import StyledH1 from "../../SharedComponents/StyledH1";
 import Footer from "../../SharedComponents/Footer";
+import { GET_SHOP_PRODUCTS } from "../../queries";
 
 const ProductsContainer = styled.div`
   display: flex;
@@ -16,19 +17,29 @@ const ProductsContainer = styled.div`
   margin: 70px 0;
 `;
 
-const Shop = ({onlineStore, wholesaleProducts}) => {
+const Shop = () => {
+
   const location = useLocation();
-  
-  // determine if onlineStore or wholesaleProducts should be loaded;
-  const products =
-    location.pathname === "/shop" ? onlineStore : wholesaleProducts;
+
+  const collectionToQuery =
+    location.pathname === "/shop" ? "Online Store" : "Wholesale Products";
+
+  const { loading, error, data } = useQuery(GET_SHOP_PRODUCTS, {
+    variables: { collectionName: collectionToQuery },
+  });
+  if (loading) return null;
+  if (error) return `Error! ${error}`;
+
+  const products = data.collections.edges[0].node.products.edges;
 
   return (
     <PageWrapper>
-      <StyledH1>{location.pathname === '/shop' ? "Shop" : "Wholesale Shop" }</StyledH1>
+      <StyledH1>
+        {location.pathname === "/shop" ? "Shop" : "Wholesale Shop"}
+      </StyledH1>
       <ProductsContainer>
         {products.map((product) => (
-          <ShopProduct key={product.id} product={product} />
+          <ShopProduct key={product.node.id} product={product.node} />
         ))}
       </ProductsContainer>
       <Footer />
@@ -36,9 +47,4 @@ const Shop = ({onlineStore, wholesaleProducts}) => {
   );
 };
 
-const mapStatetoProps = ({onlineStore, wholesaleProducts}) => ({
-  onlineStore,
-  wholesaleProducts
-});
-
-export default connect(mapStatetoProps)(Shop);
+export default Shop;

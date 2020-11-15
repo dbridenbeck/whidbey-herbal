@@ -8,7 +8,7 @@ const LineItems = ({items, createRemoveButton, createUpdateItemButton}) => {
       {items.map((lineItem, index) => {
         return (
           <LineItem
-            key={lineItem.id}
+            key={lineItem.handle}
             lineItem={lineItem}
             index={index}
             createRemoveButton={createRemoveButton}

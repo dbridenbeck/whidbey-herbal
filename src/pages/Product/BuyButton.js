@@ -63,10 +63,11 @@ const BuyButton = ({
   addLineItem,
   updateItemQuantity,
   doesItemExist,
-  lineItems,
   maxQuantity,
   selectedProduct,
-  quantity
+  quantity,
+  quantityAllowed,
+  lineItemPlusQuantityButton
 }) => {
 
   const [buyButtonClicked, setBuyButtonClicked] = useState(false);
@@ -89,27 +90,13 @@ const BuyButton = ({
       createAddtoCartTransition();
     };
 
-    const calculateLineItemQuantity = () => {
-      if (lineItems.length > 0) {
-        return lineItems
-          .filter(lineItem => lineItem.handle === selectedProduct.handle)
-          .reduce((total, lineItem) => lineItem.quantity, 0);
-      } else {
-        return 0;
-      }
-    };
-
-    const lineItemPlusQuantityButton =
-      parseInt(quantity, 10) + parseInt(calculateLineItemQuantity(), 10);
-    const quantityAllowed =
-      maxQuantity - parseInt(calculateLineItemQuantity(), 10);
     const exceededMaxQuantity = lineItemPlusQuantityButton > maxQuantity;
 
     if (exceededMaxQuantity) {
       return (
         <BuyButtonWrapper buyButtonClicked={buyButtonClicked}>
           <span className="addedToCartAlert">Added!</span>
-          <BuyButtonContainer exceededMaxQuantity={!exceededMaxQuantity}>
+          <BuyButtonContainer exceededMaxQuantity={!exceededMaxQuantity} disabled={true}>
             Met Item Limit
           </BuyButtonContainer>
           <ExceededMaxQuantityWarning
@@ -144,16 +131,15 @@ const BuyButton = ({
 };
 
 BuyButton.propTypes = {
-  updateItemQuantity: PropTypes.func,
   addLineItem: PropTypes.func,
-  selectedProduct: PropTypes.object,
+  updateItemQuantity: PropTypes.func,
   doesItemExist: PropTypes.bool,
-  quantity: PropTypes.number
-}
-
-const mapStateToProps = ({checkout: {lineItems}}) => ({
-  lineItems
-});
+  maxQuantity: PropTypes.number,
+  selectedProduct: PropTypes.object,
+  quantity: PropTypes.number,
+  quantityAllowed: PropTypes.number,
+  lineItemPlusQuantityButton: PropTypes.number,
+};
 
 const mapDispatchToProps = dispatch => ({
   updateItemQuantity: (quantityToUpdate, shouldAddQuantities, product) =>
@@ -162,4 +148,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(CartActionCreators.addLineItem(product, quantity))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BuyButton);
+export default connect(null, mapDispatchToProps)(BuyButton);

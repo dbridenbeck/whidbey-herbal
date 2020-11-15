@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { createCurrencyFormat } from "../../utils/createCurrencyFormat";
 import QuantityButton from "../../SharedComponents/QuantityButton";
 import BuyButton from "./BuyButton";
 import StyledH1 from "../../SharedComponents/StyledH1";
@@ -90,70 +91,82 @@ const ShopifyHTML = styled.div`
   margin-top: 30px;
 `;
 
-const createCTABlock = (selectedProduct, doesItemExist, updateQuantityButton, quantityButtonAmount) => {
-  const { 
-    variants, 
-    metafields,
-    availableForSale
-  } = selectedProduct;
+const createCTABlock = (
+  selectedProduct,
+  doesItemExist,
+  updateQuantityButton,
+  quantityButtonAmount,
+  lineItemQuantity
+) => {
+  const { variants, availableForSale, totalInventory } = selectedProduct;
 
   // handle null values for quantityButtonAmount
   const quantity = quantityButtonAmount === "" ? 0 : quantityButtonAmount;
+  const price = createCurrencyFormat(variants.edges[0].node.priceV2.amount);
+  const quantityAllowed = totalInventory - lineItemQuantity;
 
-  return (
-    availableForSale ? (
-      <CTABlock>
-        <span className="price">${variants.edges[0].node.price}</span>
-        <QuantityButton
-          selectedProduct={selectedProduct}
-          labelTitle={"Quantity: "}
-          quantity={quantityButtonAmount}
-          shouldAddQuantities={true}
-          onChangeFunction={updateQuantityButton}
-          maxQuantity={parseInt(metafields.edges[1].node.value)}
-        />
-        <BuyButton
-          selectedProduct={selectedProduct}
-          quantity={quantity}
-          doesItemExist={doesItemExist}
-          maxQuantity={parseInt(metafields.edges[1].node.value)}
-        />
-      </CTABlock>
-    ) : (
-      <CTABlock>
-        <span className="price">${variants.edges[0].node.price}</span>
-        <div className="soldOutWarning">
-          {" "}
-          <span>SOLD OUT</span>{" "}
-        </div>
-      </CTABlock>
-    )
-  )
-}
+  const lineItemPlusQuantityButton =
+    parseInt(quantity, 10) + parseInt(lineItemQuantity, 10);
+  return availableForSale ? (
+    <CTABlock>
+      <span className="price">{price}</span>
+      <QuantityButton
+        selectedProduct={selectedProduct}
+        labelTitle={"Quantity: "}
+        quantity={quantityButtonAmount}
+        shouldAddQuantities={true}
+        onChangeFunction={updateQuantityButton}
+        maxQuantity={totalInventory}
+      />
+      <BuyButton
+        selectedProduct={selectedProduct}
+        quantity={quantity}
+        doesItemExist={doesItemExist}
+        quantityAllowed={quantityAllowed}
+        maxQuantity={totalInventory}
+        lineItemPlusQuantityButton={lineItemPlusQuantityButton}
+      />
+    </CTABlock>
+  ) : (
+    <CTABlock>
+      <span className="price">{price}</span>
+      <div className="soldOutWarning">
+        {" "}
+        <span>SOLD OUT</span>{" "}
+      </div>
+    </CTABlock>
+  );
+};
 
 // begin component
 const ProductDetails = ({
   selectedProduct,
-  selectedProduct: {
-    title, 
-    descriptionHtml,
-    metafields
-  },
+  lineItems,
+  selectedProduct: { title, descriptionHtml, metafield },
   doesItemExist,
   quantityButtonAmount,
-  updateQuantityButton
+  updateQuantityButton,
 }) => {
+  const getLineItemQuantity = () => {
+    if (lineItems.length > 0) {
+      return lineItems
+        .filter((lineItem) => lineItem.handle === selectedProduct.handle)
+        .reduce((total, lineItem) => lineItem.quantity, 0);
+    } else {
+      return 0;
+    }
+  };
+
+  const lineItemQuantity = getLineItemQuantity();
 
   // begin component's return
   return (
     <ProductDetailsWrapper>
-      <StyledH1  >
-        {title}
-      </StyledH1>
+      <StyledH1>{title}</StyledH1>
       {/* below HTML is for "about" section */}
       <ShopifyHTML
         dangerouslySetInnerHTML={{
-          __html: metafields.edges[0].node.value
+          __html: metafield.value,
         }}
       />
       {/* CTA block is conditionally rendered depending on availableForSale */}
@@ -161,12 +174,13 @@ const ProductDetails = ({
         selectedProduct,
         doesItemExist,
         updateQuantityButton,
-        quantityButtonAmount
+        quantityButtonAmount,
+        lineItemQuantity
       )}
       {/* below HTML is for Characteristics, Uses, and Common-Sense Caution */}
       <ShopifyHTML
         dangerouslySetInnerHTML={{
-          __html: descriptionHtml
+          __html: descriptionHtml,
         }}
       />
     </ProductDetailsWrapper>
@@ -177,18 +191,20 @@ ProductDetails.propTypes = {
   selectedProduct: PropTypes.object,
   doesItemExist: PropTypes.bool,
   quantityButtonAmount: PropTypes.number,
-  updateQuantityButton: PropTypes.func
+  updateQuantityButton: PropTypes.func,
 };
 
 const mapStateToProps = ({
-  quantityButtonAmount
+  quantityButtonAmount,
+  checkout: { lineItems },
 }) => ({
-  quantityButtonAmount
+  quantityButtonAmount,
+  lineItems,
 });
 
-const mapDispatchToProps = dispatch => ({
-  updateQuantityButton: quantity =>
-    dispatch(CartActionCreators.updateQuantityButton(quantity))
+const mapDispatchToProps = (dispatch) => ({
+  updateQuantityButton: (quantity) =>
+    dispatch(CartActionCreators.updateQuantityButton(quantity)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

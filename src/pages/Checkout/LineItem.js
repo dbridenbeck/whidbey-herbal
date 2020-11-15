@@ -4,6 +4,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { device } from "../../utils/devices";
+import { createCurrencyFormat } from "../../utils/createCurrencyFormat";
 import * as CartActionCreators from "../../state/actions/cart";
 
 import QuantityButton from '../../SharedComponents/QuantityButton';
@@ -63,15 +64,21 @@ const LineItem = ({
   updateItemQuantity,
   clearHeroImg
 }) => {
-  const total = lineItem.quantity
-    ? (lineItem.quantity * lineItem.variants.edges[0].node.price).toFixed(2)
+
+  const roughTotal = lineItem.quantity
+    ? (lineItem.quantity * lineItem.variants.edges[0].node.priceV2.amount)
     : "0.00";
+
+  const currencyTotal = createCurrencyFormat(roughTotal);
+  const lineItemCurrency = createCurrencyFormat(
+    lineItem.variants.edges[0].node.priceV2.amount
+  );
 
   return (
     <LineItemWrapper key={lineItem.id}>
       {createRemoveButton(lineItem.id, index)}
       <div className="twelvethColumn">
-        <ProductImg src={lineItem.images.edges[0].node.src} />
+        <ProductImg src={lineItem.images.edges[0].node.transformedSrc} />
       </div>
       <ProductTitleLink
         to={`/product/${lineItem.handle}`}
@@ -79,19 +86,17 @@ const LineItem = ({
       >
         {lineItem.title}
       </ProductTitleLink>
-      <span className="sixthColumn">
-        ${lineItem.variants.edges[0].node.price}
-      </span>
+      <span className="sixthColumn">{lineItemCurrency}</span>
       <div className="sixthColumn">
         <QuantityButton
           selectedProduct={lineItem}
           quantity={lineItem.quantity}
           shouldAddQuantities={false}
           onChangeFunction={updateItemQuantity}
-          maxQuantity={parseInt(lineItem.metafields.edges[1].node.value)}
+          maxQuantity={lineItem.totalInventory}
         />
       </div>
-      <span className="sixthColumn">${total}</span>
+      <span className="sixthColumn">{currencyTotal}</span>
     </LineItemWrapper>
   );
 };

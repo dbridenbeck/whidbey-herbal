@@ -1,25 +1,17 @@
 import * as CartActionTypes from "./actiontypes/cart";
 
 export const initialState = {
-  checkout: { 
+  checkout: {
     lineItems: [],
-    checkoutId: '',
+    checkoutId: "",
   },
-  onlineStore: [],
-  wholesaleProducts: [],
-  featuredProducts: [],
-  articles: [],
-  pending: true,
-  error: null,
-  lastShopifyFetchTimestamp: 0,
   burgerToggled: false,
   burgerClickedOnce: false,
   heroImgSrc: "",
-  heroImgId: "",
   quantityButtonAmount: 1,
   googleMapInfoWindow: {
-    selectedStoreName: '',
-  }
+    selectedStoreName: "",
+  },
 };
 
 export const Reducer1 = (state = initialState, action) => {
@@ -35,10 +27,10 @@ export const Reducer1 = (state = initialState, action) => {
             ...state.checkout.lineItems,
             {
               ...action.product,
-              quantity: parseInt(action.quantity)
-            }
-          ]
-        }
+              quantity: parseInt(action.quantity),
+            },
+          ],
+        },
       };
     case CartActionTypes.REMOVE_LINE_ITEM:
       return {
@@ -47,8 +39,8 @@ export const Reducer1 = (state = initialState, action) => {
           ...state.checkout,
           lineItems: state.checkout.lineItems.filter(
             (lineItem, index) => index !== action.index
-          )
-        }
+          ),
+        },
       };
     case CartActionTypes.UPDATE_ITEM_QUANTITY:
       return {
@@ -56,95 +48,70 @@ export const Reducer1 = (state = initialState, action) => {
         quantityButtonAmount: 1,
         checkout: {
           ...state.checkout,
-          lineItems: state.checkout.lineItems.map(lineItem => {
-            if (lineItem.id === action.product.id) {
+          lineItems: state.checkout.lineItems.map((lineItem) => {
+            if (lineItem.handle === action.product.handle) {
               return {
                 ...action.product,
                 quantity: action.shouldAddQuantities
                   ? parseFloat(action.quantityToUpdate, 2) +
                     parseFloat(lineItem.quantity, 2)
-                  : parseFloat(action.quantityToUpdate, 2)
+                  : parseFloat(action.quantityToUpdate, 2),
               };
             } else {
               return lineItem;
             }
-          })
-        }
+          }),
+        },
       };
-    case CartActionTypes.UPDATE_CHECKOUT_ID:
+    case CartActionTypes.STORE_CHECKOUT_DETAILS:
       return {
         ...state,
         checkout: {
           ...state.checkout,
-          checkoutId: action.id
-        }
+          checkoutId: action.id,
+        },
       };
     case CartActionTypes.CLEAR_CHECKOUT_IN_STATE:
       return {
         ...state,
         checkout: {
           lineItems: [],
-          checkoutId: ""
-        }
-      };
-
-    case CartActionTypes.FETCH_PENDING:
-      return {
-        ...state,
-        pending: true
-      };
-    case CartActionTypes.FETCH_SUCCESS:
-      return {
-        ...state,
-        pending: false,
-        [action.dataType]: action.data
-      };
-    case CartActionTypes.FETCH_ERROR:
-      return {
-        ...state,
-        pending: false,
-        error: action.error
+          checkoutId: "",
+        },
       };
     case CartActionTypes.TOGGLE_BURGER:
       return {
         ...state,
         burgerToggled: !state.burgerToggled,
-        burgerClickedOnce: true
+        burgerClickedOnce: true,
       };
     case CartActionTypes.CLEAR_BURGER:
       return {
         ...state,
         burgerClickedOnce: false,
-        burgerToggled: false
+        burgerToggled: false,
       };
     case CartActionTypes.HANDLE_HERO_IMG:
       return {
         ...state,
         heroImgSrc: action.imageSrc,
-        heroImgId: action.imageId
       };
     case CartActionTypes.CLEAR_HERO_IMG:
       return {
         ...state,
         heroImgSrc: "",
-        heroImgId: ""
       };
     case CartActionTypes.UPDATE_QUANTITY_BUTTON:
       return {
         ...state,
-        quantityButtonAmount: parseInt(action.quantity)
+        quantityButtonAmount: parseInt(action.quantity),
       };
     case CartActionTypes.SET_GOOGLE_MAP_INFO_WINDOW:
       return {
         ...state,
         googleMapInfoWindow: {
-          selectedStoreName: action.selectedStoreName
-        }
-      };
-    case CartActionTypes.UPDATE_SHOPIFY_FETCH_TIMESTAMP:
-      return {
-        ...state,
-        lastShopifyFetchTimestamp: action.timestamp
+          selectedStoreName: action.selectedStoreName,
+        },
       };
     default:
       return state;

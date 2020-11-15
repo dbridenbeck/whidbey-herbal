@@ -45,54 +45,45 @@ const AltImage = styled.img`
   width: 25%;
   align-self: center;
   margin: 10px;
-  border: ${props =>
+  border: ${(props) =>
     props.isSelected ? "2px solid #e3be42" : "2px solid #DADADA"};
   border-radius: 10px;
   :hover {
-    border: ${props =>
+    border: ${(props) =>
       props.isSelected ? "2px solid #e3be42" : "2px solid #787878"};
   }
 `;
 
 // begin component
-const ProductImages = ({
-  images,
-  heroImgSrc,
-  heroImgId,
-  handleHeroImg,
-  selectedProduct: {availableForSale}
-}) => {
-
+const ProductImages = ({ images, heroImgSrc, handleHeroImg }) => {
   // when clicked, AltImage updates state and sets heroImg's src to AltImage
-  const createAltImage = image => {
+  const createAltImage = (image) => {
     const {
-      node: {
-        id, 
-        src, 
-        altText
-      }
+      node: { transformedSrc, altText },
     } = image;
-    const setHeroImg = () => handleHeroImg(src, id);
-    const isSelected = id === heroImgId;
+    const setHeroImg = () => handleHeroImg(transformedSrc);
+    const isSelected = transformedSrc === heroImgSrc;
     return (
       <AltImage
-        key={id}
-        src={src}
+        key={transformedSrc}
+        src={transformedSrc}
         alt={altText}
         isSelected={isSelected}
         onClick={setHeroImg}
       />
     );
   };
-  
+
   // begin component's return
   return (
     <ProductImagesWrapper>
       <HeroImage
-        src={heroImgSrc ? heroImgSrc : images.edges[0].node.src}
+        src={heroImgSrc ? heroImgSrc : images.edges[0].node.transformedSrc}
         alt="Product Photo"
       />
-      <AltImages>{images.edges.map(image => createAltImage(image))}</AltImages>
+      <AltImages>
+        {images.edges.map((image) => createAltImage(image))}
+      </AltImages>
     </ProductImagesWrapper>
   );
 };
@@ -101,18 +92,14 @@ ProductImages.propTypes = {
   images: PropTypes.object,
   heroImgSrc: PropTypes.string,
   heroImgId: PropTypes.string,
-  handleHeroImg: PropTypes.func
+  handleHeroImg: PropTypes.func,
 };
 
-const mapStateToProps = ({
+const mapStateToProps = ({ heroImgSrc }) => ({
   heroImgSrc,
-  heroImgId,
-}) => ({
-  heroImgSrc,
-  heroImgId,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   handleHeroImg: (imageSrc, imageId) =>
     dispatch(CartActionCreators.handleHeroImg(imageSrc, imageId)),
 });

@@ -59,8 +59,8 @@ const About = () => {
         </p>{" "}
         <p>
           A real estate ad for a 1914 abandoned farm brought us to Whidbey
-          Island. We’re currently restoring the old farm into an eco
-          organic homestead for growing and distilling healing plants.
+          Island. We’re currently restoring the old farm into an eco 
+          homestead for growing and distilling healing plants.
         </p>
       </AboutText>
     </ComponentWrapper>

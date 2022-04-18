@@ -1,11 +1,11 @@
 import React from 'react';
-import styled from "styled-components";
-import { device } from "../utils/devices";
+import styled from 'styled-components';
+import { device } from '../utils/devices';
 
 const H5Component = styled.h5`
   margin-bottom: 5px;
   padding: 0;
-  font-size: .825rem;
+  font-size: 0.825rem;
   font-weight: bold;
   color: #2e2e2e;
   text-align: center;
@@ -17,11 +17,8 @@ const H5Component = styled.h5`
   }
 `;
 
-const StyledH5 = ({children}) => {
-
-  return (
-    <H5Component>{children}</H5Component>
-  );
-}
+const StyledH5 = ({ children }) => {
+  return <H5Component>{children}</H5Component>;
+};
 
 export default StyledH5;

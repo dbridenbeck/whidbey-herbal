@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { device } from '../utils/devices';
+import { gsap } from 'gsap';
 
 const BannerSection = styled.div`
   position: fixed;
-  top: 0;
+  top: 4rem;
   left: 0;
   display: flex;
   align-items: center;
@@ -20,18 +20,11 @@ const BannerText = styled.h5`
   font-weight: bold;
   text-align: center;
   color: white;
-
-  @media ${device.tablet} {
-    font-size: 1rem;
-  }
-  @media ${device.laptop} {
-    font-size: 1rem;
-  }
 `;
 
 const Button = styled.button`
   margin: 1rem;
-  border: 0px solid white;
+  border: 2px solid #e6c564;
   border-radius: 1px;
   background-color: #e6c564;
   cursor: pointer;
@@ -43,20 +36,24 @@ const Button = styled.button`
 `;
 
 const Banner = () => {
-  const [close, setClose] = useState(true);
+  let closeRef = useRef(null);
+
+  const handleClick = () => {
+    gsap.fromTo(
+      closeRef,
+      { opacity: 1, y: 0 },
+      { ease: 'power4.out', opacity: 0, y: -10, duration: 0.2 }
+    );
+  };
 
   return (
     <>
-      {close && (
-        <>
-          <BannerSection>
-            <BannerText>Free shipping on all orders $25+</BannerText>
-            <Button type='button' onClick={() => setClose(!close)}>
-              Close
-            </Button>
-          </BannerSection>
-        </>
-      )}
+      <BannerSection ref={(el) => (closeRef = el)}>
+        <BannerText>Free shipping on all orders $25+</BannerText>
+        <Button type='button' onClick={handleClick}>
+          Close
+        </Button>
+      </BannerSection>
     </>
   );
 };

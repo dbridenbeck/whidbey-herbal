@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 
 const BannerSection = styled.div`
   position: fixed;
-  top: 4rem;
+  top: 3.75rem;
   left: 0;
   display: flex;
   align-items: center;
@@ -17,7 +17,7 @@ const BannerSection = styled.div`
 
 const BannerText = styled.h5`
   font-size: 0.825rem;
-  font-weight: bold;
+  font-weight: 400;
   text-align: center;
   color: white;
 `;

@@ -15,21 +15,17 @@ const LocationsWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding-bottom: 50px;
-  @media ${device.laptop} {
-    flex-direction: column;
-    align-content: center;
-    flex-wrap: wrap;
-  }
 
-  @media ${device.tablet} {
-    flex-direction: column;
-    align-content: center;
-    flex-wrap: wrap;
-  }
   @media ${device.mobile} {
     flex-wrap: wrap;
     flex-direction: column;
     align-content: center;
+    margin: auto;
+  }
+
+  @media ${device.laptop} {
+    flex-direction: row;
+    justify-content: center;
   }
 `;
 
@@ -39,26 +35,27 @@ const StoreList = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-
   width: 100%;
   max-width: 450px;
   margin: auto;
-  /* @media ${device.tablet} {
+
+  @media ${device.mobile} {
+    text-align: center;
+    align-content: center;
+    margin: auto;
+  }
+  @media ${device.tablet} {
     flex-direction: column;
     align-content: center;
-    max-width: '';
     margin: auto;
+    text-align: center;
   }
   @media ${device.laptop} {
     flex-direction: column;
     align-content: center;
     margin: auto;
-  } */
-  @media ${device.mobile} {
-    text-align: center;
-    flex-direction: column;
-    align-content: center;
-    margin: auto;
+    text-align: left;
+    padding-left: 1rem;
   }
 `;
 
@@ -111,6 +108,7 @@ export const stores = [
 ];
 
 const StoreLocator = () => {
+  console.log('CONSOLE', window.innerWidth);
   return (
     <ComponentWrapper id='findstore' backgroundColor={'#FFF3D1'}>
       <StyledH2>Store Locator</StyledH2>

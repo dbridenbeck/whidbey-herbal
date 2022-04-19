@@ -1,16 +1,16 @@
 import React from 'react';
-import styled from "styled-components";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import * as CartActionCreators from "../../state/actions/cart";
-import { device } from "../../utils/devices";
-import mapFrame from "./images/map-frame.png";
-import mapFrameWebp from "./images/map-frame.webp";
-import GoogleMapComponentWithMarker from "./GoogleMapComponentWithMarker";
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import * as CartActionCreators from '../../state/actions/cart';
+import { device } from '../../utils/devices';
+import mapFrame from './images/map-frame.png';
+import mapFrameWebp from './images/map-frame.webp';
+import GoogleMapComponentWithMarker from './GoogleMapComponentWithMarker';
 
 const GOOGLE_MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY;
 
-const mapURL = `https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${GOOGLE_MAPS_KEY}`
+const mapURL = `https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${GOOGLE_MAPS_KEY}`;
 
 const Wrap = styled.div`
   display: none;
@@ -45,9 +45,8 @@ const MapImg = styled.picture`
 `;
 
 const GoogleMapWrapper = ({ setGoogleMapInfoWindow, selectedStoreName }) => {
-
   const createGoogleMapComponentWithMarker = () => {
-    return(
+    return (
       <GoogleMapComponentWithMarker
         googleMapURL={mapURL}
         loadingElement={<div style={{ height: `100%` }} />}
@@ -56,35 +55,36 @@ const GoogleMapWrapper = ({ setGoogleMapInfoWindow, selectedStoreName }) => {
         handleMarkerClick={setGoogleMapInfoWindow}
         selectedStoreName={selectedStoreName}
       />
-    )
-  }
+    );
+  };
 
   return (
     <Wrap>
-      <MapContainer>
-        {createGoogleMapComponentWithMarker()}
-      </MapContainer>
+      <MapContainer>{createGoogleMapComponentWithMarker()}</MapContainer>
       <MapImg>
-        <source srcSet={`${mapFrameWebp}`} type="image/webp" />
-        <source srcSet={`${mapFrame}`} type="image/png" />
-        <img src={`${mapFrame}`} alt="a watercolor of fir bows making a border around a google map" />
-      </MapImg> 
+        <source srcSet={`${mapFrameWebp}`} type='image/webp' />
+        <source srcSet={`${mapFrame}`} type='image/png' />
+        <img
+          src={`${mapFrame}`}
+          alt='a watercolor of fir bows making a border around a google map'
+        />
+      </MapImg>
     </Wrap>
   );
-}
+};
 
 GoogleMapWrapper.propTypes = {
   selectedStoreName: PropTypes.string,
-  googleMapInfoWindow: PropTypes.func
+  googleMapInfoWindow: PropTypes.func,
 };
 
 const mapStatetoProps = ({ googleMapInfoWindow: { selectedStoreName } }) => ({
-  selectedStoreName
+  selectedStoreName,
 });
 
-const mapDispatchtoProps = dispatch => ({
-  setGoogleMapInfoWindow: selectedStoreName =>
-    dispatch(CartActionCreators.setGoogleMapInfoWindow(selectedStoreName))
+const mapDispatchtoProps = (dispatch) => ({
+  setGoogleMapInfoWindow: (selectedStoreName) =>
+    dispatch(CartActionCreators.setGoogleMapInfoWindow(selectedStoreName)),
 });
 
 export default connect(mapStatetoProps, mapDispatchtoProps)(GoogleMapWrapper);

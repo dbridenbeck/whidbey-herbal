@@ -15,6 +15,22 @@ const LocationsWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding-bottom: 50px;
+  @media ${device.laptop} {
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media ${device.tablet} {
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+  @media ${device.mobile} {
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+  }
 `;
 
 const StoreList = styled.div`
@@ -23,17 +39,26 @@ const StoreList = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  width: 90%;
+
+  width: 100%;
   max-width: 450px;
-  margin: 0 auto;
-  @media ${device.tablet} {
+  margin: auto;
+  /* @media ${device.tablet} {
     flex-direction: column;
+    align-content: center;
     max-width: '';
-    margin: 0 auto 0 20px;
-    width: 60%;
+    margin: auto;
   }
   @media ${device.laptop} {
-    margin: 0 auto 0 40px;
+    flex-direction: column;
+    align-content: center;
+    margin: auto;
+  } */
+  @media ${device.mobile} {
+    text-align: center;
+    flex-direction: column;
+    align-content: center;
+    margin: auto;
   }
 `;
 
@@ -89,9 +114,9 @@ const StoreLocator = () => {
   return (
     <ComponentWrapper id='findstore' backgroundColor={'#FFF3D1'}>
       <StyledH2>Store Locator</StyledH2>
-      <LocationsWrapper>
-        <GoogleMapWrapper />
-        <StoreList>
+      <LocationsWrapper id='locations-wrapper'>
+        <GoogleMapWrapper id='googlemap-wrapper' />
+        <StoreList id='store-list'>
           {stores.map((store) => (
             <StoreBlock store={store} key={store.storeName} />
           ))}

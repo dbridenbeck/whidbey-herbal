@@ -1,8 +1,8 @@
 const size = {
-  mobile: "375px",
-  tablet: "768px",
-  laptop: "1024px",
-  largeScreen: "1200px"
+  mobile: '325px',
+  tablet: '768px',
+  laptop: '1024px',
+  largeScreen: '1200px',
 };
 
 export const device = {

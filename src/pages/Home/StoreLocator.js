@@ -46,14 +46,9 @@ const StoreList = styled.div`
   }
   @media ${device.tablet} {
     flex-direction: column;
-    align-content: center;
-    margin: auto;
     text-align: center;
   }
   @media ${device.laptop} {
-    flex-direction: column;
-    align-content: center;
-    margin: auto;
     text-align: left;
     padding-left: 1rem;
   }

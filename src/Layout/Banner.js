@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const BannerSection = styled.div`
@@ -30,16 +30,28 @@ const Button = styled.button`
   cursor: pointer;
   &:active {
     transform: scale(0.9);
-    transition: 2s ease-out linear;
+    transition: 0.5s ease-out linear;
   }
 `;
 
 const Banner = () => {
+  const [closeBanner, setCloseBanner] = useState(true);
+
+  const handleCloseBanner = () => {
+    setCloseBanner(!closeBanner);
+  };
+
   return (
-    <BannerSection>
-      <BannerText>Free shipping on all orders $25+</BannerText>
-      <Button type='button'>Close</Button>
-    </BannerSection>
+    <>
+      {closeBanner && (
+        <BannerSection>
+          <BannerText>Free shipping on all orders $25+</BannerText>
+          <Button type='button' onClick={handleCloseBanner}>
+            Close
+          </Button>
+        </BannerSection>
+      )}
+    </>
   );
 };
 

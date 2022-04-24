@@ -1,10 +1,5 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import {
-  bannerClose,
-  bannerEnter,
-  buttonEnter,
-} from './animations/bannerAnimations';
 
 const BannerSection = styled.div`
   position: fixed;
@@ -40,24 +35,10 @@ const Button = styled.button`
 `;
 
 const Banner = () => {
-  let enterRef = useRef(null);
-  let closeRef = useRef(null);
-
-  useEffect(() => {
-    bannerEnter(closeRef);
-    buttonEnter(enterRef);
-  }, []);
-
-  const handleClose = () => {
-    bannerClose(closeRef);
-  };
-
   return (
-    <BannerSection ref={(el) => (closeRef = el)}>
+    <BannerSection>
       <BannerText>Free shipping on all orders $25+</BannerText>
-      <Button ref={(el) => (enterRef = el)} type='button' onClick={handleClose}>
-        Close
-      </Button>
+      <Button type='button'>Close</Button>
     </BannerSection>
   );
 };

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const BannerSection = styled.div`
   position: fixed;
-  top: 3.75rem;
+  top: 0;
   left: 0;
   display: flex;
   align-items: center;
@@ -23,35 +23,11 @@ const BannerText = styled.h5`
   letter-spacing: 1px;
 `;
 
-const Button = styled.button`
-  margin-left: 1.5rem;
-  border: 2px solid #e6c564;
-  background-color: #e6c564;
-  cursor: pointer;
-  &:active {
-    transform: scale(0.9);
-    transition: 0.5s ease-out linear;
-  }
-`;
-
 const Banner = () => {
-  const [closeBanner, setCloseBanner] = useState(true);
-
-  const handleCloseBanner = () => {
-    setCloseBanner(!closeBanner);
-  };
-
   return (
-    <>
-      {closeBanner && (
-        <BannerSection>
-          <BannerText>Free shipping on all orders $25+</BannerText>
-          <Button type='button' onClick={handleCloseBanner}>
-            Close
-          </Button>
-        </BannerSection>
-      )}
-    </>
+    <BannerSection>
+      <BannerText>Free shipping on all orders $25+</BannerText>
+    </BannerSection>
   );
 };
 

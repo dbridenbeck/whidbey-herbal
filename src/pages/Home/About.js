@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import farmers from "./images/farmers.jpg";
-import farmersWebp from "./images/farmers.webp";
-import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
-import StyledH2 from "../../SharedComponents/StyledH2";
-import { device } from "../../utils/devices";
+import React from 'react';
+import styled from 'styled-components';
+import farmers from './images/farmers.jpg';
+import farmersWebp from './images/farmers.webp';
+import ComponentWrapper from '../../SharedComponents/ComponentWrapper';
+import StyledH2 from '../../SharedComponents/StyledH2';
+import { device } from '../../utils/devices';
 
 const FarmerIllustration = styled.picture`
   img {
@@ -36,31 +36,56 @@ const AboutText = styled.div`
     padding: 0;
     font-size: 1.5rem;
   }
+
+  .insta-link {
+    text-decoration: none;
+    color: #2e2e2e;
+    &:hover {
+      color: #e3be42;
+    }
+  }
 `;
 
 const About = () => {
   return (
-    <ComponentWrapper id="about">
+    <ComponentWrapper id='about'>
       <StyledH2>The Farmers</StyledH2>
       <FarmerIllustration>
-        <source srcSet={`${farmersWebp}`} type="image/webp" />
-        <source srcSet={`${farmers}`} type="image/jpeg" />
+        <source srcSet={`${farmersWebp}`} type='image/webp' />
+        <source srcSet={`${farmers}`} type='image/jpeg' />
         <img
           src={`${farmers}`}
-          alt="Watercolor of Sam and Caitlin, the farmers of Whidbey Herbal"
+          alt='Watercolor of Sam and Caitlin, the farmers of Whidbey Herbal'
         />
       </FarmerIllustration>
 
       <AboutText>
         <p>
-          Hi! We’re Caitlin and Sam Stanton, the farmers behind Whidbey Herbal.
-          We grew up in the Pacific Northwest and are on a mission to capture
-          this place in a bottle.
-        </p>{" "}
+          Hi! We’re Caitlin and Sam, <br /> the farmers behind Whidbey Herbal.
+          <br />
+        </p>
         <p>
-          A real estate ad for a 1914 abandoned farm brought us to Whidbey
-          Island. We’re currently restoring the old farm into an eco 
-          homestead for growing and distilling healing plants.
+          We grew up in the Pacific Northwest and have spent the past 5 years
+          transforming a run down 1914 homestead into a thriving organic farm
+          for herbs, mushrooms, and native plants. Our goal is to create plant
+          potions so <b>extraordinary&nbsp;</b>they make you feel more connected
+          to the natural world every dang day.{' '}
+        </p>
+        <p>
+          Follow along with our farm journey on Instagram{' '}
+          <b>
+            @
+            <a
+              class='insta-link'
+              target='_blank'
+              rel='noopener noreferrer'
+              href='http://www.instagram.com/whidbeyherbal'
+            >
+              whidbeyherbal
+            </a>
+          </b>
+          , or scroll to the bottom of this page to sign up for our
+          extra-super-special email newsletter.
         </p>
       </AboutText>
     </ComponentWrapper>

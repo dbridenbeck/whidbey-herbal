@@ -73,7 +73,7 @@ const FeaturedText = styled.p`
     font-size: 1.5rem;
   }
   @media ${device.laptop} {
-    font-size: 2.375rem;
+    font-size: 2rem;
   }
 `;
 

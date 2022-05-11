@@ -14,7 +14,6 @@
     "apollo-link-http": "^1.5.17",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.10.4",
-    "gsap": "^3.10.3",
     "imagemin": "^7.0.1",
     "imagemin-webp": "^5.1.0",
     "node-sass": "^7.0.0",
@@ -33,7 +32,7 @@
     "styled-components": "^4.4.1"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

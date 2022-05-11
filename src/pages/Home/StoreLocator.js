@@ -43,10 +43,11 @@ const StoreList = styled.div`
     align-content: center;
     margin: auto;
   }
+
   @media ${device.tablet} {
     flex-direction: column;
-    text-align: center;
   }
+
   @media ${device.laptop} {
     text-align: left;
     padding-left: 1rem;

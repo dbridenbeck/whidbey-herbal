@@ -24,9 +24,6 @@ const StoreContainer = styled.div`
     }
   }
   @media ${device.tablet} {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
     width: 100%;
     margin-bottom: 25px;
     :hover h3 {

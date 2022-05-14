@@ -69,9 +69,8 @@ const About = () => {
           We grew up in the Pacific Northwest and have spent the past 5 years
           transforming a run down 1914 homestead into a thriving organic farm
           for herbs, mushrooms, and native plants. Our goal is to create plant
-          potions so
-          <b>&nbsp;extraordinary&nbsp;</b>they make you feel more connected to
-          the natural world every dang day.
+          potions so &nbsp;extraordinary&nbsp;they make you feel more connected
+          to the natural world every dang day.
         </p>
         <p>
           Follow along with our farm journey on Instagram

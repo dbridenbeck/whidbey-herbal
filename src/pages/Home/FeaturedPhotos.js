@@ -67,7 +67,7 @@ const FeaturedText = styled.p`
   line-height: 1.36em;
   font-weight: 300;
   @media ${device.mobile} {
-    font-size: 11px;
+    font-size: 0.78rem;
   }
   @media ${device.tablet} {
     font-size: 1.5rem;

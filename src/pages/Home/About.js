@@ -73,7 +73,7 @@ const About = () => {
           to the natural world every dang day.
         </p>
         <p>
-          Follow along with our farm journey on Instagram
+          Follow along with our farm journey on Instagram&nbsp;
           <b>
             <a
               class='insta-link'
@@ -81,7 +81,7 @@ const About = () => {
               rel='noopener noreferrer'
               href='http://www.instagram.com/whidbeyherbal'
             >
-              &nbsp;@whidbeyherbal
+              @whidbeyherbal
             </a>
           </b>
           , or scroll to the bottom of this page to sign up for our

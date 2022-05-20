@@ -20,7 +20,7 @@ const FarmerIllustration = styled.picture`
 `;
 
 const AboutText = styled.div`
-  padding: 0 20px;
+  padding: 0 10rem 0 10rem;
   font-size: 0.875rem;
   line-height: 1.5em;
   font-weight: 300;
@@ -28,14 +28,19 @@ const AboutText = styled.div`
   text-indent: 1.5rem;
   color: #2e2e2e;
   margin: 0 auto;
-  width: 48ch;
-  @media ${device.tablet} {
+
+  @media ${device.mobile} {
+    padding: 0 1rem 0 1rem;
     font-size: 1rem;
-    padding: 0;
   }
-  @media ${device.laptop} {
-    padding: 0;
+
+  @media ${device.tablet} {
+    padding: 0 1.5rem 0 1.5rem;
     font-size: 1.5rem;
+  }
+
+  @media ${device.laptop} {
+    padding: 0 5rem 0 5rem;
   }
 
   .insta-link {
@@ -65,12 +70,12 @@ const About = () => {
           Hi! We’re Caitlin and Sam, <br /> the farmers behind Whidbey Herbal.
           <br />
         </p>
-        <p className='text-box-middle'>
+        <p>
           We grew up in the Pacific Northwest and have spent the past 5 years
           transforming a run down 1914 homestead into a thriving organic farm
           for herbs, mushrooms, and native plants. Our goal is to create plant
-          potions so &nbsp;extraordinary&nbsp;they make you feel more connected
-          to the natural world every dang day.
+          potions so extraordinary they make you feel more connected to the
+          natural world every dang day.
         </p>
         <p>
           Follow along with our farm journey on Instagram&nbsp;

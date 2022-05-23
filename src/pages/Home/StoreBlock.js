@@ -1,11 +1,11 @@
 import React from 'react';
-import styled from "styled-components";
-import * as CartActionCreators from "../../state/actions/cart";
-import { connect } from "react-redux";
-import StyledH3 from "../../SharedComponents/StyledH3";
+import styled from 'styled-components';
+import * as CartActionCreators from '../../state/actions/cart';
+import { connect } from 'react-redux';
+import StyledH3 from '../../SharedComponents/StyledH3';
 
-import PropTypes from "prop-types";
-import { device } from "../../utils/devices";
+import PropTypes from 'prop-types';
+import { device } from '../../utils/devices';
 
 const StoreContainer = styled.div`
   position: relative;
@@ -31,11 +31,16 @@ const StoreContainer = styled.div`
       color: #e3be42;
     }
     h3 {
-      color: ${props => (props.storeIsSelected ? "#42e0e3" : "#2e2e2e")};
+      color: ${(props) => (props.storeIsSelected ? '#42e0e3' : '#2e2e2e')};
     }
   }
+  @media ${device.mobile} {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
 `;
-  
+
 const StoreAddress = styled.p`
   display: block;
   margin: 0;
@@ -49,16 +54,17 @@ const StoreAddress = styled.p`
   white-space: pre;
   @media ${device.tablet} {
     font-size: 1rem;
-    
   }
   @media ${device.laptop} {
     font-size: 1.125rem;
-    
   }
 `;
 
-const StoreBlock = ({setGoogleMapInfoWindow, selectedStoreName, store: {storeName, address, website}}) => {
-
+const StoreBlock = ({
+  setGoogleMapInfoWindow,
+  selectedStoreName,
+  store: { storeName, address, website },
+}) => {
   const storeIsSelected = storeName === selectedStoreName;
 
   // TODO: Make storeName stay highlighted when clicked, add more info to InfoWindow's message (address, link to go to see in google maps)
@@ -69,25 +75,25 @@ const StoreBlock = ({setGoogleMapInfoWindow, selectedStoreName, store: {storeNam
     >
       <StyledH3>{storeName}</StyledH3>
       <StoreAddress>{address}</StoreAddress>
-      <a href={website} target="_blank" rel="noopener noreferrer">
+      <a href={website} target='_blank' rel='noopener noreferrer'>
         View Website
       </a>
     </StoreContainer>
   );
-}
+};
 
 StoreBlock.propTypes = {
   storeName: PropTypes.string,
   address: PropTypes.string,
-}
+};
 
 const mapStatetoProps = ({ googleMapInfoWindow: { selectedStoreName } }) => ({
-  selectedStoreName
+  selectedStoreName,
 });
 
-const mapDispatchtoProps = dispatch => ({
+const mapDispatchtoProps = (dispatch) => ({
   setGoogleMapInfoWindow: (selectedStoreName) =>
-    dispatch(CartActionCreators.setGoogleMapInfoWindow(selectedStoreName))
+    dispatch(CartActionCreators.setGoogleMapInfoWindow(selectedStoreName)),
 });
 
 export default connect(mapStatetoProps, mapDispatchtoProps)(StoreBlock);

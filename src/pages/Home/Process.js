@@ -25,7 +25,7 @@ const ProcessWrapper = styled.div`
 const ProcessDescription = styled.div`
   p {
     position: relative;
-    width: 75%;
+    width: 32ch;
     margin: -90px auto 10% auto;
     text-align: center;
     font-weight: 300;
@@ -94,8 +94,8 @@ const Process = () => {
       <ProcessDescription>
         <StyledH2>The Process</StyledH2>
         <p>
-          We grow the plants, we make the goods – <br />
-          from start to finish, kind to the earth.
+          We grow the plants, we make the goods – from start to finish, kind to
+          the earth.
         </p>
       </ProcessDescription>
       <ProcessWrapper>

@@ -20,12 +20,11 @@ const FarmerIllustration = styled.picture`
 `;
 
 const AboutText = styled.div`
-  padding: 0 10rem 0 10rem;
+  padding: 0 5rem 0 5rem;
   font-size: 0.875rem;
   line-height: 1.5em;
   font-weight: 300;
   text-align: center;
-  text-indent: 1.5rem;
   color: #2e2e2e;
   margin: 0 auto;
 

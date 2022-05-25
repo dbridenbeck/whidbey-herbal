@@ -8,7 +8,7 @@ const BannerSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 1.8rem;
+  height: 2rem;
   min-width: 100vw;
   background-color: #2e2e2e;
   z-index: 10;

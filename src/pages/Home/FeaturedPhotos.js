@@ -1,11 +1,11 @@
 import React from 'react';
-import styled from "styled-components";
-import { device } from "../../utils/devices";
-import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
-import CaitlinBowsWebp from "./images/caitlin-bows.webp";
-import CaitlinBows from "./images/caitlin-bows.jpg";
-import stillOnStump from "./images/still-on-stump.jpg";
-import stillOnStumpWebp from "./images/still-on-stump.webp";
+import styled from 'styled-components';
+import { device } from '../../utils/devices';
+import ComponentWrapper from '../../SharedComponents/ComponentWrapper';
+import CaitlinBowsWebp from './images/caitlin-bows.webp';
+import CaitlinBows from './images/caitlin-bows.jpg';
+import stillOnStump from './images/still-on-stump.jpg';
+import stillOnStumpWebp from './images/still-on-stump.webp';
 import WaveSVG from './images/photosectionsvg.svg';
 
 const FullWidthSVG = styled.div`
@@ -66,11 +66,16 @@ const FeaturedText = styled.p`
   font-size: 0.825rem;
   line-height: 1.36em;
   font-weight: 300;
+  @media ${device.mobile} {
+    font-size: 0.78rem;
+    top: 12%;
+  }
   @media ${device.tablet} {
     font-size: 1.5rem;
+    top: 15%;
   }
   @media ${device.laptop} {
-    font-size: 2.375rem;
+    font-size: 2rem;
   }
 `;
 
@@ -80,25 +85,26 @@ const FeaturedPhotos = () => {
       <FullWidthSVG />
       <PhotoContainer>
         <FeaturedText>
-          We’re a family farm that grows and distills each of our essential
-          oils, fresh from the heart of Whidbey Island in the Salish Sea.
+          We’re a family farm that grows and distills herbs. We make our herbal
+          products in small batches, fresh from the heart of Whidbey Island in
+          the Salish Sea.
         </FeaturedText>
         <StyledPicture>
-          <source srcSet={`${stillOnStumpWebp}`} type="image/webp" />
-          <source srcSet={`${stillOnStump}`} type="image/jpeg" />
+          <source srcSet={`${stillOnStumpWebp}`} type='image/webp' />
+          <source srcSet={`${stillOnStump}`} type='image/jpeg' />
           <img
-            className="circle-photo"
+            className='circle-photo'
             src={stillOnStump}
-            alt="Beatiful copper still sitting on a stump."
+            alt='Beatiful copper still sitting on a stump.'
           />
         </StyledPicture>
         <StyledPicture>
-          <source srcSet={`${CaitlinBowsWebp}`} type="image/webp" />
-          <source srcSet={`${CaitlinBows}`} type="image/jpeg" />
+          <source srcSet={`${CaitlinBowsWebp}`} type='image/webp' />
+          <source srcSet={`${CaitlinBows}`} type='image/jpeg' />
           <img
-            className="right-rect-photo"
+            className='right-rect-photo'
             src={CaitlinBows}
-            alt="Caitlin smiling and holding fir bows"
+            alt='Caitlin smiling and holding fir bows'
           />
         </StyledPicture>
       </PhotoContainer>

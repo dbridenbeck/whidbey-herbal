@@ -27,23 +27,25 @@ const StyledLinkContainer = styled.div`
   color: #787878;
 `;
 
-const StyledLink = styled(Link)`
-  display: inline-block;
-  text-decoration: none;
-  text-align: center;
-  font-size: 1.125rem;
-  line-height: 1.5em;
-  font-weight: 300;
-  color: black;
-  :visited {
-    color: black;
-  }
-  &:hover {
-    color: #e3be42;
-  }
-  @media ${device.laptop} {
-    padding: 0;
+const StyledLink = styled.div`
+  a {
+    display: inline-block;
+    text-decoration: none;
     text-align: center;
+    font-size: 1.125rem;
+    line-height: 1.5em;
+    font-weight: 300;
+    color: black;
+    :visited {
+      color: black;
+    }
+    &:hover {
+      color: #e3be42;
+    }
+    @media ${device.laptop} {
+      padding: 0;
+      text-align: center;
+    }
   }
 `;
 
@@ -74,8 +76,8 @@ const createStyledLink = (clearBurger, links) => {
   const handleClearBurger = () => clearBurger();
   return links.map((link) => (
     <StyledLinkContainer key={link.name}>
-      <StyledLink href={link.destination}>
-        <span onClick={handleClearBurger}>{link.name}</span>
+      <StyledLink onClick={handleClearBurger}>
+        <Link href={link.destination}>{link.name}</Link>
       </StyledLink>
     </StyledLinkContainer>
   ));

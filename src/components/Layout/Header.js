@@ -4,16 +4,12 @@ import Link from 'next/link';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
+import horizLogo from '../../../public/horiz-logo.png';
 
 import NavPanel from './NavPanel';
 import Hamburger from './Hamburger';
 import { device } from '../../utils/devices';
-
-import cart from './images/cart.png';
-import cartYellow from './images/cart-yellow.png';
-import horizLogo from './images/horiz-logo.png';
 
 const Navbar = styled.div`
   z-index: 1000;
@@ -30,37 +26,20 @@ const Navbar = styled.div`
   :hover {
     opacity: 1;
   }
-  /* control Navbar show/hide for scroll & hover when on laptop */
-  @media ${device.laptop} {
-    /* show Navbar on pages other than homepage */
-    opacity: ${(props) => (props.currentRoute !== '/' ? '0' : '1')};
-    &.active {
-      opacity: 1;
-      transition: opacity 200ms ease-in;
-    }
-    &.hidden {
-      /* show Navbar on homepage if checkout has lineItems in it */
-      opacity: ${(props) =>
-        props.currentRoute !== '/' || props.lineItems.length ? '1' : '0'};
-      transition: opacity 200ms ease-out;
-      :hover {
-        opacity: 1;
-      }
-    }
-  }
 `;
 
-const CheckoutLink = styled(Link)`
+const CheckoutLink = styled.div`
   position: relative;
+  cursor: pointer;
   width: 48px;
   height: 100%;
   margin-right: 20px;
-  background-image: url(${cart});
+  background-image: url('/cart.png');
   background-position: center;
   background-size: auto 60%;
   background-repeat: no-repeat;
   &:hover {
-    background-image: url(${cartYellow});
+    background-image: url('/cart-yellow.png');
   }
   .item-counter {
     width: 25px;
@@ -83,17 +62,16 @@ const CheckoutLink = styled(Link)`
   }
 `;
 
-const HomeLink = styled(Image)`
+const HomeLink = styled.div`
   height: 49;
   width: 225px;
   margin: 7px auto 0 auto;
   @media ${device.laptop} {
-    margin: 5px 10% 0 10%;
+    margin: 5px 24px 0;
   }
 `;
 
-const Header = ({ show, lineItems, clearBurger, burgerToggled }) => {
-  const { pathname } = useRouter();
+const Header = ({ lineItems, clearBurger, burgerToggled }) => {
   const createCheckoutLink = () => {
     const itemsInCart = () => {
       if (lineItems.length) {
@@ -107,31 +85,30 @@ const Header = ({ show, lineItems, clearBurger, burgerToggled }) => {
       }
     };
     return (
-      <CheckoutLink href={`/checkout`} itemsincart={itemsInCart()}>
-        <div className="item-counter" onClick={clearBurger}>
-          {itemsInCart()}
-        </div>
-      </CheckoutLink>
+      <Link href={`/checkout`}>
+        <CheckoutLink itemsincart={itemsInCart()}>
+          <div className="item-counter" onClick={clearBurger}>
+            {itemsInCart()}
+          </div>
+        </CheckoutLink>
+      </Link>
     );
   };
 
   const createNavBar = () => {
     return (
-      <Navbar
-        id="home"
-        className={show ? 'active' : 'hidden'}
-        currentRoute={pathname}
-        lineItems={lineItems}
-      >
+      <Navbar id="home">
         <Hamburger />
         <Link href={`/#home`}>
-          <HomeLink
-            src={horizLogo}
-            height="49"
-            width="225"
-            alt="Whidbey Herbal Logo"
-            onClick={clearBurger}
-          />
+          <HomeLink>
+            <Image
+              src={horizLogo}
+              height="49"
+              width="225"
+              alt="Whidbey Herbal Logo"
+              onClick={clearBurger}
+            />
+          </HomeLink>
         </Link>
         <NavPanel burgerToggled={burgerToggled} />
         {createCheckoutLink()}

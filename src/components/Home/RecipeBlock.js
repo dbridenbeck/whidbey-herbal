@@ -3,19 +3,21 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { device } from '../../utils/devices';
+import Image from 'next/image';
 
-const RecipeLink = styled(Link)`
+const RecipeLink = styled.div`
   display: block;
-  width: 47%;
   text-decoration: none;
+  margin-bottom: 20px;
+  padding-left: 20px;
   /* position last item aligned left if last item is odd */
   :last-child:nth-child(odd) {
-    margin: 0 auto 0 2%;
+    align-self: flex-start;
+    // margin-right: auto;
   }
   @media ${device.tablet} {
-    width: 30%;
     :last-child:nth-child(odd) {
-      margin: 0;
+      align-self: flex-start;
     }
   }
 `;
@@ -23,12 +25,22 @@ const RecipeLink = styled(Link)`
 const RecipeContainer = styled.div`
   position: relative;
   /* use relative positioning to make margin for :last-child:nth-child(odd) on RecipeLink work */
-  margin: 0 6% 70px 6%;
   &:hover h5 {
     color: #e3be42;
   }
   &:hover svg path {
     fill: #e3be42;
+  }
+  width: 134px;
+
+  @media ${device.tablet} {
+    width: 202px;
+  }
+  @media ${device.laptop} {
+    width: 270px;
+  }
+  @media ${device.largeScreen} {
+    width: 316px;
   }
 `;
 
@@ -73,11 +85,24 @@ const RecipeInfo = styled.div`
   }
 `;
 
-const RecipeImage = styled.img`
+const RecipeImage = styled.div`
+  position: relative;
   display: block;
-  width: 100%;
-  height: auto;
-  margin: 0 auto 20px auto;
+  width: 134px;
+  height: 134px;
+  margin-bottom: 20px;
+  @media ${device.tablet} {
+    width: 202px;
+    height: 202px;
+  }
+  @media ${device.laptop} {
+    width: 270px;
+    height: 270px;
+  }
+  @media ${device.largeScreen} {
+    width: 316px;
+    height: 316px;
+  }
 `;
 
 const RecipeBlock = ({
@@ -86,35 +111,39 @@ const RecipeBlock = ({
       title,
       handle,
       excerpt,
-      image: { transformedSrc },
+      image: { transformedSrc, altText },
     },
   },
 }) => {
   return (
-    <RecipeLink href={`/recipe/${handle}`}>
-      <RecipeContainer recipeName={title}>
-        <RecipeImage src={`${transformedSrc}`} />
-        <RecipeInfo>
-          <h5>{title}</h5>
-          {/* SVG for right arrow icon */}
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z"
-              fill="black"
-              fillOpacity="0.54"
-            />
-          </svg>
+    <Link href={`/recipe/${handle}`}>
+      <RecipeLink>
+        <RecipeContainer recipeName={title}>
+          <RecipeImage>
+            <Image src={transformedSrc} alt={altText} layout="fill" />
+          </RecipeImage>
+          <RecipeInfo>
+            <h5>{title}</h5>
+            {/* SVG for right arrow icon */}
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z"
+                fill="black"
+                fillOpacity="0.54"
+              />
+            </svg>
 
-          <p className="recipeText">{excerpt}</p>
-        </RecipeInfo>
-      </RecipeContainer>
-    </RecipeLink>
+            <p className="recipeText">{excerpt}</p>
+          </RecipeInfo>
+        </RecipeContainer>
+      </RecipeLink>
+    </Link>
   );
 };
 

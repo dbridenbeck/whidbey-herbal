@@ -47,7 +47,9 @@ const StyledPicture = styled.div`
     props.circle
       ? `& img{align-self: flex-end;
     border-radius: 50%;
-    padding: 0 3.2%;}`
+    }
+    padding: 0 3.2%;
+    `
       : ''};
 `;
 
@@ -84,10 +86,15 @@ const FeaturedPhotos = () => {
           <Image
             src={stillOnStump}
             alt="Beatiful copper still sitting on a stump."
+            layout="responsive"
           />
         </StyledPicture>
         <StyledPicture>
-          <Image src={CaitlinBows} alt="Caitlin smiling and holding fir bows" />
+          <Image
+            src={CaitlinBows}
+            alt="Caitlin smiling and holding fir bows"
+            layout="responsive"
+          />
         </StyledPicture>
       </PhotoContainer>
     </ComponentWrapper>

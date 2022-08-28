@@ -8,7 +8,7 @@ const WelcomeWrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 837px;
-  margin: 60px auto 100px auto;
+  margin: 60px auto 100px;
   /* Media screen keeps img 100% height on bigger screens */
   @media ${device.laptop} {
     height: calc(100vh - 60px);
@@ -19,10 +19,11 @@ const WelcomeWrapper = styled.div`
 const StyledPicture = styled.div`
   position: relative;
   width: 100%;
+  max-width: 1280px;
+  height: auto;
   margin: 0 auto;
   /* Media screen keeps img 100% height on bigger screens */
   @media ${device.laptop} {
-    height: 100%;
     object-fit: contain;
   }
 `;
@@ -78,6 +79,7 @@ const WelcomeSection = () => {
         <Image
           src={farm}
           alt="A watercolor of Whidbey Herbal farms showing a barn, a house, lavender fields, a dog in a pasture, and a forest in the background"
+          layout="responsive"
         />
       </StyledPicture>
       <Tagline>

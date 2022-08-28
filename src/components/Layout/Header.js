@@ -63,6 +63,7 @@ const CheckoutLink = styled.div`
 `;
 
 const HomeLink = styled.div`
+  cursor: pointer;
   height: 49;
   width: 225px;
   margin: 7px auto 0 auto;

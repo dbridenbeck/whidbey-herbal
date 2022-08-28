@@ -7,6 +7,7 @@ import Image from 'next/image';
 
 const RecipeLink = styled.div`
   display: block;
+  cursor: pointer;
   text-decoration: none;
   margin-bottom: 20px;
   padding: 0px 10px;

@@ -8,7 +8,7 @@ import Reviews from './Reviews';
 import ProductDetails from './ProductDetails';
 import Footer from '../../SharedComponents/Footer';
 import { GET_PRODUCT } from '../../queries';
-import { useRouter } from 'next/router ';
+import { useRouter } from 'next/router';
 
 // begin component
 const Product = ({ checkout }) => {

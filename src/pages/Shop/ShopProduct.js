@@ -52,6 +52,7 @@ const ProductContainer = styled.div`
 `;
 
 const ProductLink = styled.div`
+  cursor: pointer;
   a {
     text-decoration: none;
   }
@@ -79,13 +80,13 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
   };
 
   return (
-    <ProductLink>
-      <Link
-        href={{
-          pathname: '/product/[handle]',
-          query: { handle: product.handle },
-        }}
-      >
+    <Link
+      href={{
+        pathname: '/product/[handle]',
+        query: { handle: product.handle },
+      }}
+    >
+      <ProductLink>
         <>
           <ImageContainer onClick={clearHeroImgAndQuantityButton}>
             {!product.availableForSale ? (
@@ -103,8 +104,8 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
           <StyledH5> {product.title.toUpperCase()} </StyledH5>
           <p className="info">${product.variants.edges[0].node.price}</p>
         </>
-      </Link>
-    </ProductLink>
+      </ProductLink>
+    </Link>
   );
 };
 

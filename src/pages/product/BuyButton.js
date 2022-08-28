@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { connect } from 'react-redux'
-import styled from 'styled-components'
-import PropTypes from 'prop-types'
-import * as CartActionCreators from '../../../state/actions/cart'
-import ExceededMaxQuantityWarning from '../../../SharedComponents/ExceededMaxQuantityWarning'
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import * as CartActionCreators from '../../state/actions/cart';
+import ExceededMaxQuantityWarning from '../../SharedComponents/ExceededMaxQuantityWarning';
 
 const BuyButtonWrapper = styled.div`
   position: relative;
@@ -26,7 +26,7 @@ const BuyButtonWrapper = styled.div`
     opacity: ${(props) => (props.buyButtonClicked ? '1' : '0')};
     transition: all 0.75s ease-in-out;
   }
-`
+`;
 
 const BuyButtonContainer = styled.button`
   align-self: flex-start;
@@ -57,7 +57,7 @@ const BuyButtonContainer = styled.button`
   :focus-visible {
     outline-width: 5px solid red;
   }
-`
+`;
 
 const BuyButton = ({
   addLineItem,
@@ -69,27 +69,27 @@ const BuyButton = ({
   quantityAllowed,
   lineItemPlusQuantityButton,
 }) => {
-  const [buyButtonClicked, setBuyButtonClicked] = useState(false)
+  const [buyButtonClicked, setBuyButtonClicked] = useState(false);
 
   // create buy button
   const createBuyButton = () => {
     const createAddtoCartTransition = () => {
-      setBuyButtonClicked(true)
+      setBuyButtonClicked(true);
       // reset state so that animation can happen again
-      setTimeout(() => setBuyButtonClicked(false), 750)
-    }
+      setTimeout(() => setBuyButtonClicked(false), 750);
+    };
 
     // onClick, button will either addItem or updateQuantity
     const addItem = () => {
-      addLineItem(selectedProduct, quantity)
-      createAddtoCartTransition()
-    }
+      addLineItem(selectedProduct, quantity);
+      createAddtoCartTransition();
+    };
     const updateQuantity = () => {
-      updateItemQuantity(quantity, 'add', selectedProduct)
-      createAddtoCartTransition()
-    }
+      updateItemQuantity(quantity, 'add', selectedProduct);
+      createAddtoCartTransition();
+    };
 
-    const exceededMaxQuantity = lineItemPlusQuantityButton > maxQuantity
+    const exceededMaxQuantity = lineItemPlusQuantityButton > maxQuantity;
 
     if (exceededMaxQuantity) {
       return (
@@ -110,7 +110,7 @@ const BuyButton = ({
               : `Your cart currently has ${maxQuantity} of this item, which is the limit. If you wish to order more than ${maxQuantity}, Please email hello@whidbeyherbal.com`}
           </ExceededMaxQuantityWarning>
         </BuyButtonWrapper>
-      )
+      );
     } else {
       return (
         <BuyButtonWrapper buyButtonClicked={buyButtonClicked}>
@@ -124,13 +124,13 @@ const BuyButton = ({
             Add to Cart
           </BuyButtonContainer>
         </BuyButtonWrapper>
-      )
+      );
     }
-  }
+  };
 
   // BuyButton component render
-  return <div>{createBuyButton()}</div>
-}
+  return <div>{createBuyButton()}</div>;
+};
 
 BuyButton.propTypes = {
   addLineItem: PropTypes.func,
@@ -141,7 +141,7 @@ BuyButton.propTypes = {
   quantity: PropTypes.number,
   quantityAllowed: PropTypes.number,
   lineItemPlusQuantityButton: PropTypes.number,
-}
+};
 
 const mapDispatchToProps = (dispatch) => ({
   updateItemQuantity: (quantityToUpdate, shouldAddQuantities, product) =>
@@ -154,6 +154,6 @@ const mapDispatchToProps = (dispatch) => ({
     ),
   addLineItem: (product, quantity) =>
     dispatch(CartActionCreators.addLineItem(product, quantity)),
-})
+});
 
-export default connect(null, mapDispatchToProps)(BuyButton)
+export default connect(null, mapDispatchToProps)(BuyButton);

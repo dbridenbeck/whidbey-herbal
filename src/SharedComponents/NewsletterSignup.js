@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import { device } from '../utils/devices'
-import StyledH1 from './StyledH1'
-import StyledH3 from './StyledH3'
-import loop from '../../public/loop.png'
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { device } from '../utils/devices';
+import StyledH1 from './StyledH1';
+import StyledH3 from './StyledH3';
+import loop from '../../public/loop.png';
+import Image from 'next/image';
 
 const SignupWrapper = styled.div`
   display: block;
@@ -13,18 +14,33 @@ const SignupWrapper = styled.div`
   .setH1Width {
     display: inline-block;
     position: relative;
-    img {
-      position: absolute;
-      top: 1%;
-      right: -19.5%;
-      width: 33%;
-    }
   }
   @media ${device.tablet} {
     width: 65%;
     max-width: 832px;
   }
-`
+`;
+
+const ImageWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  right: -40px;
+  width: 66px;
+  height: 64px;
+
+  @media ${device.tablet} {
+    top: 0;
+    right: -52px;
+    width: 88px;
+    height: 84px;
+  }
+  @media ${device.laptop} {
+    top: 0;
+    right: -65px;
+    width: 111px;
+    height: 105px;
+  }
+`;
 
 const FormContainer = styled.div`
   display: block;
@@ -54,14 +70,14 @@ const FormContainer = styled.div`
       background-color: rgba(255, 255, 255, 0.5);
     }
   }
-`
+`;
 
 export class NewsletterSignup extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       emailValue: '',
-    }
+    };
   }
 
   render() {
@@ -70,8 +86,10 @@ export class NewsletterSignup extends Component {
         <div className="setH1Width">
           <StyledH1>
             Stay in <br /> the loop.
+            <ImageWrapper>
+              <Image src={loop} layout="fill" />
+            </ImageWrapper>
           </StyledH1>
-          <img src={loop} alt="A hand drawn loop-de-loop" />
         </div>
         <StyledH3>Subscribe to our newsletter below</StyledH3>
         <FormContainer>
@@ -89,7 +107,7 @@ export class NewsletterSignup extends Component {
                 id="MERGE0"
                 value={this.state.emailValue}
                 onChange={(e) => {
-                  this.setState({ emailValue: e.target.value })
+                  this.setState({ emailValue: e.target.value });
                 }}
                 autoCapitalize="off"
                 autoCorrect="off"
@@ -142,8 +160,8 @@ export class NewsletterSignup extends Component {
           </form>
         </FormContainer>
       </SignupWrapper>
-    )
+    );
   }
 }
 
-export default NewsletterSignup
+export default NewsletterSignup;

@@ -1,8 +1,9 @@
-import React from 'react'
-import styled from 'styled-components'
-import { device } from '../utils/devices'
-import instagram from '../../public/instagram.png'
-import facebook from '../../public/facebook.png'
+import React from 'react';
+import styled from 'styled-components';
+import { device } from '../utils/devices';
+import instagram from '../../public/instagram.png';
+import facebook from '../../public/facebook.png';
+import Image from 'next/image';
 
 const ContactAndSocialsWrapper = styled.div`
   display: block;
@@ -32,7 +33,7 @@ const ContactAndSocialsWrapper = styled.div`
     width: 35%;
     max-width: 448px;
   }
-`
+`;
 
 const SocialIconContainer = styled.div`
   margin: 0 auto;
@@ -40,14 +41,14 @@ const SocialIconContainer = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   width: 100%;
-`
+`;
 
-const SocialIcon = styled.img`
+const SocialIcon = styled.div`
   display: inline-block;
   height: 25px;
   width: 25px;
   margin: 10px 20px 0 0;
-`
+`;
 
 const ContactAndSocials = () => {
   return (
@@ -62,24 +63,18 @@ const ContactAndSocials = () => {
       </div>
       <SocialIconContainer>
         <a href="https://www.instagram.com/whidbeyherbal/">
-          <SocialIcon
-            src={`${instagram}`}
-            height="512"
-            width="512"
-            alt="Instagram logo"
-          />
+          <SocialIcon>
+            <Image src={instagram} alt="instagram logo" />
+          </SocialIcon>
         </a>
         <a href="https://www.facebook.com/WhidbeyHerbal/">
-          <SocialIcon
-            src={`${facebook}`}
-            height="512"
-            width="512"
-            alt="Facebook logo"
-          />
+          <SocialIcon>
+            <Image src={facebook} alt="facebook logo" />
+          </SocialIcon>
         </a>
       </SocialIconContainer>
     </ContactAndSocialsWrapper>
-  )
-}
+  );
+};
 
-export default ContactAndSocials
+export default ContactAndSocials;

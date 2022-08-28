@@ -8,12 +8,6 @@ const BumpOutContainer = styled.div`
   position: relative;
   width: 51%;
   margin-top: 10%;
-  @media ${device.tablet} {
-    margin-top: -22%;
-  }
-  @media (min-width: 12801px) {
-    margin-top: -10%;
-  }
   align-self: flex-end;
   svg {
     display: inline-block;
@@ -32,6 +26,15 @@ const BumpOutContainer = styled.div`
     left: -15%;
     width: 63.7%;
     height: 51%;
+  }
+  @media ${device.tablet} {
+    margin-top: -22%;
+  }
+  @media (min-width: 12801px) {
+    margin-top: -10%;
+  }
+  @media ${device.largeScreen} {
+    width: auto;
   }
 `;
 

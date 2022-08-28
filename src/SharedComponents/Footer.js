@@ -5,6 +5,7 @@ import whPatternWebp from '../../public/wh-pattern.webp';
 import { device } from '../utils/devices';
 import NewsletterSignup from './NewsletterSignup';
 import ContactAndSocials from './ContactAndSocials';
+import Image from 'next/image';
 
 const FooterContainer = styled.div`
   display: block;
@@ -23,20 +24,17 @@ const FooterContainer = styled.div`
   }
 `;
 
-const WHPatternBackground = styled.picture`
-  height: 110%;
-  img {
-    background-size: auto;
-    opacity: 0.04;
-    position: absolute;
-    height: 100%;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    @media (min-width: 1281px) {
-      height: 125%;
-    }
+const WHPatternBackground = styled.div`
+  opacity: 0.04;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  @media (min-width: 1281px) {
+    height: 125%;
   }
 `;
 
@@ -44,9 +42,7 @@ const Footer = () => {
   return (
     <FooterContainer>
       <WHPatternBackground>
-        <source srcSet={whPatternWebp} type="image/webp" />
-        <source srcSet={whPattern} type="image/jpeg" />
-        <img src={whPattern} alt="Cute Woodland Style Line Drawings" />
+        <Image src={whPattern} layout="fill" objectFit="cover" />
       </WHPatternBackground>
       <NewsletterSignup />
       <ContactAndSocials />

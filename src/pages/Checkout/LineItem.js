@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { device } from "../../utils/devices";
-import { createCurrencyFormat } from "../../utils/createCurrencyFormat";
-import * as CartActionCreators from "../../state/actions/cart";
+import Link from 'next/link';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { device } from '../../utils/devices';
+import { createCurrencyFormat } from '../../utils/createCurrencyFormat';
+import * as CartActionCreators from '../../state/actions/cart';
 
 import QuantityButton from '../../SharedComponents/QuantityButton';
 
@@ -17,7 +17,7 @@ const LineItemWrapper = styled.div`
   width: 100%;
   color: #787878;
   font-size: 0.875em;
-  border-top: 1px solid #C0C0C0;
+  border-top: 1px solid #c0c0c0;
   .twelvethColumn {
     display: block;
     width: 8.37%;
@@ -62,12 +62,11 @@ const LineItem = ({
   index,
   createRemoveButton,
   updateItemQuantity,
-  clearHeroImg
+  clearHeroImg,
 }) => {
-
   const roughTotal = lineItem.quantity
-    ? (lineItem.quantity * lineItem.variants.edges[0].node.priceV2.amount)
-    : "0.00";
+    ? lineItem.quantity * lineItem.variants.edges[0].node.priceV2.amount
+    : '0.00';
 
   const currencyTotal = createCurrencyFormat(roughTotal);
   const lineItemCurrency = createCurrencyFormat(
@@ -80,11 +79,8 @@ const LineItem = ({
       <div className="twelvethColumn">
         <ProductImg src={lineItem.images.edges[0].node.transformedSrc} />
       </div>
-      <ProductTitleLink
-        to={`/product/${lineItem.handle}`}
-        onClick={clearHeroImg}
-      >
-        {lineItem.title}
+      <ProductTitleLink href={`/product/${lineItem.handle}`}>
+        <span onClick={clearHeroImg}>{lineItem.title}</span>
       </ProductTitleLink>
       <span className="sixthColumn">{lineItemCurrency}</span>
       <div className="sixthColumn">
@@ -106,9 +102,9 @@ LineItem.propTypes = {
   index: PropTypes.number,
   createRemoveButton: PropTypes.func,
   removeLineItem: PropTypes.func,
-}
+};
 
-const mapDispatchtoProps = dispatch => ({
+const mapDispatchtoProps = (dispatch) => ({
   updateItemQuantity: (quantityToUpdate, shouldAddQuantities, product) =>
     dispatch(
       CartActionCreators.updateItemQuantity(
@@ -117,7 +113,7 @@ const mapDispatchtoProps = dispatch => ({
         product
       )
     ),
-  clearHeroImg: () => dispatch(CartActionCreators.clearHeroImg())
+  clearHeroImg: () => dispatch(CartActionCreators.clearHeroImg()),
 });
 
 export default connect(null, mapDispatchtoProps)(LineItem);

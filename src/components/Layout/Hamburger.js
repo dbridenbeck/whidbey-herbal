@@ -1,9 +1,9 @@
-import React from "react";
-import { connect } from 'react-redux';
-import PropTypes from "prop-types";
-import * as CartActionCreators from '../state/actions/cart';
-import styled from 'styled-components';
-import { device } from "../utils/devices";
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import * as CartActionCreators from '../../state/actions/cart'
+import styled from 'styled-components'
+import { device } from '../../utils/devices'
 
 const Burger = styled.div`
   width: 40px;
@@ -16,11 +16,11 @@ const Burger = styled.div`
     margin: 7px 0;
     background-color: black;
     border-radius: 3px;
-    content: "";
+    content: '';
     transition: all 0.2s ease-in-out;
   }
   /* click sets burgerToggled to true, which animates hamburger to an "X" when clicked */
-  ${props => {
+  ${(props) => {
     if (props.burgerToggled) {
       return `
         &:before {
@@ -38,35 +38,30 @@ const Burger = styled.div`
   @media ${device.laptop} {
     display: none;
   }
-`;
+`
 
-const createBurger = ({burgerToggled, toggleBurger}) => {
-  const toggle = () => toggleBurger();
+const createBurger = ({ burgerToggled, toggleBurger }) => {
+  const toggle = () => toggleBurger()
   return (
-    <Burger 
-      burgerToggled={burgerToggled}
-      onClick={toggle}
-    >
+    <Burger burgerToggled={burgerToggled} onClick={toggle}>
       <div />
     </Burger>
-  );
+  )
 }
 
-const Hamburger = (props) => (
-  createBurger(props)
-);
+const Hamburger = (props) => createBurger(props)
 
 Hamburger.propTypes = {
   burgerToggled: PropTypes.bool,
-  toggleBurger: PropTypes.func
-};
+  toggleBurger: PropTypes.func,
+}
 
 const mapStateToProps = ({ burgerToggled }) => ({
-  burgerToggled
-});
+  burgerToggled,
+})
 
-const mapDispatchToProps = dispatch => ({
-  toggleBurger: () => dispatch(CartActionCreators.toggleBurger())
-});
+const mapDispatchToProps = (dispatch) => ({
+  toggleBurger: () => dispatch(CartActionCreators.toggleBurger()),
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Hamburger);
+export default connect(mapStateToProps, mapDispatchToProps)(Hamburger)

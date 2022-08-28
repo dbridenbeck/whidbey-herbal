@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import farmers from "./images/farmers.jpg";
-import farmersWebp from "./images/farmers.webp";
-import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
-import StyledH2 from "../../SharedComponents/StyledH2";
-import { device } from "../../utils/devices";
+import React from 'react'
+import styled from 'styled-components'
+import farmers from '../../../public/farmers.jpg'
+import farmersWebp from '../../../public/farmers.webp'
+import ComponentWrapper from '../../SharedComponents/ComponentWrapper'
+import StyledH2 from '../../SharedComponents/StyledH2'
+import { device } from '../../utils/devices'
 
 const FarmerIllustration = styled.picture`
   img {
@@ -17,7 +17,7 @@ const FarmerIllustration = styled.picture`
       max-width: 800px;
     }
   }
-`;
+`
 
 const AboutText = styled.div`
   padding: 0 20px;
@@ -36,7 +36,7 @@ const AboutText = styled.div`
     padding: 0;
     font-size: 1.5rem;
   }
-`;
+`
 
 const About = () => {
   return (
@@ -56,15 +56,15 @@ const About = () => {
           Hi! We’re Caitlin and Sam Stanton, the farmers behind Whidbey Herbal.
           We grew up in the Pacific Northwest and are on a mission to capture
           this place in a bottle.
-        </p>{" "}
+        </p>{' '}
         <p>
           A real estate ad for a 1914 abandoned farm brought us to Whidbey
-          Island. We’re currently restoring the old farm into an eco 
-          homestead for growing and distilling healing plants.
+          Island. We’re currently restoring the old farm into an eco homestead
+          for growing and distilling healing plants.
         </p>
       </AboutText>
     </ComponentWrapper>
-  );
-};
+  )
+}
 
-export default About;
+export default About

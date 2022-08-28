@@ -1,12 +1,13 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import ComponentWrapper from "./ComponentWrapper";
-import StyledH2 from "./StyledH2";
-import { GET_FEATURED_PRODUCTS } from "../queries";
-import Product from "./Product";
+import React from 'react';
+import Link from 'next/link';
+import { useQuery } from '@apollo/client';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import ComponentWrapper from './ComponentWrapper';
+import StyledH2 from './StyledH2';
+import { GET_FEATURED_PRODUCTS } from '../queries';
+import Product from './Product';
 
 const ProductsContainer = styled.div`
   display: flex;
@@ -37,17 +38,17 @@ const ExploreShopLink = styled(Link)`
 `;
 
 const Products = ({ title }) => {
-  const location = useLocation();
+  const { pathname } = useRouter();
   const { loading, error, data } = useQuery(GET_FEATURED_PRODUCTS);
   if (loading) return null;
   if (error) return `Error! ${error}`;
-  
-  const queriedProducts = location.pathname.includes("wholesale")
+
+  const queriedProducts = pathname.includes('wholesale')
     ? data.collections.edges.find(
-        (collection) => collection.node.title === "Wholesale Products"
+        (collection) => collection.node.title === 'Wholesale Products'
       )
     : data.collections.edges.find(
-        (collection) => collection.node.title === "Featured Products"
+        (collection) => collection.node.title === 'Featured Products'
       );
   const products = queriedProducts.node.products.edges;
 
@@ -59,7 +60,7 @@ const Products = ({ title }) => {
           <Product key={product.node.handle} product={product.node} />
         ))}
       </ProductsContainer>
-      <ExploreShopLink to="/shop">Explore the Shop</ExploreShopLink>
+      <ExploreShopLink href="/shop">Explore the Shop</ExploreShopLink>
     </ComponentWrapper>
   );
 };

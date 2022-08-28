@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import { device } from "../utils/devices";
-import StyledH1 from './StyledH1';
-import StyledH3 from './StyledH3';
-import loop from "./images/loop.png";
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import { device } from '../utils/devices'
+import StyledH1 from './StyledH1'
+import StyledH3 from './StyledH3'
+import loop from '../../public/loop.png'
 
 const SignupWrapper = styled.div`
   display: block;
@@ -24,7 +24,7 @@ const SignupWrapper = styled.div`
     width: 65%;
     max-width: 832px;
   }
-`;
+`
 
 const FormContainer = styled.div`
   display: block;
@@ -32,7 +32,7 @@ const FormContainer = styled.div`
   input {
     font-size: 1.2em;
     border: 1px solid blue;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     border: 1px solid #787878;
     height: 2.25em;
     padding: 0;
@@ -54,11 +54,11 @@ const FormContainer = styled.div`
       background-color: rgba(255, 255, 255, 0.5);
     }
   }
-`;
+`
 
 export class NewsletterSignup extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       emailValue: '',
     }
@@ -88,8 +88,8 @@ export class NewsletterSignup extends Component {
                 name="EMAIL"
                 id="MERGE0"
                 value={this.state.emailValue}
-                onChange={e => {
-                  this.setState({ emailValue: e.target.value });
+                onChange={(e) => {
+                  this.setState({ emailValue: e.target.value })
                 }}
                 autoCapitalize="off"
                 autoCorrect="off"
@@ -105,7 +105,7 @@ export class NewsletterSignup extends Component {
             />
 
             <div
-              style={{ position: "absolute", left: "-5000px" }}
+              style={{ position: 'absolute', left: '-5000px' }}
               aria-hidden="true"
               aria-label="Please leave the following three fields empty"
             >
@@ -142,8 +142,8 @@ export class NewsletterSignup extends Component {
           </form>
         </FormContainer>
       </SignupWrapper>
-    );
+    )
   }
 }
 
-export default NewsletterSignup;
+export default NewsletterSignup

@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { device } from "../../utils/devices";
-import * as CartActionCreators from "../../state/actions/cart";
-import StyledH5 from "../../SharedComponents/StyledH5";
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { device } from '../../utils/devices';
+import * as CartActionCreators from '../../state/actions/cart';
+import StyledH5 from '../../SharedComponents/StyledH5';
 
 const ProductContainer = styled.div`
   display: block;
@@ -66,25 +66,22 @@ const Image = styled.img`
   max-width: 100%;
   max-height: 100%;
   margin: 0 auto;
-${props => !props.isAvailable ? "opacity: .5" : "opacity: 1"};
-`
+  ${(props) => (!props.isAvailable ? 'opacity: .5' : 'opacity: 1')};
+`;
 
 const createProduct = (product, clearHeroImg, updateQuantityButton) => {
   const clearHeroImgAndQuantityButton = () => {
     clearHeroImg();
     updateQuantityButton(1);
-  }
+  };
 
   return (
-    <ProductLink
-      to={`/product/${product.handle}`}
-      onClick={clearHeroImgAndQuantityButton}
-    >
-      <ImageContainer>
+    <ProductLink to={`/product/${product.handle}`}>
+      <ImageContainer onClick={clearHeroImgAndQuantityButton}>
         {!product.availableForSale ? (
           <div className="soldOutWarning">
-            {" "}
-            <span>SOLD OUT</span>{" "}
+            {' '}
+            <span>SOLD OUT</span>{' '}
           </div>
         ) : null}
         <Image
@@ -93,15 +90,19 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
           isAvailable={product.availableForSale}
         />
       </ImageContainer>
-      <StyledH5 > {product.title.toUpperCase()} </StyledH5>
+      <StyledH5> {product.title.toUpperCase()} </StyledH5>
       <p className="info">${product.variants.edges[0].node.price}</p>
     </ProductLink>
   );
 };
 
 // begin component
-const ShopProduct = ({location: {pathname}, product, clearHeroImg, updateQuantityButton}) => {
-  
+const ShopProduct = ({
+  location: { pathname },
+  product,
+  clearHeroImg,
+  updateQuantityButton,
+}) => {
   return (
     <ProductContainer pathname={pathname}>
       {createProduct(product, clearHeroImg, updateQuantityButton)}
@@ -111,12 +112,13 @@ const ShopProduct = ({location: {pathname}, product, clearHeroImg, updateQuantit
 
 ShopProduct.propTypes = {
   product: PropTypes.object,
-  clearHeroImg: PropTypes.func
-}
+  clearHeroImg: PropTypes.func,
+};
 
 const mapDispatchToProps = (dispatch) => ({
   clearHeroImg: () => dispatch(CartActionCreators.clearHeroImg()),
-  updateQuantityButton: (amount) => dispatch(CartActionCreators.updateQuantityButton(amount))
-})
+  updateQuantityButton: (amount) =>
+    dispatch(CartActionCreators.updateQuantityButton(amount)),
+});
 
 export default connect(null, mapDispatchToProps)(withRouter(ShopProduct));

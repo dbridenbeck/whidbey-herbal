@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from "styled-components";
-import { device } from "../../utils/devices";
-import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
-import CaitlinBowsWebp from "./images/caitlin-bows.webp";
-import CaitlinBows from "./images/caitlin-bows.jpg";
-import stillOnStump from "./images/still-on-stump.jpg";
-import stillOnStumpWebp from "./images/still-on-stump.webp";
-import WaveSVG from './images/photosectionsvg.svg';
+import React from 'react'
+import styled from 'styled-components'
+import { device } from '../../utils/devices'
+import ComponentWrapper from '../../SharedComponents/ComponentWrapper'
+import CaitlinBowsWebp from '../../../public/caitlin-bows.webp'
+import CaitlinBows from '../../../public/caitlin-bows.jpg'
+import stillOnStump from '../../../public/still-on-stump.jpg'
+import stillOnStumpWebp from '../../../public/still-on-stump.webp'
+import WaveSVG from '../../../public/photosectionsvg.svg'
 
 const FullWidthSVG = styled.div`
   display: block;
@@ -26,7 +26,7 @@ const FullWidthSVG = styled.div`
   @media (min-width: 1281px) {
     margin-left: -20vw;
   }
-`;
+`
 
 const PhotoContainer = styled.div`
   position: relative;
@@ -43,7 +43,7 @@ const PhotoContainer = styled.div`
     border-radius: 50%;
     padding: 0 3.2%;
   }
-`;
+`
 
 const StyledPicture = styled.picture`
   img {
@@ -52,7 +52,7 @@ const StyledPicture = styled.picture`
     width: 50%;
     height: auto;
   }
-`;
+`
 
 const FeaturedText = styled.p`
   display: block;
@@ -72,7 +72,7 @@ const FeaturedText = styled.p`
   @media ${device.laptop} {
     font-size: 2.375rem;
   }
-`;
+`
 
 const FeaturedPhotos = () => {
   return (
@@ -103,7 +103,7 @@ const FeaturedPhotos = () => {
         </StyledPicture>
       </PhotoContainer>
     </ComponentWrapper>
-  );
-};
+  )
+}
 
-export default FeaturedPhotos;
+export default FeaturedPhotos

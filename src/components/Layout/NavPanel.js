@@ -1,8 +1,8 @@
-import React from "react";
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import NavLinks from "./NavLinks";
-import { device } from "../utils/devices";
+import React from 'react'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import NavLinks from './NavLinks'
+import { device } from '../../utils/devices'
 
 const PanelWrapper = styled.div`
   /* make navpanel display as hamburger-controled slider when mobile */
@@ -21,7 +21,7 @@ const PanelWrapper = styled.div`
     margin: 0 0 0 5%;
     z-index: 6;
   }
-`;
+`
 
 const Panel = styled.div`
   display: flex;
@@ -53,7 +53,7 @@ const Panel = styled.div`
     left: -200px;
     width: 25vw;
     opacity: 0;
-    transition: all .5s ease-in-out;
+    transition: all 0.5s ease-in-out;
     /* ignore .closePanel transition and always make visible on laptop */
     @media ${device.laptop} {
       display: flex;
@@ -65,22 +65,20 @@ const Panel = styled.div`
       transition: none;
     }
   }
-`;
+`
 
-const NavPanel = ({burgerToggled}) => {
+const NavPanel = ({ burgerToggled }) => {
   return (
     <PanelWrapper className="PanelWrapper">
-      <Panel
-        className={burgerToggled ? "openPanel" : "closePanel"}
-      >
+      <Panel className={burgerToggled ? 'openPanel' : 'closePanel'}>
         <NavLinks />
       </Panel>
     </PanelWrapper>
-  );
+  )
 }
 
 NavPanel.propTypes = {
   burgerToggled: PropTypes.bool,
 }
 
-export default React.memo(NavPanel);
+export default React.memo(NavPanel)

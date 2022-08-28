@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { useMutation } from "@apollo/client";
-import { CHECKOUT_LINEITEMS_ADD, CREATE_CHECKOUT } from "../../queries";
-import PageWrapper from "../../SharedComponents/PageWrapper";
-import StyledH1 from "../../SharedComponents/StyledH1";
-import { device } from "../../utils/devices";
-import { createCurrencyFormat } from "../../utils/createCurrencyFormat";
-import * as CartActionCreators from "../../state/actions/cart";
-import LineItems from "./LineItems";
-import LineItemHeaders from "./LineItemHeaders";
-import SubtotalSection from "./SubtotalSection";
-import FeaturedProducts from "../../SharedComponents/FeaturedProducts";
-import Footer from "../../SharedComponents/Footer";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { useMutation } from '@apollo/client';
+import { CHECKOUT_LINEITEMS_ADD, CREATE_CHECKOUT } from '../../queries';
+import PageWrapper from '../../SharedComponents/PageWrapper';
+import StyledH1 from '../../SharedComponents/StyledH1';
+import { device } from '../../utils/devices';
+import { createCurrencyFormat } from '../../utils/createCurrencyFormat';
+import * as CartActionCreators from '../../state/actions/cart';
+import LineItems from './LineItems';
+import LineItemHeaders from './LineItemHeaders';
+import SubtotalSection from './SubtotalSection';
+import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
+import Footer from '../../SharedComponents/Footer';
 
 const CheckoutContainer = styled.div`
   display: block;
@@ -71,7 +71,7 @@ const CheckoutButton = styled.button`
   :hover {
     color: ${(props) => (props.loadingCheckout ? `#787878` : `white`)};
     background-color: ${(props) =>
-    props.loadingCheckout ? `white` : `#E3BE42`};
+      props.loadingCheckout ? `white` : `#E3BE42`};
   }
 `;
 
@@ -86,7 +86,7 @@ const Checkout = ({ lineItems, removeLineItem, storeCheckoutDetails }) => {
   const [addCheckoutItems] = useMutation(CHECKOUT_LINEITEMS_ADD);
 
   const [checkoutButtonText, changeCheckoutButtonText] = useState(
-    "Proceed to Checkout"
+    'Proceed to Checkout'
   );
   const [loadingCheckout, setLoadingCheckoutTrue] = useState(false);
 
@@ -94,8 +94,8 @@ const Checkout = ({ lineItems, removeLineItem, storeCheckoutDetails }) => {
     const remove = () => removeLineItem(id, index);
     return (
       <RemoveWrapper>
-        <button className="remove" onClick={remove}>
-          x
+        <button className="remove">
+          <span onClick={remove}>x</span>
         </button>
       </RemoveWrapper>
     );
@@ -108,7 +108,7 @@ const Checkout = ({ lineItems, removeLineItem, storeCheckoutDetails }) => {
       `Loading Checkout.. `,
       `Loading Checkout...`,
     ];
-    changeCheckoutButtonText("Loading Checkout");
+    changeCheckoutButtonText('Loading Checkout');
     let i = 0;
     setInterval(() => {
       const text = loadingCheckoutTextProgress[i];
@@ -139,10 +139,12 @@ const Checkout = ({ lineItems, removeLineItem, storeCheckoutDetails }) => {
           });
         })
         .then((response) => {
-          window.location.assign(response.data.checkoutLineItemsAdd.checkout.webUrl)
+          window.location.assign(
+            response.data.checkoutLineItemsAdd.checkout.webUrl
+          );
         });
     } catch (error) {
-      console.log("Error creating checkout: ", error);
+      console.log('Error creating checkout: ', error);
     }
   };
 
@@ -187,14 +189,14 @@ const Checkout = ({ lineItems, removeLineItem, storeCheckoutDetails }) => {
           calculatedCartSubtotal={currencyCalculatedCartSubtotal}
           createCheckoutButton={createCheckoutButton}
         />
-        <FeaturedProducts title={"Continue Shopping"} />
+        <FeaturedProducts title={'Continue Shopping'} />
       </CheckoutContainer>
     ) : (
-        <CheckoutContainer>
-          <StyledH2>Your Shopping Cart is empty.</StyledH2>
-          <FeaturedProducts title={"Explore the Shop"} />
-        </CheckoutContainer>
-      );
+      <CheckoutContainer>
+        <StyledH2>Your Shopping Cart is empty.</StyledH2>
+        <FeaturedProducts title={'Explore the Shop'} />
+      </CheckoutContainer>
+    );
   };
 
   return (
@@ -213,7 +215,7 @@ Checkout.propTypes = {
 };
 
 const mapStateToProps = ({ checkout: { lineItems } }) => ({
-  lineItems
+  lineItems,
 });
 
 const mapDispatchToProps = (dispatch) => ({

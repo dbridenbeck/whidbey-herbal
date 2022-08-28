@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from "styled-components";
-import ComponentWrapper from "../../SharedComponents/ComponentWrapper";
-import SamCaitlinLogs from "./images/sam-and-caitlin-logs.jpg";
-import BottlesHoneyCloseup from "./images/bottles-honey-closeup.jpg";
-import SamCaitlinLogsWebp from "./images/sam-and-caitlin-logs.webp";
-import BottlesHoneyCloseupWebp from "./images/bottles-honey-closeup.webp";
-import { device } from '../../utils/devices';
+import React from 'react'
+import styled from 'styled-components'
+import ComponentWrapper from '../../SharedComponents/ComponentWrapper'
+import SamCaitlinLogs from '../../../public/sam-and-caitlin-logs.jpg'
+import BottlesHoneyCloseup from '../../../public/bottles-honey-closeup.jpg'
+import SamCaitlinLogsWebp from '../../../public/sam-and-caitlin-logs.webp'
+import BottlesHoneyCloseupWebp from '../../../public/bottles-honey-closeup.webp'
+import { device } from '../../utils/devices'
 
 const PhotoContainer = styled.div`
   display: block;
@@ -14,7 +14,7 @@ const PhotoContainer = styled.div`
     width: 115%;
     margin-left: -7.5%;
   }
-`;
+`
 
 const StyledPicture = styled.picture`
   img {
@@ -26,7 +26,7 @@ const StyledPicture = styled.picture`
   :first-child {
     margin-right: 2%;
   }
-`;
+`
 
 const PhotoSection = () => {
   return (
@@ -50,7 +50,7 @@ const PhotoSection = () => {
         </StyledPicture>
       </PhotoContainer>
     </ComponentWrapper>
-  );
+  )
 }
 
-export default PhotoSection;
+export default PhotoSection

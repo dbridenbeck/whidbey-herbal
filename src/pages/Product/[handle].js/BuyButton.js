@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import * as CartActionCreators from "../../state/actions/cart";
-import ExceededMaxQuantityWarning from "../../SharedComponents/ExceededMaxQuantityWarning";
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import * as CartActionCreators from '../../../state/actions/cart'
+import ExceededMaxQuantityWarning from '../../../SharedComponents/ExceededMaxQuantityWarning'
 
 const BuyButtonWrapper = styled.div`
   position: relative;
@@ -13,7 +13,7 @@ const BuyButtonWrapper = styled.div`
     display: block;
     position: absolute;
     width: 150px;
-    top: ${props => props.buyButtonClicked? "-25px" : "-15px"};
+    top: ${(props) => (props.buyButtonClicked ? '-25px' : '-15px')};
     left: 50%;
     z-index: 1;
     margin: 0 0 0 -75px;
@@ -21,12 +21,12 @@ const BuyButtonWrapper = styled.div`
     color: #2e2e2e;
     font-size: 0.725rem;
     text-align: center;
-    background-color: rgba( 277, 190, 66, 0.33);
+    background-color: rgba(277, 190, 66, 0.33);
     border-radius: 10px;
-    opacity: ${props => (props.buyButtonClicked ? "1" : "0")};
-    transition: all .75s ease-in-out;
+    opacity: ${(props) => (props.buyButtonClicked ? '1' : '0')};
+    transition: all 0.75s ease-in-out;
   }
-  `;
+`
 
 const BuyButtonContainer = styled.button`
   align-self: flex-start;
@@ -36,28 +36,28 @@ const BuyButtonContainer = styled.button`
   width: 150px;
   padding: 5px;
   margin: 1% 0 5px 0;
-  color: ${props => (props.exceededMaxQuantity ? "#e3be42" : "#e34267")};
+  color: ${(props) => (props.exceededMaxQuantity ? '#e3be42' : '#e34267')};
   text-align: center;
   font-size: 1em;
   font-weight: normal;
   text-decoration: none;
-  border: ${props =>
-    props.exceededMaxQuantity ? "3px solid #e3be42" : "3px solid #787878"};
+  border: ${(props) =>
+    props.exceededMaxQuantity ? '3px solid #e3be42' : '3px solid #787878'};
   border-radius: 10px;
   background-color: white;
   z-index: 5;
   &:hover {
-    color: ${props => (props.exceededMaxQuantity ? "white" : "#e34267")};
-    background-color: ${props =>
-      props.exceededMaxQuantity ? "#e3be42" : "white"};
+    color: ${(props) => (props.exceededMaxQuantity ? 'white' : '#e34267')};
+    background-color: ${(props) =>
+      props.exceededMaxQuantity ? '#e3be42' : 'white'};
   }
   :focus {
     outline: none;
-    }
+  }
   :focus-visible {
     outline-width: 5px solid red;
   }
-`;
+`
 
 const BuyButton = ({
   addLineItem,
@@ -67,36 +67,38 @@ const BuyButton = ({
   selectedProduct,
   quantity,
   quantityAllowed,
-  lineItemPlusQuantityButton
+  lineItemPlusQuantityButton,
 }) => {
-
-  const [buyButtonClicked, setBuyButtonClicked] = useState(false);
+  const [buyButtonClicked, setBuyButtonClicked] = useState(false)
 
   // create buy button
   const createBuyButton = () => {
     const createAddtoCartTransition = () => {
-      setBuyButtonClicked(true);
+      setBuyButtonClicked(true)
       // reset state so that animation can happen again
-      setTimeout( () => setBuyButtonClicked(false), 750);
-    };
+      setTimeout(() => setBuyButtonClicked(false), 750)
+    }
 
     // onClick, button will either addItem or updateQuantity
     const addItem = () => {
-      addLineItem(selectedProduct, quantity);
-      createAddtoCartTransition();
-    };
+      addLineItem(selectedProduct, quantity)
+      createAddtoCartTransition()
+    }
     const updateQuantity = () => {
-      updateItemQuantity(quantity, "add", selectedProduct);
-      createAddtoCartTransition();
-    };
+      updateItemQuantity(quantity, 'add', selectedProduct)
+      createAddtoCartTransition()
+    }
 
-    const exceededMaxQuantity = lineItemPlusQuantityButton > maxQuantity;
+    const exceededMaxQuantity = lineItemPlusQuantityButton > maxQuantity
 
     if (exceededMaxQuantity) {
       return (
         <BuyButtonWrapper buyButtonClicked={buyButtonClicked}>
           <span className="addedToCartAlert">Added!</span>
-          <BuyButtonContainer exceededMaxQuantity={!exceededMaxQuantity} disabled={true}>
+          <BuyButtonContainer
+            exceededMaxQuantity={!exceededMaxQuantity}
+            disabled={true}
+          >
             Met Item Limit
           </BuyButtonContainer>
           <ExceededMaxQuantityWarning
@@ -108,7 +110,7 @@ const BuyButton = ({
               : `Your cart currently has ${maxQuantity} of this item, which is the limit. If you wish to order more than ${maxQuantity}, Please email hello@whidbeyherbal.com`}
           </ExceededMaxQuantityWarning>
         </BuyButtonWrapper>
-      );
+      )
     } else {
       return (
         <BuyButtonWrapper buyButtonClicked={buyButtonClicked}>
@@ -122,13 +124,13 @@ const BuyButton = ({
             Add to Cart
           </BuyButtonContainer>
         </BuyButtonWrapper>
-      );
+      )
     }
-  };
+  }
 
   // BuyButton component render
-  return <div>{createBuyButton()}</div>;
-};
+  return <div>{createBuyButton()}</div>
+}
 
 BuyButton.propTypes = {
   addLineItem: PropTypes.func,
@@ -139,13 +141,19 @@ BuyButton.propTypes = {
   quantity: PropTypes.number,
   quantityAllowed: PropTypes.number,
   lineItemPlusQuantityButton: PropTypes.number,
-};
+}
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   updateItemQuantity: (quantityToUpdate, shouldAddQuantities, product) =>
-    dispatch(CartActionCreators.updateItemQuantity(quantityToUpdate, shouldAddQuantities, product)),
+    dispatch(
+      CartActionCreators.updateItemQuantity(
+        quantityToUpdate,
+        shouldAddQuantities,
+        product
+      )
+    ),
   addLineItem: (product, quantity) =>
-    dispatch(CartActionCreators.addLineItem(product, quantity))
-});
+    dispatch(CartActionCreators.addLineItem(product, quantity)),
+})
 
-export default connect(null, mapDispatchToProps)(BuyButton);
+export default connect(null, mapDispatchToProps)(BuyButton)

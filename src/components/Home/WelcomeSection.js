@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import { device } from "../../utils/devices";
-import farmWebp from "./images/farm-with-lines.webp";
-import farm from "./images/farm-with-lines.jpg";
+import React from 'react'
+import styled from 'styled-components'
+import { device } from '../../utils/devices'
+import farmWebp from '../../../public/farm-with-lines.webp'
+import farm from '../../../public/farm-with-lines.jpg'
 
 const WelcomeWrapper = styled.div`
   position: relative;
@@ -14,7 +14,7 @@ const WelcomeWrapper = styled.div`
     height: calc(100vh - 60px);
     max-width: 100vw;
   }
-`;
+`
 
 const StyledPicture = styled.picture`
   img {
@@ -27,7 +27,7 @@ const StyledPicture = styled.picture`
       object-fit: contain;
     }
   }
-`;
+`
 
 const Tagline = styled.div`
   display: block;
@@ -71,7 +71,7 @@ const Tagline = styled.div`
       width: 460px;
     }
   }
-`;
+`
 
 const WelcomeSection = () => {
   return (
@@ -91,7 +91,7 @@ const WelcomeSection = () => {
         <div className="highlight" />
       </Tagline>
     </WelcomeWrapper>
-  );
-};
+  )
+}
 
-export default WelcomeSection;
+export default WelcomeSection

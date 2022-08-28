@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from "styled-components";
-import { device } from "../../utils/devices";
-import bottlesAndHoneyWebp from "./images/bottles-and-honey.webp";
-import bottlesAndHoney from "./images/bottles-and-honey.jpg";
+import React from 'react'
+import styled from 'styled-components'
+import { device } from '../../utils/devices'
+import bottlesAndHoneyWebp from '../../../public/bottles-and-honey.webp'
+import bottlesAndHoney from '../../../public/bottles-and-honey.jpg'
 
 const BumpOutContainer = styled.div`
   position: relative;
@@ -33,7 +33,7 @@ const BumpOutContainer = styled.div`
     width: 63.7%;
     height: 51%;
   }
-`;
+`
 
 const BottlesHoneyPhoto = styled.picture`
   img {
@@ -43,17 +43,18 @@ const BottlesHoneyPhoto = styled.picture`
     height: auto;
     z-index: 3;
   }
-`;
-
+`
 
 const PhotoBumpOut = () => {
-
   return (
     <BumpOutContainer>
       <BottlesHoneyPhoto>
         <source srcSet={bottlesAndHoneyWebp} type="image/webp" />
         <source srcSet={bottlesAndHoney} type="image/jpeg" />
-        <img src={bottlesAndHoney} alt="Bottles of essential oil, honeycomb, and lavender stalk laying on a table" />
+        <img
+          src={bottlesAndHoney}
+          alt="Bottles of essential oil, honeycomb, and lavender stalk laying on a table"
+        />
       </BottlesHoneyPhoto>
       <div className="circle">
         <svg height="100%" width="100%">
@@ -68,7 +69,7 @@ const PhotoBumpOut = () => {
         </svg>
       </div>
     </BumpOutContainer>
-  );
+  )
 }
 
-export default PhotoBumpOut;
+export default PhotoBumpOut

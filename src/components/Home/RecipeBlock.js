@@ -1,15 +1,14 @@
 import React from 'react';
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { device } from "../../utils/devices";
-
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import Link from 'next/link';
+import { device } from '../../utils/devices';
 
 const RecipeLink = styled(Link)`
   display: block;
   width: 47%;
   text-decoration: none;
-    /* position last item aligned left if last item is odd */
+  /* position last item aligned left if last item is odd */
   :last-child:nth-child(odd) {
     margin: 0 auto 0 2%;
   }
@@ -74,12 +73,12 @@ const RecipeInfo = styled.div`
   }
 `;
 
-  const RecipeImage = styled.img`
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 0 auto 20px auto;
-  `;
+const RecipeImage = styled.img`
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto 20px auto;
+`;
 
 const RecipeBlock = ({
   recipe: {
@@ -87,15 +86,12 @@ const RecipeBlock = ({
       title,
       handle,
       excerpt,
-      image: {
-        transformedSrc
-      }
-    }
-  }
+      image: { transformedSrc },
+    },
+  },
 }) => {
-
   return (
-    <RecipeLink to={`/recipe/${handle}`}>
+    <RecipeLink href={`/recipe/${handle}`}>
       <RecipeContainer recipeName={title}>
         <RecipeImage src={`${transformedSrc}`} />
         <RecipeInfo>
@@ -120,13 +116,13 @@ const RecipeBlock = ({
       </RecipeContainer>
     </RecipeLink>
   );
-}
+};
 
 RecipeBlock.propTypes = {
   title: PropTypes.string,
   handle: PropTypes.string,
   excerpt: PropTypes.string,
   originalSrc: PropTypes.string,
-}
+};
 
 export default RecipeBlock;

@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { device } from '../utils/devices';
 import * as CartActionCreators from '../state/actions/cart';
 import StyledH5 from './StyledH5';
+import Image from 'next/image';
 
 const ProductContainer = styled.div`
   display: block;
@@ -24,22 +25,6 @@ const ProductContainer = styled.div`
     text-align: center;
     color: black;
   }
-  .soldOutWarning {
-    position: absolute;
-    width: 100%;
-    height: 80%;
-    z-index: 99;
-    span {
-      display: block;
-      width: 100%;
-      margin: 50% auto 0 auto;
-      padding: 10px;
-      color: #525252;
-      font-size: 1.25em;
-      font-weight: 300;
-      text-align: center;
-      background: rgba(230, 197, 100, 0.5);
-    }
   }
   /* 
     :last-child allows 5 featured products to be shown on laptop, but on Mobile/Tablet
@@ -77,11 +62,48 @@ const ImageContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-const Image = styled.img`
+const StyledImage = styled.div`
+  position: relative;
   display: block;
-  max-width: 100%;
-  max-height: 100%;
+  margin: 0 auto;
+  height: 128px;
+  width: 114px;
+  @media ${device.tablet} {
+    height: 194px;
+    width: 172px;
+  }
+  @media ${device.laptop} {
+    height: 201px;
+    width: 180px;
+  }
+  @media ${device.largeScreen} {
+    height: 236px;
+    width: 210px;
+  }
   ${(props) => (!props.isAvailable ? 'opacity: .5' : 'opacity: 1')};
+`;
+
+const SoldOutWarning = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  z-index: 99;
+  span {
+    display: block;
+    width: 100%;
+    margin: 50% auto 0 auto;
+    padding: 10px;
+    color: #525252;
+    font-size: 1em;
+    font-weight: 300;
+    text-align: center;
+    background: rgba(230, 197, 100, 0.5);
+  }
+  @media ${device.tablet} {
+    span {
+      font-size: 1.25em;
+    }
+  }
 `;
 
 const createProduct = (product, clearHeroImg, updateQuantityButton) => {
@@ -89,22 +111,24 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
     clearHeroImg();
     updateQuantityButton(1);
   };
-
+  console.log(product.images.edges[0].node.transformedSrc);
   return (
     <ProductLink href={`/product/${product.handle}`}>
       <>
         <ImageContainer onClick={clearHeroImgAndQuantityButton}>
-          {!product.availableForSale ? (
-            <div className="soldOutWarning">
-              {' '}
-              <span>SOLD OUT</span>{' '}
-            </div>
-          ) : null}
-          <Image
-            src={`${product.images.edges[0].node.transformedSrc}`}
-            alt={`${product.description}`}
-            isAvailable={product.availableForSale}
-          />
+          <StyledImage isAvailable={product.availableForSale}>
+            {!product.availableForSale ? (
+              <SoldOutWarning>
+                {' '}
+                <span>SOLD OUT</span>{' '}
+              </SoldOutWarning>
+            ) : null}
+            <Image
+              src={`${product.images.edges[0].node.transformedSrc}`}
+              alt={`${product.description}`}
+              layout="fill"
+            />
+          </StyledImage>
         </ImageContainer>
         <StyledH5> {product.title.toUpperCase()} </StyledH5>
         <p className="info">${product.variants.edges[0].node.price}</p>

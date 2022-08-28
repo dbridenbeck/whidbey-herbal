@@ -8,4 +8,7 @@ module.exports = {
       ssr: true,
     },
   },
+  images: {
+    domains: ['cdn.shopify.com'],
+  },
 };

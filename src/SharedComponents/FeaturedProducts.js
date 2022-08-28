@@ -17,23 +17,27 @@ const ProductsContainer = styled.div`
   position: relative;
 `;
 
-const ExploreShopLink = styled(Link)`
+const ExploreShopLink = styled.span`
   display: block;
   width: 40%;
   min-width: 200px;
   max-width: 300px;
   margin: 30px auto 0px auto;
   padding: 10px 5px;
-  color: #e3be42;
   border: 2px solid #e3be42;
   border-radius: 10px;
   text-align: center;
   font-size: 1.225em;
   font-weight: 300;
-  text-decoration: none;
   &:hover {
     background-color: #e3be42;
-    color: white;
+    a {
+      color: white;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: #e3be42;
   }
 `;
 
@@ -60,7 +64,9 @@ const Products = ({ title }) => {
           <Product key={product.node.handle} product={product.node} />
         ))}
       </ProductsContainer>
-      <ExploreShopLink href="/shop">Explore the Shop</ExploreShopLink>
+      <ExploreShopLink>
+        <Link href="/shop">Explore the Shop </Link>
+      </ExploreShopLink>
     </ComponentWrapper>
   );
 };

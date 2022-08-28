@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { device } from '../../utils/devices';
 import * as CartActionCreators from '../../state/actions/cart';
 import StyledH5 from '../../SharedComponents/StyledH5';
+import { useRouter } from 'next/router';
 
 const ProductContainer = styled.div`
   display: block;
@@ -50,8 +51,10 @@ const ProductContainer = styled.div`
   }
 `;
 
-const ProductLink = styled(Link)`
-  text-decoration: none;
+const ProductLink = styled.div`
+  a {
+    text-decoration: none;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -76,33 +79,33 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
   };
 
   return (
-    <ProductLink to={`/product/${product.handle}`}>
-      <ImageContainer onClick={clearHeroImgAndQuantityButton}>
-        {!product.availableForSale ? (
-          <div className="soldOutWarning">
-            {' '}
-            <span>SOLD OUT</span>{' '}
-          </div>
-        ) : null}
-        <Image
-          src={`${product.images.edges[0].node.transformedSrc}`}
-          alt={`${product.description}`}
-          isAvailable={product.availableForSale}
-        />
-      </ImageContainer>
-      <StyledH5> {product.title.toUpperCase()} </StyledH5>
-      <p className="info">${product.variants.edges[0].node.price}</p>
+    <ProductLink>
+      <Link href={`/product/${product.handle}`}>
+        <>
+          <ImageContainer onClick={clearHeroImgAndQuantityButton}>
+            {!product.availableForSale ? (
+              <div className="soldOutWarning">
+                {' '}
+                <span>SOLD OUT</span>{' '}
+              </div>
+            ) : null}
+            <Image
+              src={`${product.images.edges[0].node.transformedSrc}`}
+              alt={`${product.description}`}
+              isAvailable={product.availableForSale}
+            />
+          </ImageContainer>
+          <StyledH5> {product.title.toUpperCase()} </StyledH5>
+          <p className="info">${product.variants.edges[0].node.price}</p>
+        </>
+      </Link>
     </ProductLink>
   );
 };
 
 // begin component
-const ShopProduct = ({
-  location: { pathname },
-  product,
-  clearHeroImg,
-  updateQuantityButton,
-}) => {
+const ShopProduct = ({ product, clearHeroImg, updateQuantityButton }) => {
+  const { pathname } = useRouter();
   return (
     <ProductContainer pathname={pathname}>
       {createProduct(product, clearHeroImg, updateQuantityButton)}
@@ -121,4 +124,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(CartActionCreators.updateQuantityButton(amount)),
 });
 
-export default connect(null, mapDispatchToProps)(withRouter(ShopProduct));
+export default connect(null, mapDispatchToProps)(ShopProduct);

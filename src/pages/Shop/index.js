@@ -1,12 +1,12 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
-import styled from "styled-components";
-import { useQuery } from "@apollo/client";
-import PageWrapper from "../../SharedComponents/PageWrapper";
-import ShopProduct from "./ShopProduct";
-import StyledH1 from "../../SharedComponents/StyledH1";
-import Footer from "../../SharedComponents/Footer";
-import { GET_SHOP_PRODUCTS } from "../../queries";
+import React from 'react';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import { useQuery } from '@apollo/client';
+import PageWrapper from '../../SharedComponents/PageWrapper';
+import ShopProduct from './ShopProduct';
+import StyledH1 from '../../SharedComponents/StyledH1';
+import Footer from '../../SharedComponents/Footer';
+import { GET_SHOP_PRODUCTS } from '../../queries';
 
 const ProductsContainer = styled.div`
   display: flex;
@@ -18,11 +18,10 @@ const ProductsContainer = styled.div`
 `;
 
 const Shop = () => {
-
-  const location = useLocation();
+  const { pathname } = useRouter();
 
   const collectionToQuery =
-    location.pathname === "/shop" ? "Online Store" : "Wholesale Products";
+    pathname === '/shop' ? 'Online Store' : 'Wholesale Products';
 
   const { loading, error, data } = useQuery(GET_SHOP_PRODUCTS, {
     variables: { collectionName: collectionToQuery },
@@ -34,9 +33,7 @@ const Shop = () => {
 
   return (
     <PageWrapper>
-      <StyledH1>
-        {location.pathname === "/shop" ? "Shop" : "Wholesale Shop"}
-      </StyledH1>
+      <StyledH1>{pathname === '/shop' ? 'Shop' : 'Wholesale Shop'}</StyledH1>
       <ProductsContainer>
         {products.map((product) => (
           <ShopProduct key={product.node.id} product={product.node} />

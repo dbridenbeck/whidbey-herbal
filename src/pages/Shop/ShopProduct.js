@@ -80,7 +80,12 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
 
   return (
     <ProductLink>
-      <Link href={`/product/${product.handle}`}>
+      <Link
+        href={{
+          pathname: '/product/[handle]',
+          query: { handle: product.handle },
+        }}
+      >
         <>
           <ImageContainer onClick={clearHeroImgAndQuantityButton}>
             {!product.availableForSale ? (

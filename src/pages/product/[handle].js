@@ -1,17 +1,19 @@
-import React from "react";
-import { connect } from "react-redux";
-import { useQuery } from "@apollo/client";
-import PropTypes from "prop-types";
-import FeaturedProducts from "../../SharedComponents/FeaturedProducts";
-import PageWrapper from "../../SharedComponents/PageWrapper";
-import Reviews from "./Reviews";
-import ProductDetails from "./ProductDetails";
-import Footer from "../../SharedComponents/Footer";
-import { GET_PRODUCT } from "../../queries";
+import React from 'react';
+import { connect } from 'react-redux';
+import { useQuery } from '@apollo/client';
+import PropTypes from 'prop-types';
+import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
+import PageWrapper from '../../SharedComponents/PageWrapper';
+import Reviews from './Reviews';
+import ProductDetails from './ProductDetails';
+import Footer from '../../SharedComponents/Footer';
+import { GET_PRODUCT } from '../../queries';
+import { useRouter } from 'next/router ';
 
 // begin component
-const Product = ({ match, checkout }) => {
-  const { handle } = match.params;
+const Product = ({ checkout }) => {
+  const router = useRouter();
+  const { handle } = router.query;
 
   const { loading, error, data } = useQuery(GET_PRODUCT, {
     variables: { productHandle: handle },
@@ -21,9 +23,9 @@ const Product = ({ match, checkout }) => {
   const selectedProduct = data.productByHandle;
 
   // determine if wholesaleProducts or onlineProducts should be loaded
-  const featuredProductsTitle = handle.includes("wholesale")
-    ? "More Wholesale Products"
-    : "More Products";
+  const featuredProductsTitle = handle.includes('wholesale')
+    ? 'More Wholesale Products'
+    : 'More Products';
 
   // check if item exists in checkout already
   const doesItemExist = () => {

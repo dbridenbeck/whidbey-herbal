@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as CartActionCreators from '../../state/actions/cart';
-import Link from 'next/link';
 import styled from 'styled-components';
 import { device } from '../../utils/devices';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 const LinksWrapper = styled.div`
   display: block;
@@ -23,29 +24,35 @@ const LinksWrapper = styled.div`
   }
 `;
 
-const StyledLinkContainer = styled.div`
-  color: #787878;
-`;
+const StyledLinkContainer = styled.div``;
 
 const StyledLink = styled.div`
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.125rem;
+  line-height: 1.5em;
+  font-weight: 300;
   a {
-    display: inline-block;
-    text-decoration: none;
-    text-align: center;
-    font-size: 1.125rem;
-    line-height: 1.5em;
-    font-weight: 300;
     color: black;
+    text-decoration: none;
     :visited {
       color: black;
     }
     &:hover {
       color: #e3be42;
     }
-    @media ${device.laptop} {
-      padding: 0;
-      text-align: center;
-    }
+  }
+  :visited {
+    color: black;
+  }
+  &:hover {
+    color: #e3be42;
+  }
+  @media ${device.laptop} {
+    padding: 0;
+    text-align: center;
   }
 `;
 
@@ -56,31 +63,56 @@ const links = [
   },
   {
     name: 'About',
-    destination: '/#about',
+    destination: '#about',
   },
   {
     name: 'Process',
-    destination: '/#process',
+    destination: '#process',
   },
   {
     name: 'Find a Store',
-    destination: '/#findstore',
+    destination: '#findstore',
   },
   {
     name: 'Recipes',
-    destination: '/#recipes',
+    destination: '#recipes',
   },
 ];
 
 const createStyledLink = (clearBurger, links) => {
-  const handleClearBurger = () => clearBurger();
-  return links.map((link) => (
-    <StyledLinkContainer key={link.name}>
-      <StyledLink onClick={handleClearBurger}>
-        <Link href={link.destination}>{link.name}</Link>
-      </StyledLink>
-    </StyledLinkContainer>
-  ));
+  const [isMounted, setIsMounted] = useState(false);
+  const handleClearBurger = (link) => {
+    if (isMounted && link.name !== 'Shop') {
+      const element = document.querySelector(link.destination);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest',
+        });
+      }
+
+      clearBurger();
+    }
+  };
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, [setIsMounted]);
+
+  return links.map((link) => {
+    return (
+      <StyledLinkContainer key={link.name}>
+        <StyledLink onClick={() => handleClearBurger(link)}>
+          {link.name !== 'Shop' ? (
+            link.name
+          ) : (
+            <Link href={link.destination}>{link.name}</Link>
+          )}
+        </StyledLink>
+      </StyledLinkContainer>
+    );
+  });
 };
 
 const NavLinks = ({ clearBurger }) => {

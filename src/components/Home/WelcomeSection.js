@@ -1,8 +1,8 @@
-import React from 'react'
-import styled from 'styled-components'
-import { device } from '../../utils/devices'
-import farmWebp from '../../../public/farm-with-lines.webp'
-import farm from '../../../public/farm-with-lines.jpg'
+import React from 'react';
+import styled from 'styled-components';
+import { device } from '../../utils/devices';
+import Image from 'next/image';
+import farm from '../../../public/farm-with-lines.jpg';
 
 const WelcomeWrapper = styled.div`
   position: relative;
@@ -14,20 +14,18 @@ const WelcomeWrapper = styled.div`
     height: calc(100vh - 60px);
     max-width: 100vw;
   }
-`
+`;
 
-const StyledPicture = styled.picture`
-  img {
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
-    /* Media screen keeps img 100% height on bigger screens */
-    @media ${device.laptop} {
-      height: 100%;
-      object-fit: contain;
-    }
+const StyledPicture = styled.div`
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  /* Media screen keeps img 100% height on bigger screens */
+  @media ${device.laptop} {
+    height: 100%;
+    object-fit: contain;
   }
-`
+`;
 
 const Tagline = styled.div`
   display: block;
@@ -71,16 +69,14 @@ const Tagline = styled.div`
       width: 460px;
     }
   }
-`
+`;
 
 const WelcomeSection = () => {
   return (
     <WelcomeWrapper>
       <StyledPicture>
-        <source srcSet={`${farmWebp}`} type="image/webp" />
-        <source srcSet={`${farm}`} type="image/jpeg" />
-        <img
-          src={`${farm}`}
+        <Image
+          src={farm}
           alt="A watercolor of Whidbey Herbal farms showing a barn, a house, lavender fields, a dog in a pasture, and a forest in the background"
         />
       </StyledPicture>
@@ -91,7 +87,7 @@ const WelcomeSection = () => {
         <div className="highlight" />
       </Tagline>
     </WelcomeWrapper>
-  )
-}
+  );
+};
 
-export default WelcomeSection
+export default WelcomeSection;

@@ -1,12 +1,10 @@
-import React from 'react'
-import styled from 'styled-components'
-import { device } from '../../utils/devices'
-import ComponentWrapper from '../../SharedComponents/ComponentWrapper'
-import CaitlinBowsWebp from '../../../public/caitlin-bows.webp'
-import CaitlinBows from '../../../public/caitlin-bows.jpg'
-import stillOnStump from '../../../public/still-on-stump.jpg'
-import stillOnStumpWebp from '../../../public/still-on-stump.webp'
-import WaveSVG from '../../../public/photosectionsvg.svg'
+import React from 'react';
+import styled from 'styled-components';
+import { device } from '../../utils/devices';
+import ComponentWrapper from '../../SharedComponents/ComponentWrapper';
+import CaitlinBows from '../../../public/caitlin-bows.jpg';
+import stillOnStump from '../../../public/still-on-stump.jpg';
+import Image from 'next/image';
 
 const FullWidthSVG = styled.div`
   display: block;
@@ -16,7 +14,7 @@ const FullWidthSVG = styled.div`
   height: 100%;
   /* -200px margin offset's componentwrapper's margin */
   margin: -200px 0 0 -0vw;
-  background-image: url(${WaveSVG});
+  background-image: url('/photosectionsvg.svg');
   /* adjust positioning and size of SVG for bigger screens */
   @media ${device.tablet} {
     width: 200vw;
@@ -26,7 +24,7 @@ const FullWidthSVG = styled.div`
   @media (min-width: 1281px) {
     margin-left: -20vw;
   }
-`
+`;
 
 const PhotoContainer = styled.div`
   position: relative;
@@ -38,21 +36,20 @@ const PhotoContainer = styled.div`
   /* negative margin compensates for componentwrapper's 200px top margin*/
   margin: -200px -50vw 0 -50vw;
   padding-top: 20%;
-  .circle-photo {
-    align-self: flex-end;
-    border-radius: 50%;
-    padding: 0 3.2%;
-  }
-`
+`;
 
-const StyledPicture = styled.picture`
-  img {
-    display: inline-block;
-    position: relative;
-    width: 50%;
-    height: auto;
-  }
-`
+const StyledPicture = styled.div`
+  display: inline-block;
+  position: relative;
+  width: 50%;
+  height: auto;
+  ${(props) =>
+    props.circle
+      ? `& img{align-self: flex-end;
+    border-radius: 50%;
+    padding: 0 3.2%;}`
+      : ''};
+`;
 
 const FeaturedText = styled.p`
   display: block;
@@ -72,7 +69,7 @@ const FeaturedText = styled.p`
   @media ${device.laptop} {
     font-size: 2.375rem;
   }
-`
+`;
 
 const FeaturedPhotos = () => {
   return (
@@ -83,27 +80,18 @@ const FeaturedPhotos = () => {
           We’re a family farm that grows and distills each of our essential
           oils, fresh from the heart of Whidbey Island in the Salish Sea.
         </FeaturedText>
-        <StyledPicture>
-          <source srcSet={`${stillOnStumpWebp}`} type="image/webp" />
-          <source srcSet={`${stillOnStump}`} type="image/jpeg" />
-          <img
-            className="circle-photo"
+        <StyledPicture circle>
+          <Image
             src={stillOnStump}
             alt="Beatiful copper still sitting on a stump."
           />
         </StyledPicture>
         <StyledPicture>
-          <source srcSet={`${CaitlinBowsWebp}`} type="image/webp" />
-          <source srcSet={`${CaitlinBows}`} type="image/jpeg" />
-          <img
-            className="right-rect-photo"
-            src={CaitlinBows}
-            alt="Caitlin smiling and holding fir bows"
-          />
+          <Image src={CaitlinBows} alt="Caitlin smiling and holding fir bows" />
         </StyledPicture>
       </PhotoContainer>
     </ComponentWrapper>
-  )
-}
+  );
+};
 
-export default FeaturedPhotos
+export default FeaturedPhotos;

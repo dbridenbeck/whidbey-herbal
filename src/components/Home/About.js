@@ -1,23 +1,22 @@
-import React from 'react'
-import styled from 'styled-components'
-import farmers from '../../../public/farmers.jpg'
-import farmersWebp from '../../../public/farmers.webp'
-import ComponentWrapper from '../../SharedComponents/ComponentWrapper'
-import StyledH2 from '../../SharedComponents/StyledH2'
-import { device } from '../../utils/devices'
+import React from 'react';
+import styled from 'styled-components';
+import farmers from '../../../public/farmers.jpg';
+import farmersWebp from '../../../public/farmers.webp';
+import ComponentWrapper from '../../SharedComponents/ComponentWrapper';
+import StyledH2 from '../../SharedComponents/StyledH2';
+import { device } from '../../utils/devices';
+import Image from 'next/image';
 
-const FarmerIllustration = styled.picture`
-  img {
-    display: block;
-    height: auto;
-    width: 87%;
-    max-width: 400px;
-    margin: 0 auto;
-    @media (min-width: 1281px) {
-      max-width: 800px;
-    }
+const FarmerIllustration = styled.div`
+  display: block;
+  height: auto;
+  width: 87%;
+  max-width: 400px;
+  margin: 0 auto;
+  @media (min-width: 1281px) {
+    max-width: 800px;
   }
-`
+`;
 
 const AboutText = styled.div`
   padding: 0 20px;
@@ -36,17 +35,15 @@ const AboutText = styled.div`
     padding: 0;
     font-size: 1.5rem;
   }
-`
+`;
 
 const About = () => {
   return (
     <ComponentWrapper id="about">
       <StyledH2>The Farmers</StyledH2>
       <FarmerIllustration>
-        <source srcSet={`${farmersWebp}`} type="image/webp" />
-        <source srcSet={`${farmers}`} type="image/jpeg" />
-        <img
-          src={`${farmers}`}
+        <Image
+          src={farmers}
           alt="Watercolor of Sam and Caitlin, the farmers of Whidbey Herbal"
         />
       </FarmerIllustration>
@@ -64,7 +61,7 @@ const About = () => {
         </p>
       </AboutText>
     </ComponentWrapper>
-  )
-}
+  );
+};
 
-export default About
+export default About;

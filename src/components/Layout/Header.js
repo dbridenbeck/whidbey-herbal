@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 import NavPanel from './NavPanel';
 import Hamburger from './Hamburger';
@@ -82,8 +83,8 @@ const CheckoutLink = styled(Link)`
   }
 `;
 
-const HomeLink = styled.img`
-  height: auto;
+const HomeLink = styled(Image)`
+  height: 49;
   width: 225px;
   margin: 7px auto 0 auto;
   @media ${device.laptop} {
@@ -125,9 +126,9 @@ const Header = ({ show, lineItems, clearBurger, burgerToggled }) => {
         <Hamburger />
         <Link href={`/#home`}>
           <HomeLink
-            src={`${horizLogo}`}
-            width="1200"
-            height="263"
+            src={horizLogo}
+            height="49"
+            width="225"
             alt="Whidbey Herbal Logo"
             onClick={clearBurger}
           />

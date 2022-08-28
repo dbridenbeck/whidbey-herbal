@@ -9,7 +9,7 @@ const RecipeLink = styled.div`
   display: block;
   text-decoration: none;
   margin-bottom: 20px;
-  padding-left: 20px;
+  padding: 0px 10px;
   /* position last item aligned left if last item is odd */
   :last-child:nth-child(odd) {
     align-self: flex-start;

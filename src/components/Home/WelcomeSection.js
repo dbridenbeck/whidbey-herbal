@@ -42,7 +42,7 @@ const Tagline = styled.div`
     position: relative;
     padding: 0 0 10px 0;
     margin: 0;
-    font-size: 1.625rem;
+    font-size: 1.5rem;
     font-weight: bold;
     z-index: 5;
     @media ${device.tablet} {
@@ -56,9 +56,9 @@ const Tagline = styled.div`
     position: absolute;
     background-color: #e6c564;
     top: 20%;
-    left: 163px;
+    left: 149px;
     height: 1.225rem;
-    width: 167px;
+    width: 158px;
     @media ${device.tablet} {
       left: 300px;
       height: 2.15rem;

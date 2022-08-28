@@ -13,7 +13,6 @@ const RecipeLink = styled.div`
   /* position last item aligned left if last item is odd */
   :last-child:nth-child(odd) {
     align-self: flex-start;
-    // margin-right: auto;
   }
   @media ${device.tablet} {
     :last-child:nth-child(odd) {

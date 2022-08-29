@@ -79,43 +79,40 @@ const links = [
   },
 ];
 
-const createStyledLink = (clearBurger, links) => {
+const NavLinks = ({ clearBurger }) => {
   const [isMounted, setIsMounted] = useState(false);
-  const handleClearBurger = (link) => {
-    if (isMounted && link.name !== 'Shop') {
-      const element = document.querySelector(link.destination);
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-          inline: 'nearest',
-        });
-      }
-
-      clearBurger();
-    }
-  };
-
   useEffect(() => {
     setIsMounted(true);
   }, [setIsMounted]);
+  const createStyledLink = (clearBurger, links) => {
+    const handleClearBurger = (link) => {
+      if (isMounted && link.name !== 'Shop') {
+        const element = document.querySelector(link.destination);
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest',
+          });
+        }
+      }
+      clearBurger();
+    };
 
-  return links.map((link) => {
-    return (
-      <StyledLinkContainer key={link.name}>
-        <StyledLink onClick={() => handleClearBurger(link)}>
-          {link.name !== 'Shop' ? (
-            link.name
-          ) : (
-            <Link href={link.destination}>{link.name}</Link>
-          )}
-        </StyledLink>
-      </StyledLinkContainer>
-    );
-  });
-};
-
-const NavLinks = ({ clearBurger }) => {
+    return links.map((link) => {
+      return (
+        <StyledLinkContainer key={link.name}>
+          <StyledLink onClick={() => handleClearBurger(link)}>
+            {link.name !== 'Shop' ? (
+              link.name
+            ) : (
+              <Link href={link.destination}>{link.name}</Link>
+            )}
+          </StyledLink>
+        </StyledLinkContainer>
+      );
+    });
+  };
   return <LinksWrapper>{createStyledLink(clearBurger, links)}</LinksWrapper>;
 };
 

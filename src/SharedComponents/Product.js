@@ -51,8 +51,11 @@ const ProductContainer = styled.div`
   }
 `;
 
-const ProductLink = styled(Link)`
-  text-decoration: none;
+const ProductLink = styled.div`
+  cursor: pointer;
+  a {
+    text-decoration: none;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -111,10 +114,9 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
     clearHeroImg();
     updateQuantityButton(1);
   };
-  console.log(product.images.edges[0].node.transformedSrc);
   return (
-    <ProductLink href={`/product/${product.handle}`}>
-      <>
+    <Link href={`/product/${product.handle}`}>
+      <ProductLink>
         <ImageContainer onClick={clearHeroImgAndQuantityButton}>
           <StyledImage isAvailable={product.availableForSale}>
             {!product.availableForSale ? (
@@ -132,8 +134,8 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
         </ImageContainer>
         <StyledH5> {product.title.toUpperCase()} </StyledH5>
         <p className="info">${product.variants.edges[0].node.price}</p>
-      </>
-    </ProductLink>
+      </ProductLink>
+    </Link>
   );
 };
 

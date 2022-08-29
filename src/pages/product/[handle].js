@@ -46,7 +46,7 @@ const Product = ({ checkout }) => {
           doesItemExist={handleIfItemExists}
         />
         <Reviews />
-        <FeaturedProducts title={featuredProductsTitle} />
+        <FeaturedProducts title={featuredProductsTitle} bottomPadding />
       </div>
     ) : null;
   };

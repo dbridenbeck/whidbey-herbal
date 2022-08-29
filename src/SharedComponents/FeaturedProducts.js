@@ -41,7 +41,7 @@ const ExploreShopLink = styled.span`
   }
 `;
 
-const Products = ({ title }) => {
+const Products = ({ title, bottomPadding }) => {
   const { pathname } = useRouter();
   const { loading, error, data } = useQuery(GET_FEATURED_PRODUCTS);
   if (loading) return null;
@@ -57,7 +57,7 @@ const Products = ({ title }) => {
   const products = queriedProducts.node.products.edges;
 
   return (
-    <ComponentWrapper>
+    <ComponentWrapper bottomPadding={bottomPadding}>
       <StyledH2> {title} </StyledH2>
       <ProductsContainer>
         {products.map((product) => (

@@ -189,12 +189,12 @@ const Checkout = ({ lineItems, removeLineItem, storeCheckoutDetails }) => {
           calculatedCartSubtotal={currencyCalculatedCartSubtotal}
           createCheckoutButton={createCheckoutButton}
         />
-        <FeaturedProducts title={'Continue Shopping'} />
+        <FeaturedProducts title={'Continue Shopping'} bottomPadding />
       </CheckoutContainer>
     ) : (
       <CheckoutContainer>
         <StyledH2>Your Shopping Cart is empty.</StyledH2>
-        <FeaturedProducts title={'Explore the Shop'} />
+        <FeaturedProducts title={'Explore the Shop'} bottomPadding />
       </CheckoutContainer>
     );
   };

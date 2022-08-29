@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as CartActionCreators from '../../state/actions/cart';
 import Link from 'next/link';
 import { connect } from 'react-redux';
@@ -10,6 +10,7 @@ import horizLogo from '../../../public/horiz-logo.png';
 import NavPanel from './NavPanel';
 import Hamburger from './Hamburger';
 import { device } from '../../utils/devices';
+import { getFromLocalStorage } from '../../state/localStorage';
 
 const Navbar = styled.div`
   z-index: 1000;
@@ -73,9 +74,13 @@ const HomeLink = styled.div`
 `;
 
 const Header = ({ lineItems, clearBurger, burgerToggled }) => {
+  const [persistedLineItems, setPersistedLineItems] = useState([]);
+  useEffect(() => {
+    setPersistedLineItems(getFromLocalStorage()?.checkout.lineItems);
+  }, []);
   const createCheckoutLink = () => {
     const itemsInCart = () => {
-      if (lineItems.length) {
+      if (persistedLineItems?.length) {
         return lineItems
           .map((lineItem) => lineItem.quantity)
           .filter(Boolean)

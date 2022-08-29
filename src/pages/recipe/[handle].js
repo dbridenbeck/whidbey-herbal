@@ -8,6 +8,7 @@ import StyledH1 from '../../SharedComponents/StyledH1';
 import Footer from '../../SharedComponents/Footer';
 import { GET_ARTICLES } from '../../queries';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 // Begin Styled Components
 const RecipeContainer = styled.div`
@@ -23,13 +24,26 @@ const RecipeContainer = styled.div`
   }
 `;
 
-const RecipeImage = styled.img`
-  width: 100%;
-  border-radius: 10px;
+const RecipeImage = styled.div`
+  position: relative;
+  width: 245px;
+  height: 245px;
+  img {
+    border-radius: 10px;
+  }
   @media ${device.tablet} {
-    width: 40%;
+    width: 275px;
+    height: 275px;
     margin: 10px 10px 10px 0px;
     float: right;
+  }
+  @media ${device.laptop} {
+    width: 377px;
+    height: 377px;
+  }
+  @media ${device.largeScreen} {
+    width: 448px;
+    height: 448px;
   }
 `;
 
@@ -68,7 +82,9 @@ const Recipe = () => {
         <>
           <StyledH1>{title}</StyledH1>
           <RecipeContainer>
-            <RecipeImage src={transformedSrc} />
+            <RecipeImage>
+              <Image src={transformedSrc} layout="fill" />
+            </RecipeImage>
             <ShopifyHTML
               dangerouslySetInnerHTML={{
                 __html: contentHtml,
@@ -90,7 +106,7 @@ const Recipe = () => {
   return (
     <PageWrapper>
       {createRecipe(queriedArticles)}
-      <FeaturedProducts title={'Explore the Shop'} />
+      <FeaturedProducts title={'Explore the Shop'} bottomPadding />
       <Footer />
     </PageWrapper>
   );

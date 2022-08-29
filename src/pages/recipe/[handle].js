@@ -98,17 +98,16 @@ const Recipe = () => {
     }
   };
 
-  const {
-    data: {
-      articles: { edges: queriedArticles },
-    },
-  } = useQuery(GET_ARTICLES);
+  const { data, loading } = useQuery(GET_ARTICLES);
+  const articles = data?.articles?.edges;
   return (
-    <PageWrapper>
-      {createRecipe(queriedArticles)}
-      <FeaturedProducts title={'Explore the Shop'} bottomPadding />
-      <Footer />
-    </PageWrapper>
+    !loading && (
+      <PageWrapper>
+        {createRecipe(articles)}
+        <FeaturedProducts title={'Explore the Shop'} bottomPadding />
+        <Footer />
+      </PageWrapper>
+    )
   );
 };
 

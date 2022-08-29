@@ -19,17 +19,19 @@ const RecipeContainer = styled.div`
 `;
 
 const RecipeSection = () => {
-  const { data } = useQuery(GET_ARTICLES);
-  const articles = data.articles.edges;
+  const { data, loading } = useQuery(GET_ARTICLES);
+  const articles = data?.articles?.edges;
   return (
-    <ComponentWrapper id="recipes" maxWidth={''}>
-      <StyledH2>Recipes</StyledH2>
-      <RecipeContainer>
-        {articles.map((article) => (
-          <RecipeBlock recipe={article} key={article.node.handle} />
-        ))}
-      </RecipeContainer>
-    </ComponentWrapper>
+    !loading && (
+      <ComponentWrapper id="recipes" maxWidth={''}>
+        <StyledH2>Recipes</StyledH2>
+        <RecipeContainer>
+          {articles.map((article) => (
+            <RecipeBlock recipe={article} key={article.node.handle} />
+          ))}
+        </RecipeContainer>
+      </ComponentWrapper>
+    )
   );
 };
 

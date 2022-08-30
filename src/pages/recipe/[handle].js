@@ -1,12 +1,12 @@
-import React from 'react';
-import { useQuery } from '@apollo/client';
+import React, { useEffect } from 'react';
+import apolloClient from '../../apolloClient';
 import styled from 'styled-components';
 import { device } from '../../utils/devices';
 import PageWrapper from '../../SharedComponents/PageWrapper';
 import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
 import StyledH1 from '../../SharedComponents/StyledH1';
 import Footer from '../../SharedComponents/Footer';
-import { GET_ARTICLES } from '../../queries';
+import { GET_FEATURED_PRODUCTS_AND_ARTICLES } from '../../queries';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
@@ -56,7 +56,7 @@ const ShopifyHTML = styled.div`
 `;
 
 // begin component
-const Recipe = () => {
+const Recipe = ({ articles, products }) => {
   const createRecipe = (articles) => {
     const router = useRouter();
     const { handle } = router.query;
@@ -98,17 +98,30 @@ const Recipe = () => {
     }
   };
 
-  const { data, loading } = useQuery(GET_ARTICLES);
-  const articles = data?.articles?.edges;
   return (
-    !loading && (
-      <PageWrapper>
-        {createRecipe(articles)}
-        <FeaturedProducts title={'Explore the Shop'} bottomPadding />
-        <Footer />
-      </PageWrapper>
-    )
+    <PageWrapper>
+      {createRecipe(articles)}
+      <FeaturedProducts
+        title={'Explore the Shop'}
+        products={products}
+        bottomPadding
+      />
+      <Footer />
+    </PageWrapper>
   );
 };
 
 export default Recipe;
+
+export async function getServerSideProps() {
+  const { data } = await apolloClient.query({
+    query: GET_FEATURED_PRODUCTS_AND_ARTICLES,
+  });
+  return {
+    // TODO, handle error from apollo query
+    props: {
+      articles: data?.articles?.edges,
+      products: data?.collections?.edges,
+    },
+  };
+}

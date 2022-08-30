@@ -41,26 +41,22 @@ const ExploreShopLink = styled.span`
   }
 `;
 
-const Products = ({ title, bottomPadding }) => {
+const Products = ({ products, title, bottomPadding }) => {
   const { pathname } = useRouter();
-  const { loading, error, data } = useQuery(GET_FEATURED_PRODUCTS);
-  if (loading) return null;
-  if (error) return `Error! ${error}`;
-
   const queriedProducts = pathname.includes('wholesale')
-    ? data.collections.edges.find(
+    ? products.find(
         (collection) => collection.node.title === 'Wholesale Products'
       )
-    : data.collections.edges.find(
+    : products.find(
         (collection) => collection.node.title === 'Featured Products'
       );
-  const products = queriedProducts.node.products.edges;
+  const finalProducts = queriedProducts.node.products.edges;
 
   return (
     <ComponentWrapper bottomPadding={bottomPadding}>
       <StyledH2> {title} </StyledH2>
       <ProductsContainer>
-        {products.map((product) => (
+        {finalProducts.map((product) => (
           <Product key={product.node.handle} product={product.node} />
         ))}
       </ProductsContainer>

@@ -32,7 +32,7 @@ const Layout = ({ children, clearCheckoutInState, checkoutId }) => {
 
   return (
     <ApolloConsumer>
-      {(client) => {
+      {() => {
         // if checkout exists, clear checkout in state if checkout was completed
         if (checkoutData?.node?.completedAt) {
           clearCheckoutInState();

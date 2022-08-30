@@ -1,25 +1,23 @@
 import '../index.css';
 import Layout from '../components/Layout/Layout';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { createHttpLink } from 'apollo-link-http';
-import { setContext } from 'apollo-link-context';
 import ScrollToTop from '../utils/ScrollToTop';
 import { Reducer1 } from '../state/app';
 import { useRouter } from 'next/router';
 import ReactGA from 'react-ga';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   saveToLocalStorage,
   getFromLocalStorage,
 } from '../../src/state/localStorage';
+import apolloClient from '../apolloClient';
 
 function App({ Component, pageProps }) {
   // google analytics config
   const router = useRouter();
-  const [isMounted, setIsMounted] = useState(false);
 
   const trackingId = 'UA-151317774-1';
   ReactGA.initialize(trackingId);
@@ -51,25 +49,9 @@ function App({ Component, pageProps }) {
     saveToLocalStorage(state);
   });
 
-  // config Apollo
-  const httpLink = createHttpLink({
-    uri: 'https://whidbey-herbal.myshopify.com/api/2020-07/graphql.json',
-  });
-
-  const middlewareLink = setContext(() => ({
-    headers: {
-      'X-Shopify-Storefront-Access-Token': '837432f0b8059e443da74da036f73f70',
-    },
-  }));
-
-  const client = new ApolloClient({
-    link: middlewareLink.concat(httpLink),
-    cache: new InMemoryCache(),
-  });
-
   return (
     <Provider store={store}>
-      <ApolloProvider client={client}>
+      <ApolloProvider client={apolloClient}>
         <ScrollToTop />
         <Layout>
           <Component {...pageProps} />
@@ -80,3 +62,4 @@ function App({ Component, pageProps }) {
 }
 
 export default App;
+export { apolloClient };

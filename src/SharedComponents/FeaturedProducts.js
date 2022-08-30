@@ -1,12 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ComponentWrapper from './ComponentWrapper';
 import StyledH2 from './StyledH2';
-import { GET_FEATURED_PRODUCTS } from '../queries';
 import Product from './Product';
 
 const ProductsContainer = styled.div`

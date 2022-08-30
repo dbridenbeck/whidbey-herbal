@@ -1,4 +1,4 @@
-import React from 'react';
+import apolloClient from '../../apolloClient';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { useQuery } from '@apollo/client';
@@ -17,20 +17,7 @@ const ProductsContainer = styled.div`
   margin: 70px 0;
 `;
 
-const Shop = () => {
-  const { pathname } = useRouter();
-
-  const collectionToQuery =
-    pathname === '/shop' ? 'Online Store' : 'Wholesale Products';
-
-  const { loading, error, data } = useQuery(GET_SHOP_PRODUCTS, {
-    variables: { collectionName: collectionToQuery },
-  });
-  if (loading) return null;
-  if (error) return `Error! ${error}`;
-
-  const products = data.collections.edges[0].node.products.edges;
-
+const Shop = ({ products, pathname }) => {
   return (
     <PageWrapper>
       <StyledH1>{pathname === '/shop' ? 'Shop' : 'Wholesale Shop'}</StyledH1>
@@ -45,3 +32,20 @@ const Shop = () => {
 };
 
 export default Shop;
+export async function getServerSideProps(context) {
+  const pathname = context.req.url;
+  const collectionToQuery =
+    context.res.url === '/shop' ? 'Online Store' : 'Wholesale Products';
+
+  const { data } = await apolloClient.query({
+    query: GET_SHOP_PRODUCTS,
+    variables: { collectionName: collectionToQuery },
+  });
+  return {
+    // TODO, handle error from apollo query
+    props: {
+      products: data.collections.edges[0].node.products.edges,
+      pathname,
+    },
+  };
+}

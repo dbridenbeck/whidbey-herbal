@@ -26,7 +26,7 @@ const MasterWrapper = styled.div`
 `;
 
 const Layout = ({ children, clearCheckoutInState, checkoutId }) => {
-  const { data: checkoutData } = useQuery(GET_CHECKOUT, {
+  const { data: checkoutData, loading } = useQuery(GET_CHECKOUT, {
     variables: { id: checkoutId },
   });
 
@@ -39,10 +39,12 @@ const Layout = ({ children, clearCheckoutInState, checkoutId }) => {
         }
 
         return (
-          <MasterWrapper id="MasterWrapper">
-            <Header />
-            {children}
-          </MasterWrapper>
+          !loading && (
+            <MasterWrapper id="MasterWrapper">
+              <Header />
+              {children}
+            </MasterWrapper>
+          )
         );
       }}
     </ApolloConsumer>

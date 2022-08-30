@@ -1,10 +1,21 @@
-import React from 'react';
 import Home from '../components/Home/Home';
 import apolloClient from '../apolloClient';
+import HeadTags from '../SharedComponents/HeadTags';
 import { GET_FEATURED_PRODUCTS_AND_ARTICLES } from '../queries';
 
 const App = ({ articles, products }) => {
-  return <Home articles={articles} products={products} />;
+  return (
+    <>
+      <HeadTags
+        title={'Whidbey Herbal'}
+        ogTitle={'Whidbey Herbal'}
+        ogUrl={'https://whidbeyherbal.com'}
+        ogDescription={'Small batch. Handcrafted. Potions made from plants.'}
+        ogImage={'https://whidbeyherbal.com/logo512.png'}
+      />
+      <Home articles={articles} products={products} />;
+    </>
+  );
 };
 
 export default App;

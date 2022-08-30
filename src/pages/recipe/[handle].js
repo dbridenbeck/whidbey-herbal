@@ -6,8 +6,8 @@ import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
 import StyledH1 from '../../SharedComponents/StyledH1';
 import Footer from '../../SharedComponents/Footer';
 import { GET_FEATURED_PRODUCTS_AND_ARTICLES } from '../../queries';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
+import HeadTags from '../../SharedComponents/HeadTags';
 
 // Begin Styled Components
 const RecipeContainer = styled.div`
@@ -55,72 +55,71 @@ const ShopifyHTML = styled.div`
 `;
 
 // begin component
-const Recipe = ({ articles, products }) => {
-  const createRecipe = (articles) => {
-    const router = useRouter();
-    const { handle } = router.query;
+const Recipe = ({ selectedRecipe, products, ogUrl, ogImage }) => {
+  const {
+    node: {
+      title,
+      image: { transformedSrc },
+      contentHtml,
+    },
+  } = selectedRecipe;
 
-    // select the current product
-    const selectRecipe = articles.filter(
-      (recipe) => handle === recipe.node.handle
+  const createRecipe = () => {
+    return (
+      <>
+        <StyledH1>{title}</StyledH1>
+        <RecipeContainer>
+          <RecipeImage>
+            <Image src={transformedSrc} layout="fill" />
+          </RecipeImage>
+          <ShopifyHTML
+            dangerouslySetInnerHTML={{
+              __html: contentHtml,
+            }}
+          />
+        </RecipeContainer>
+      </>
     );
-
-    const selectedRecipe = selectRecipe[0];
-
-    // handle direct navigation to recipe page
-    if (selectedRecipe) {
-      const {
-        node: {
-          title,
-          image: { transformedSrc },
-          contentHtml,
-        },
-      } = selectedRecipe;
-
-      return (
-        <>
-          <StyledH1>{title}</StyledH1>
-          <RecipeContainer>
-            <RecipeImage>
-              <Image src={transformedSrc} layout="fill" />
-            </RecipeImage>
-            <ShopifyHTML
-              dangerouslySetInnerHTML={{
-                __html: contentHtml,
-              }}
-            />
-          </RecipeContainer>
-        </>
-      );
-    } else {
-      return null;
-    }
   };
 
   return (
-    <PageWrapper>
-      {createRecipe(articles)}
-      <FeaturedProducts
-        title={'Explore the Shop'}
-        products={products}
-        bottomPadding
-      />
-      <Footer />
-    </PageWrapper>
+    <>
+      <HeadTags title={title} ogUrl={ogUrl} ogImage={ogImage} />
+      <PageWrapper>
+        {createRecipe()}
+        <FeaturedProducts
+          title={'Explore the Shop'}
+          products={products}
+          bottomPadding
+        />
+        <Footer />
+      </PageWrapper>
+    </>
   );
 };
 
 export default Recipe;
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req, query, resolvedUrl }) {
+  const protocol = req.headers?.referer?.split('/')[0] || '';
   const { data } = await apolloClient.query({
     query: GET_FEATURED_PRODUCTS_AND_ARTICLES,
   });
+  const handle = query.handle;
+  // select the current product
+  const selectRecipe = data.articles.edges.filter(
+    (recipe) => handle === recipe.node.handle
+  );
+
+  const selectedRecipe = selectRecipe[0];
+
   return {
     // TODO, handle error from apollo query
     props: {
-      articles: data?.articles?.edges,
+      selectedRecipe,
       products: data?.collections?.edges,
+      ogUrl: `${protocol}//${req.headers.host}${resolvedUrl}`,
+      ogImage: selectedRecipe.node.image.transformedSrc,
     },
   };
 }

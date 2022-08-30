@@ -1,15 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { createCurrencyFormat } from "../../utils/createCurrencyFormat";
-import QuantityButton from "../../SharedComponents/QuantityButton";
-import BuyButton from "./BuyButton";
-import StyledH1 from "../../SharedComponents/StyledH1";
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { createCurrencyFormat } from '../../utils/createCurrencyFormat';
+import QuantityButton from '../../SharedComponents/QuantityButton';
+import BuyButton from './BuyButton';
+import StyledH1 from '../../SharedComponents/StyledH1';
 
-import { device } from "../../utils/devices";
+import { device } from '../../utils/devices';
 
-import * as CartActionCreators from "../../state/actions/cart";
-import styled from "styled-components";
+import * as CartActionCreators from '../../state/actions/cart';
+import styled from 'styled-components';
 
 // Begin Styled Components
 const ProductDetailsWrapper = styled.div`
@@ -101,7 +101,7 @@ const createCTABlock = (
   const { variants, availableForSale, totalInventory } = selectedProduct;
 
   // handle null values for quantityButtonAmount
-  const quantity = quantityButtonAmount === "" ? 0 : quantityButtonAmount;
+  const quantity = quantityButtonAmount === '' ? 0 : quantityButtonAmount;
   const price = createCurrencyFormat(variants.edges[0].node.priceV2.amount);
   const quantityAllowed = totalInventory - lineItemQuantity;
 
@@ -112,7 +112,7 @@ const createCTABlock = (
       <span className="price">{price}</span>
       <QuantityButton
         selectedProduct={selectedProduct}
-        labelTitle={"Quantity: "}
+        labelTitle={'Quantity: '}
         quantity={quantityButtonAmount}
         shouldAddQuantities={true}
         onChangeFunction={updateQuantityButton}
@@ -131,8 +131,8 @@ const createCTABlock = (
     <CTABlock>
       <span className="price">{price}</span>
       <div className="soldOutWarning">
-        {" "}
-        <span>SOLD OUT</span>{" "}
+        {' '}
+        <span>SOLD OUT</span>{' '}
       </div>
     </CTABlock>
   );

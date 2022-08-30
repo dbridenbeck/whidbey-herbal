@@ -14,6 +14,8 @@ import LineItemHeaders from './LineItemHeaders';
 import SubtotalSection from './SubtotalSection';
 import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
 import Footer from '../../SharedComponents/Footer';
+import { GET_FEATURED_PRODUCTS } from '../../queries';
+import apolloClient from '../../apolloClient';
 
 const CheckoutContainer = styled.div`
   display: block;
@@ -80,7 +82,12 @@ const StyledH2 = styled.h2`
   font-weight: normal;
 `;
 
-const Checkout = ({ lineItems, removeLineItem, storeCheckoutDetails }) => {
+const Checkout = ({
+  lineItems,
+  removeLineItem,
+  storeCheckoutDetails,
+  products,
+}) => {
   const [createNewCheckout] = useMutation(CREATE_CHECKOUT);
 
   const [addCheckoutItems] = useMutation(CHECKOUT_LINEITEMS_ADD);
@@ -189,12 +196,20 @@ const Checkout = ({ lineItems, removeLineItem, storeCheckoutDetails }) => {
           calculatedCartSubtotal={currencyCalculatedCartSubtotal}
           createCheckoutButton={createCheckoutButton}
         />
-        <FeaturedProducts title={'Continue Shopping'} bottomPadding />
+        <FeaturedProducts
+          title={'Continue Shopping'}
+          products={products}
+          bottomPadding
+        />
       </CheckoutContainer>
     ) : (
       <CheckoutContainer>
         <StyledH2>Your Shopping Cart is empty.</StyledH2>
-        <FeaturedProducts title={'Explore the Shop'} bottomPadding />
+        <FeaturedProducts
+          title={'Explore the Shop'}
+          products={products}
+          bottomPadding
+        />
       </CheckoutContainer>
     );
   };
@@ -226,3 +241,17 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+
+export async function getServerSideProps() {
+  const { data } = await apolloClient.query({
+    query: GET_FEATURED_PRODUCTS,
+  });
+  return {
+    // TODO, handle error from apollo query
+    props: {
+      products: data?.collections?.edges,
+    },
+  };
+}
+
+GET_FEATURED_PRODUCTS;

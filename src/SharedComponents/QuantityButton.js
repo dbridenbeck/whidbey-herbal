@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import ExceededMaxQuantityWarning from './ExceededMaxQuantityWarning';
 
 const QuantityWrapper = styled.div`
@@ -21,23 +21,31 @@ const StyledInput = styled.input`
   border-radius: 10px;
   text-align: center;
   font-size: 1em;
-  color: rgba(120, 120, 120, .8);
+  color: rgba(120, 120, 120, 0.8);
   :focus {
     outline-width: 0;
   }
-  `;
+`;
 
-const maxInput = (event, maxQuantity) => event.target.value > maxQuantity ? maxQuantity : event.target.value
+const maxInput = (event, maxQuantity) =>
+  event.target.value > maxQuantity ? maxQuantity : event.target.value;
 
-const QuantityButton = 
-({
-  quantity, 
-  selectedProduct, 
-  shouldAddQuantities, 
-  labelTitle, 
+const QuantityButton = ({
+  quantity,
+  selectedProduct,
+  shouldAddQuantities,
+  labelTitle,
   onChangeFunction,
-  maxQuantity
+  maxQuantity,
 }) => {
+  console.log({
+    quantity,
+    selectedProduct,
+    shouldAddQuantities,
+    labelTitle,
+    onChangeFunction,
+    maxQuantity,
+  });
 
   return (
     <QuantityWrapper>
@@ -49,7 +57,7 @@ const QuantityButton =
             value={parseInt(quantity)}
             min="1"
             max={maxQuantity}
-            onChange={event => {
+            onChange={(event) => {
               onChangeFunction(
                 maxInput(event, maxQuantity),
                 shouldAddQuantities,
@@ -68,6 +76,5 @@ const QuantityButton =
     </QuantityWrapper>
   );
 };
-
 
 export default QuantityButton;

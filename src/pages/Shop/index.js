@@ -15,10 +15,10 @@ const ProductsContainer = styled.div`
   margin: 70px 0;
 `;
 
-const Shop = ({ products, pathname }) => {
+const Shop = ({ products, resolvedUrl }) => {
   return (
     <PageWrapper>
-      <StyledH1>{pathname === '/shop' ? 'Shop' : 'Wholesale Shop'}</StyledH1>
+      <StyledH1>{resolvedUrl === '/shop' ? 'Shop' : 'Wholesale Shop'}</StyledH1>
       <ProductsContainer>
         {products.map((product) => (
           <ShopProduct key={product.node.id} product={product.node} />
@@ -30,10 +30,9 @@ const Shop = ({ products, pathname }) => {
 };
 
 export default Shop;
-export async function getServerSideProps(context) {
-  const pathname = context.req.url;
+export async function getServerSideProps({ resolvedUrl }) {
   const collectionToQuery =
-    context.res.url === '/shop' ? 'Online Store' : 'Wholesale Products';
+    resolvedUrl === '/shop' ? 'Online Store' : 'Wholesale Products';
 
   const { data } = await apolloClient.query({
     query: GET_SHOP_PRODUCTS,
@@ -43,7 +42,7 @@ export async function getServerSideProps(context) {
     // TODO, handle error from apollo query
     props: {
       products: data.collections.edges[0].node.products.edges,
-      pathname,
+      resolvedUrl,
     },
   };
 }

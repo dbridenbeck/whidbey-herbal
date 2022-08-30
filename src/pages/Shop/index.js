@@ -1,7 +1,5 @@
 import apolloClient from '../../apolloClient';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { useQuery } from '@apollo/client';
 import PageWrapper from '../../SharedComponents/PageWrapper';
 import ShopProduct from './ShopProduct';
 import StyledH1 from '../../SharedComponents/StyledH1';

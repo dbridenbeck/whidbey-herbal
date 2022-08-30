@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useQuery } from '@apollo/client';
+import apolloClient from '../../apolloClient';
 import PropTypes from 'prop-types';
 import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
 import PageWrapper from '../../SharedComponents/PageWrapper';
@@ -8,20 +8,15 @@ import Reviews from './Reviews';
 import ProductDetails from './ProductDetails';
 import Footer from '../../SharedComponents/Footer';
 import { GET_PRODUCT } from '../../queries';
-import { useRouter } from 'next/router';
 
 // begin component
-const Product = ({ checkout }) => {
-  const router = useRouter();
-  const { handle } = router.query;
-
-  const { loading, error, data } = useQuery(GET_PRODUCT, {
-    variables: { productHandle: handle },
-  });
-  if (loading) return null;
-  if (error) return `Error! ${error}`;
-  const selectedProduct = data.productByHandle;
-
+const Product = ({
+  checkout,
+  data,
+  handle,
+  products,
+  productByHandle: selectedProduct,
+}) => {
   // determine if wholesaleProducts or onlineProducts should be loaded
   const featuredProductsTitle = handle.includes('wholesale')
     ? 'More Wholesale Products'
@@ -46,7 +41,11 @@ const Product = ({ checkout }) => {
           doesItemExist={handleIfItemExists}
         />
         <Reviews />
-        <FeaturedProducts title={featuredProductsTitle} bottomPadding />
+        <FeaturedProducts
+          title={featuredProductsTitle}
+          products={products}
+          bottomPadding
+        />
       </div>
     ) : null;
   };
@@ -69,3 +68,21 @@ const mapStateToProps = ({ checkout }) => ({
 });
 
 export default connect(mapStateToProps, null)(Product);
+
+export async function getServerSideProps(context) {
+  const {
+    params: { handle },
+  } = context;
+  const { data } = await apolloClient.query({
+    query: GET_PRODUCT,
+    variables: { productHandle: handle },
+  });
+  return {
+    // TODO, handle error from apollo query
+    props: {
+      productByHandle: data.productByHandle,
+      products: data?.collections?.edges,
+      handle,
+    },
+  };
+}

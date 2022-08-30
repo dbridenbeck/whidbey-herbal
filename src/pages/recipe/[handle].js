@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import apolloClient from '../../apolloClient';
 import styled from 'styled-components';
 import { device } from '../../utils/devices';

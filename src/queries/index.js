@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 const CheckoutFragment = gql`
   fragment CheckoutFragment on Checkout {
@@ -21,6 +21,37 @@ const CheckoutFragment = gql`
             price
           }
           quantity
+        }
+      }
+    }
+  }
+`;
+
+const CollectionFragment = gql`
+  fragment CollectionFragment on Collection {
+    title
+    products(first: 5) {
+      edges {
+        node {
+          id
+          title
+          availableForSale
+          handle
+          variants(first: 1) {
+            edges {
+              node {
+                price
+              }
+            }
+          }
+          images(first: 6) {
+            edges {
+              node {
+                transformedSrc(maxWidth: 400, maxHeight: 450)
+                altText
+              }
+            }
+          }
         }
       }
     }
@@ -68,32 +99,7 @@ export const GET_FEATURED_PRODUCTS_AND_ARTICLES = gql`
     ) {
       edges {
         node {
-          title
-          products(first: 5) {
-            edges {
-              node {
-                id
-                title
-                handle
-                availableForSale
-                variants(first: 1) {
-                  edges {
-                    node {
-                      price
-                    }
-                  }
-                }
-                images(first: 6) {
-                  edges {
-                    node {
-                      transformedSrc(maxWidth: 400, maxHeight: 450)
-                      altText
-                    }
-                  }
-                }
-              }
-            }
-          }
+          ...CollectionFragment
         }
       }
     }
@@ -112,6 +118,7 @@ export const GET_FEATURED_PRODUCTS_AND_ARTICLES = gql`
       }
     }
   }
+  ${CollectionFragment}
 `;
 
 export const GET_CHECKOUT = gql`
@@ -175,7 +182,18 @@ export const GET_PRODUCT = gql`
         }
       }
     }
+    collections(
+      query: "title:'Wholesale Products' OR title:'Featured Products'"
+      first: 2
+    ) {
+      edges {
+        node {
+          ...CollectionFragment
+        }
+      }
+    }
   }
+  ${CollectionFragment}
 `;
 
 export const GET_SHOP_PRODUCTS = gql`
@@ -223,34 +241,10 @@ export const GET_FEATURED_PRODUCTS = gql`
     ) {
       edges {
         node {
-          title
-          products(first: 5) {
-            edges {
-              node {
-                id
-                title
-                availableForSale
-                handle
-                variants(first: 1) {
-                  edges {
-                    node {
-                      price
-                    }
-                  }
-                }
-                images(first: 6) {
-                  edges {
-                    node {
-                      transformedSrc(maxWidth: 400, maxHeight: 450)
-                      altText
-                    }
-                  }
-                }
-              }
-            }
-          }
+          ...CollectionFragment
         }
       }
     }
   }
+  ${CollectionFragment}
 `;

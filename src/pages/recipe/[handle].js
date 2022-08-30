@@ -55,7 +55,7 @@ const ShopifyHTML = styled.div`
 `;
 
 // begin component
-const Recipe = ({ selectedRecipe, products, ogUrl, ogImage }) => {
+const Recipe = ({ selectedRecipe, products, ogUrl }) => {
   const {
     node: {
       title,
@@ -84,7 +84,7 @@ const Recipe = ({ selectedRecipe, products, ogUrl, ogImage }) => {
 
   return (
     <>
-      <HeadTags title={title} ogUrl={ogUrl} ogImage={ogImage} />
+      <HeadTags title={title} ogUrl={ogUrl} ogImage={transformedSrc} />
       <PageWrapper>
         {createRecipe()}
         <FeaturedProducts
@@ -119,7 +119,6 @@ export async function getServerSideProps({ req, query, resolvedUrl }) {
       selectedRecipe,
       products: data?.collections?.edges,
       ogUrl: `${protocol}//${req.headers.host}${resolvedUrl}`,
-      ogImage: selectedRecipe.node.image.transformedSrc,
     },
   };
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import apolloClient from '../../apolloClient';
 import PropTypes from 'prop-types';
@@ -8,11 +8,12 @@ import Reviews from './Reviews';
 import ProductDetails from './ProductDetails';
 import Footer from '../../SharedComponents/Footer';
 import { GET_PRODUCT } from '../../queries';
+import HeadTags from '../../SharedComponents/HeadTags';
 
 // begin component
 const Product = ({
   checkout,
-  data,
+  ogUrl,
   handle,
   products,
   productByHandle: selectedProduct,
@@ -52,10 +53,18 @@ const Product = ({
 
   // begin component's return
   return (
-    <PageWrapper>
-      {selectedProduct && createProductDetails()}
-      <Footer />
-    </PageWrapper>
+    <>
+      <HeadTags
+        title={selectedProduct.title}
+        ogUrl={ogUrl}
+        ogImage={selectedProduct.images.edges[0].node.transformedSrc}
+      />
+
+      <PageWrapper>
+        {selectedProduct && createProductDetails()}
+        <Footer />
+      </PageWrapper>
+    </>
   );
 };
 
@@ -69,10 +78,9 @@ const mapStateToProps = ({ checkout }) => ({
 
 export default connect(mapStateToProps, null)(Product);
 
-export async function getServerSideProps(context) {
-  const {
-    params: { handle },
-  } = context;
+export async function getServerSideProps({ req, params, resolvedUrl }) {
+  const protocol = req.headers?.referer?.split('/')[0] || '';
+  const { handle } = params;
   const { data } = await apolloClient.query({
     query: GET_PRODUCT,
     variables: { productHandle: handle },
@@ -83,6 +91,7 @@ export async function getServerSideProps(context) {
       productByHandle: data.productByHandle,
       products: data?.collections?.edges,
       handle,
+      ogUrl: `${protocol}//${req.headers.host}${resolvedUrl}`,
     },
   };
 }

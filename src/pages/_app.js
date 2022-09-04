@@ -21,12 +21,12 @@ function App({ Component, pageProps }) {
 
   const trackingId = 'UA-151317774-1';
   ReactGA.initialize(trackingId);
-  useEffect(() => {
-    // CONFIRM THIS WORKS AS EXPECTED!
-    router.beforePopState(({ url }) => {
-      ReactGA.pageview(url);
-    });
-  });
+  // GET THIS WORKING AS EXPECTED!
+  // useEffect(() => {
+  //   router.beforePopState(({ url }) => {
+  //     ReactGA.pageview(url);
+  //   });
+  // });
 
   // persist state from localStorage
   const preLoadedState = getFromLocalStorage();

@@ -98,11 +98,13 @@ const Checkout = ({
   const [loadingCheckout, setLoadingCheckoutTrue] = useState(false);
 
   const createRemoveButton = (id, index) => {
-    const remove = () => removeLineItem(id, index);
+    const remove = () => {
+      removeLineItem(id, index);
+    };
     return (
       <RemoveWrapper>
-        <button className="remove">
-          <span onClick={remove}>x</span>
+        <button className="remove" onClick={remove}>
+          <span>x</span>
         </button>
       </RemoveWrapper>
     );

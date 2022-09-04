@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import ComponentWrapper from '../../SharedComponents/ComponentWrapper';
 import StyledH2 from '../../SharedComponents/StyledH2';
 import StoreBlock from './StoreBlock';
-import GoogleMapWrapper from './GoogleMapWrapper';
 import { device } from '../../utils/devices';
 
 const LocationsWrapper = styled.div`

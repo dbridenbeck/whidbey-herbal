@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import * as CartActionCreators from '../../state/actions/cart';
-import { connect } from 'react-redux';
 import StyledH3 from '../../SharedComponents/StyledH3';
 
 import PropTypes from 'prop-types';
@@ -31,7 +29,7 @@ const StoreContainer = styled.div`
       color: #e3be42;
     }
     h3 {
-      color: ${(props) => (props.storeIsSelected ? '#42e0e3' : '#2e2e2e')};
+      color: '#2e2e2e';
     }
   }
   @media ${device.mobile} {
@@ -60,22 +58,12 @@ const StoreAddress = styled.p`
   }
 `;
 
-const StoreBlock = ({
-  setGoogleMapInfoWindow,
-  selectedStoreName,
-  store: { storeName, address, website },
-}) => {
-  const storeIsSelected = storeName === selectedStoreName;
-
-  // TODO: Make storeName stay highlighted when clicked, add more info to InfoWindow's message (address, link to go to see in google maps)
+const StoreBlock = ({ store: { storeName, address, website } }) => {
   return (
-    <StoreContainer
-      onClick={() => setGoogleMapInfoWindow(storeName)}
-      storeIsSelected={storeIsSelected}
-    >
+    <StoreContainer>
       <StyledH3>{storeName}</StyledH3>
       <StoreAddress>{address}</StoreAddress>
-      <a href={website} target='_blank' rel='noopener noreferrer'>
+      <a href={website} target="_blank" rel="noopener noreferrer">
         View Website
       </a>
     </StoreContainer>
@@ -87,13 +75,4 @@ StoreBlock.propTypes = {
   address: PropTypes.string,
 };
 
-const mapStatetoProps = ({ googleMapInfoWindow: { selectedStoreName } }) => ({
-  selectedStoreName,
-});
-
-const mapDispatchtoProps = (dispatch) => ({
-  setGoogleMapInfoWindow: (selectedStoreName) =>
-    dispatch(CartActionCreators.setGoogleMapInfoWindow(selectedStoreName)),
-});
-
-export default connect(mapStatetoProps, mapDispatchtoProps)(StoreBlock);
+export default StoreBlock;

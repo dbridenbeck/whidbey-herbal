@@ -77,7 +77,7 @@ const Header = ({ lineItems, clearBurger, burgerToggled }) => {
   const [persistedLineItems, setPersistedLineItems] = useState([]);
   useEffect(() => {
     setPersistedLineItems(getFromLocalStorage()?.checkout.lineItems);
-  }, []);
+  }, [lineItems]);
   const createCheckoutLink = () => {
     const itemsInCart = () => {
       if (persistedLineItems?.length) {

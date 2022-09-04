@@ -86,11 +86,10 @@ export const stores = [
 
 const StoreLocator = () => {
   return (
-    <ComponentWrapper id='findstore' backgroundColor={'#FFF3D1'}>
+    <ComponentWrapper id="findstore" backgroundColor={'#FFF3D1'}>
       <StyledH2>Store Locator</StyledH2>
-      <LocationsWrapper id='locations-wrapper'>
-        <GoogleMapWrapper id='googlemap-wrapper' />
-        <StoreList id='store-list'>
+      <LocationsWrapper id="locations-wrapper">
+        <StoreList id="store-list">
           {stores.map((store) => (
             <StoreBlock store={store} key={store.storeName} />
           ))}

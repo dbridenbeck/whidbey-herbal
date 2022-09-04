@@ -13,6 +13,7 @@ import {
   getFromLocalStorage,
 } from '../../src/state/localStorage';
 import apolloClient from '../apolloClient';
+import { useEffect } from 'react';
 
 function App({ Component, pageProps }) {
   // google analytics config
@@ -41,6 +42,24 @@ function App({ Component, pageProps }) {
         : (f) => f
     )
   );
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      const isHomeHash = url.slice(0, 2) === '/#';
+      if (isHomeHash) {
+        const hash = url.split('/')[1];
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest',
+          });
+        }
+      }
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+  }, []);
 
   // update localStorage with subscribe to save to localStorage on state change
   store.subscribe(() => {

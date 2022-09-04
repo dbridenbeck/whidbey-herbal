@@ -12,7 +12,7 @@ const App = ({ articles, products }) => {
         ogDescription={'Small batch. Handcrafted. Potions made from plants.'}
         ogImage={'https://whidbeyherbal.com/logo512.png'}
       />
-      <Home articles={articles} products={products} />;
+      <Home articles={articles} products={products} />
     </>
   );
 };

@@ -63,19 +63,19 @@ const links = [
   },
   {
     name: 'About',
-    destination: '#about',
+    destination: '/#about',
   },
   {
     name: 'Process',
-    destination: '#process',
+    destination: '/#process',
   },
   {
     name: 'Find a Store',
-    destination: '#findstore',
+    destination: '/#findstore',
   },
   {
     name: 'Recipes',
-    destination: '#recipes',
+    destination: '/#recipes',
   },
 ];
 
@@ -87,7 +87,8 @@ const NavLinks = ({ clearBurger }) => {
   const createStyledLink = (clearBurger, links) => {
     const handleClearBurger = (link) => {
       if (isMounted && link.name !== 'Shop') {
-        const element = document.querySelector(link.destination);
+        const hash = link.destination.split('/')[1];
+        const element = document.querySelector(hash);
         if (element) {
           element.scrollIntoView({
             behavior: 'smooth',
@@ -103,11 +104,7 @@ const NavLinks = ({ clearBurger }) => {
       return (
         <StyledLinkContainer key={link.name}>
           <StyledLink onClick={() => handleClearBurger(link)}>
-            {link.name !== 'Shop' ? (
-              link.name
-            ) : (
-              <Link href={link.destination}>{link.name}</Link>
-            )}
+            <Link href={link.destination}>{link.name}</Link>
           </StyledLink>
         </StyledLinkContainer>
       );

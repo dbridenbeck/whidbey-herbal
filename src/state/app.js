@@ -68,16 +68,16 @@ export const Reducer1 = (state = initialState, action) => {
         ...state,
         checkout: {
           ...state.checkout,
-          checkoutId: action.id,
         },
+        checkoutId: action.id,
       };
     case CartActionTypes.CLEAR_CHECKOUT_IN_STATE:
       return {
         ...state,
         checkout: {
           lineItems: [],
-          checkoutId: '',
         },
+        checkoutId: '',
       };
     case CartActionTypes.TOGGLE_BURGER:
       return {

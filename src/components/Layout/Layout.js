@@ -57,7 +57,7 @@ Layout.propTypes = {
   clearCheckoutInState: PropTypes.func,
 };
 
-const mapStateToProps = ({ checkout: { checkoutId } }) => ({
+const mapStateToProps = ({ checkoutId }) => ({
   checkoutId,
 });
 

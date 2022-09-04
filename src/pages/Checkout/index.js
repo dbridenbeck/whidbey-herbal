@@ -131,27 +131,25 @@ const Checkout = ({
     showCheckoutLoading();
     setLoadingCheckoutTrue(true);
     try {
-      createNewCheckout({
+      const checkoutResponse = await createNewCheckout({
         variables: { input: {} },
-      })
-        .then((response) => {
-          const {
-            data: {
-              checkoutCreate: {
-                checkout: { id },
-              },
-            },
-          } = response;
-          storeCheckoutDetails(id);
-          return addCheckoutItems({
-            variables: { checkoutId: id, lineItems: lineItemsToAdd },
-          });
-        })
-        .then((response) => {
-          window.location.assign(
-            response.data.checkoutLineItemsAdd.checkout.webUrl
-          );
-        });
+      });
+
+      const {
+        data: {
+          checkoutCreate: {
+            checkout: { id: checkoutId },
+          },
+        },
+      } = checkoutResponse;
+
+      const checkoutItemsResponse = await addCheckoutItems({
+        variables: { checkoutId, lineItems: lineItemsToAdd },
+      });
+      storeCheckoutDetails(checkoutId);
+      window.location.assign(
+        checkoutItemsResponse.data.checkoutLineItemsAdd.checkout.webUrl
+      );
     } catch (error) {
       console.log('Error creating checkout: ', error);
     }

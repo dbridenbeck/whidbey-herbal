@@ -38,15 +38,6 @@ const QuantityButton = ({
   onChangeFunction,
   maxQuantity,
 }) => {
-  console.log({
-    quantity,
-    selectedProduct,
-    shouldAddQuantities,
-    labelTitle,
-    onChangeFunction,
-    maxQuantity,
-  });
-
   return (
     <QuantityWrapper>
       <Quantity>

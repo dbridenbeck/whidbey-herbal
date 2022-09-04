@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 import ReactGA from 'react-ga';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { useEffect } from 'react';
 import {
   saveToLocalStorage,
   getFromLocalStorage,

@@ -1,42 +1,16 @@
 import apolloClient from '../../apolloClient';
-import styled from 'styled-components';
-import PageWrapper from '../../SharedComponents/PageWrapper';
-import ShopProduct from './ShopProduct';
-import StyledH1 from '../../SharedComponents/StyledH1';
-import Footer from '../../SharedComponents/Footer';
 import { GET_SHOP_PRODUCTS } from '../../queries';
+import ShopLayout from './ShopLayout';
 
-const ProductsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-evenly;
-  position: relative;
-  margin: 70px 0;
-`;
-
-const Shop = ({ products, resolvedUrl }) => {
-  return (
-    <PageWrapper>
-      <StyledH1>{resolvedUrl === '/shop' ? 'Shop' : 'Wholesale Shop'}</StyledH1>
-      <ProductsContainer>
-        {products.map((product) => (
-          <ShopProduct key={product.node.id} product={product.node} />
-        ))}
-      </ProductsContainer>
-      <Footer />
-    </PageWrapper>
-  );
+const Shop = ({ products }) => {
+  return <ShopLayout products={products} heading={'Shop'} />;
 };
 
 export default Shop;
 export async function getServerSideProps({ resolvedUrl }) {
-  const collectionToQuery =
-    resolvedUrl === '/shop' ? 'Online Store' : 'Wholesale Products';
-
   const { data } = await apolloClient.query({
     query: GET_SHOP_PRODUCTS,
-    variables: { collectionName: collectionToQuery },
+    variables: { collectionName: 'Online Store' },
   });
   return {
     // TODO, handle error from apollo query

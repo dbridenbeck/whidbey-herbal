@@ -9,7 +9,7 @@ import {
   addLineItemsMock,
   createCheckoutMutationCalled,
   addLineItemsMutationCalled,
-} from '../pages/checkout/checkoutMocks';
+} from './checkoutMocks';
 import { mockProducts } from './mockData';
 import { act } from '@testing-library/react';
 

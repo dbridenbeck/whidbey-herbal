@@ -2,16 +2,16 @@ import {
   GET_FEATURED_PRODUCTS,
   CREATE_CHECKOUT,
   CHECKOUT_LINEITEMS_ADD,
-} from "../../queries";
+} from '../queries';
 
 export let createCheckoutMutationCalled = false;
 export let addLineItemsMutationCalled = false;
 const checkoutLineItemsMock = {
-  checkoutId: "abcd1234=",
+  checkoutId: 'abcd1234=',
   lineItems: [
     {
       quantity: 1,
-      variantId: "1234variantitem",
+      variantId: '1234variantitem',
     },
   ],
 };
@@ -25,56 +25,56 @@ export const getFeaturedProductsMock = {
       collections: {
         edges: [
           {
-            __typename: "CollectionEdge",
+            __typename: 'CollectionEdge',
             node: {
-              title: "Featured Products",
+              title: 'Featured Products',
               products: {
                 edges: [
                   {
                     node: {
                       availableForSale: true,
-                      handle: "cedar-oil",
-                      id: "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzE3MDQ2NDkwOTcyNTg=",
+                      handle: 'cedar-oil',
+                      id: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzE3MDQ2NDkwOTcyNTg=',
                       images: {
                         edges: [
                           {
                             node: {
                               altText: null,
                               transformedSrc:
-                                "https://cdn.shopify.com/s/files/1/2550/5490/products/Lavender_Front-_3000_X_3000_400x450.jpg?v=1573183646",
-                              __typename: "Image",
+                                'https://cdn.shopify.com/s/files/1/2550/5490/products/Lavender_Front-_3000_X_3000_400x450.jpg?v=1573183646',
+                              __typename: 'Image',
                             },
-                            __typename: "ImageEdge",
+                            __typename: 'ImageEdge',
                           },
                         ],
-                        __typename: "ImageConnection",
+                        __typename: 'ImageConnection',
                       },
-                      title: "Western Red Cedar Essential Oil",
+                      title: 'Western Red Cedar Essential Oil',
                       variants: {
                         edges: [
                           {
                             node: {
-                              price: "20.00",
-                              __typename: "ProductVariant",
+                              price: '20.00',
+                              __typename: 'ProductVariant',
                             },
-                            __typename: "ProductVariantEdge",
+                            __typename: 'ProductVariantEdge',
                           },
                         ],
-                        __typename: "ProductVariantConnection",
+                        __typename: 'ProductVariantConnection',
                       },
-                      __typename: "Product",
+                      __typename: 'Product',
                     },
-                    __typename: "ProductEdge",
+                    __typename: 'ProductEdge',
                   },
                 ],
-                __typename: "ProductConnection",
+                __typename: 'ProductConnection',
               },
-              __typename: "Collection",
+              __typename: 'Collection',
             },
           },
         ],
       },
-      __typename: "CollectionConnection",
+      __typename: 'CollectionConnection',
     },
   },
 };
@@ -90,18 +90,18 @@ export const createCheckoutMock = {
       data: {
         checkoutCreate: {
           checkout: {
-            __typename: "Checkout",
+            __typename: 'Checkout',
             comlpetedAt: null,
-            id: "abcd1234=",
+            id: 'abcd1234=',
             lineItems: {
               edges: [],
-              __typename: "CheckoutLineItemConnection",
+              __typename: 'CheckoutLineItemConnection',
             },
-            subtotalPrice: "0.00",
-            totalPrice: "0.00",
-            totalTax: "0.00",
+            subtotalPrice: '0.00',
+            totalPrice: '0.00',
+            totalTax: '0.00',
             webUrl:
-              "https://whidbey-herbal.myshopify.com/25505490/checkouts/4f939f4b893aa152ca46211fb611e8bb?key=d8228a5982c045b715daa3a87f34007f",
+              'https://whidbey-herbal.myshopify.com/25505490/checkouts/4f939f4b893aa152ca46211fb611e8bb?key=d8228a5982c045b715daa3a87f34007f',
           },
         },
       },
@@ -121,40 +121,36 @@ export const addLineItemsMock = {
       data: {
         checkoutLineItemsAdd: {
           checkout: {
-            __typename: "Checkout",
-            id: "abcd1234=",
+            __typename: 'Checkout',
+            id: 'abcd1234=',
             lineItems: {
               edges: [
                 {
-                  __typename: "CheckoutLineItemEdge",
+                  __typename: 'CheckoutLineItemEdge',
                   node: {
-                    __typename: "CheckoutLineItem",
-                    id:
-                      "1234lineitem",
+                    __typename: 'CheckoutLineItem',
+                    id: '1234lineitem',
                     quantity: 1,
-                    title: "Western Red Cedar Essential Oil",
+                    title: 'Western Red Cedar Essential Oil',
                     variant: {
-                      __typename: "ProductVariant",
-                      id:
-                        "1234variantitem",
+                      __typename: 'ProductVariant',
+                      id: '1234variantitem',
                       image: {
-                        __typename: "Image",
-                        src:
-                          "https://cdn.shopify.com/s/files/1/2550/5490/products/Lavender_Front-_3000_X_3000_400x450.jpg?v=1573183646",
+                        __typename: 'Image',
+                        src: 'https://cdn.shopify.com/s/files/1/2550/5490/products/Lavender_Front-_3000_X_3000_400x450.jpg?v=1573183646',
                       },
-                      price: "20.00",
-                      title: "Default Title",
+                      price: '20.00',
+                      title: 'Default Title',
                     },
                   },
                 },
               ],
-              __typename: "CheckoutLineItemConnection",
+              __typename: 'CheckoutLineItemConnection',
             },
-            subtotalPrice: "20.00",
-            totalPrice: "20.00",
-            totalTax: "0.00",
-            webUrl:
-              "https://mock-shopify-checkout.com",
+            subtotalPrice: '20.00',
+            totalPrice: '20.00',
+            totalTax: '0.00',
+            webUrl: 'https://mock-shopify-checkout.com',
           },
         },
       },

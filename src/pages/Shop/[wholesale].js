@@ -1,6 +1,6 @@
 import apolloClient from '../../apolloClient';
 import { GET_SHOP_PRODUCTS } from '../../queries';
-import ShopLayout from './ShopLayout';
+import ShopLayout from '../../components/Shop/ShopLayout';
 import Error from 'next/error';
 
 const Shop = ({ products, isErroredUrl }) => {

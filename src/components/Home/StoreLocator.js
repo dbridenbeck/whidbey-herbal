@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import ComponentWrapper from '../../SharedComponents/ComponentWrapper';
 import StyledH2 from '../../SharedComponents/StyledH2';

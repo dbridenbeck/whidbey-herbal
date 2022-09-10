@@ -1,9 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
 import ComponentWrapper from '../../SharedComponents/ComponentWrapper';
 import SamCaitlinLogs from '../../../public/sam-and-caitlin-logs.jpg';
 import BottlesHoneyCloseup from '../../../public/bottles-honey-closeup.jpg';
-import SamCaitlinLogsWebp from '../../../public/sam-and-caitlin-logs.webp';
+
 import Image from 'next/image';
 import { device } from '../../utils/devices';
 

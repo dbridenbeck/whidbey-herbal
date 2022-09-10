@@ -1,8 +1,7 @@
-import React from 'react';
 import LineItem from './LineItem';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-const LineItems = ({items, createRemoveButton, createUpdateItemButton}) => {
+const LineItems = ({ items, createRemoveButton, createUpdateItemButton }) => {
   return (
     <div>
       {items.map((lineItem, index) => {
@@ -18,13 +17,13 @@ const LineItems = ({items, createRemoveButton, createUpdateItemButton}) => {
       })}
     </div>
   );
-}
+};
 
 LineItems.propTypes = {
   checkout: PropTypes.object,
   createRemoveButton: PropTypes.func,
   createUpdaetItemButton: PropTypes.func,
   removeLineItem: PropTypes.func,
-}
+};
 
 export default LineItems;

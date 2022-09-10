@@ -1,6 +1,7 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
+import 'cross-fetch/polyfill';
 // config Apollo
 const httpLink = createHttpLink({
   uri: 'https://whidbey-herbal.myshopify.com/api/2020-07/graphql.json',

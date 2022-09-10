@@ -1,6 +1,5 @@
-import React from 'react';
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const SubtotalWrapper = styled.div`
   display: flex;
@@ -35,10 +34,10 @@ const SubtotalSection = ({ calculatedCartSubtotal, createCheckoutButton }) => (
       {createCheckoutButton()}
     </div>
   </SubtotalWrapper>
-);          
+);
 SubtotalSection.propTypes = {
   visibleCartSubtotal: PropTypes.number,
-  createCheckoutButton: PropTypes.func
-}
+  createCheckoutButton: PropTypes.func,
+};
 
 export default SubtotalSection;

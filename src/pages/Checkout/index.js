@@ -146,6 +146,7 @@ const Checkout = ({
       const checkoutItemsResponse = await addCheckoutItems({
         variables: { checkoutId, lineItems: lineItemsToAdd },
       });
+
       storeCheckoutDetails(checkoutId);
       window.location.assign(
         checkoutItemsResponse.data.checkoutLineItemsAdd.checkout.webUrl
@@ -227,6 +228,7 @@ Checkout.propTypes = {
   lineItems: PropTypes.array,
   removeLineItem: PropTypes.func,
   storeCheckoutDetails: PropTypes.func,
+  products: PropTypes.array,
 };
 
 const mapStateToProps = ({ checkout: { lineItems } }) => ({

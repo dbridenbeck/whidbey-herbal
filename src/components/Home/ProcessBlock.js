@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { device } from '../../utils/devices';
@@ -90,7 +89,7 @@ const StyledPicture = styled.div`
 `;
 
 const ProcessBlock = ({
-  processInfo: { processTitle, description, img, width, height, alt },
+  processInfo: { processTitle, description, img, alt },
 }) => {
   return (
     <ProcessContainer>

@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { device } from '../../utils/devices';
 import ComponentWrapper from '../../SharedComponents/ComponentWrapper';

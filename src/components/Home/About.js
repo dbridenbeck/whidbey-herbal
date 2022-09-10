@@ -1,7 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
 import farmers from '../../../public/farmers.jpg';
-import farmersWebp from '../../../public/farmers.webp';
 import ComponentWrapper from '../../SharedComponents/ComponentWrapper';
 import StyledH2 from '../../SharedComponents/StyledH2';
 import { device } from '../../utils/devices';

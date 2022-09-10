@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import ComponentWrapper from '../../SharedComponents/ComponentWrapper';
 import StyledH2 from '../../SharedComponents/StyledH2';
@@ -10,11 +9,6 @@ import handBright from '../../../public/hand-bright700.jpg';
 import bottle from '../../../public/bottle700.jpg';
 import aging from '../../../public/aging700.jpg';
 import distill from '../../../public/distill700.jpg';
-import harvestWebp from '../../../public/harvest700.webp';
-import handBrightWebp from '../../../public/hand-bright700.webp';
-import bottleWebp from '../../../public/bottle700.webp';
-import agingWebp from '../../../public/aging700.webp';
-import distillWebp from '../../../public/distill700.webp';
 
 const ProcessWrapper = styled.div`
   display: flex;

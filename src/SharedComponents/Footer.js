@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import whPattern from '../../public/wh-pattern.jpg';
 import whPatternWebp from '../../public/wh-pattern.webp';

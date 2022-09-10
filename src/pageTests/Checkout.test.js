@@ -10,6 +10,10 @@ import {
   createCheckoutMutationCalled,
   addLineItemsMutationCalled,
 } from '../pages/checkout/checkoutMocks';
+import { mockProducts } from './mockData';
+import { act } from '@testing-library/react';
+
+const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 
 const history = createBrowserHistory();
 
@@ -18,11 +22,31 @@ const mocks = [getFeaturedProductsMock, createCheckoutMock, addLineItemsMock];
 describe('Checkout View', () => {
   let view = null;
 
+  const oldWindowLocation = window.location;
+
+  // handle mocking window.location.assign with beforeAll
+  beforeAll(() => {
+    delete window.location;
+
+    window.location = Object.defineProperties(
+      {},
+      {
+        ...Object.getOwnPropertyDescriptors(oldWindowLocation),
+        assign: {
+          configurable: true,
+          value: jest.fn(),
+        },
+      }
+    );
+  });
   beforeEach(async () => {
+    useRouter.mockImplementation(() => ({
+      pathname: 'checkout',
+    }));
     view = await render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <Router basename={'/'} history={history}>
-          <Checkout />
+          <Checkout products={mockProducts} />
         </Router>
       </MockedProvider>,
       {
@@ -110,8 +134,10 @@ describe('Checkout View', () => {
   it('Proceeds to Shopify checkout with correct items', async () => {
     const checkoutButton = await view.findByText('Proceed to Checkout');
 
-    fireEvent.click(checkoutButton);
-    await new Promise((resolve) => setTimeout(resolve, 50)); // wait for response
+    await act(async () => {
+      fireEvent.click(checkoutButton);
+      await new Promise((resolve) => setTimeout(resolve, 50)); // wait for response
+    });
 
     expect(createCheckoutMutationCalled).toBe(true);
     expect(addLineItemsMutationCalled).toBe(true);

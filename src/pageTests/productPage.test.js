@@ -1,12 +1,9 @@
 import { fireEvent, render } from '../utils/test-utils';
 import { MockedProvider } from '@apollo/client/testing';
-import { Router } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
 import Product from '../pages/product/[handle]';
 import { mocks, mockProducts, mockProduct } from './mockData';
-const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 
-const history = createBrowserHistory();
+const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 
 describe('Product View', () => {
   let view = null;
@@ -17,13 +14,11 @@ describe('Product View', () => {
     }));
     view = await render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <Router basename={'/'} history={history}>
-          <Product
-            handle={'cedar-oil'}
-            products={mockProducts}
-            productByHandle={mockProduct}
-          />
-        </Router>
+        <Product
+          handle={'cedar-oil'}
+          products={mockProducts}
+          productByHandle={mockProduct}
+        />
       </MockedProvider>
     );
   });

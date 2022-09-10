@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as CartActionCreators from '../../state/actions/cart';
 import Link from 'next/link';
 import { connect } from 'react-redux';

@@ -1,11 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { device } from "../../utils/devices";
+import { device } from '../../utils/devices';
 
-import * as CartActionCreators from "../../state/actions/cart";
-import styled from "styled-components";
+import * as CartActionCreators from '../../state/actions/cart';
+import styled from 'styled-components';
 
 // Begin Styled Components
 const ProductImagesWrapper = styled.div`
@@ -46,11 +45,11 @@ const AltImage = styled.img`
   align-self: center;
   margin: 10px;
   border: ${(props) =>
-    props.isSelected ? "2px solid #e3be42" : "2px solid #DADADA"};
+    props.isSelected ? '2px solid #e3be42' : '2px solid #DADADA'};
   border-radius: 10px;
   :hover {
     border: ${(props) =>
-      props.isSelected ? "2px solid #e3be42" : "2px solid #787878"};
+      props.isSelected ? '2px solid #e3be42' : '2px solid #787878'};
   }
 `;
 

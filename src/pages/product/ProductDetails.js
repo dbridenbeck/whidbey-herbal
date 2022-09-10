@@ -1,11 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import ProductDescription from "./ProductDescription";
-import ProductImages from "./ProductImages";
+import ProductDescription from './ProductDescription';
+import ProductImages from './ProductImages';
 
-import { device } from "../../utils/devices";
+import { device } from '../../utils/devices';
 
 // Begin Styled Components
 const ProductInfoWrapper = styled.div`
@@ -20,18 +19,15 @@ const ProductInfoWrapper = styled.div`
 `;
 
 // begin component
-const ProductDetails = ({
-  selectedProduct,
-  doesItemExist,
-}) => {
+const ProductDetails = ({ selectedProduct, doesItemExist }) => {
   return (
     <ProductInfoWrapper>
-      <ProductImages 
+      <ProductImages
         images={selectedProduct.images}
         selectedProduct={selectedProduct}
       />
-      <ProductDescription 
-        selectedProduct={selectedProduct} 
+      <ProductDescription
+        selectedProduct={selectedProduct}
         doesItemExist={doesItemExist}
       />
     </ProductInfoWrapper>
@@ -40,7 +36,7 @@ const ProductDetails = ({
 
 ProductDetails.propTypes = {
   selectedProduct: PropTypes.object,
-  doesItemExist: PropTypes.bool
+  doesItemExist: PropTypes.bool,
 };
 
 export default ProductDetails;

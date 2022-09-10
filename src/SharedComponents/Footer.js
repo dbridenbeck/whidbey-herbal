@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import whPattern from '../../public/wh-pattern.jpg';
-import whPatternWebp from '../../public/wh-pattern.webp';
 import { device } from '../utils/devices';
 import NewsletterSignup from './NewsletterSignup';
 import ContactAndSocials from './ContactAndSocials';

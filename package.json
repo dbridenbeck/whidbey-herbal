@@ -33,7 +33,8 @@
     "test": "jest --watch",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export"
   },
   "eslintConfig": {
     "extends": "react-app"

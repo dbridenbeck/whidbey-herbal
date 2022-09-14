@@ -16,6 +16,9 @@ const ProductContainer = styled.div`
   :hover h5 {
     color: #e3be42;
   }
+  :active h5 {
+      color: grey;
+  }
   .info {
     margin: 0;
     font-size: 0.75em;
@@ -52,9 +55,6 @@ const ProductContainer = styled.div`
 
 const ProductLink = styled.div`
   cursor: pointer;
-  a {
-    text-decoration: none;
-  }
 `;
 
 const ImageContainer = styled.div`

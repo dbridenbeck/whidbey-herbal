@@ -2,8 +2,13 @@
   box-sizing: border-box;
 }
 
-h1 {font-family: 'Domine', serif;}
-h2, h3 {font-family: 'Open Sans', sans-serif;}
+h1 {
+  font-family: 'Domine', serif;
+}
+h2,
+h3 {
+  font-family: 'Open Sans', sans-serif;
+}
 
 html {
   margin: 0;
@@ -31,7 +36,9 @@ body {
 }
 
 @media (min-width: 1024px) {
-  body {font-size: 1.250em;}
+  body {
+    font-size: 1.25em;
+  }
 }
 
 code {

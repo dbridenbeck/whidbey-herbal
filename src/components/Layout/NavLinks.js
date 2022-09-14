@@ -42,6 +42,9 @@ const StyledLink = styled.div`
     &:hover {
       color: #e3be42;
     }
+    &:active {
+      color: grey;
+    }
   }
   :visited {
     color: black;

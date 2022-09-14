@@ -30,6 +30,9 @@ const RecipeContainer = styled.div`
   &:hover svg path {
     fill: #e3be42;
   }
+  &:active h5 {
+    color: grey;
+  }
   width: 134px;
 
   @media ${device.tablet} {

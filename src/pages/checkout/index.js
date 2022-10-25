@@ -24,15 +24,15 @@ const CheckoutContainer = styled.div`
 const RemoveWrapper = styled.div`
   display: block;
   box-sizing: border-box;
-  width: 8.37%;
+  width: 16.7%;
   button {
     box-sizing: border-box;
     display: block;
     margin: 0 auto;
     padding: 0;
-    height: 30px;
     width: 100%;
     max-width: 30px;
+    height: 30px;
     font-size: 1rem;
     color: #e34267;
     border: 1px solid #787878;

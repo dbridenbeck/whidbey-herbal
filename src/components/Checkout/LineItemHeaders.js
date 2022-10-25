@@ -16,6 +16,7 @@ const LineItemHeadersWrapper = styled.div`
     margin-left: 16.7%;
   }
   .sixthColumn {
+    text-align: center;
     width: 16.7%;
   }
   @media ${device.tablet} {
@@ -25,10 +26,10 @@ const LineItemHeadersWrapper = styled.div`
 
 const LineItemHeaders = () => (
   <LineItemHeadersWrapper>
-    <span className="product">Product</span>
-    <span className="sixthColumn">Price</span>
-    <span className="sixthColumn">Quantity</span>
-    <span className="sixthColumn">Total</span>
+    <div className="product">Product</div>
+    <div className="sixthColumn">Price</div>
+    <div className="sixthColumn">Quantity</div>
+    <div className="sixthColumn">Total</div>
   </LineItemHeadersWrapper>
 );
 

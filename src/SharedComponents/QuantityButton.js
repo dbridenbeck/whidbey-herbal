@@ -15,6 +15,7 @@ const Quantity = styled.form`
 
 const StyledInput = styled.input`
   margin: 0 auto;
+  display: block;
   max-width: 45px;
   border: 1px solid #787878;
   border-radius: 10px;
@@ -40,22 +41,21 @@ const QuantityButton = ({
   return (
     <QuantityWrapper>
       <Quantity>
-        <label>
-          {labelTitle}
-          <StyledInput
-            type="number"
-            value={parseInt(quantity)}
-            min="1"
-            max={maxQuantity}
-            onChange={(event) => {
-              onChangeFunction(
-                maxInput(event, maxQuantity),
-                shouldAddQuantities,
-                selectedProduct
-              );
-            }}
-          />
-        </label>
+        {labelTitle && <label id={labelTitle}>{labelTitle}</label>}
+        <StyledInput
+          htmlFor
+          type="number"
+          value={parseInt(quantity)}
+          min="1"
+          max={maxQuantity}
+          onChange={(event) => {
+            onChangeFunction(
+              maxInput(event, maxQuantity),
+              shouldAddQuantities,
+              selectedProduct
+            );
+          }}
+        />
       </Quantity>
       <ExceededMaxQuantityWarning
         buttonQuantity={quantity}

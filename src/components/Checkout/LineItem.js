@@ -15,11 +15,14 @@ const LineItemWrapper = styled.div`
   height: 65px;
   width: 100%;
   color: #787878;
-  font-size: 0.875em;
+  font-size: 0.75em;
   border-top: 1px solid #c0c0c0;
   .twelvethColumn {
-    display: block;
+    display: none;
     width: 8.37%;
+    @media ${device.tablet} {
+      display: block;
+    }
   }
   .sixthColumn {
     display: block;
@@ -44,15 +47,18 @@ const ProductImg = styled.img`
   margin: 0 auto;
 `;
 
-const ProductTitleLink = styled(Link)`
+const ProductTitleLink = styled.span`
   width: 33%;
   font-weight: normal;
-  color: #e3be42;
   text-decoration: none;
   line-height: 1.125em;
   padding: 0 5px;
-  :hover {
-    color: #787878;
+  & a {
+    text-decoration: none;
+    color: #e3be42;
+    :hover {
+      color: #787878;
+    }
   }
 `;
 
@@ -78,8 +84,8 @@ const LineItem = ({
       <div className="twelvethColumn">
         <ProductImg src={lineItem.images.edges[0].node.transformedSrc} />
       </div>
-      <ProductTitleLink href={`/product/${lineItem.handle}`}>
-        <span onClick={clearHeroImg}>{lineItem.title}</span>
+      <ProductTitleLink onClick={clearHeroImg}>
+        <Link href={`/product/${lineItem.handle}`}>{lineItem.title}</Link>
       </ProductTitleLink>
       <span className="sixthColumn">{lineItemCurrency}</span>
       <div className="sixthColumn">

@@ -5,7 +5,6 @@ import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
 import PageWrapper from '../../SharedComponents/PageWrapper';
 import Reviews from '../../components/Product/Reviews';
 import ProductDetails from '../../components/Product/ProductDetails';
-import Footer from '../../SharedComponents/Footer';
 import { GET_PRODUCT } from '../../queries';
 import HeadTags from '../../SharedComponents/HeadTags';
 
@@ -58,11 +57,7 @@ const Product = ({
         ogUrl={ogUrl}
         ogImage={selectedProduct.images.edges[0].node.transformedSrc}
       />
-
-      <PageWrapper>
-        {selectedProduct && createProductDetails()}
-        <Footer />
-      </PageWrapper>
+      <PageWrapper>{selectedProduct && createProductDetails()}</PageWrapper>
     </>
   );
 };

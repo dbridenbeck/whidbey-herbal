@@ -6,7 +6,6 @@ import PhotoSection from './PhotoSection';
 import Process from './Process';
 import StoreLocator from './StoreLocator';
 import RecipeSection from './RecipeSection';
-import Footer from '../../SharedComponents/Footer';
 
 const Home = ({ articles, products }) => (
   <>
@@ -18,7 +17,6 @@ const Home = ({ articles, products }) => (
     <Process />
     <StoreLocator />
     <RecipeSection articles={articles} />
-    <Footer />
   </>
 );
 

@@ -3,6 +3,7 @@ import { useQuery, ApolloConsumer } from '@apollo/client';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { device } from '../../utils/devices';
+import Footer from '../../SharedComponents/Footer';
 import { GET_CHECKOUT } from '../../queries';
 
 import * as CartActionCreators from '../../state/actions/cart';
@@ -43,6 +44,7 @@ const Layout = ({ children, clearCheckoutInState, checkoutId }) => {
             <MasterWrapper id="MasterWrapper">
               <Header />
               {children}
+              <Footer />
             </MasterWrapper>
           )
         );

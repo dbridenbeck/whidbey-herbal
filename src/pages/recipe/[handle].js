@@ -4,7 +4,6 @@ import { device } from '../../utils/devices';
 import PageWrapper from '../../SharedComponents/PageWrapper';
 import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
 import StyledH1 from '../../SharedComponents/StyledH1';
-import Footer from '../../SharedComponents/Footer';
 import { GET_FEATURED_PRODUCTS_AND_ARTICLES } from '../../queries';
 import Image from 'next/image';
 import HeadTags from '../../SharedComponents/HeadTags';
@@ -92,7 +91,6 @@ const Recipe = ({ selectedRecipe, products, ogUrl }) => {
           products={products}
           bottomPadding
         />
-        <Footer />
       </PageWrapper>
     </>
   );

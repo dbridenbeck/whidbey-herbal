@@ -13,7 +13,6 @@ import LineItems from '../../components/Checkout/LineItems';
 import LineItemHeaders from '../../components/Checkout/LineItemHeaders';
 import SubtotalSection from '../../components/Checkout/SubtotalSection';
 import FeaturedProducts from '../../SharedComponents/FeaturedProducts';
-import Footer from '../../SharedComponents/Footer';
 import { GET_FEATURED_PRODUCTS } from '../../queries';
 import apolloClient from '../../apolloClient';
 
@@ -219,7 +218,6 @@ const Checkout = ({
     <PageWrapper>
       <StyledH1>Checkout</StyledH1>
       {createCheckoutContainer()}
-      <Footer />
     </PageWrapper>
   );
 };

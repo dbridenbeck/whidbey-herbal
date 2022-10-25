@@ -25,6 +25,9 @@ const RemoveWrapper = styled.div`
   display: block;
   box-sizing: border-box;
   width: 16.7%;
+  @media ${device.tablet} {
+    width: 8.37%;
+  }
   button {
     box-sizing: border-box;
     display: block;

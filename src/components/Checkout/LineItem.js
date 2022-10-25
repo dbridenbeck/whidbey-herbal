@@ -27,6 +27,7 @@ const LineItemWrapper = styled.div`
   .sixthColumn {
     display: block;
     max-height: 21px;
+    text-align: center;
     margin: 0;
     padding: 0;
     width: 16.67%;

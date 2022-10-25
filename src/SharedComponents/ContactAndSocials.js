@@ -7,7 +7,6 @@ import Image from 'next/image';
 const ContactAndSocialsWrapper = styled.div`
   display: block;
   width: 100%;
-  margin-top: 20px;
   z-index: 5;
   p {
     display: block;

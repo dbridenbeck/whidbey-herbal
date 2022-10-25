@@ -23,6 +23,7 @@ export async function getServerSideProps() {
   const { data } = await apolloClient.query({
     query: GET_FEATURED_PRODUCTS_AND_ARTICLES,
   });
+
   return {
     // TODO, handle error from apollo query
     props: {

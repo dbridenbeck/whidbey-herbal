@@ -165,7 +165,7 @@ const ProductDetails = ({
       {/* below HTML is for "about" section */}
       <ShopifyHTML
         dangerouslySetInnerHTML={{
-          __html: metafield.value,
+          __html: metafield?.value || '',
         }}
       />
       {/* CTA block is conditionally rendered depending on availableForSale */}
@@ -179,7 +179,7 @@ const ProductDetails = ({
       {/* below HTML is for Characteristics, Uses, and Common-Sense Caution */}
       <ShopifyHTML
         dangerouslySetInnerHTML={{
-          __html: descriptionHtml,
+          __html: descriptionHtml || '',
         }}
       />
     </ProductDetailsWrapper>

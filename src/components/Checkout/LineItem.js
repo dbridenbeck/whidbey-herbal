@@ -17,6 +17,12 @@ const LineItemWrapper = styled.div`
   color: #787878;
   font-size: 0.75em;
   border-top: 1px solid #c0c0c0;
+  @media ${device.tablet} {
+    font-size: 0.875em;
+  }
+  @media ${device.laptop} {
+    font-size: 0.9em;
+  }
   .twelvethColumn {
     display: none;
     width: 8.37%;

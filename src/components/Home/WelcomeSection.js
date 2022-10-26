@@ -80,6 +80,7 @@ const WelcomeSection = () => {
           alt="A watercolor of Whidbey Herbal farms showing a barn, a house, lavender fields, a dog in a pasture, and a forest in the background"
           layout="responsive"
           priority
+          placeholder="blur"
         />
       </StyledPicture>
       <Tagline>

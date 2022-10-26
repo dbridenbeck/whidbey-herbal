@@ -6,6 +6,7 @@ import { device } from '../../utils/devices';
 import * as CartActionCreators from '../../state/actions/cart';
 import StyledH5 from '../../SharedComponents/StyledH5';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const ProductContainer = styled.div`
   display: block;
@@ -51,25 +52,11 @@ const ProductContainer = styled.div`
 `;
 
 const ProductLink = styled.div`
+  display: relative;
   cursor: pointer;
   a {
     text-decoration: none;
   }
-`;
-
-const ImageContainer = styled.div`
-  position: relative;
-  display: block;
-  max-width: 100%;
-  margin-bottom: 20px;
-`;
-
-const Image = styled.img`
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-  margin: 0 auto;
-  ${(props) => (!props.isAvailable ? 'opacity: .5' : 'opacity: 1')};
 `;
 
 const createProduct = (product, clearHeroImg, updateQuantityButton) => {
@@ -87,7 +74,17 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
     >
       <ProductLink>
         <>
-          <ImageContainer onClick={clearHeroImgAndQuantityButton}>
+          <div
+            onClick={clearHeroImgAndQuantityButton}
+            // using style to work nicely with next's Image component
+            style={{
+              display: 'block',
+              position: 'relative',
+              marginBottom: '20px',
+              maxWidth: '100%',
+              height: 'auto',
+            }}
+          >
             {!product.availableForSale ? (
               <div className="soldOutWarning">
                 {' '}
@@ -97,9 +94,17 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
             <Image
               src={`${product.images.edges[0].node.transformedSrc}`}
               alt={`${product.description}`}
-              isAvailable={product.availableForSale}
+              fill
+              // using style to work nicely with next's Image component
+              style={{ opacity: product.availableForSale ? '1' : '0.5' }}
+              width="400"
+              height="450"
+              sizes={`(max-width: 768px) 36vw,
+                      33vw,
+                    `}
             />
-          </ImageContainer>
+          </div>
+
           <StyledH5> {product.title.toUpperCase()} </StyledH5>
           <p className="info">${product.variants.edges[0].node.price}</p>
         </>

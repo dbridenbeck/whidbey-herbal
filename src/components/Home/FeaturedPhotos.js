@@ -86,6 +86,7 @@ const FeaturedPhotos = () => {
             src={stillOnStump}
             alt="Beatiful copper still sitting on a stump."
             layout="responsive"
+            placeholder="blur"
           />
         </StyledPicture>
         <StyledPicture>
@@ -93,6 +94,7 @@ const FeaturedPhotos = () => {
             src={CaitlinBows}
             alt="Caitlin smiling and holding fir bows"
             layout="responsive"
+            placeholder="blur"
           />
         </StyledPicture>
       </PhotoContainer>

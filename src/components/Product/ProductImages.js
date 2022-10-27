@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import Image from 'next/image';
 import { device } from '../../utils/devices';
-
 import * as CartActionCreators from '../../state/actions/cart';
 import styled from 'styled-components';
 
@@ -10,8 +9,10 @@ import styled from 'styled-components';
 const ProductImagesWrapper = styled.div`
   position: relative;
   width: 100%;
+  max-width: 410px;
   margin: 0 auto;
   @media ${device.tablet} {
+    margin: 0;
     width: 45%;
   }
   @media ${device.laptop} {
@@ -19,11 +20,12 @@ const ProductImagesWrapper = styled.div`
   }
 `;
 
-const HeroImage = styled.img`
+const HeroImage = styled.div`
   display: block;
-  margin: 2.5% auto 30px auto;
-  width: 100%;
-  height: auto;
+  position: relative;
+  margin: 0 auto;
+  width: 285px;
+  height: 320px;
   /* border: 4px solid #e3be42; */
   border-radius: 10px;
 `;
@@ -35,15 +37,19 @@ const AltImages = styled.div`
   justify-content: center;
   align-content: flex-start;
   height: auto;
-  width: 100%;
+  max-width: 410px;
   margin: 0 auto;
 `;
 
-const AltImage = styled.img`
+const AltImage = styled.div`
   display: block;
+  position: relative;
   width: 25%;
+  max-width: 102px;
+  height: 72px;
   align-self: center;
   margin: 10px;
+  overflow: hidden;
   border: ${(props) =>
     props.isSelected ? '2px solid #e3be42' : '2px solid #DADADA'};
   border-radius: 10px;
@@ -63,23 +69,33 @@ const ProductImages = ({ images, heroImgSrc, handleHeroImg }) => {
     const setHeroImg = () => handleHeroImg(transformedSrc);
     const isSelected = transformedSrc === heroImgSrc;
     return (
-      <AltImage
-        key={transformedSrc}
-        src={transformedSrc}
-        alt={altText}
-        isSelected={isSelected}
-        onClick={setHeroImg}
-      />
+      <AltImage>
+        <Image
+          key={transformedSrc}
+          src={transformedSrc}
+          alt={altText}
+          isSelected={isSelected}
+          onClick={setHeroImg}
+          layout="fill"
+          objectFit="contain"
+          sizes="102px"
+        />
+      </AltImage>
     );
   };
 
   // begin component's return
   return (
     <ProductImagesWrapper>
-      <HeroImage
-        src={heroImgSrc ? heroImgSrc : images.edges[0].node.transformedSrc}
-        alt="Product Photo"
-      />
+      <HeroImage>
+        <Image
+          layout="fill"
+          src={heroImgSrc ? heroImgSrc : images.edges[0].node.transformedSrc}
+          alt="Product Photo"
+          objectFit="contain"
+          sizes="285px"
+        />
+      </HeroImage>
       <AltImages>
         {images.edges.map((image) => createAltImage(image))}
       </AltImages>

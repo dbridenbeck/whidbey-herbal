@@ -14,7 +14,7 @@ import styled from 'styled-components';
 const ProductDetailsWrapper = styled.div`
   width: 100%;
   height: auto;
-  margin: 50px auto 0 auto;
+  margin-top: 50px;
   padding: 0;
   color: #787878;
   h2 {
@@ -34,12 +34,12 @@ const ProductDetailsWrapper = styled.div`
     color: #787878;
   }
   @media ${device.tablet} {
+    margin-left: 20px;
     width: 45%;
-    margin: 0 auto;
   }
   @media ${device.laptop} {
+    margin-left: 40px;
     width: 55%;
-    margin: 0 auto;
   }
 `;
 

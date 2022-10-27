@@ -14,7 +14,7 @@ const ProductInfoWrapper = styled.div`
   @media ${device.tablet} {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
   }
 `;
 

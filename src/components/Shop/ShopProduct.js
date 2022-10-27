@@ -100,6 +100,7 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
             sizes={`(max-width: 768px) 36vw,
                       33vw,
                     `}
+            priority
           />
         </div>
 

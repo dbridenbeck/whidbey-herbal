@@ -79,6 +79,7 @@ const ProductImages = ({ images, heroImgSrc, handleHeroImg }) => {
           layout="fill"
           objectFit="contain"
           sizes="102px"
+          priority
         />
       </AltImage>
     );
@@ -94,6 +95,7 @@ const ProductImages = ({ images, heroImgSrc, handleHeroImg }) => {
           alt="Product Photo"
           objectFit="contain"
           sizes="285px"
+          priority
         />
       </HeroImage>
       <AltImages>

@@ -29,6 +29,7 @@ const ProductContainer = styled.div`
     width: 100%;
     height: 80%;
     z-index: 99;
+    top: 0;
     span {
       display: block;
       width: 100%;
@@ -52,8 +53,9 @@ const ProductContainer = styled.div`
 `;
 
 const ProductLink = styled.div`
-  display: relative;
   cursor: pointer;
+  height: 100%;
+  width: 100%;
   a {
     text-decoration: none;
   }
@@ -73,41 +75,36 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
       }}
     >
       <ProductLink>
-        <>
-          <div
-            onClick={clearHeroImgAndQuantityButton}
+        <div
+          onClick={clearHeroImgAndQuantityButton}
+          // using style to work nicely with next's Image component
+          style={{
+            display: 'block',
+            position: 'relative',
+            marginBottom: '20px',
+            paddingTop: 'calc((450 / 400) * 100%)',
+          }}
+        >
+          {!product.availableForSale ? (
+            <div className="soldOutWarning">
+              {' '}
+              <span>SOLD OUT</span>{' '}
+            </div>
+          ) : null}
+          <Image
+            src={`${product.images.edges[0].node.transformedSrc}`}
+            alt={`${product.description}`}
+            layout="fill"
             // using style to work nicely with next's Image component
-            style={{
-              display: 'block',
-              position: 'relative',
-              marginBottom: '20px',
-              maxWidth: '100%',
-              height: 'auto',
-            }}
-          >
-            {!product.availableForSale ? (
-              <div className="soldOutWarning">
-                {' '}
-                <span>SOLD OUT</span>{' '}
-              </div>
-            ) : null}
-            <Image
-              src={`${product.images.edges[0].node.transformedSrc}`}
-              alt={`${product.description}`}
-              fill
-              // using style to work nicely with next's Image component
-              style={{ opacity: product.availableForSale ? '1' : '0.5' }}
-              width="400"
-              height="450"
-              sizes={`(max-width: 768px) 36vw,
+            style={{ opacity: product.availableForSale ? '1' : '0.5' }}
+            sizes={`(max-width: 768px) 36vw,
                       33vw,
                     `}
-            />
-          </div>
+          />
+        </div>
 
-          <StyledH5> {product.title.toUpperCase()} </StyledH5>
-          <p className="info">${product.variants.edges[0].node.price}</p>
-        </>
+        <StyledH5> {product.title.toUpperCase()} </StyledH5>
+        <p className="info">${product.variants.edges[0].node.price}</p>
       </ProductLink>
     </Link>
   );

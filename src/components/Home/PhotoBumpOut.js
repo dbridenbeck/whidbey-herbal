@@ -54,6 +54,7 @@ const PhotoBumpOut = () => {
         <Image
           src={bottlesAndHoney}
           alt="Bottles of essential oil, honeycomb, and lavender stalk laying on a table"
+          sizes="50vw"
         />
       </BottlesHoneyPhoto>
       <div className="circle">

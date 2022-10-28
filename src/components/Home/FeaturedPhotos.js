@@ -87,6 +87,7 @@ const FeaturedPhotos = () => {
             alt="Beatiful copper still sitting on a stump."
             layout="responsive"
             placeholder="blur"
+            sizes="50vw"
           />
         </StyledPicture>
         <StyledPicture>
@@ -95,6 +96,7 @@ const FeaturedPhotos = () => {
             alt="Caitlin smiling and holding fir bows"
             layout="responsive"
             placeholder="blur"
+            sizes="50vw"
           />
         </StyledPicture>
       </PhotoContainer>

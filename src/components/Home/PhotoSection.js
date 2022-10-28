@@ -35,6 +35,7 @@ const PhotoSection = () => {
             src={BottlesHoneyCloseup}
             alt="Three bottles of essential oils and a piece of honey comb sitting on a table"
             layout="responsive"
+            sizes="50vw"
           />
         </StyledPicture>
         <StyledPicture>
@@ -42,6 +43,7 @@ const PhotoSection = () => {
             src={SamCaitlinLogs}
             alt="Sam and Caitlin posing next to a log cabin"
             layout="responsive"
+            sizes="50vw"
           />
         </StyledPicture>
       </PhotoContainer>

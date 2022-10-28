@@ -122,7 +122,16 @@ const RecipeBlock = ({
       <RecipeLink>
         <RecipeContainer recipeName={title}>
           <RecipeImage>
-            <Image src={transformedSrc} alt={altText} layout="fill" />
+            <Image
+              src={transformedSrc}
+              alt={altText}
+              layout="fill"
+              sizes="(max-width: 768px) 134px,
+                      (max-width: 1024px) 202px,
+                      (max-width: 1200px) 270px,
+                      316px
+                    "
+            />
           </RecipeImage>
           <RecipeInfo>
             <h5>{title}</h5>

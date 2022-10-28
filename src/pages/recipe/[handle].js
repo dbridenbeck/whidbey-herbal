@@ -23,13 +23,14 @@ const RecipeContainer = styled.div`
 `;
 
 const RecipeImage = styled.div`
+  display: block;
   position: relative;
-  width: 245px;
-  height: 245px;
+  padding-top: 100%;
   img {
     border-radius: 10px;
   }
   @media ${device.tablet} {
+    padding-top: 0;
     width: 275px;
     height: 275px;
     margin: 10px 10px 10px 0px;
@@ -69,7 +70,16 @@ const Recipe = ({ selectedRecipe, products, ogUrl }) => {
         <StyledH1>{title}</StyledH1>
         <RecipeContainer>
           <RecipeImage>
-            <Image src={transformedSrc} layout="fill" />
+            <Image
+              src={transformedSrc}
+              layout="fill"
+              sizes="(max-width: 768px) 100vw,
+                (max-width: 1024px) 275px,
+                (max-width: 1200px) 377px,
+                448px
+              "
+              priority
+            />
           </RecipeImage>
           <ShopifyHTML
             dangerouslySetInnerHTML={{

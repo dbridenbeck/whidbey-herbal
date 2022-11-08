@@ -15,6 +15,7 @@ const ProductsContainer = styled.div`
 `;
 
 const ExploreShopLink = styled.span`
+  cursor: pointer;
   display: block;
   width: 40%;
   min-width: 200px;
@@ -26,15 +27,14 @@ const ExploreShopLink = styled.span`
   text-align: center;
   font-size: 1.225em;
   font-weight: 300;
+  color: #e3be42;
   &:hover {
     background-color: #e3be42;
-    a {
-      color: white;
+    color: white;
+    :active {
+      color: #e3be42;
+      background-color: white;
     }
-  }
-  a {
-    text-decoration: none;
-    color: #e3be42;
   }
 `;
 
@@ -57,9 +57,9 @@ const Products = ({ products, title, bottomPadding }) => {
           <Product key={product.node.handle} product={product.node} />
         ))}
       </ProductsContainer>
-      <ExploreShopLink>
-        <Link href="/shop">Explore the Shop </Link>
-      </ExploreShopLink>
+      <Link href="/shop">
+        <ExploreShopLink>Explore the Shop</ExploreShopLink>
+      </Link>
     </ComponentWrapper>
   );
 };

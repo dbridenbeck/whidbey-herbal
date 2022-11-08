@@ -23,10 +23,6 @@ const StoreContainer = styled.div`
   @media ${device.tablet} {
     width: 100%;
     margin-bottom: 25px;
-    :hover h3 {
-      cursor: pointer;
-      color: #e3be42;
-    }
     h3 {
       color: '#2e2e2e';
     }
@@ -57,14 +53,27 @@ const StoreAddress = styled.p`
   }
 `;
 
-const StoreBlock = ({ store: { storeName, address, website } }) => {
+const LinksContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  gap: 48px;
+`;
+
+const StoreBlock = ({
+  store: { storeName, address, website, googleMapUrl },
+}) => {
   return (
     <StoreContainer>
       <StyledH3>{storeName}</StyledH3>
       <StoreAddress>{address}</StoreAddress>
-      <a href={website} target="_blank" rel="noopener noreferrer">
-        View Website
-      </a>
+      <LinksContainer>
+        <a href={website} target="_blank" rel="noopener noreferrer">
+          View Website
+        </a>
+        <a href={googleMapUrl} target="_blank" rel="noopener noreferrer">
+          Map
+        </a>
+      </LinksContainer>
     </StoreContainer>
   );
 };

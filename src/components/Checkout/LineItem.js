@@ -66,6 +66,9 @@ const ProductTitleLink = styled.span`
     :hover {
       color: #787878;
     }
+    :active {
+      color: #e3be42;
+    }
   }
 `;
 

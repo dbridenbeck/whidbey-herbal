@@ -11,7 +11,7 @@ const LocationsWrapper = styled.div`
   /* max-width mirrors MasterWrapper's max-width (in Layout.js) */
   max-width: 1200px;
   margin: 0 auto;
-  padding-bottom: 50px;
+  padding: 0 20px 50px 10px;
 
   @media ${device.mobile} {
     flex-wrap: wrap;

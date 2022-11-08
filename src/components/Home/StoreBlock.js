@@ -9,6 +9,7 @@ const StoreContainer = styled.div`
   align-self: flex-start;
   flex-grow: 1;
   width: 45%;
+  max-width: 130px;
   margin: 0 10px 52px 0;
   a {
     display: block;
@@ -22,6 +23,7 @@ const StoreContainer = styled.div`
   }
   @media ${device.tablet} {
     width: 100%;
+    max-width: none;
     margin-bottom: 25px;
     h3 {
       color: '#2e2e2e';
@@ -44,7 +46,7 @@ const StoreAddress = styled.p`
   line-height: 1.5em;
   letter-spacing: 0.01em;
   color: #2e2e2e;
-  white-space: pre;
+  margin-bottom: 14px;
   @media ${device.tablet} {
     font-size: 1rem;
   }
@@ -53,27 +55,19 @@ const StoreAddress = styled.p`
   }
 `;
 
-const LinksContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  gap: 48px;
-`;
-
 const StoreBlock = ({
   store: { storeName, address, website, googleMapUrl },
 }) => {
   return (
     <StoreContainer>
       <StyledH3>{storeName}</StyledH3>
-      <StoreAddress>{address}</StoreAddress>
-      <LinksContainer>
-        <a href={website} target="_blank" rel="noopener noreferrer">
-          View Website
-        </a>
-        <a href={googleMapUrl} target="_blank" rel="noopener noreferrer">
-          Map
-        </a>
-      </LinksContainer>
+      <a href={googleMapUrl} target="_blank" rel="noopener noreferrer">
+        <StoreAddress>{address}</StoreAddress>
+      </a>
+
+      <a href={website} target="_blank" rel="noopener noreferrer">
+        View Website
+      </a>
     </StoreContainer>
   );
 };

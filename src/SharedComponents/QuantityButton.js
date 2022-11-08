@@ -43,7 +43,7 @@ const QuantityButton = ({
       <Quantity>
         {labelTitle && <label id={labelTitle}>{labelTitle}</label>}
         <StyledInput
-          htmlFor
+          htmlFor={labelTitle}
           type="number"
           value={parseInt(quantity)}
           min="1"

@@ -21,12 +21,6 @@ function App({ Component, pageProps }) {
 
   const trackingId = 'UA-151317774-1';
   ReactGA.initialize(trackingId);
-  // GET THIS WORKING AS EXPECTED!
-  // useEffect(() => {
-  //   router.beforePopState(({ url }) => {
-  //     ReactGA.pageview(url);
-  //   });
-  // });
 
   // persist state from localStorage
   const preLoadedState = getFromLocalStorage();
@@ -57,6 +51,7 @@ function App({ Component, pageProps }) {
           });
         }
       }
+      ReactGA.pageview(url);
     };
     router.events.on('routeChangeComplete', handleRouteChange);
   }, []);

@@ -1,4 +1,4 @@
-import * as CartActionTypes from "../actiontypes/cart";
+import * as CartActionTypes from '../actiontypes/cart';
 
 export const addLineItem = (product, quantity) => ({
   type: CartActionTypes.ADD_LINE_ITEM,
@@ -25,7 +25,7 @@ export const updateItemQuantity = (
 
 export const storeCheckoutDetails = (id) => ({
   type: CartActionTypes.STORE_CHECKOUT_DETAILS,
-  id
+  id,
 });
 
 export const clearCheckoutInState = () => ({
@@ -52,9 +52,4 @@ export const clearHeroImg = () => ({
 export const updateQuantityButton = (quantity) => ({
   type: CartActionTypes.UPDATE_QUANTITY_BUTTON,
   quantity,
-});
-
-export const setGoogleMapInfoWindow = (selectedStoreName) => ({
-  type: CartActionTypes.SET_GOOGLE_MAP_INFO_WINDOW,
-  selectedStoreName,
 });

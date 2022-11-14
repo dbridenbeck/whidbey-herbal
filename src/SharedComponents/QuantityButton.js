@@ -1,5 +1,4 @@
-import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import ExceededMaxQuantityWarning from './ExceededMaxQuantityWarning';
 
 const QuantityWrapper = styled.div`
@@ -16,48 +15,47 @@ const Quantity = styled.form`
 
 const StyledInput = styled.input`
   margin: 0 auto;
+  display: block;
   max-width: 45px;
   border: 1px solid #787878;
   border-radius: 10px;
   text-align: center;
   font-size: 1em;
-  color: rgba(120, 120, 120, .8);
+  color: rgba(120, 120, 120, 0.8);
   :focus {
     outline-width: 0;
   }
-  `;
+`;
 
-const maxInput = (event, maxQuantity) => event.target.value > maxQuantity ? maxQuantity : event.target.value
+const maxInput = (event, maxQuantity) =>
+  event.target.value > maxQuantity ? maxQuantity : event.target.value;
 
-const QuantityButton = 
-({
-  quantity, 
-  selectedProduct, 
-  shouldAddQuantities, 
-  labelTitle, 
+const QuantityButton = ({
+  quantity,
+  selectedProduct,
+  shouldAddQuantities,
+  labelTitle,
   onChangeFunction,
-  maxQuantity
+  maxQuantity,
 }) => {
-
   return (
     <QuantityWrapper>
       <Quantity>
-        <label>
-          {labelTitle}
-          <StyledInput
-            type="number"
-            value={parseInt(quantity)}
-            min="1"
-            max={maxQuantity}
-            onChange={event => {
-              onChangeFunction(
-                maxInput(event, maxQuantity),
-                shouldAddQuantities,
-                selectedProduct
-              );
-            }}
-          />
-        </label>
+        {labelTitle && <label id={labelTitle}>{labelTitle}</label>}
+        <StyledInput
+          htmlFor={labelTitle}
+          type="number"
+          value={parseInt(quantity)}
+          min="1"
+          max={maxQuantity}
+          onChange={(event) => {
+            onChangeFunction(
+              maxInput(event, maxQuantity),
+              shouldAddQuantities,
+              selectedProduct
+            );
+          }}
+        />
       </Quantity>
       <ExceededMaxQuantityWarning
         buttonQuantity={quantity}
@@ -68,6 +66,5 @@ const QuantityButton =
     </QuantityWrapper>
   );
 };
-
 
 export default QuantityButton;

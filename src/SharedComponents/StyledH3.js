@@ -1,6 +1,5 @@
-import React from 'react';
-import { device } from "../utils/devices";
-import styled from "styled-components";
+import { device } from '../utils/devices';
+import styled from 'styled-components';
 
 const H3Component = styled.h3`
   margin: 0 0 5px 0;
@@ -17,11 +16,8 @@ const H3Component = styled.h3`
   }
 `;
 
-const StyledH3 = ({children}) => {
-
-  return (
-    <H3Component>{children}</H3Component>
-  );
-}
+const StyledH3 = ({ children }) => {
+  return <H3Component>{children}</H3Component>;
+};
 
 export default StyledH3;

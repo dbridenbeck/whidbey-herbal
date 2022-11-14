@@ -1,16 +1,16 @@
-import * as CartActionTypes from "./actiontypes/cart";
+import * as CartActionTypes from './actiontypes/cart';
 
 export const initialState = {
   checkout: {
     lineItems: [],
-    checkoutId: "",
+    checkoutId: '',
   },
   burgerToggled: false,
   burgerClickedOnce: false,
-  heroImgSrc: "",
+  heroImgSrc: '',
   quantityButtonAmount: 1,
   googleMapInfoWindow: {
-    selectedStoreName: "",
+    selectedStoreName: '',
   },
 };
 
@@ -68,16 +68,16 @@ export const Reducer1 = (state = initialState, action) => {
         ...state,
         checkout: {
           ...state.checkout,
-          checkoutId: action.id,
         },
+        checkoutId: action.id,
       };
     case CartActionTypes.CLEAR_CHECKOUT_IN_STATE:
       return {
         ...state,
         checkout: {
           lineItems: [],
-          checkoutId: "",
         },
+        checkoutId: '',
       };
     case CartActionTypes.TOGGLE_BURGER:
       return {
@@ -99,19 +99,12 @@ export const Reducer1 = (state = initialState, action) => {
     case CartActionTypes.CLEAR_HERO_IMG:
       return {
         ...state,
-        heroImgSrc: "",
+        heroImgSrc: '',
       };
     case CartActionTypes.UPDATE_QUANTITY_BUTTON:
       return {
         ...state,
         quantityButtonAmount: parseInt(action.quantity),
-      };
-    case CartActionTypes.SET_GOOGLE_MAP_INFO_WINDOW:
-      return {
-        ...state,
-        googleMapInfoWindow: {
-          selectedStoreName: action.selectedStoreName,
-        },
       };
     default:
       return state;

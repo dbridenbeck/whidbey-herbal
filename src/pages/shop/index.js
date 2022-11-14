@@ -23,6 +23,7 @@ export async function getServerSideProps({ resolvedUrl }) {
     query: GET_SHOP_PRODUCTS,
     variables: { collectionName: 'Online Store' },
   });
+
   return {
     // TODO, handle error from apollo query
     props: {

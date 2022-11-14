@@ -32,9 +32,6 @@ const BumpOutContainer = styled.div`
   @media (min-width: 12801px) {
     margin-top: -10%;
   }
-  @media ${device.largeScreen} {
-    width: auto;
-  }
 `;
 
 const BottlesHoneyPhoto = styled.div`

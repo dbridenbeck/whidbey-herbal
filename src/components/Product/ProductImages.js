@@ -64,18 +64,15 @@ const ProductImages = ({ images, heroImgSrc, handleHeroImg }) => {
   // when clicked, AltImage updates state and sets heroImg's src to AltImage
   const createAltImage = (image) => {
     const {
-      node: { transformedSrc, altText },
+      node: { url, altText },
     } = image;
-    const setHeroImg = () => handleHeroImg(transformedSrc);
-    const isSelected = transformedSrc === heroImgSrc;
+    const setHeroImg = () => handleHeroImg(url);
+    const isSelected = url === heroImgSrc;
     return (
-      <AltImage>
+      <AltImage key={url} isSelected={isSelected} onClick={setHeroImg}>
         <Image
-          key={transformedSrc}
-          src={transformedSrc}
+          src={url}
           alt={altText}
-          isSelected={isSelected}
-          onClick={setHeroImg}
           layout="fill"
           objectFit="contain"
           sizes="102px"
@@ -91,7 +88,7 @@ const ProductImages = ({ images, heroImgSrc, handleHeroImg }) => {
       <HeroImage>
         <Image
           layout="fill"
-          src={heroImgSrc ? heroImgSrc : images.edges[0].node.transformedSrc}
+          src={heroImgSrc ? heroImgSrc : images.edges[0].node.url}
           alt="Product Photo"
           objectFit="contain"
           sizes="285px"

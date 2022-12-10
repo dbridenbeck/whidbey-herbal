@@ -113,7 +113,7 @@ const RecipeBlock = ({
       title,
       handle,
       excerpt,
-      image: { transformedSrc, altText },
+      image: { url, altText },
     },
   },
 }) => {
@@ -123,7 +123,7 @@ const RecipeBlock = ({
         <RecipeContainer recipeName={title}>
           <RecipeImage>
             <Image
-              src={transformedSrc}
+              src={url}
               alt={altText}
               layout="fill"
               sizes="(max-width: 768px) 134px,

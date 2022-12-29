@@ -178,7 +178,7 @@ const Checkout = ({
     const roughCalculatedCartSubtotal = lineItems
       .map(
         (lineItem) =>
-          lineItem.quantity * lineItem.variants.edges[0].node.priceV2.amount
+          lineItem.quantity * lineItem.variants.edges[0].node.price.amount
       )
       .filter(Boolean)
       .reduce(

@@ -4,13 +4,13 @@ import { ApolloLink } from 'apollo-boost';
 import 'cross-fetch/polyfill';
 // config Apollo
 const httpLink = createHttpLink({
-  uri: 'https://whidbey-herbal.myshopify.com/api/2020-07/graphql.json',
+  uri: 'https://whidbey-herbal.myshopify.com/api/2022-10/graphql.json',
 });
 
 const middlewareLink = new ApolloLink((operation, forward) => {
   operation.setContext({
     headers: {
-      'X-Shopify-Storefront-Access-Token': '837432f0b8059e443da74da036f73f70',
+      'X-Shopify-Storefront-Access-Token': 'c5ef76df32b442653976987149c26f32',
     },
   });
   return forward(operation);

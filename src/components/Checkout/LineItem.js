@@ -80,19 +80,19 @@ const LineItem = ({
   clearHeroImg,
 }) => {
   const roughTotal = lineItem.quantity
-    ? lineItem.quantity * lineItem.variants.edges[0].node.priceV2.amount
+    ? lineItem.quantity * lineItem.variants.edges[0].node.price.amount
     : '0.00';
 
   const currencyTotal = createCurrencyFormat(roughTotal);
   const lineItemCurrency = createCurrencyFormat(
-    lineItem.variants.edges[0].node.priceV2.amount
+    lineItem.variants.edges[0].node.price.amount
   );
 
   return (
     <LineItemWrapper key={lineItem.id}>
       {createRemoveButton(lineItem.id, index)}
       <div className="twelvethColumn">
-        <ProductImg src={lineItem.images.edges[0].node.transformedSrc} />
+        <ProductImg src={lineItem.images.edges[0].node.url} />
       </div>
       <ProductTitleLink onClick={clearHeroImg}>
         <Link href={`/product/${lineItem.handle}`}>{lineItem.title}</Link>

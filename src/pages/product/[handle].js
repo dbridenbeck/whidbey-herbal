@@ -14,7 +14,7 @@ const Product = ({
   ogUrl,
   handle,
   products,
-  productByHandle: selectedProduct,
+  product: selectedProduct,
 }) => {
   // determine if wholesaleProducts or onlineProducts should be loaded
   const featuredProductsTitle = handle.includes('wholesale')
@@ -55,7 +55,7 @@ const Product = ({
       <HeadTags
         title={selectedProduct.title}
         ogUrl={ogUrl}
-        ogImage={selectedProduct.images.edges[0].node.transformedSrc}
+        ogImage={selectedProduct.images.edges[0].node.url}
       />
       <PageWrapper>{selectedProduct && createProductDetails()}</PageWrapper>
     </>
@@ -82,7 +82,7 @@ export async function getServerSideProps({ req, params, resolvedUrl }) {
   return {
     // TODO, handle error from apollo query
     props: {
-      productByHandle: data.productByHandle,
+      product: data.product,
       products: data?.collections?.edges,
       handle,
       ogUrl: `${protocol}//${req.headers.host}${resolvedUrl}`,

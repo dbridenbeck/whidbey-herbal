@@ -101,7 +101,7 @@ const createCTABlock = (
 
   // handle null values for quantityButtonAmount
   const quantity = quantityButtonAmount === '' ? 0 : quantityButtonAmount;
-  const price = createCurrencyFormat(variants.edges[0].node.priceV2.amount);
+  const price = createCurrencyFormat(variants.edges[0].node.price.amount);
   const quantityAllowed = totalInventory - lineItemQuantity;
 
   const lineItemPlusQuantityButton =

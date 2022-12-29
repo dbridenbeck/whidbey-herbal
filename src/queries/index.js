@@ -4,9 +4,6 @@ const CheckoutFragment = gql`
   fragment CheckoutFragment on Checkout {
     id
     webUrl
-    totalTax
-    subtotalPrice
-    totalPrice
     lineItems(first: 250) {
       edges {
         node {
@@ -18,7 +15,9 @@ const CheckoutFragment = gql`
             image {
               src
             }
-            price
+            price {
+              amount
+            }
           }
           quantity
         }
@@ -40,14 +39,16 @@ const CollectionFragment = gql`
           variants(first: 1) {
             edges {
               node {
-                price
+                price {
+                  amount
+                }
               }
             }
           }
           images(first: 6) {
             edges {
               node {
-                transformedSrc(maxWidth: 400, maxHeight: 450)
+                url(transform: { maxWidth: 400, maxHeight: 450 })
                 altText
               }
             }
@@ -61,7 +62,7 @@ const CollectionFragment = gql`
 export const CREATE_CHECKOUT = gql`
   mutation checkoutCreate($input: CheckoutCreateInput!) {
     checkoutCreate(input: $input) {
-      userErrors {
+      checkoutUserErrors {
         message
         field
       }
@@ -79,7 +80,7 @@ export const CHECKOUT_LINEITEMS_ADD = gql`
     $lineItems: [CheckoutLineItemInput!]!
   ) {
     checkoutLineItemsAdd(checkoutId: $checkoutId, lineItems: $lineItems) {
-      userErrors {
+      checkoutUserErrors {
         message
         field
       }
@@ -111,7 +112,7 @@ export const GET_FEATURED_PRODUCTS_AND_ARTICLES = gql`
           excerpt
           handle
           image {
-            transformedSrc(maxWidth: 750, maxHeight: 750)
+            url(transform: { maxWidth: 750, maxHeight: 750 })
             altText
           }
         }
@@ -142,7 +143,7 @@ export const GET_ARTICLES = gql`
           excerpt
           handle
           image {
-            transformedSrc(maxWidth: 750, maxHeight: 750)
+            url(transform: { maxWidth: 750, maxHeight: 750 })
             altText
           }
         }
@@ -153,7 +154,7 @@ export const GET_ARTICLES = gql`
 
 export const GET_PRODUCT = gql`
   query getProduct($productHandle: String!) {
-    productByHandle(handle: $productHandle) {
+    product(handle: $productHandle) {
       title
       handle
       availableForSale
@@ -166,7 +167,7 @@ export const GET_PRODUCT = gql`
         edges {
           node {
             id
-            priceV2 {
+            price {
               amount
               currencyCode
             }
@@ -177,7 +178,7 @@ export const GET_PRODUCT = gql`
         edges {
           node {
             altText
-            transformedSrc(maxWidth: 400, maxHeight: 450)
+            url(transform: { maxWidth: 400, maxHeight: 450 })
           }
         }
       }
@@ -212,7 +213,9 @@ export const GET_SHOP_PRODUCTS = gql`
                 variants(first: 1) {
                   edges {
                     node {
-                      price
+                      price {
+                        amount
+                      }
                     }
                   }
                 }
@@ -220,7 +223,7 @@ export const GET_SHOP_PRODUCTS = gql`
                   edges {
                     node {
                       altText
-                      transformedSrc(maxWidth: 400, maxHeight: 450)
+                      url(transform: { maxWidth: 400, maxHeight: 450 })
                     }
                   }
                 }

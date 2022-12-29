@@ -92,7 +92,7 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
             </div>
           ) : null}
           <Image
-            src={`${product.images.edges[0].node.transformedSrc}`}
+            src={`${product.images.edges[0].node.url}`}
             alt={`${product.description}`}
             layout="fill"
             // using style to work nicely with next's Image component
@@ -105,7 +105,7 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
         </div>
 
         <StyledH5> {product.title.toUpperCase()} </StyledH5>
-        <p className="info">${product.variants.edges[0].node.price}</p>
+        <p className="info">${product.variants.edges[0].node.price.amount}</p>
       </ProductLink>
     </Link>
   );

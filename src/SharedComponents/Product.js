@@ -125,14 +125,14 @@ const createProduct = (product, clearHeroImg, updateQuantityButton) => {
               </SoldOutWarning>
             ) : null}
             <Image
-              src={`${product.images.edges[0].node.transformedSrc}`}
+              src={`${product.images.edges[0].node.url}`}
               alt={`${product.description}`}
               layout="fill"
             />
           </StyledImage>
         </ImageContainer>
         <StyledH5> {product.title.toUpperCase()} </StyledH5>
-        <p className="info">${product.variants.edges[0].node.price}</p>
+        <p className="info">${product.variants.edges[0].node.price.amount}</p>
       </ProductLink>
     </Link>
   );

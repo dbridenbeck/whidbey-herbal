@@ -59,7 +59,7 @@ const Recipe = ({ selectedRecipe, products, ogUrl }) => {
   const {
     node: {
       title,
-      image: { transformedSrc },
+      image: { url },
       contentHtml,
     },
   } = selectedRecipe;
@@ -71,7 +71,7 @@ const Recipe = ({ selectedRecipe, products, ogUrl }) => {
         <RecipeContainer>
           <RecipeImage>
             <Image
-              src={transformedSrc}
+              src={url}
               layout="fill"
               sizes="(max-width: 768px) 100vw,
                 (max-width: 1024px) 275px,
@@ -93,7 +93,7 @@ const Recipe = ({ selectedRecipe, products, ogUrl }) => {
 
   return (
     <>
-      <HeadTags title={title} ogUrl={ogUrl} ogImage={transformedSrc} />
+      <HeadTags title={title} ogUrl={ogUrl} ogImage={url} />
       <PageWrapper>
         {createRecipe()}
         <FeaturedProducts
